@@ -1,21 +1,30 @@
 package com.teamapp.travelsite.AirlineBooking;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Entity
+@NoArgsConstructor
+@DynamicInsert
 public class AirlineVO {
+
     @Id
     @GeneratedValue
+    @OneToMany
     private int ID;
-    @NonNull
+
+    @Column(nullable = false)
     private String destination;
+
+    @Column(nullable = false)
     private String starting;
+
+    @Column(nullable = false)
     private String departureDate;
+
+    @Column(nullable = false)
     private String departureTime;
 }
-//JPA 쓰는게 맞나. 싶다.

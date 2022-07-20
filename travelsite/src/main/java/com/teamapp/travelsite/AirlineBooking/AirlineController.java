@@ -5,18 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.HashMap;
 
 
 @RestController
 @RequestMapping(value = "/book")
 public class AirlineController {
     private AirlineRepository AirlineRepository;
-
+    HashMap<String, AirlineVO> airlineList = new HashMap<String,AirlineVO>();
 
     @GetMapping("/") //항공권 조회 페이지
     public String showBookingPage(){
-        //List<Airline> AirlineList =
+
+
         return "";
     }
 
