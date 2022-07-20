@@ -1,2 +1,4 @@
-package com.teamapp.travelsite.AirlineBooking;public class AirlineService {
+package com.teamapp.travelsite.AirlineBooking;
+
+public class AirlineService {
 }
