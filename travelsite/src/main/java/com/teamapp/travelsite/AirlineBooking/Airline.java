@@ -10,5 +10,5 @@ public class Airline {
     private String departureDate;
     private String arrivalTime;
     private String departureTime;
-
 }
+//일단 date Time 나눠둠
