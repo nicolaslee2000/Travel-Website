@@ -1,30 +1,33 @@
 package com.teamapp.travelsite.AirlineBooking;
 
-import org.springframework.boot.Banner;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import java.util.List;
+
 
 @RestController
 public class AirlineController {
-    @GetMapping("/book")
+    private AirlineRepository AirlineRepository;
+
+
+    @GetMapping("/book") //항공권 조회 페이지
     public String showBookingPage(){
+        //List<Airline> AirlineList =
         return "";
     }
 
-    @GetMapping("/book/flight")
-    public String showBookingPage(Model model){
-     //model.addAttribute()
+    //무한스크롤 혹은 페이징 처리 할것.
+
+
+    @GetMapping("/book/{ID}") //항공권 상세 페이지
+    public String showBookingDetail(){
+
      return"";
     }
 
-    @GetMapping("/book/flight/confirm")
+    @GetMapping("/book/flight/confirm") //항공권 확인 페이지
         public String showBookConfirm(Model model){
             //
         return "";
