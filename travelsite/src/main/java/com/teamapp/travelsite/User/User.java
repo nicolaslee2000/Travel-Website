@@ -1,12 +1,16 @@
 package com.teamapp.travelsite.User;
 
 
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
-@Entity
+@Builder
+@ToString
+@AllArgsConstructor
+@Entity(name = "USER")
+@Setter
 public class User {
 
     @Id
@@ -15,6 +19,9 @@ public class User {
 
     @Column(nullable = false)
     private String id;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false)
     private String name;
