@@ -21,13 +21,9 @@ import com.teamapp.travelsite.amadeus.database.DatabaseConnect;
 
 @RestController
 @RequestMapping(value = "/api")
-
+//http://localhost:8090/api/locations?keyword=NYC
 public class ApiController {
 
-	@GetMapping("/")
-	public String hello() {
-		return "hello world";
-	}
 
 	@GetMapping("/locations")
 	public Location[] locations(@RequestParam(required = true) String keyword) throws ResponseException {
