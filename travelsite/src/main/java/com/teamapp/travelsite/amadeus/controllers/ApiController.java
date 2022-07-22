@@ -46,12 +46,13 @@ public class ApiController {
 		return AmadeusConnect.INSTANCE.order(order);
 	}
 	@GetMapping("/flights")
-    public FlightOfferSearch[] flights(@RequestParam(required=true) String origin,
-                          @RequestParam(required=true) String destination,
-                          @RequestParam(required=true) String departDate,
+    public FlightOfferSearch[] flights(@RequestParam(required=true) String originLocationCode,
+                          @RequestParam(required=true) String destinationLocationCode,
+                          @RequestParam(required=true) String departureDate,
                           @RequestParam(required=true) String adults,
-                          @RequestParam(required = false) String returnDate)
+                          @RequestParam(required = false) String returnDate,
+                          @RequestParam(required=false) String max)
                           throws ResponseException {
-        return AmadeusConnect.INSTANCE.flights(origin, destination, departDate, adults, returnDate);
+        return AmadeusConnect.INSTANCE.flights(originLocationCode, destinationLocationCode, departureDate, adults, returnDate, max);
     }
 }
