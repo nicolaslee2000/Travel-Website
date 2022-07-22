@@ -13,7 +13,6 @@ public class AirlineVO {
 
     @Id
     @GeneratedValue
-    @OneToMany
     private int ID;
 
     @Column(nullable = false)

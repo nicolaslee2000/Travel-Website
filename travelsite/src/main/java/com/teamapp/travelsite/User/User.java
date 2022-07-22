@@ -15,6 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "m_idx")
     private String m_idx;
 
     @Column(nullable = false)
@@ -28,4 +29,7 @@ public class User {
 
     @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String createDate; //Timestamp
 }
