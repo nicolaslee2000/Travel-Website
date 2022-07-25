@@ -1,18 +1,18 @@
 package com.teamapp.travelsite.AirlineBooking;
 
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.logging.LoggerFactory;
-
-import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AirlineControllerTest {
-
+class AirlineServicemplTest {
+    @Test
+    public void AirlineServicemplTest () throws Exception {
     //given
-    
+
     //when
-    
+
     //then
-    
+
     }
+
+}
