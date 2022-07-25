@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity(name = "USER")
 @Setter
+@Table(name = "USER")
 public class User {
 
     @Id

@@ -9,11 +9,12 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @DynamicInsert
+@Table(name = "Airline")
 public class AirlineVO {
 
     @Id
     @GeneratedValue
-    private int ID;
+    private int id;
 
     @Column(nullable = false)
     private String destination;

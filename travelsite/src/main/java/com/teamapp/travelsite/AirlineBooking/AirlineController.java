@@ -19,6 +19,7 @@ public class AirlineController {
 
     @GetMapping("/") //항공권 조회 페이지
     public HashMap<String, AirlineVO> showBookingPage(){
+
         String from = null;
         String to = null;
         String depart = null;
