@@ -10,6 +10,7 @@ import com.amadeus.referenceData.Locations;
 import com.amadeus.resources.FlightOfferSearch;
 import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
+import com.amadeus.resources.HotelOffer;
 import com.amadeus.resources.Location;
 import com.google.gson.JsonObject;
 
@@ -50,4 +51,17 @@ public enum AmadeusConnect {
 	public FlightOrder order(JsonObject order) throws ResponseException {
 		return amadeus.booking.flightOrders.post(order);
 	}
+	
+	
+	
+	
+	//hotel api endpoints
+	
+	public HotelOffer[] hotelList(String cityCode) throws ResponseException {
+		
+		return  amadeus.shopping.hotelOffers.get(Params
+				  .with("cityCode", cityCode));
+	}
+	
+	
 }

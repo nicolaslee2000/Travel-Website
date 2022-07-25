@@ -10,7 +10,7 @@ public class DatabaseConnect {
       public static Traveler traveler(JsonObject travelerInfo) {
         String fname = travelerInfo.get("fname").getAsString();
         String lname = travelerInfo.get("lname").getAsString();
-        String dateOfBirth = travelerInfo.get("dob").getAsString();
+        String dateOfBirth = travelerInfo.get("dateOfBirth").getAsString();
         Traveler traveler = new Traveler();
         Phone phone = traveler.new Phone();
         phone.setCountryCallingCode("1");

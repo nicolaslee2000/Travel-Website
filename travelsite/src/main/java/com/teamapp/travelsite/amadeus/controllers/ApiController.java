@@ -1,7 +1,5 @@
 package com.teamapp.travelsite.amadeus.controllers;
 
-import java.util.Arrays;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
