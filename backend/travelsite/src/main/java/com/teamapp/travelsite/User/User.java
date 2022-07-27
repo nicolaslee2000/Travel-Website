@@ -32,5 +32,9 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    private String regType;
+    //L = local, G = Google, K = Kakao
+
+    @Column(nullable = false)
     private String createDate; //Timestamp
 }
