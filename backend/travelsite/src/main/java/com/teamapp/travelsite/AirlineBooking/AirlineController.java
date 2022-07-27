@@ -1,6 +1,6 @@
 package com.teamapp.travelsite.AirlineBooking;
 
-import com.teamapp.travelsite.Api.AirlineApi;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +14,11 @@ import java.util.HashMap;
 public class AirlineController {
     private AirlineRepository AirlineRepository;
     AirlineVO airlineVO = new AirlineVO();
-    AirlineApi airlineApi = new AirlineApi();
-    AirlineServicempl airlineServicempl = new AirlineServicempl();
+
+//    AirlineServicempl airlineServicempl = new AirlineServicempl();
 
     @GetMapping("/") //항공권 조회 페이지
-    public HashMap<String, AirlineVO> showBookingPage(){
+    public void showBookingPage(){
 
         String from = null;
         String to = null;
@@ -28,7 +28,8 @@ public class AirlineController {
         String child = null;
 
 
-        return airlineServicempl.serachAirline(from, to, depart, goback,adult,child);
+//        return airlineServicempl.serachAirline(from, to, depart, goback,adult,child);
+
     }
 
    @GetMapping("/{ID}") //항공권 상세 페이지
