@@ -1,57 +1,24 @@
-body {
-  font-family: sans-serif;
+.tab-regform {
   text-align: center;
-  padding-left: 30%;
-  height: 100px;
-  margin-top: 100px;
-}
-
-.tab-form .tab-head {
-  align-content: center;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  padding-left: 10%;
-  left: 50%;
-}
-
-.form {
-  align-content: stretch;
-  justify-content: space-between;
-  margin-top: 15px 25px 15px 0px;
-  width: 500px;
-  height: 400px;
-  padding-top: 5%;
-  position: absolute;
+  margin-top: 30px;
+  margin-bottom: 30px;
   background-color: #fff;
   box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.08);
   border-radius: 10%;
+  height: 500px;
 }
 
-.form .register > h2 {
+.tab-regform .tab-head {
+  margin-left: 35%;
+}
+
+.regform .register > h2 {
   position: relative;
-  top: -50px;
 }
 
 .form .register .form-input {
   position: relative;
-  margin: 15px 25px 15px 15px;
-  top: -30px;
-  justify-content: space-between;
-}
-
-.form .SNSregister {
-  position: relative;
-  padding-top: 5%;
-}
-
-.form .SNSregister > h2 {
-  position: relative;
-  padding-top: 5%;
-}
-
-.form .SNSregister .form-input {
-  top: -30px;
-  margin: 15px 15px 15px 15px;
+  margin: 20px 25px 15px 15px;
+  top: 20px;
   justify-content: space-between;
 }
