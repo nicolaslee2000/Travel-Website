@@ -93,7 +93,7 @@ const LoginForm = () => {
 
           <TabPanel value={value} index={1}>
             <div className='SNSregister'>
-              <h2>SNS 계정 로그인 </h2>
+              <h2>소셜 계정 로그인 </h2>
               <div className='form-input'>
                 <div>
                   <Button>
