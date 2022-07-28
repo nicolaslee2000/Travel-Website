@@ -1,0 +1,28 @@
+.headerCotainer {
+  display: flex;
+  flex-direction: column;
+  background-color: blanchedalmond;
+}
+
+.headerButtonGroup {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.headerButtonPos {
+  padding-right: 20px;
+}
+
+.headerButton {
+  font-size: 15px;
+}
+
+.headerTitle {
+  font-size: 30px;
+  color: black;
+  /* text-shadow: 6px 2px 2px gray; */
+  background-color: dodgerblue;
+  padding: 30px 150px;
+
+  /* box-sizing: border-box; */
+}

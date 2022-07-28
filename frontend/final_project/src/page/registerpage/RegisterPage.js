@@ -1,11 +1,14 @@
 import React from 'react';
+import Layout from '../../components/othercomponent/Layout';
 import RegisterForm from '../../components/registercomponent/RegisterForm';
 
 const RegisterPage = () => {
   return (
-    <div>
-      <RegisterForm />
-    </div>
+    <>
+      <Layout>
+        <RegisterForm />
+      </Layout>
+    </>
   );
 };
 
