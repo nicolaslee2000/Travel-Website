@@ -2,6 +2,8 @@ package com.teamapp.travelsite.User;
 
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
@@ -9,13 +11,13 @@ import javax.persistence.*;
 @Builder
 @ToString
 @AllArgsConstructor
-@Entity(name = "USER")
+@Entity
 @Setter
-@Table(name = "USER")
+@Table(name = "USER_TABLE")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id //Index Column
+    @GeneratedValue //why we uses hibernate
     @Column(name = "m_idx")
     private String m_idx;
 
@@ -35,6 +37,14 @@ public class User {
     private String regType;
     //L = local, G = Google, K = Kakao
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     @Column(nullable = false)
-    private String createDate; //Timestamp
+    private java.util.Date createDate; //Timestamp
 }
+/*
+    (strategy=GenerationType.IDENTITY) IDENTITY = AUTO_INCREMENT
+    SEQUENCE (ORACLE, PostgreSQL, DB2, H2) order by sequence file or table
+    TABLE :: Like sequence however create key building table (able ALL DB)
+    AUTO :: auto (DEFAULT)
+* */

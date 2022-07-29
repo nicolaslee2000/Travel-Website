@@ -2,6 +2,7 @@ package com.teamapp.travelsite.User;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String showLogin(){
+
         return "login_form";
     }
 

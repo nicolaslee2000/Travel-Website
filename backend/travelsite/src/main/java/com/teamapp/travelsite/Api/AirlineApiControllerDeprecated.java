@@ -2,7 +2,6 @@ package com.teamapp.travelsite.Api;
 
 import com.amadeus.Amadeus;
 import com.amadeus.resources.*;
-import com.teamapp.travelsite.AirlineBooking.AirlineVO;
 import java.util.Arrays;
 
 import com.amadeus.Params;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 //@RequestMapping("")
 //확정되면 모델에 전부 담아서 보낼것
 public class AirlineApiControllerDeprecated {
-    private AirlineVO airlineVO = new AirlineVO();
 
     Amadeus amadeus = Amadeus
             .builder("vhvChPiYx8exfB5fukFn9CaIOmkBpZn2","19iGuJh25e7AGAin")
@@ -146,7 +144,7 @@ public class AirlineApiControllerDeprecated {
 
         return order.getFlightOffers();
     }
-        //이 밑으론 USER 권한 획득시 접근가능하게 구현할것.
+        //조회 및 삭제
         @GetMapping("/deleteOrder/{id}")
         @ResponseBody
         public String deleteOrder() throws ResponseException {
