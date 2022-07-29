@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="teamapp.travelsite.AirlineBooking.AirlineMapper">
-    <!-- 네임스페이스 줄이는법 까먹음 mybatis 필요하면 쓰세요-->
 
     <!--  Oracle == MySQL  -->
 </mapper>

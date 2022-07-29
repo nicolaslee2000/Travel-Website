@@ -2,23 +2,28 @@ package com.teamapp.travelsite.User;
 
 import com.teamapp.travelsite.Exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@EnableJpaRepositories
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
+    private final EntityManagerFactory entityManagerFactory;
     public User create(String id,String name, String email, String password) {
         User user = new User();
         user.setId(id);
