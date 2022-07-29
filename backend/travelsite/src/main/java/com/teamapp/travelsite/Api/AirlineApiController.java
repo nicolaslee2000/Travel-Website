@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController //임시 어노테이션 (테스트)
 //@RequestMapping("")
+//확정되면 모델에 전부 담아서 보낼것
 public class AirlineApiController {
     private AirlineVO airlineVO = new AirlineVO();
 
@@ -69,7 +70,7 @@ public class AirlineApiController {
                         .and("departureDate", "2022-11-01")
                         .and("returnDate", "2022-11-20")
                         .and("adults", 1)
-                        .and("max", 250)
+                        .and("max", 250) //임의
                         .and("nonStop","false"));
 
         //그 뒤로 POST

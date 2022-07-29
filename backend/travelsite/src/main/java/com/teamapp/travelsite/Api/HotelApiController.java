@@ -20,7 +20,7 @@ public class HotelApiController {
     //TESTLINE==================================================TESTLINE============================
 
     @GetMapping("/")
-    @ResponseBody //이름으로 조회, 나중에 객체 받아서 POST으로 변경 예정
+    @ResponseBody //이름으로 조회, 나중에 POST으로 변경 예정
     public void showHotelLists() throws ResponseException {
         Hotel[] hotels = amadeus.referenceData.locations.hotels.byHotels.get(
                 Params.with("hotelIds", "ARPARARA"));
