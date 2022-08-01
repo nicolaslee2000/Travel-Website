@@ -17,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http.authorizeRequests().antMatchers("/**").permitAll()
             ; //인증되지 않은 모든 접근을 허가 : 로그인 하지 않아도 페이지 접근 가능
+            http.cors().and().csrf().disable();
             return http.build();
         }
 

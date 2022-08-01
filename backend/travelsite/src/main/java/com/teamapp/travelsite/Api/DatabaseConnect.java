@@ -6,33 +6,49 @@ import com.amadeus.resources.Traveler.Name;
 import com.amadeus.resources.Traveler.Phone;
 import com.google.gson.JsonObject;
 import com.amadeus.resources.Traveler.Contact;
+
 public class DatabaseConnect {
-      public static Traveler traveler(JsonObject travelerInfo) {
-        String fname = travelerInfo.get("fname").getAsString();
-        String lname = travelerInfo.get("lname").getAsString();
-        String dateOfBirth = travelerInfo.get("dateOfBirth").getAsString();
-        Traveler traveler = new Traveler();
-        Phone phone = traveler.new Phone();
-        phone.setCountryCallingCode("1");
-        phone.setNumber("1231231234");
-        phone.setDeviceType("MOBILE");
-        Contact contact = traveler.new Contact();
-        Phone[] phones = {phone};
-        contact.setPhones(phones);
-        traveler.setContact(contact);
-        Name name = traveler.new Name(fname, lname);
-        traveler.setName(name);
-        traveler.setDateOfBirth(dateOfBirth);
-        traveler.setId("1");
-        Document document = traveler.new Document();
-        document.setDocumentType("PASSPORT");
-        document.setNumber("00000000");
-        document.setExpiryDate("2025-04-14");
-        document.setNationality("ES");
-        document.setHolder(true);
-        document.setIssuanceCountry("ES");
-        Document[] documents = {document};
-        traveler.setDocuments(documents);
-        return traveler;
-    }
+	public static Traveler traveler(JsonObject travelerInfo) {
+
+		Traveler traveler = new Traveler();
+		String id = travelerInfo.get("id").getAsString();
+		
+		String fname = travelerInfo.get("fname").getAsString();
+		String lname = travelerInfo.get("lname").getAsString();
+		String dateOfBirth = travelerInfo.get("dateOfBirth").getAsString();
+		String gender = travelerInfo.get("gender").getAsString();
+		
+		String email = travelerInfo.get("email").getAsString();
+		Phone phone = traveler.new Phone();
+		String countryCode = travelerInfo.get("countryCode").getAsString();
+		String number = travelerInfo.get("phoneNumber").getAsString();
+		phone.setCountryCallingCode(countryCode);
+		phone.setNumber(number);
+		phone.setDeviceType("MOBILE");
+		Contact contact = traveler.new Contact();
+		Phone[] phones = { phone };
+		contact.setPhones(phones);
+		contact.setEmailAddress(email);
+		traveler.setContact(contact);
+		Name name = traveler.new Name(fname, lname);
+		traveler.setName(name);
+		traveler.setDateOfBirth(dateOfBirth);
+		traveler.setId(id);
+		traveler.setGender(gender);
+		
+		String passportNumber = travelerInfo.get("passportNumber").getAsString();
+		String nationality = travelerInfo.get("nationality").getAsString();
+		String passportExpiryDate = travelerInfo.get("passportExpiryDate").getAsString();
+		
+		Document document = traveler.new Document();
+		document.setDocumentType("PASSPORT");
+		document.setNumber(passportNumber);
+		document.setExpiryDate(passportExpiryDate);
+		document.setNationality(nationality);
+		document.setHolder(true);
+		document.setIssuanceCountry(nationality);
+		Document[] documents = { document };
+		traveler.setDocuments(documents);
+		return traveler;
+	}
 }
