@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.Security.OAuthPayload;
+package com.teamapp.travelsite.Security.OAuthBody;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

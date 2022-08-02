@@ -45,7 +45,6 @@ public class User {
     @Column(nullable = false)
     private java.util.Date createDate; //Timestamp
 
-    //enum은 lombok이 인식을 못하나?
 
 }
 /*
