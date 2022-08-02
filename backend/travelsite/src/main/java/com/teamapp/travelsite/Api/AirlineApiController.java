@@ -11,7 +11,6 @@ import com.amadeus.exceptions.ResponseException;
 import com.amadeus.resources.FlightOfferSearch;
 import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
-import com.amadeus.resources.Location;
 import com.amadeus.resources.Traveler;
 import com.google.gson.JsonObject;
 
@@ -21,12 +20,26 @@ import com.google.gson.JsonObject;
 //http://localhost:8090/flight/locations?keyword=NYC
 public class AirlineApiController {
 
-
-	@GetMapping("/locations")
-	public Location[] locations(@RequestParam(required = true) String keyword) throws ResponseException {
-		return AmadeusConnect.INSTANCE.location(keyword);
-
-	}
+	
+	
+	@GetMapping("/flights")
+    public FlightOfferSearch[] flights(@RequestParam(required=true) String origin,
+                          @RequestParam(required=true) String destination,
+                          @RequestParam(required=true) String departDate,
+                          @RequestParam(required = false) String returnDate,
+                          @RequestParam(required=true) String adults,
+                          @RequestParam(required=false) String children,
+                          @RequestParam(required=false) String infants,
+                          @RequestParam(required=false) String travelClass,
+                          @RequestParam(required=false) String includedAirlines,
+                          @RequestParam(required=false) String excludedAirlines,
+                          @RequestParam(required=false) String nonStop,
+                          @RequestParam(required=false) String currency,
+                          @RequestParam(required=false) String maxPrice,
+                          @RequestParam(required=false) String max)
+                          throws ResponseException {
+        return AmadeusConnect.INSTANCE.flights(origin, destination, departDate, returnDate, adults, children, infants, travelClass, includedAirlines, excludedAirlines, nonStop, currency, maxPrice, max);
+    }
 
 	@PostMapping("/confirm")
 	public FlightPrice confirm(@RequestBody(required = true) FlightOfferSearch search) throws ResponseException {
@@ -42,14 +55,5 @@ public class AirlineApiController {
 	public FlightOrder order(@RequestBody(required = true) JsonObject order) throws ResponseException {
 		return AmadeusConnect.INSTANCE.order(order);
 	}
-	@GetMapping("/flights")
-    public FlightOfferSearch[] flights(@RequestParam(required=true) String originLocationCode,
-                          @RequestParam(required=true) String destinationLocationCode,
-                          @RequestParam(required=true) String departureDate,
-                          @RequestParam(required=true) String adults,
-                          @RequestParam(required = false) String returnDate,
-                          @RequestParam(required=false) String max)
-                          throws ResponseException {
-        return AmadeusConnect.INSTANCE.flights(originLocationCode, destinationLocationCode, departureDate, adults, returnDate, max);
-    }
+
 }
