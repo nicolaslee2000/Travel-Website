@@ -1,9 +1,9 @@
 package com.teamapp.travelsite.User;
 
 
+import com.teamapp.travelsite.Security.AuthProvider;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
@@ -13,16 +13,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Setter
-@Table(name = "USER_TABLE")
+@Getter
+@Table(name = "USER_TABLE",uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
 public class User {
 
-    @Id //Index Column
-    @GeneratedValue //why we uses hibernate
-    @Column(name = "m_idx")
-    private String m_idx;
 
-    @Column(nullable = false)
-    private String id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Column(nullable = false)
     private String password;
@@ -33,14 +33,19 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private String regType;
-    //L = local, G = Google, K = Kakao
+    private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+
+    private String providerId;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(nullable = false)
     private java.util.Date createDate; //Timestamp
+
+
 }
 /*
     (strategy=GenerationType.IDENTITY) IDENTITY = AUTO_INCREMENT
