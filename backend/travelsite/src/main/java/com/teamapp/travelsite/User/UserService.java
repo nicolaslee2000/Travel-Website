@@ -1,14 +1,13 @@
 package com.teamapp.travelsite.User;
 
 import com.teamapp.travelsite.Exception.UserNotFoundException;
+import com.teamapp.travelsite.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,7 @@ public class UserService {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password)); //암호화 Spring Security 메서드
-        this.userRepository.save(user);
+        this.userRepository.save(user); //Create Entity In DB
         return user;
     }
 

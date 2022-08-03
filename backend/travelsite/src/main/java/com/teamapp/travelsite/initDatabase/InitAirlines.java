@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.teamapp.travelsite.Repository.AirlineRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -28,11 +29,14 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		Amadeus amadeus = Amadeus.builder("cSg0o4RSb1xXoEUYShvvb2JOJC7DxqQq","yFFOhZt1nuAS2cDS").build();
+		final Amadeus amadeus = Amadeus.builder("cSg0o4RSb1xXoEUYShvvb2JOJC7DxqQq","yFFOhZt1nuAS2cDS").build();
+
+		final AirlineRepository airlineRepository;
 		
 		try {
 			airlines = Arrays.stream(amadeus.referenceData.airlines.get()).map(
 					e -> new Airline(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());
+
 			
 			int i = 0;
 			for(Airline airline : airlines) {
@@ -56,7 +60,7 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 		}
 		
 		
-			airlines.forEach(System.out::println);
+			//airlines.forEach(System.out::println);
 	}
 
 	
