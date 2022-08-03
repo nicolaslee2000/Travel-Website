@@ -1,0 +1,67 @@
+package com.teamapp.travelsite.initDatabase;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandler;
+import java.net.http.HttpResponse.BodyHandlers;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.teamapp.travelsite.Repository.AirlineRepository;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+
+import com.amadeus.Amadeus;
+import com.amadeus.exceptions.ResponseException;
+
+@Component
+public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> {
+	
+	List<Airline> airlines = new ArrayList<>();
+	
+	@Override
+	public void onApplicationEvent(ContextRefreshedEvent event) {
+		final Amadeus amadeus = Amadeus.builder("cSg0o4RSb1xXoEUYShvvb2JOJC7DxqQq","yFFOhZt1nuAS2cDS").build();
+
+		final AirlineRepository airlineRepository;
+		
+		try {
+			airlines = Arrays.stream(amadeus.referenceData.airlines.get()).map(
+					e -> new Airline(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());
+
+			
+			int i = 0;
+			for(Airline airline : airlines) {
+				String uri = "https://daisycon.io/images/airline/?width=300&height=150&color=ffffff&iata="+airline.getAirline_iatacode();
+				HttpRequest request = HttpRequest.newBuilder(new URI(uri)).GET()
+						.header("Accept", "*/*")
+						.build();
+						
+				HttpResponse<byte[]> response = HttpClient.newHttpClient().send(request, BodyHandlers.ofByteArray());
+				airline.setAirline_logo(response.body());	
+				i++;
+				if(i>10){
+					break;
+				}
+			}
+			
+			
+			
+		} catch (ResponseException | URISyntaxException | IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		
+			//airlines.forEach(System.out::println);
+	}
+
+	
+}

@@ -1,5 +1,6 @@
-package com.teamapp.travelsite.User;
+package com.teamapp.travelsite.Repository;
 
+import com.teamapp.travelsite.User.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
