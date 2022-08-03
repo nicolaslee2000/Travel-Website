@@ -9,8 +9,7 @@ import com.amadeus.exceptions.ResponseException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController //임시 어노테이션 (테스트)
-//@RequestMapping("")
-//확정되면 모델에 전부 담아서 보낼것
+@RequestMapping ("/test")
 public class AirlineApiControllerDeprecated {
 
     Amadeus amadeus = Amadeus
@@ -18,7 +17,7 @@ public class AirlineApiControllerDeprecated {
             .build(); //API Injection
 
     //==================================================TESTLINE====================================
-    @GetMapping("/example") //항공사 행선지 표시
+    @GetMapping("/goto") //항공사 행선지 표시
     @ResponseBody
     public Destination[] airlinelookups() throws ResponseException {
 
@@ -41,7 +40,7 @@ public class AirlineApiControllerDeprecated {
         return destinations;
     }
     @ResponseBody
-    @GetMapping("/airportloc") //공항정보 표시
+    @GetMapping("/airport") //공항정보 표시
     public Location airportloc() throws ResponseException {
         /// Get a specific city or airport based on its id
         Location location = amadeus.referenceData
@@ -79,7 +78,7 @@ public class AirlineApiControllerDeprecated {
     }
 
     //최종 구현 로직
-    @GetMapping("/ordertest")
+    @GetMapping("/order")
     @ResponseBody
     public FlightOfferSearch[] ordertest() throws ResponseException {
         //차후 전략 :: traveler 객체를 상속받아 TravelerVO 으로 구현.
@@ -144,24 +143,4 @@ public class AirlineApiControllerDeprecated {
 
         return order.getFlightOffers();
     }
-        //조회 및 삭제
-        @GetMapping("/deleteOrder/{id}")
-        @ResponseBody
-        public String deleteOrder() throws ResponseException {
-
-            //FlightOrder order = amadeus.booking.flightOrder("MlpZVkFMfFdBVFNPTnwyMDE1LTExLTAy").delete();
-
-//            if (order.getResponse().getStatusCode() != 200) {
-//                System.out.println("Wrong status code: " + order.getResponse().getStatusCode());
-//                System.exit(-1);
-//            }
-
-            return "/showOrder/{id}";
-        }
-        @GetMapping("/showOrder/{id}")
-        @ResponseBody
-        public FlightOrder showOrder() throws ResponseException {
-            com.amadeus.resources.FlightOrder order = amadeus.booking.flightOrder("MlpZVkFMfFdBVFNPTnwyMDE1LTExLTAy").get();
-            return order;
-        }
 }
