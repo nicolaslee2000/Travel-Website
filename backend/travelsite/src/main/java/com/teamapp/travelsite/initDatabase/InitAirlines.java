@@ -56,7 +56,8 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 		}
 		
 		
-			airlines.forEach(System.out::println);
+//			airlines.forEach(System.out::println);
+		//TODO airlines to database
 	}
 
 	

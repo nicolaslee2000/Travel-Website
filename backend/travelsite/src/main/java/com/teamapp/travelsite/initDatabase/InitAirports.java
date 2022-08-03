@@ -36,6 +36,7 @@ public class InitAirports implements ApplicationListener<ContextRefreshedEvent> 
 		} 
 		
 		//TODO airports and cities to database
+		//cities, airports 
 
 	}
 

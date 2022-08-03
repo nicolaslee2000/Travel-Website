@@ -11,6 +11,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Country {
-	private String country_code;
+	private String country_code; //2 char KR US
 	private String country_name;
 }
