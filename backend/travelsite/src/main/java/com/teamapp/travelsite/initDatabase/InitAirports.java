@@ -23,7 +23,6 @@ public class InitAirports implements ApplicationListener<ContextRefreshedEvent> 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		Gson gson = new Gson();
-
 		try(Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"))){
 			airports = gson.fromJson(reader, new TypeToken<List<Airport>>() {}.getType());
 //			airports.forEach(System.out::println);
