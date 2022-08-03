@@ -1,20 +1,18 @@
 package com.teamapp.travelsite.User;
 
 
-import com.teamapp.travelsite.Exception.ResourceNotFoundException;
-import com.teamapp.travelsite.Security.CurrentUser;
+import java.util.List;
 
-import com.teamapp.travelsite.Security.UserPrincipal;
-import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
+import com.teamapp.travelsite.Exception.ResourceNotFoundException;
+import com.teamapp.travelsite.Repository.UserRepository;
+import com.teamapp.travelsite.Security.CurrentUser;
+import com.teamapp.travelsite.Security.UserPrincipal;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor

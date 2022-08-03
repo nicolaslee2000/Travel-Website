@@ -1,12 +1,12 @@
 package com.teamapp.travelsite.Security;
 
 import com.teamapp.travelsite.Exception.BadRequestException;
+import com.teamapp.travelsite.Repository.UserRepository;
 import com.teamapp.travelsite.Security.OAuthBody.ApiResponse;
 import com.teamapp.travelsite.Security.OAuthBody.AuthResponse;
 import com.teamapp.travelsite.Security.OAuthBody.LoginRequest;
 import com.teamapp.travelsite.Security.OAuthBody.SignUpRequest;
 import com.teamapp.travelsite.User.User;
-import com.teamapp.travelsite.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

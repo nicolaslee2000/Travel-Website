@@ -23,7 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EntityManagerFactory entityManagerFactory;
-    public User create(String id,String name, String email, String password) {
+    public User create(long id,String name, String email, String password) {
         User user = new User();
         user.setId(id);
         user.setName(name);

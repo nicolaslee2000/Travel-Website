@@ -3,9 +3,11 @@ package com.teamapp.travelsite.Security;
 
 
 import com.teamapp.travelsite.Exception.ResourceNotFoundException;
+import com.teamapp.travelsite.Repository.UserRepository;
 import com.teamapp.travelsite.User.User;
-import com.teamapp.travelsite.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by rajeevkumarsingh on 02/08/17.
  */
 
+@EnableJpaRepositories("com.teamapp.travelsite.Repository")
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

@@ -107,6 +107,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                 .permitAll()
                 .antMatchers("/auth/**", "/oauth2/**")
                 .permitAll()
+                .antMatchers("/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
