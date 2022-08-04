@@ -48,6 +48,7 @@ public class AirlineApiController {
 
 	@PostMapping("/traveler")
 	public Traveler traveler(@RequestBody(required = true) JsonObject travelerInfo) {
+		System.out.println(travelerInfo.toString());
 		return DatabaseConnect.traveler(travelerInfo.get("data").getAsJsonObject());
 	}
 

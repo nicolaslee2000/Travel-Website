@@ -23,12 +23,12 @@ public class Airport {
 	private Long ap_idx;
 	
 	@SerializedName("iata")
-	@Column(nullable = false,name = "iata")
+	@Column(nullable = false,name = "airport_iatacode")
 	private String airport_iatacode;
 	@SerializedName("city")
-	@Column(nullable = false,name = "city")
+	@Column(nullable = false,name = "city_name")
 	private String city_name;
-	@Column(nullable = false,name = "country")
+	@Column(nullable = false,name = "country_code")
 	@SerializedName("country")
 	private String country_code;
 

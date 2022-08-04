@@ -5,8 +5,18 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.service.ServiceRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -16,6 +26,9 @@ import com.google.gson.reflect.TypeToken;
 
 @Component
 public class InitAirports implements ApplicationListener<ContextRefreshedEvent> {
+	
+	@Autowired
+	InitDatabaseService initDatabaseService;
 	
 	List<Airport> airports = new ArrayList<>();
 	List<City> cities = new ArrayList<>();
@@ -34,10 +47,17 @@ public class InitAirports implements ApplicationListener<ContextRefreshedEvent> 
 			e.printStackTrace();
 		} 
 		
-		//TODO airports and cities to database
+//		initDatabaseService.saveAirports(airports.stream().filter(e -> !e.getAirport_iatacode().isBlank()||e.getAirport_iatacode()!=null)
+//				.collect(Collectors.toList()));
+		
+		//TODO airports and cities to databases
 		//cities, airports 
-
+		initDatabaseService.saveAirport(new Airport(null, "K7", "coco", "KR"));
+		
 	}
-
+	
+//	private List<Airport> getAirports(List<Airport> a){
+//		
+//	}
 	
 }
