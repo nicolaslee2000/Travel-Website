@@ -38,4 +38,6 @@ public class City{
 		this.country_code = str1;
 	}
 
+	public City(String city_name, String country_code, String country) {
+	}
 }

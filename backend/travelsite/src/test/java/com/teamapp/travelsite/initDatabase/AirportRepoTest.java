@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 
+
 @DataJpaTest
 public class AirportRepoTest {
     @Autowired
@@ -17,7 +18,8 @@ public class AirportRepoTest {
     @DisplayName("for Save To DB")
     void saveMember() {
         // given
-        City city = new City();
+        City city = new City("City_name","Country_code","country"); //여기도 not null 요구
+
       Airport airport = new Airport("1234",city);
         // when
         Airport savedAirport = airportRepository.save(airport);
@@ -25,6 +27,8 @@ public class AirportRepoTest {
         Assertions.assertThat(airport).isSameAs(savedAirport);
         Assertions.assertThat(airport.getAirport_iatacode()).isEqualTo(savedAirport.getAirport_iatacode());
         Assertions.assertThat(airport.getCity()).isNotNull();
+
+        //result : failed
     }
 
     }
