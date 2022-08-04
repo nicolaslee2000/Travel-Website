@@ -1,0 +1,29 @@
+.searchItem {
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-bottom: 20px;
+  background-color: khaki;
+  width: 80%;
+}
+
+.searchConfirm {
+  font-size: 20;
+  font-weight: bold;
+}
+
+.siDetails {
+  /* flex: 1; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.siPrice {
+  font-size: large;
+  display: flex;
+  /* justify-content: space-around; */
+}

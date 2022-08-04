@@ -1,19 +1,18 @@
-import './App.css';
-import Mainpage from './page/mainpage/Mainpage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import RegisterPage from './page/registerpage/RegisterPage';
-import RegisteredPage from './page/registeredpage/RegisteredPage';
-import LoginPage from './page/loginpage/LoginPage';
+import MainPage from './pages/mainpage/MainPage';
+import SearchResultPage from './pages/searchresultpage/SearchResultPage';
+import TravlerPage from './pages/travelerpage/TravlerPage';
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path='/' element={<Mainpage />} />
-        <Route path='register' element={<RegisterPage />} />
-        <Route path='registed' element={<RegisteredPage />} />
-        <Route path='login' element={<LoginPage />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/searchResult' element={<SearchResultPage />} />
+          <Route path='/travler' element={<TravlerPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
