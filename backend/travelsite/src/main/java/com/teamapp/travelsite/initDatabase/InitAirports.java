@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.amadeus.resources.TripDetail;
+import com.teamapp.travelsite.Repository.AirportRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -19,24 +22,30 @@ public class InitAirports implements ApplicationListener<ContextRefreshedEvent> 
 	
 	List<Airport> airports = new ArrayList<>();
 	List<City> cities = new ArrayList<>();
-	
+
+	@Autowired
+	AirportRepository airportRepository;
+
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		Gson gson = new Gson();
 
-		try(Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"))){
-			airports = gson.fromJson(reader, new TypeToken<List<Airport>>() {}.getType());
-//			airports.forEach(System.out::println);
-			cities = gson.fromJson(reader, new TypeToken<List<City>> () {}.getType());
-			
-//			System.out.println(airports.size());
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-		
-		//TODO airports and cities to database
-		//cities, airports 
+//		try(Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"))){
+//			airports = gson.fromJson(reader, new TypeToken<List<Airport>>() {}.getType());
+//			//airports.forEach(System.out::println);
+//			cities = gson.fromJson(reader, new TypeToken<List<City>> () {}.getType());
+//			//System.out.println(airports.size());
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		//// save to repo
+		//airportRepository.saveAll(airports);
+
+
+
+
+
 
 	}
 

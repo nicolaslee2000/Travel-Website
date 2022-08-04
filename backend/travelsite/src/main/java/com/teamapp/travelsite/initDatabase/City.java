@@ -1,9 +1,6 @@
 package com.teamapp.travelsite.initDatabase;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,21 +8,34 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //@Entity
 @Data
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-public class City {
-	@Id
-	@GeneratedValue
-	private int C_idx;
+public class City{
 
+	@Id
 	@SerializedName("city")
-	@Column(nullable = false,name = "city")
+	@Column(nullable = false,name = "city_name")
 	private String city_name;
-	@SerializedName("country")
-	@Column(nullable = false,name = "country")
+
+	@Column(nullable = false,insertable = false,updatable = false)
 	private String country_code;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
+	private Country country;
+
+	@OneToMany(mappedBy = "city")
+	private List<Airport> airport = new ArrayList<>();
+
+	public City(String str, String str1) {
+		this.city_name = str;
+		this.country_code = str1;
+	}
+
 }
