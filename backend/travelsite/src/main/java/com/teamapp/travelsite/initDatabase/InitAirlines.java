@@ -34,10 +34,6 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		final Amadeus amadeus = Amadeus.builder("cSg0o4RSb1xXoEUYShvvb2JOJC7DxqQq","yFFOhZt1nuAS2cDS").build();
-
-
-
-		
 		try {
 			airlineDTOS = Arrays.stream(amadeus.referenceData.airlines.get()).map(
 					e -> new AirlineDTO(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());

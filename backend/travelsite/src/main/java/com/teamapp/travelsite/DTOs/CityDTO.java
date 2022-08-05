@@ -2,6 +2,7 @@ package com.teamapp.travelsite.DTOs;
 
 
 import com.teamapp.travelsite.initDatabase.City;
+import com.teamapp.travelsite.initDatabase.Country;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,9 @@ public class CityDTO {
     public City toEntity(){
         return City.builder()
                 .city_name(this.city_name)
-                .country_code(this.country_code)
+                .country(Country.builder()
+                        .country_code(this.country_code)
+                        .build())
                 .build();
     }
 }
