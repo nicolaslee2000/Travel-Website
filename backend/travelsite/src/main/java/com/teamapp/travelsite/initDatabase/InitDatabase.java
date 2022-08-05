@@ -41,7 +41,7 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
         try(Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"))){
             airportsDTOs = gson.fromJson(reader, new TypeToken<List<AirportDTO>>() {}.getType());
             //airports.forEach(System.out::println);
-            citiesDTOs = gson.fromJson(reader, new TypeToken<List<City>> () {}.getType());
+            citiesDTOs = gson.fromJson(reader, new TypeToken<List<CityDTO>> () {}.getType());
             //System.out.println(airports.size());
 
         } catch (IOException e) {

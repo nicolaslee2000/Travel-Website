@@ -13,18 +13,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AirportDTO {
 
-    @SerializedName("iata")
-    private String airport_iatacode;
 
-    private String city_name;
+    private String iata;
+
+    private String city;
 
     private String country_code;
     public Airport toEntity() {
         return Airport.builder()
-                .airport_iatacode(this.airport_iatacode)
+                .airport_iatacode(this.iata)
                 .city(City.builder()
                         .country_code(this.country_code)
-                        .city_name(this.city_name)
+                        .city_name(this.city)
                         .build())
                 .build();
     }

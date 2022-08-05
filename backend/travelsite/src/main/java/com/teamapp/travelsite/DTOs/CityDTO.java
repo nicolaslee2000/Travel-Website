@@ -12,13 +12,13 @@ import lombok.Data;
 @AllArgsConstructor
 public class CityDTO {
 
-    private String city_name;
+    private String city;
 
     private String country_code;
 
     public City toEntity(){
         return City.builder()
-                .city_name(this.city_name)
+                .city_name(this.city)
                 .country(Country.builder()
                         .country_code(this.country_code)
                         .build())
