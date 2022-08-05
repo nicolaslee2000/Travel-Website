@@ -18,9 +18,6 @@ import java.util.List;
 public class City{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int city_idx;
-
 	@SerializedName("city")
 	@Column(nullable = true,name = "city_name")
 	private String city_name;

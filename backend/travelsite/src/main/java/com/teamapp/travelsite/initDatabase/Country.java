@@ -19,13 +19,15 @@ import java.util.List;
 public class Country {
 
 	@Id
-	@Column(nullable = false)
+	@GeneratedValue
+	private int country_id;
+	@Column(nullable = true)
 	private String country_code;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String country_name;
 
 
-	@OneToMany(mappedBy = "country",cascade = CascadeType.ALL) //N:1 Bothside (JPA) In DB FK Owner :: N side
+	@OneToMany(mappedBy = "country") //N:1 Bothside (JPA) In DB FK Owner :: N side
 	List<City> cities;
 
 	//cascade 영속성 전파
