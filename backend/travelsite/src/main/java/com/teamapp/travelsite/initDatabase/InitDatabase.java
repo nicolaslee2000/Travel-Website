@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.teamapp.travelsite.DTOs.AirportDTO;
 import com.teamapp.travelsite.DTOs.CityDTO;
+import com.teamapp.travelsite.DTOs.CityDTOanother;
 import com.teamapp.travelsite.Repository.AirportRepository;
 import com.teamapp.travelsite.Repository.CityRepository;
 import com.teamapp.travelsite.Repository.CountryRepository;
@@ -23,7 +24,9 @@ import java.util.Locale;
 @Component
 public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> {
     List<AirportDTO> airportsDTOs = new ArrayList<>();
-    List<CityDTO> citiesDTOs = new ArrayList<>();
+    //List<CityDTO> citiesDTOss = new ArrayList<>();
+
+    List<CityDTOanother> citiesDTOs = new ArrayList<>();
     List<Airport> airportList = new ArrayList<>();
     List<City> cityList = new ArrayList<>();
     List<Country> countries = new ArrayList<>();
@@ -41,7 +44,7 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
         try(Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"))){
             airportsDTOs = gson.fromJson(reader, new TypeToken<List<AirportDTO>>() {}.getType());
             //airports.forEach(System.out::println);
-            citiesDTOs = gson.fromJson(reader, new TypeToken<List<CityDTO>> () {}.getType());
+            citiesDTOs = gson.fromJson(reader, new TypeToken<List<CityDTOanother>> () {}.getType());
             //System.out.println(airports.size());
 
         } catch (IOException e) {
@@ -54,10 +57,7 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
             Locale obj = new Locale("", countryCode);
 //			System.out.println("Country Code = " + obj.getCountry()
 //				+ ", Country Name = " + obj.getDisplayCountry());
-
-
             Country country = new Country(obj.getCountry(), obj.getDisplayCountry());
-
             countries.add(country);
         }
 

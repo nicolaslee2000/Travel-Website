@@ -7,11 +7,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 
 
 @DataJpaTest
+@AutoConfigureTestDatabase
 public class AirportRepoTest {
     @Autowired
     private AirportRepository airportRepository;
@@ -26,16 +28,14 @@ public class AirportRepoTest {
     void saveMember() {
         // given
 
-
-
         AirportDTO airport = new AirportDTO("anything","anything","anything");
         // when
-        //Airport savedAirport = airportRepository.save(airport);
+        Airport savedAirport = airportRepository.save(airport.toEntity());
+
         // then
         Assertions.assertThat(airport).isSameAs(savedAirport);
-        Assertions.assertThat(airport.getAirport_iatacode()).isEqualTo(savedAirport.getAirport_iatacode());
+        Assertions.assertThat(airport.getIata()).isEqualTo(savedAirport.getAirport_iatacode());
         Assertions.assertThat(airport.getCity()).isNotNull();
-
         //result : failed
     }
 

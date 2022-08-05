@@ -22,10 +22,10 @@ public class AirportDTO {
     public Airport toEntity() {
         return Airport.builder()
                 .airport_iatacode(this.iata)
-                .city(City.builder()
-                        .country_code(this.country_code)
-                        .city_name(this.city)
-                        .build())
+//                .city(City.builder()
+//                        .country_code(this.country_code)
+//                        .city_name(this.city)
+//                        .build())
                 .build();
     }
 }
