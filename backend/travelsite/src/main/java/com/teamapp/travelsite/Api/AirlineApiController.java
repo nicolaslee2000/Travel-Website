@@ -1,5 +1,12 @@
 package com.teamapp.travelsite.Api;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandlers;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +20,8 @@ import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
 import com.amadeus.resources.Traveler;
 import com.google.gson.JsonObject;
+
+import io.jsonwebtoken.io.IOException;
 
 
 @RestController
@@ -54,6 +63,25 @@ public class AirlineApiController {
 	@PostMapping("/order")
 	public FlightOrder order(@RequestBody(required = true) JsonObject order) throws ResponseException {
 		return AmadeusConnect.INSTANCE.order(order);
+	}
+	
+	@GetMapping("/logo")
+	public byte[] logo(@RequestParam(required=true) String iatacode, @RequestParam(required=false, defaultValue = "150") String width
+			,@RequestParam(required=false, defaultValue = "300") String height) {
+		HttpResponse<byte[]> response = null;
+		try {
+			String uri = "https://daisycon.io/images/airline/?width="+width+"&height="+height+"&color=ffffff&iata="+iatacode;
+			HttpRequest request = HttpRequest.newBuilder(new URI(uri)).GET()
+					.header("Accept", "*/*")
+					.build();
+					
+			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofByteArray());
+		} catch(IOException | java.io.IOException | InterruptedException | URISyntaxException e) {
+			
+		}
+		 
+		return response.body();
+		
 	}
 
 }
