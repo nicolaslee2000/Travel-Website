@@ -52,8 +52,10 @@ public class InitAirports implements ApplicationListener<ContextRefreshedEvent> 
 		
 		//TODO airports and cities to databases
 		//cities, airports 
-		initDatabaseService.saveAirport(new Airport(null, "K7", "coco", "KR"));
-		
+		initDatabaseService.saveAirport(new Airport(null, "ICN", "incheon international","incheon", "KR"));
+		initDatabaseService.saveAirport(new Airport(null, "NYC", "new york","newYork", "KR"));
+		initDatabaseService.saveAirport(new Airport(null, "FRA", "Frankfurt am main","frankfurt", "KR"));
+		initDatabaseService.saveAirport(new Airport(null, "BKK", "Bangkok airport","bangkok", "KR"));
 	}
 	
 //	private List<Airport> getAirports(List<Airport> a){

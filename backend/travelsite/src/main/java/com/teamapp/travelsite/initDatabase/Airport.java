@@ -25,6 +25,9 @@ public class Airport {
 	@SerializedName("iata")
 	@Column(nullable = false,name = "airport_iatacode")
 	private String airport_iatacode;
+	@SerializedName("name")
+	@Column(nullable = false,name = "airport_name")
+	private String airport_name;
 	@SerializedName("city")
 	@Column(nullable = false,name = "city_name")
 	private String city_name;
