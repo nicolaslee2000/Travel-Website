@@ -1,6 +1,8 @@
 package com.teamapp.travelsite.initDatabase;
 
+import com.teamapp.travelsite.DTOs.AirportDTO;
 import com.teamapp.travelsite.Repository.AirportRepository;
+import org.aspectj.lang.annotation.After;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,15 +16,21 @@ public class AirportRepoTest {
     @Autowired
     private AirportRepository airportRepository;
 
+    @After("")
+    public void cleanup(){
+        airportRepository.deleteAll();
+    }
+
     @Test
     @DisplayName("for Save To DB")
     void saveMember() {
         // given
-        City city = new City("City_name","Country_code","country"); //여기도 not null 요구
+        Country country = new Country("discoun","discountry");
 
-      Airport airport = new Airport("1234",city);
+
+        AirportDTO airport = new AirportDTO("anything","anything","anything");
         // when
-        Airport savedAirport = airportRepository.save(airport);
+        Airport savedAirport = airportRepository.save(airport.);
         // then
         Assertions.assertThat(airport).isSameAs(savedAirport);
         Assertions.assertThat(airport.getAirport_iatacode()).isEqualTo(savedAirport.getAirport_iatacode());

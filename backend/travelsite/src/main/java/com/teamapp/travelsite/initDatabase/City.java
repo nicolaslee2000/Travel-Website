@@ -4,18 +4,15 @@ import javax.persistence.*;
 
 import com.google.gson.annotations.SerializedName;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //@Entity
-@Data
-@AllArgsConstructor
 @Entity
-@NoArgsConstructor
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class City{
 
 	@Id
@@ -38,6 +35,4 @@ public class City{
 		this.country_code = str1;
 	}
 
-	public City(String city_name, String country_code, String country) {
-	}
 }

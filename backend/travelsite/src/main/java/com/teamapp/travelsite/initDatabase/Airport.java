@@ -4,14 +4,12 @@ import javax.persistence.*;
 
 import com.google.gson.annotations.SerializedName;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
+
 @Entity
-@NoArgsConstructor
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Airport {
 
 	@Id

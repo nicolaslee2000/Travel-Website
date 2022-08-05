@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.teamapp.travelsite.DTOs.AirlineDTO;
 import com.teamapp.travelsite.Repository.AirlineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -24,7 +25,7 @@ import com.amadeus.exceptions.ResponseException;
 @Component
 public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> {
 	
-	List<Airline> airlines = new ArrayList<>();
+	List<AirlineDTO> airlines = new ArrayList<>();
 
 	@Autowired
 	AirlineRepository airlineRepository;
@@ -38,11 +39,11 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 		
 		try {
 			airlines = Arrays.stream(amadeus.referenceData.airlines.get()).map(
-					e -> new Airline(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());
+					e -> new AirlineDTO(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());
 
 			
 			int i = 0;
-			for(Airline airline : airlines) {
+			for(AirlineDTO airline : airlines) {
 				String uri = "https://daisycon.io/images/airline/?width=300&height=150&color=ffffff&iata="+airline.getAirline_iatacode();
 				HttpRequest request = HttpRequest.newBuilder(new URI(uri)).GET()
 						.header("Accept", "*/*")
@@ -69,11 +70,11 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 
 		//airlines.forEach(System.out::println);
 
-		//saveAllWithDevideTest(airlines);
+		saveAllWithDevideTest(airlines);
 
 	}
-	public void saveAllWithDevideTest(List<Airline> list){
-		List<Airline> tmp = new ArrayList<>();
+	public void saveAllWithDevideTest(List<AirlineDTO> list){
+		List<AirlineDTO> tmp = new ArrayList<>();
 		list.forEach(i -> {
 			tmp.add(i);
 			if (tmp.size() == 100) {
