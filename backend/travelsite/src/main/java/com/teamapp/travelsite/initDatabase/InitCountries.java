@@ -16,8 +16,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitCountries implements ApplicationListener<ContextRefreshedEvent> {
 
-	@Autowired
-	CountryRepository countryRepository;
 	List<Country> countries = new ArrayList<>();
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -37,12 +35,8 @@ public class InitCountries implements ApplicationListener<ContextRefreshedEvent>
 			countries.add(country);
 		}
 
-		//countryRepository.saveAll(countries); //for Bulk INSERT
+
 	}
 
-	/* cf. Bulk Insert
-	In short, Bulk insert is faster. You can use bulk insert to insert millions of rows from a csv or xml or other files
-	in a very short time however if you only have 3 or 4 rows to insert it's quick enough to just
-	throw it in using insert statements.
-	 */
+
 }

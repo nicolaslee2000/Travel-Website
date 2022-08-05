@@ -25,12 +25,12 @@ public class AirportRepoTest {
     @DisplayName("for Save To DB")
     void saveMember() {
         // given
-        Country country = new Country("discoun","discountry");
+
 
 
         AirportDTO airport = new AirportDTO("anything","anything","anything");
         // when
-        Airport savedAirport = airportRepository.save(airport.);
+        //Airport savedAirport = airportRepository.save(airport);
         // then
         Assertions.assertThat(airport).isSameAs(savedAirport);
         Assertions.assertThat(airport.getAirport_iatacode()).isEqualTo(savedAirport.getAirport_iatacode());

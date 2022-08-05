@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
 import com.teamapp.travelsite.initDatabase.Airline;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
 
@@ -33,13 +34,27 @@ public class AirlineDTO {
 
     // Entity -> DTO
     public static AirlineDTO of(Airline airline) {
-        return modelMapper.map(airline, AirlineDTO.class);
+
+        ModelMapper modelMapper = new ModelMapper();
+
+        return modelMapper.map(airline, AirlineDTO.class); //map(Entity,DTO.class)
     }
 
-    // Entity -> DTO (Page의 경우)
-    public static Page<SampleDto> of(Page<Sample> sourcePage) {
-        return sourcePage.map(SampleDto::of);
+    // DTO -> Entity
+
+    public Airline toEntity(){
+        return Airline.builder()
+                .airline_iatacode(this.airline_iatacode)
+                .airline_logo(this.airline_logo)
+                .airline_name(this.airline_name)
+                .build();
     }
+
+//    Entity -> DTO (Page의 경우) SampleCode
+//    public static Page<SampleDto> of(Page<Sample> sourcePage) {
+//            ModelMapper modelMapper = new ModelMapper();
+//        return sourcePage.map(SampleDto::of);
+//    }
 
 
 }

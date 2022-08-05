@@ -1,9 +1,6 @@
 package com.teamapp.travelsite.initDatabase;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
@@ -17,6 +14,8 @@ import org.springframework.stereotype.Component;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class Airline {
 
 	@Id
@@ -29,5 +28,4 @@ public class Airline {
 	@JsonSerialize(using= ByteArraySerializer.class)
 	@Column(nullable = true)
 	private byte[] airline_logo;
-
 }

@@ -12,8 +12,10 @@ import java.util.List;
 //@Entity
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class Country {
 
 	@Id
@@ -23,13 +25,11 @@ public class Country {
 	private String country_name;
 
 
-	@OneToMany(mappedBy = "country") //N:1 Bothside (JPA) In DB FK Owner :: N side
+	@OneToMany(mappedBy = "country",cascade = CascadeType.ALL) //N:1 Bothside (JPA) In DB FK Owner :: N side
 	List<City> cities;
 
-
-
-
-
+	//cascade 영속성 전파
+	
 	public Country(String country, String displayCountry) {
 		this.country_name = displayCountry;
 		this.country_code = country;

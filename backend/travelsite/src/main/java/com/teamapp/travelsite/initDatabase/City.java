@@ -13,26 +13,24 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class City{
 
 	@Id
 	@SerializedName("city")
-	@Column(nullable = false,name = "city_name")
+	@Column(nullable = true,name = "city_name")
 	private String city_name;
 
-	@Column(nullable = false,insertable = false,updatable = false)
+	@Column(nullable = true,insertable = false,updatable = false)
 	private String country_code;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
 	private Country country;
 
-	@OneToMany(mappedBy = "city")
+	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
 	private List<Airport> airport = new ArrayList<>();
 
-	public City(String str, String str1) {
-		this.city_name = str;
-		this.country_code = str1;
-	}
 
 }

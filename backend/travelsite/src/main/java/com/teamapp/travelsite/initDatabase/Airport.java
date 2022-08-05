@@ -10,14 +10,16 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class Airport {
 
 	@Id
 	@SerializedName("iata")
-	@Column(nullable = false,name = "airport_id")
+	@Column(nullable = true,name = "airport_id")
 	private String airport_iatacode;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumns({
 			@JoinColumn(name = "city_name",
 					referencedColumnName = "city_name"
@@ -27,4 +29,6 @@ public class Airport {
 					)
 	})
 	private City city;
+
+
 }

@@ -25,7 +25,8 @@ import com.amadeus.exceptions.ResponseException;
 @Component
 public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> {
 	
-	List<AirlineDTO> airlines = new ArrayList<>();
+	List<Airline> airlineEntity = new ArrayList<>(); //Entity
+	List<AirlineDTO> airlineDTOS = new ArrayList<>();
 
 	@Autowired
 	AirlineRepository airlineRepository;
@@ -38,12 +39,12 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 
 		
 		try {
-			airlines = Arrays.stream(amadeus.referenceData.airlines.get()).map(
+			airlineDTOS = Arrays.stream(amadeus.referenceData.airlines.get()).map(
 					e -> new AirlineDTO(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());
 
 			
 			int i = 0;
-			for(AirlineDTO airline : airlines) {
+			for(AirlineDTO airline : airlineDTOS) {
 				String uri = "https://daisycon.io/images/airline/?width=300&height=150&color=ffffff&iata="+airline.getAirline_iatacode();
 				HttpRequest request = HttpRequest.newBuilder(new URI(uri)).GET()
 						.header("Accept", "*/*")
@@ -70,11 +71,13 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 
 		//airlines.forEach(System.out::println);
 
-		saveAllWithDevideTest(airlines);
+		airlineDTOS.forEach(e -> airlineEntity.add(e.toEntity()));
+
+		//saveAllWithDevideTest(airlineEntity);
 
 	}
-	public void saveAllWithDevideTest(List<AirlineDTO> list){
-		List<AirlineDTO> tmp = new ArrayList<>();
+	public void saveAllWithDevideTest(List<Airline> list){
+		List<Airline> tmp = new ArrayList<>();
 		list.forEach(i -> {
 			tmp.add(i);
 			if (tmp.size() == 100) {
