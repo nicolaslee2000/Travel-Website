@@ -40,7 +40,7 @@ const Header = () => {
           </div>
         )}
         <div className='headerTitle'>
-          <NavLink activeStyle={titleStyle} to='/'>
+          <NavLink /*activeStyle={titleStyle}*/ to='/'>
             자바 풀스텍 A반 3조
           </NavLink>
         </div>

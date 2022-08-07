@@ -371,27 +371,30 @@ const TravlerHeader = () => {
           <DialogContentText>
             확인을 누르면 예약이 완료됩니다.
           </DialogContentText>
-          <DialogContentText>id : {flightRedux.traveler.id}</DialogContentText>
           <DialogContentText>
-            dateOfBirth : {flightRedux.traveler.dateOfBirth}
+            id : {flightRedux.traveler.id || ''}
           </DialogContentText>
           <DialogContentText>
-            firstName : {flightRedux.traveler.name.firstName}
+            dateOfBirth : {flightRedux.traveler.dateOfBirth || ''}
           </DialogContentText>
           <DialogContentText>
-            lastName : {flightRedux.traveler.name.lastName}
+            firstName : {flightRedux.traveler.name.firstName || ''}
           </DialogContentText>
           <DialogContentText>
-            phonesNumber : {flightRedux.traveler.contact.phones[0].number}
+            lastName : {flightRedux.traveler.name.lastName || ''}
           </DialogContentText>
           <DialogContentText>
-            documentType : {flightRedux.traveler.documents[0].documentType}
+            phonesNumber : {flightRedux.traveler.contact.phones[0].number || ''}
           </DialogContentText>
           <DialogContentText>
-            expiryDate : {flightRedux.traveler.documents[0].expiryDate}
+            documentType :{' '}
+            {flightRedux.traveler.documents[0].documentType || ''}
           </DialogContentText>
           <DialogContentText>
-            nationality : {flightRedux.traveler.documents[0].nationality}
+            expiryDate : {flightRedux.traveler.documents[0].expiryDate || ''}
+          </DialogContentText>
+          <DialogContentText>
+            nationality : {flightRedux.traveler.documents[0].nationality || ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

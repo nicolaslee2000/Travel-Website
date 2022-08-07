@@ -24,11 +24,13 @@ const MainSearchPrac02 = () => {
   const top10Start2 = [
     { start: { country: '한국', airport: '인천', code: 'ICN' } },
     { start: { country: '일본', airport: '나리타', code: 'NRT' } },
+    { start: { country: '독일', airport: '베를린', code: 'BER' } },
   ];
 
   const top10End2 = [
     { end: { country: '한국', airport: '인천', code: 'ICN' } },
     { end: { country: '일본', airport: '나리타', code: 'NRT' } },
+    { end: { country: '독일', airport: '베를린', code: 'BER' } },
   ];
 
   const top10End = [
@@ -102,7 +104,7 @@ const MainSearchPrac02 = () => {
         // params: { adults: sendData.adults },
       })
       .then((response) => {
-        console.log('리스폰스 데이터', response.data);
+        console.log('리스폰스 데이터(배열 데이터)', response.data);
         dispatch(offerInit(response.data));
         console.log('디스패치 실행 후임');
         //dispatch(seInit(response.data));
