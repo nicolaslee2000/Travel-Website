@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amadeus.resources.Location;
+import com.teamapp.travelsite.Api.AmadeusConnect;
 import com.teamapp.travelsite.initDatabase.Airport;
 import com.teamapp.travelsite.initDatabase.InitDatabaseService;
 
@@ -21,10 +23,14 @@ public class AutocompleteController {
 	@GetMapping("/search")
 	public List<Airport> autocomplete(@RequestParam String str) {
 		
-		List<String> list = new ArrayList<>();
-		list.add("a");
-		list.add("b");
+
 		
-		return service.getAirports(str);
+		return service.getAirports(str) ;
+	}
+	
+	@GetMapping("/apisearch")
+	public Location[] search(@RequestParam String str) {
+		
+		return AmadeusConnect.INSTANCE.search(str);
 	}
 }

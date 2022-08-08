@@ -9,12 +9,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.teamapp.travelsite.Repository.AirportRepository;
+import com.teamapp.travelsite.Repository.CountryRepository;
 
 @Service
 public class InitDatabaseService {
 	
 	@Autowired
 	private AirportRepository airportRepository;
+	@Autowired
+	private CountryRepository countryRepository;
 	List<Airport> airports = new ArrayList<Airport>();
 	public void saveAirport(Airport airport) {
 		airportRepository.save(airport);
@@ -24,10 +27,19 @@ public class InitDatabaseService {
 		airportRepository.saveAll(airports);
 	}
 	
+	public void saveCountry(Country country) {
+		countryRepository.save(country);
+	}
+	
+	public void saveCountries(List<Country> countries) {
+		countryRepository.saveAll(countries);
+	}
+	
 	public List<Airport> getAirports(String str)  {
 		Pageable firstThree = PageRequest.of(0, 3);
-		airportRepository.findByAirport_iatacodeContainingIgnoreCase(str).stream().forEach(airports::add);
-		airportRepository.findByAirport_nameContainingIgnoreCase(str).stream().forEach(airports::add);
-		return airports;
+		airports.clear();
+//		airportRepository.findByAirportIatacodeContainingIgnoreCase(str).stream().forEach(airports::add);
+//		airportRepository.findByAirportNameContainingIgnoreCase(str).stream().forEach(airports::add);
+		return airportRepository.findAllAirports();
 	}
 }

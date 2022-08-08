@@ -22,18 +22,31 @@ public class Airport {
 	@GeneratedValue
 	private Long ap_idx;
 	
-	@SerializedName("iata")
+//	@SerializedName("iata")
 	@Column(nullable = false,name = "airport_iatacode")
-	private String airport_iatacode;
-	@SerializedName("name")
+	private String airportIatacode;
+//	@SerializedName("name")
 	@Column(nullable = false,name = "airport_name")
-	private String airport_name;
-	@SerializedName("city")
+	private String airportName;
+//	@SerializedName("city")
 	@Column(nullable = false,name = "city_name")
 	private String city_name;
 	@Column(nullable = false,name = "country_code")
-	@SerializedName("country")
+//	@SerializedName("country")
 	private String country_code;
+	
+	@Column
+	private String why;
 
+	public Airport(Long ap_idx, String airport_iatacode, String airport_name, String city_name, String country_code) {
+		super();
+		this.ap_idx = ap_idx;
+		this.airportIatacode = airport_iatacode;
+		this.airportName = airport_name;
+		this.city_name = city_name;
+		this.country_code = country_code;
+	}
+	
+	
 
 }

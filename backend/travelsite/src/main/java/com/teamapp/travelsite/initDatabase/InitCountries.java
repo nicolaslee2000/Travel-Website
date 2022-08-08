@@ -1,15 +1,21 @@
 package com.teamapp.travelsite.initDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.PostConstruct;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InitCountries implements ApplicationListener<ContextRefreshedEvent> {
+	
+	List<Country> countries = new ArrayList<Country>();
+	
+	@Autowired
+	InitDatabaseService service;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -22,8 +28,11 @@ public class InitCountries implements ApplicationListener<ContextRefreshedEvent>
 //				+ ", Country Name = " + obj.getDisplayCountry());
 			
 			//TODO map Country entity to database
-			new Country(obj.getCountry(), obj.getDisplayCountry());
+			
+//			System.out.println(new Country(o bj.getCountry(), obj.getDisplayCountry(Locale.KOREAN)));
+			countries.add(new Country(null,obj.getCountry(), obj.getDisplayCountry(Locale.ENGLISH)));
 		}
+		service.saveCountries(countries);
 
 	}
 }

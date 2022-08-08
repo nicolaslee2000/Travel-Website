@@ -39,6 +39,14 @@ public class InitAirports implements ApplicationListener<ContextRefreshedEvent> 
 		try(Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"))){
 			airports = gson.fromJson(reader, new TypeToken<List<Airport>>() {}.getType());
 //			airports.forEach(System.out::println);
+			
+//			System.out.println(airports.size());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		try(Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"))){
+//			airports.forEach(System.out::println);
 			cities = gson.fromJson(reader, new TypeToken<List<City>> () {}.getType());
 			
 //			System.out.println(airports.size());
@@ -46,7 +54,6 @@ public class InitAirports implements ApplicationListener<ContextRefreshedEvent> 
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
 //		initDatabaseService.saveAirports(airports.stream().filter(e -> !e.getAirport_iatacode().isBlank()||e.getAirport_iatacode()!=null)
 //				.collect(Collectors.toList()));
 		

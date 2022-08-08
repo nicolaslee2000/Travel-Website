@@ -59,6 +59,17 @@ public enum AmadeusConnect {
 	public FlightOrder order(JsonObject order) throws ResponseException {
 		return amadeus.booking.flightOrders.post(order);
 	}
+	
+	public Location[] search(String str) {
+		String[] subtype = {"AIRPORT", "CITY"};
+		
+		try {
+			return amadeus.referenceData.locations.get(Params.with("subType", "AIRPORT").and("keyword", str));
+		} catch (ResponseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 
 	
