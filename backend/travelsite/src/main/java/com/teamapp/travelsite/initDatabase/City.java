@@ -24,16 +24,16 @@ public class City{
 	private int c_idx;
 
 	@SerializedName("city")
-	@Column(nullable = true,name = "city_name")
+	@Column(nullable = true)
 	private String city_name;
 
-//	@Column(nullable = true,insertable = false,updatable = false)
-//	private String country_code;
+	@Column(nullable = true,insertable = false,updatable = false)
+	private String country_code;
 
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
-//	private Country country;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
+	private Country country;
 
-	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
-	private List<Airport> airport = new ArrayList<>();
+//	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
+//	private List<Airport> airport;
 }
