@@ -38,7 +38,7 @@ public class InitDatabaseService {
 	public List<Airport> getAirports(String str)  {
 		Pageable firstThree = PageRequest.of(0, 3);
 		airports.clear();
-
-		return airportRepository.findAllAirports(str.toUpperCase());
+		
+		return airportRepository.findAllAirports(str.toUpperCase(), firstThree);
 	}
 }
