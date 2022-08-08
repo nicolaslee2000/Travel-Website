@@ -17,16 +17,15 @@ import lombok.Data;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-@Table(name="countries")
 public class Country {
 
 	@Id
 	@GeneratedValue
 	private Long Coun_idx;
 
-	@Column(nullable = false, name="country_code")
+	@Column(nullable = false)
 	private String country_code;
-	@Column(nullable = false, name="country_name")
+	@Column(nullable = false)
 	private String country_name;
 
 

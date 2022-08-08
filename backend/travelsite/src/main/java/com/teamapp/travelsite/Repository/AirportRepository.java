@@ -8,23 +8,17 @@ import java.util.Optional;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AirportRepository extends JpaRepository<Airport, String> {
 
-	List<Airport> findByAirportIatacodeContainingIgnoreCase(String airportIatacode);
 
-	List<Airport> findByAirportNameContainingIgnoreCase(String airportName);
 
-//	@Query(value = "SELECT \"country_code\" from \"airport\"", nativeQuery = true)
-	@Query(value="SELECT \"why\" FROM \"airport\"", nativeQuery = true)
-	List<Airport> findAllAirports();
+	@Query("SELECT a FROM Airport a LEFT JOIN Country c ON a.country_code = c.country_code"
+			+ " WHERE UPPER(a.airportIatacode) LIKE %:str% OR UPPER(a.airportName) LIKE %:str% OR UPPER(a.city_name) "
+			+ "LIKE %:str% OR UPPER(a.country_code) LIKE %:str% OR UPPER(c.country_name) LIKE %:str%")
+	List<Airport> findAllAirports(@Param("str") String str);
 
 }
-
-//a LEFT JOIN "
-//+ "\"country\" c ON a.\"country_code\" = c.\"country_code\"
-//WHERE UPPER(a.\"airport_iatacode\") "
-//		+ "LIKE UPPER('%kr%') OR UPPER(a.\"airport_name\") LIKE UPPER('%kr%') OR UPPER(a.\"city_name\") "
-//		+ "LIKE UPPER('%kr%') OR UPPER(c.\"country_code\") LIKE UPPER('%kr%') OR UPPER(c.\"country_name\") LIKE UPPER('%kr%')

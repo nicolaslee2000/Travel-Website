@@ -38,8 +38,7 @@ public class InitDatabaseService {
 	public List<Airport> getAirports(String str)  {
 		Pageable firstThree = PageRequest.of(0, 3);
 		airports.clear();
-//		airportRepository.findByAirportIatacodeContainingIgnoreCase(str).stream().forEach(airports::add);
-//		airportRepository.findByAirportNameContainingIgnoreCase(str).stream().forEach(airports::add);
-		return airportRepository.findAllAirports();
+
+		return airportRepository.findAllAirports(str.toUpperCase());
 	}
 }
