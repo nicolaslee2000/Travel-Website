@@ -19,9 +19,6 @@ public class CityDTO {
     public City toEntity(){
         return City.builder()
                 .city_name(this.city)
-                .country(Country.builder()
-                        .country_code(this.country_code)
-                        .build())
                 .build();
     }
 }

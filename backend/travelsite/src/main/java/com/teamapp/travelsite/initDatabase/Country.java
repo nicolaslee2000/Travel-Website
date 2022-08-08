@@ -22,20 +22,25 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Country {
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(nullable = false)
+	private int con_idx;
 	@Column(nullable = true)
 	private String country_code;
 	@Column(nullable = true)
 	private String country_name;
 
+	@Column(nullable = true)
+	private String country_name_kr;
 
-	@OneToMany(mappedBy = "country") //N:1 Bothside (JPA) In DB FK Owner :: N side
-	List<City> cities;
+
+//	@OneToMany(mappedBy = "country") //N:1 Bothside (JPA) In DB FK Owner :: N side
+//	List<City> cities;
 
 	//cascade 영속성 전파
 	
-	public Country(String country, String displayCountry) {
-		this.country_name = displayCountry;
-		this.country_code = country;
-	} //Builder
+//	public Country(String country, String displayCountry) {
+//		this.country_name = displayCountry;
+//		this.country_code = country;
+//	} //Builder
 }

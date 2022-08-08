@@ -21,15 +21,12 @@ public class Airport {
 	private String airport_iatacode;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumns({
-			@JoinColumn(name = "city_name",
-					referencedColumnName = "city_name"
-					),
-			@JoinColumn(name = "country_code",
-					referencedColumnName = "country_code"
-					)
-	})
+			@JoinColumn(name = "city_name",referencedColumnName = "city_name")
 	private City city;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
+	private Country country;
 
 
 }

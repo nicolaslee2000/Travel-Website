@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.teamapp.travelsite.DTOs.AirportDTO;
 import com.teamapp.travelsite.DTOs.CityDTO;
+import com.teamapp.travelsite.DTOs.CountryDTO;
 import com.teamapp.travelsite.Repository.AirportRepository;
 import com.teamapp.travelsite.Repository.CityRepository;
 import com.teamapp.travelsite.Repository.CountryRepository;
@@ -26,6 +27,8 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
     List<AirportDTO> airportsDTOs = new ArrayList<>();
     List<CityDTO> citiesDTOs = new ArrayList<>();
 
+    List<CountryDTO> countryDTOS = new ArrayList<>();
+
     List<Airport> airportList = new ArrayList<>();
     List<City> cityList = new ArrayList<>();
     List<Country> countries = new ArrayList<>();
@@ -40,6 +43,8 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
     @SneakyThrows
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
+
         //airport city
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"));
@@ -58,11 +63,12 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
             Locale obj = new Locale("", countryCode);
 //			System.out.println("Country Code = " + obj.getCountry()
 //				+ ", Country Name = " + obj.getDisplayCountry());
-            Country country = new Country(obj.getCountry(), obj.getDisplayCountry());
-            countries.add(country);
+            CountryDTO countryDTO = new CountryDTO(obj.getCountry(), obj.getDisplayCountry(Locale.ENGLISH), obj.getDisplayCountry(Locale.KOREAN));
+            countryDTOS.add(countryDTO);
         }
 
         System.out.println("Country saving start");
+        countryDTOS.forEach(e -> countries.add(e.toEntity()));
         countryRepository.saveAll(countries);
         //// save to repo
         System.out.println("city saving start");

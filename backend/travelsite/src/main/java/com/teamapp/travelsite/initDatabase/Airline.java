@@ -20,13 +20,16 @@ import org.springframework.stereotype.Component;
 public class Airline {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int airl_idx;
+
 	@Column(nullable = false)
 	private String airline_iatacode;
 
 	@Column(nullable = false)
 	private String airline_name;
 
-	@JsonSerialize(using= ByteArraySerializer.class)
-	@Column(nullable = true)
-	private byte[] airline_logo;
+//	@JsonSerialize(using= ByteArraySerializer.class)
+//	@Column(nullable = true)
+//	private byte[] airline_logo;
 }

@@ -65,11 +65,11 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 		/////////save to repo
 		/////////saveAll : for Stream, List, HashMap, etc..
 
-		//airlines.forEach(System.out::println);
+//		airlines.forEach(System.out::println);
 
-		airlineDTOS.forEach(e -> airlineEntity.add(e.toEntity()));
-
-		//saveAllWithDevideTest(airlineEntity);
+//		airlineDTOS.forEach(e -> airlineEntity.add(e.toEntity()));
+//
+//		saveAllWithDevideTest(airlineEntity);
 
 	}
 	public void saveAllWithDevideTest(List<Airline> list){

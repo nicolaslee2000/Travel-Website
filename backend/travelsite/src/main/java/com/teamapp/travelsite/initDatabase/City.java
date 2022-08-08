@@ -19,23 +19,21 @@ import java.util.List;
 public class City{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(nullable = true)
 	private int c_idx;
 
 	@SerializedName("city")
 	@Column(nullable = true,name = "city_name")
 	private String city_name;
 
-	@Column(nullable = true,insertable = false,updatable = false)
-	private String country_code;
+//	@Column(nullable = true,insertable = false,updatable = false)
+//	private String country_code;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
-	private Country country;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
+//	private Country country;
 
 	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
 	private List<Airport> airport = new ArrayList<>();
-
-
 }
