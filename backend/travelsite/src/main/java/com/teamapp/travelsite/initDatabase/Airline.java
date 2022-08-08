@@ -26,7 +26,7 @@ public class Airline {
 	@Column(nullable = false)
 	private String airline_iatacode;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String airline_name;
 
 //	@JsonSerialize(using= ByteArraySerializer.class)
