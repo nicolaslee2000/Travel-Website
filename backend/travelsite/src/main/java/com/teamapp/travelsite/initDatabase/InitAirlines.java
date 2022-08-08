@@ -33,7 +33,6 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-<<<<<<< HEAD
 		final Amadeus amadeus = Amadeus.builder("cSg0o4RSb1xXoEUYShvvb2JOJC7DxqQq","yFFOhZt1nuAS2cDS").build();
 		try {
 			airlineDTOS = Arrays.stream(amadeus.referenceData.airlines.get()).map(
@@ -82,43 +81,6 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 				tmp.clear();
 			}
 		});
-=======
-//		
-//		 
-//		final Amadeus amadeus = Amadeus.builder("cSg0o4RSb1xXoEUYShvvb2JOJC7DxqQq","yFFOhZt1nuAS2cDS").build();
-//
-//		final AirlineRepository airlineRepository;
-//		
-//		try {
-//			airlines = Arrays.stream(amadeus.referenceData.airlines.get()).map(
-//					e -> new Airline(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());
-//
-//			
-//			int i = 0;
-//			for(Airline airline : airlines) {
-//				String uri = "https://daisycon.io/images/airline/?width=300&height=150&color=ffffff&iata="+airline.getAirline_iatacode();
-//				HttpRequest request = HttpRequest.newBuilder(new URI(uri)).GET()
-//						.header("Accept", "*/*")
-//						.build();
-//						
-//				HttpResponse<byte[]> response = HttpClient.newHttpClient().send(request, BodyHandlers.ofByteArray());
-//				airline.setAirline_logo(response.body());	
-//				i++;
-//				if(i>10){
-//					break;
-//				}
-//			}
-//			
-//			
-//			
-//		} catch (ResponseException | URISyntaxException | IOException | InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		
-		
-		 
-			//airlines.forEach(System.out::println);
->>>>>>> main
 	}
 
 	
