@@ -10,8 +10,6 @@ import com.amadeus.referenceData.Locations;
 import com.amadeus.resources.FlightOfferSearch;
 import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
-import com.amadeus.resources.HotelOffer;
-import com.amadeus.resources.HotelOfferSearch.Hotel;
 import com.amadeus.resources.Location;
 import com.google.gson.JsonObject;
 
@@ -58,6 +56,17 @@ public enum AmadeusConnect {
 
 	public FlightOrder order(JsonObject order) throws ResponseException {
 		return amadeus.booking.flightOrders.post(order);
+	}
+	
+	public Location[] search(String str) {
+		String[] subtype = {"AIRPORT", "CITY"};
+		
+		try {
+			return amadeus.referenceData.locations.get(Params.with("subType", "AIRPORT").and("keyword", str));
+		} catch (ResponseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 

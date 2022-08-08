@@ -13,17 +13,17 @@ public class InitCountries implements ApplicationListener<ContextRefreshedEvent>
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		String[] locales = Locale.getISOCountries();
-
-		for (String countryCode : locales) {
-
-			Locale obj = new Locale("", countryCode);
-//			System.out.println("Country Code = " + obj.getCountry() 
-//				+ ", Country Name = " + obj.getDisplayCountry());
-			
-			//TODO map Country entity to database
-			new Country(obj.getCountry(), obj.getDisplayCountry());
-		}
+//		String[] locales = Locale.getISOCountries();
+//
+//		for (String countryCode : locales) {
+//
+//			Locale obj = new Locale("", countryCode);
+////			System.out.println("Country Code = " + obj.getCountry() 
+////				+ ", Country Name = " + obj.getDisplayCountry());
+//			
+//			//TODO map Country entity to database
+//			new Country(obj.getCountry(), obj.getDisplayCountry());
+//		}
 
 	}
 }
