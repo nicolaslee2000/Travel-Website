@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController //임시 어노테이션 (테스트)
 @RequestMapping ("/test")
+@Deprecated
+/**
+ * @deprecated ... Test Class
+ * please use AmadeusConnect
+ */
 public class AirlineApiControllerDeprecated {
 
     Amadeus amadeus = Amadeus

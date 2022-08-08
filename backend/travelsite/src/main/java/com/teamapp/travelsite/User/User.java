@@ -2,6 +2,7 @@ package com.teamapp.travelsite.User;
 
 
 import com.teamapp.travelsite.Security.AuthProvider;
+import com.teamapp.travelsite.Traveler.Traveler;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -21,7 +22,7 @@ public class User {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -44,6 +45,9 @@ public class User {
     @CreationTimestamp
     @Column(nullable = false)
     private java.util.Date createDate; //Timestamp
+
+    @OneToOne(mappedBy = "user")
+    Traveler traveler;
 
 
 }

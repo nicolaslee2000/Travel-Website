@@ -1,31 +1,39 @@
 package com.teamapp.travelsite.initDatabase;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.google.gson.annotations.SerializedName;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //@Entity
-@Data
-@AllArgsConstructor
 @Entity
-@NoArgsConstructor
-public class City {
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@Table(name = "CITY")
+public class City{
+
 	@Id
-	@GeneratedValue
-	private int C_idx;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(nullable = true)
+	private int c_idx;
 
 	@SerializedName("city")
-	@Column(nullable = false,name = "city")
+	@Column(nullable = true)
 	private String city_name;
-	@SerializedName("country")
-	@Column(nullable = false,name = "country")
+
+	@Column(nullable = true,insertable = false,updatable = false)
 	private String country_code;
-	
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
+	private Country country;
+
+//	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
+//	private List<Airport> airport;
 }

@@ -1,32 +1,42 @@
 package com.teamapp.travelsite.initDatabase;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.apache.ibatis.annotations.One;
 import org.springframework.stereotype.Repository;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 //@Entity
-@Data
-@AllArgsConstructor
+
 @Entity
-@NoArgsConstructor
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@Table(name = "COUNTRY")
 public class Country {
 
 	@Id
-	@GeneratedValue
-	private String Coun_idx;
-
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false)
+	private int con_idx;
+	@Column(nullable = true)
 	private String country_code;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String country_name;
 
-	public Country(String country, String displayCountry) {
-	}
+	@Column(nullable = true)
+	private String country_name_kr;
+
+
+	@OneToMany(mappedBy = "country") //N:1 Bothside (JPA) In DB FK Owner :: N side
+	List<City> cities;
+
+	//cascade 영속성 전파
+
 }

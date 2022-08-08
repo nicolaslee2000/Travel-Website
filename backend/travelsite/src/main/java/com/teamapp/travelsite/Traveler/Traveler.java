@@ -4,6 +4,8 @@ import com.teamapp.travelsite.User.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +27,7 @@ public class Traveler {
     private @Getter @Setter String emailAddress;
     private @Getter @Setter String phone;
     // private @Getter @Setter Document[] documents;
+
+    @OneToMany(mappedBy = "traveler")
+    private List<Document> document = new ArrayList<>();
 }
