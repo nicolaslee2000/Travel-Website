@@ -16,6 +16,10 @@ import lombok.*;
 public class Airport {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(nullable = false)
+	private int air_idx;
+
 	@SerializedName("iata")
 	@Column(nullable = true,name = "airport_id")
 	private String airport_iatacode;
