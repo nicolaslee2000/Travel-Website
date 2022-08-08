@@ -15,9 +15,14 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@Table(name = "CITY")
 public class City{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
+	private int c_idx;
+
 	@SerializedName("city")
 	@Column(nullable = true,name = "city_name")
 	private String city_name;

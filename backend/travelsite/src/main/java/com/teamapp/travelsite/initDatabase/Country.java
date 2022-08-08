@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 //@Entity
 
 @Entity
@@ -16,11 +18,11 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@Table(name = "COUNTRY")
 public class Country {
 
 	@Id
-	@GeneratedValue
-	private int country_id;
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(nullable = true)
 	private String country_code;
 	@Column(nullable = true)

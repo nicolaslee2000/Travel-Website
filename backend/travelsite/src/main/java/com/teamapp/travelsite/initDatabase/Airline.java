@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@Table(name = "AIRLINE")
 public class Airline {
 
 	@Id

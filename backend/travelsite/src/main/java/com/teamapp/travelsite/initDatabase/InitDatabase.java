@@ -66,9 +66,9 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
         countryRepository.saveAll(countries);
         //// save to repo
         System.out.println("city saving start");
-       // System.out.println(citiesDTOs);
         citiesDTOs.forEach(e -> cityList.add(e.toEntity()));
         saveAllcity(cityList);
+//
         //city first because cascade
         System.out.println("airport saving start");
         airportsDTOs.forEach(e -> airportList.add(e.toEntity()));
