@@ -13,6 +13,7 @@ import com.amadeus.Amadeus;
 import com.amadeus.Params;
 import com.amadeus.exceptions.ResponseException;
 import com.amadeus.referenceData.Locations;
+import com.amadeus.resources.FlightDestination;
 import com.amadeus.resources.FlightOfferSearch;
 import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
@@ -84,7 +85,15 @@ public class AmadeusConnect {
 		}
 		return null;
 	}
-
+	
+	public FlightDestination[] flightInspire(String origin) {
+		try {
+			return amadeus.shopping.flightDestinations.get(Params.with("origin", origin));
+		} catch (ResponseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	
 }
