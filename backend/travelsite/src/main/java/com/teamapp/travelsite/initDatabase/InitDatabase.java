@@ -96,7 +96,7 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
     }
     public <T> List<T> deduplication(List<T> list, Function<? super T, ?> key) {
         return list.stream()
-                .filter(deduplication(key)) //call deduplication
+                .filter(deduplication(key)) // List -> stream -> filter -> List
                 .collect(Collectors.toList());
     }
     private <T> Predicate<T> deduplication(Function<? super T, ?> key) {
@@ -111,6 +111,7 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
     private <T> Predicate<T> deleteNullObject(Function<? super T, ?> key) {
         Set<Object> sets = ConcurrentHashMap.newKeySet();
         Iterator<Object> keys = sets.iterator();
+
         while (keys.hasNext()){
             if(keys.equals(null)){           //not yet
                 sets.remove(keys);
@@ -123,9 +124,7 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
     public void setCountryMapping(CityDTO cityDTO) {
         try {
             cityDTO.setCountrys(countryRepository.findById(cityDTO.getCountry()).get());
-
         } catch (NoSuchElementException noSuchElementException) {
-
         }
     }
     public void setAirportMapping(AirportDTO airportDTO) {

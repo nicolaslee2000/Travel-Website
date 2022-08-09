@@ -31,5 +31,5 @@ public class Airport {
 
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "country_name",referencedColumnName = "country_name")
-	private Country country; //단방향
+	private Country country;
 }

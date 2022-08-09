@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AirportDTO {
-
-
     private String iata;
 
     private String city; //tempVariable for parsing Gson
