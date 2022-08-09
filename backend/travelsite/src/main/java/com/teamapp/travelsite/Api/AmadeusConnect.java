@@ -3,6 +3,12 @@ package com.teamapp.travelsite.Api;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
+import org.springframework.stereotype.Component;
+
 import com.amadeus.Amadeus;
 import com.amadeus.Params;
 import com.amadeus.exceptions.ResponseException;
@@ -12,15 +18,25 @@ import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
 import com.amadeus.resources.Location;
 import com.google.gson.JsonObject;
+import com.teamapp.travelsite.Config.AmadeusConfig;
 
-public enum AmadeusConnect {
-	INSTANCE;
+import lombok.RequiredArgsConstructor;
 
+@Component
+public class AmadeusConnect {
+
+	
 	private Amadeus amadeus;
-
-	private AmadeusConnect() {
-		this.amadeus = Amadeus.builder("xSwPZ1hUSTFsfJIyE2Ojs4p43iNMxVXK", "UZan5LiC10JLDh8h").setHostname("production").build();
+	
+	private final AmadeusConfig amadeusConfig;
+	@Autowired
+	private AmadeusConnect(AmadeusConfig amadeusConfig) {
+		this.amadeusConfig= amadeusConfig;
+	
+		this.amadeus = Amadeus.builder(amadeusConfig.getApiKey(), amadeusConfig.getApiSecret()).setHostname("production").build();
 	}
+	
+
 
 	public Location[] location(String keyword) throws ResponseException {
 		return amadeus.referenceData.locations.get(Params.with("keyword", keyword).and("subType", Locations.AIRPORT));

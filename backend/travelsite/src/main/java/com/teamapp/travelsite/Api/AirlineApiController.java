@@ -7,6 +7,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,14 +22,20 @@ import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
 import com.amadeus.resources.Traveler;
 import com.google.gson.JsonObject;
+import com.teamapp.travelsite.Config.AmadeusConfig;
 
 import io.jsonwebtoken.io.IOException;
-
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(value = "/flight")
-//http://localhost:8090/flight/locations?keyword=NYC
+@RequiredArgsConstructor
 public class AirlineApiController {
+
+	
+	
+	private final AmadeusConnect amadeusConnect;
+	
 
 	
 	
@@ -47,12 +55,12 @@ public class AirlineApiController {
                           @RequestParam(required=false) String maxPrice,
                           @RequestParam(required=false) String max)
                           throws ResponseException {
-        return AmadeusConnect.INSTANCE.flights(origin, destination, departDate, returnDate, adults, children, infants, travelClass, includedAirlines, excludedAirlines, nonStop, currency, maxPrice, max);
+        return amadeusConnect.flights(origin, destination, departDate, returnDate, adults, children, infants, travelClass, includedAirlines, excludedAirlines, nonStop, currency, maxPrice, max);
     }
 
 	@PostMapping("/confirm")
 	public FlightPrice confirm(@RequestBody(required = true) FlightOfferSearch search) throws ResponseException {
-		return AmadeusConnect.INSTANCE.confirm(search);
+		return amadeusConnect.confirm(search);
 	}
 
 	@PostMapping("/traveler")
@@ -62,7 +70,7 @@ public class AirlineApiController {
 
 	@PostMapping("/order")
 	public FlightOrder order(@RequestBody(required = true) JsonObject order) throws ResponseException {
-		return AmadeusConnect.INSTANCE.order(order);
+		return amadeusConnect.order(order);
 	}
 	
 	@GetMapping("/logo")
@@ -79,7 +87,7 @@ public class AirlineApiController {
 		} catch(IOException | java.io.IOException | InterruptedException | URISyntaxException e) {
 			
 		}
-		 
+		
 		return response.body();
 		
 	}
