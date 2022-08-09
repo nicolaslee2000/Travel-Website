@@ -1,37 +1,35 @@
 package com.teamapp.travelsite.initDatabase;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 
 //@Entity
-@Data
-@AllArgsConstructor
+
 @Entity
-@NoArgsConstructor
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@Table(name = "AIRLINE")
 public class Airline {
 
 	@Id
-	@GeneratedValue
-	private String air_idx;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int airl_idx;
 
 	@Column(nullable = false)
 	private String airline_iatacode;
-	@Column(nullable = false)
+
+	@Column(nullable = true)
 	private String airline_name;
 
-	@JsonSerialize(using= ByteArraySerializer.class)
-	private byte[] airline_logo;
-
-
-	public Airline(String iataCode, String commonName) {
-	}
+//	@JsonSerialize(using= ByteArraySerializer.class)
+//	@Column(nullable = true)
+//	private byte[] airline_logo;
 }
