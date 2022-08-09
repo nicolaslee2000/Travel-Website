@@ -21,15 +21,13 @@ public class Airline {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int airl_idx;
+	@Column(nullable = false)
+	private Long air_idx;
 
 	@Column(nullable = false)
 	private String airline_iatacode;
 
-	@Column(nullable = true)
+	@Column(nullable = true) //주의 null값 있음
 	private String airline_name;
 
-//	@JsonSerialize(using= ByteArraySerializer.class)
-//	@Column(nullable = true)
-//	private byte[] airline_logo;
 }

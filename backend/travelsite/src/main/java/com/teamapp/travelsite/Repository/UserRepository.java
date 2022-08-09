@@ -17,6 +17,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findByname(String username);
 
+    //examples
     @Query(value =
             "SELECT * FROM USER_TABLE" +
                     "ORDER BY email"

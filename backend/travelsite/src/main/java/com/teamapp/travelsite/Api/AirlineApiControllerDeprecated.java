@@ -8,7 +8,7 @@ import com.amadeus.Params;
 import com.amadeus.exceptions.ResponseException;
 import org.springframework.web.bind.annotation.*;
 
-@RestController //임시 어노테이션 (테스트)
+@RestController
 @RequestMapping ("/test")
 @Deprecated
 /**
@@ -21,7 +21,6 @@ public class AirlineApiControllerDeprecated {
             .builder("vhvChPiYx8exfB5fukFn9CaIOmkBpZn2","19iGuJh25e7AGAin")
             .build(); //API Injection
 
-    //==================================================TESTLINE====================================
     @GetMapping("/goto") //항공사 행선지 표시
     @ResponseBody
     public Destination[] airlinelookups() throws ResponseException {
