@@ -1,13 +1,18 @@
 package com.teamapp.travelsite.DTOs;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
-import com.teamapp.travelsite.initDatabase.Airline;
-import lombok.*;
+import javax.validation.constraints.NotBlank;
+
 import org.modelmapper.ModelMapper;
 
-import javax.validation.constraints.NotBlank;
+import com.teamapp.travelsite.initDatabase.Airline;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter
@@ -24,13 +29,8 @@ public class AirlineDTO {
     @NotBlank(message = "Warning : Airlinename is Null")
     private String airline_name;
 
-    @JsonSerialize(using= ByteArraySerializer.class)
-    private byte[] airline_logo;
 
-    public AirlineDTO(String iataCode, String commonName) {
-        this.airline_iatacode = iataCode;
-        this.airline_name = commonName;
-    }
+
 
     // Entity -> DTO
     public static AirlineDTO of(Airline airline) {
@@ -45,7 +45,6 @@ public class AirlineDTO {
     public Airline toEntity(){
         return Airline.builder()
                 .airline_iatacode(this.airline_iatacode)
-//                .airline_logo(this.airline_logo)
                 .airline_name(this.airline_name)
                 .build();
     }

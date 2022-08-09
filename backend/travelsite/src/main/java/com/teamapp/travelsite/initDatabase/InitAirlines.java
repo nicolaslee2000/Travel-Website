@@ -39,27 +39,11 @@ public class InitAirlines implements ApplicationListener<ContextRefreshedEvent> 
 					e -> new AirlineDTO(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());
 
 			
-			int i = 0;
-			for(AirlineDTO airline : airlineDTOS) {
-				String uri = "https://daisycon.io/images/airline/?width=300&height=150&color=ffffff&iata="+airline.getAirline_iatacode();
-				HttpRequest request = HttpRequest.newBuilder(new URI(uri)).GET()
-						.header("Accept", "*/*")
-						.build();
-						
-				HttpResponse<byte[]> response = HttpClient.newHttpClient().send(request, BodyHandlers.ofByteArray());
-				airline.setAirline_logo(response.body());	
-				i++;
-
-				
-				
-				if(i>10){
-					break;
-				}
-			}
 			
 			
 			
-		} catch (ResponseException | URISyntaxException | IOException | InterruptedException e) {
+			
+		} catch (ResponseException e) {
 			e.printStackTrace();
 		}
 		/////////save to repo
