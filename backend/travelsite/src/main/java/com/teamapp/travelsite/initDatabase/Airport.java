@@ -16,29 +16,20 @@ import lombok.*;
 public class Airport {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(nullable = false)
-	private Long air_idx;
+	private Long id;
 
 	@SerializedName("iata")
 	@Column(nullable = true,name = "airport_id")
 	private String airport_iatacode;
 
-//	@Id
-//	@Column(nullable = true)
-//	private String country_code;
-//
-//	@Id
-//	@Column(nullable = true)
-//	private String city_name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "city_name",referencedColumnName = "city_name")
 	private City city;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
-	private Country country;
-
-
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	@JoinColumn(name = "country_name",referencedColumnName = "country_name")
+	private Country country; //단방향
 }

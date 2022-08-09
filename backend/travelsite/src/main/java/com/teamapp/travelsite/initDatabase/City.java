@@ -18,18 +18,13 @@ import java.util.List;
 public class City{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(nullable = true)
-	private Long c_idx;
-
-
 	@SerializedName("city")
-	@Column(nullable = true)
-	private String city_name;
+	@Column(name = "city_name",nullable = true)
+	private String cityName;
 
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE) //영속성 컨텍스트에 중복 주소값 병합
+	@JoinColumn(name = "country_name",referencedColumnName = "country_name")
 	private Country country;
 
 	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)

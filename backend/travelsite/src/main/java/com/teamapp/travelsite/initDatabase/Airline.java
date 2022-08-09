@@ -30,8 +30,4 @@ public class Airline {
 	@Column(nullable = true) //주의 null값 있음
 	private String airline_name;
 
-	@Lob
-	@JsonSerialize(using= ByteArraySerializer.class)
-	@Column(nullable = true)
-	private byte[] airline_logo;
 }

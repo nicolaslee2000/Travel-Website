@@ -45,7 +45,6 @@ public class AirlineDTO {
     public Airline toEntity(){
         return Airline.builder()
                 .airline_iatacode(this.airline_iatacode)
-                .airline_logo(this.airline_logo)
                 .airline_name(this.airline_name)
                 .build();
     }
