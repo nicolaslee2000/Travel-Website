@@ -34,7 +34,7 @@ public class Country {
 	private String country_name_kr;
 
 
-	@OneToMany(mappedBy = "country") //N:1 Bothside (JPA) In DB FK Owner :: N side
+	@OneToMany(mappedBy = "country",cascade = CascadeType.ALL) //N:1 Bothside (JPA) In DB FK Owner :: N side
 	List<City> cities;
 
 	//cascade 영속성 전파

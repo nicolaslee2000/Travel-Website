@@ -18,17 +18,25 @@ public class Airport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false)
-	private int air_idx;
+	private Long air_idx;
 
 	@SerializedName("iata")
 	@Column(nullable = true,name = "airport_id")
 	private String airport_iatacode;
 
-//	@ManyToOne
-//	@JoinColumn(name = "city_name",referencedColumnName = "city_name")
-//	private City city;
+//	@Id
+//	@Column(nullable = true)
+//	private String country_code;
+//
+//	@Id
+//	@Column(nullable = true)
+//	private String city_name;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "city_name",referencedColumnName = "city_name")
+	private City city;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
 	private Country country;
 

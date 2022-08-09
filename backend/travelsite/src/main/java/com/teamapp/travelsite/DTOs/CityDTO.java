@@ -14,11 +14,14 @@ public class CityDTO {
 
     private String city;
 
-    private String country_code;
+    private String country;
 
     public City toEntity(){
         return City.builder()
                 .city_name(this.city)
+                .country(Country.builder()
+                        .country_name(this.country)
+                        .build())
                 .build();
     }
 }

@@ -20,19 +20,18 @@ public class City{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = true)
-	private int c_idx;
+	private Long c_idx;
+
 
 	@SerializedName("city")
 	@Column(nullable = true)
 	private String city_name;
 
-	@Column(nullable = true,insertable = false,updatable = false)
-	private String country_code;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name = "country_code",referencedColumnName = "country_code")
 	private Country country;
 
-//	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
-//	private List<Airport> airport;
+	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
+	private List<Airport> airport;
 }
