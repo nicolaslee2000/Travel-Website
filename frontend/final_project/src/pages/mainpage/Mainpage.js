@@ -3,7 +3,7 @@ import { Container } from '@mui/system';
 import React from 'react';
 import Layout from '../../components/othercomponent/Layout';
 import MainSearchPrac02 from '../../components/mainpagecomponent/MainSearchPrac02';
-import './mainpage.css';
+import './mainPage.css';
 import MianBody from '../../components/mainpagecomponent/MianBody';
 //import Log_JoinPage from '../registerpage/RegisterPage';
 // import { BrowserRouter, Routes, Route } from 'react-router-dom';
