@@ -41,9 +41,6 @@ public class AmadeusConnect {
 		this.amadeus = Amadeus.builder(amadeusConfig.getApiKey(), amadeusConfig.getApiSecret()).setHostname("production").build();
 	}
 
-
-
-
 	public Location[] location(String keyword) throws ResponseException {
 		return amadeus.referenceData.locations.get(Params.with("keyword", keyword).and("subType", Locations.AIRPORT));
 	}
