@@ -29,8 +29,8 @@ const MainSearchPrac02 = () => {
   const [nonStop, setNonStop] = useState(true);
   const [onWay, setOnWay] = useState(true);
   const [flightInfo, setFlightInfo] = useState({
-    origin: { country: "", airport: "", code: "ICN" },
-    destination: { country: "", airport: "", code: "NRT" },
+    origin: { country: "", airport: "", code: "" },
+    destination: { country: "", airport: "", code: "" },
     departDate: null,
     returnDate: null,
     adults: null,
