@@ -13,7 +13,6 @@ const main = () => {
         <>
             <Layout>
                 <div className="wrap">
-                    <p>hi</p>
                     <div className="container">
                         <MainSearchPrac02 />
                         <MainBody />
