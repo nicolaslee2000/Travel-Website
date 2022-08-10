@@ -1,7 +1,7 @@
 .bodyContainer {
   /* background-color: coral; */
   background-image: url('../../assets/imgs/searchResultBack05.jpg');
-  background-size: cover;
+  background-size: auto;
 }
 
 .smallMargin {

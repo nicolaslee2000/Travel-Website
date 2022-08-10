@@ -17,6 +17,7 @@ import './goResultItem.css';
 import { CardActions, CardHeader } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { display } from '@mui/system';
+import AccDetailItem from './AccDetailItem';
 
 const BackResultItem02 = () => {
   // 목적지에서 다시 돌아올 때
@@ -154,6 +155,7 @@ const BackResultItem02 = () => {
             let deTime = new Date(ele.departure.at);
             let arTime = new Date(ele.arrival.at);
             let leTime = (arTime.getTime() - deTime.getTime()) / 1000 / 60; //분
+            let times = { deTime: deTime, arTime: arTime, leTime: leTime };
             console.log('deTime : ', deTime);
             console.log('arTime : ', arTime);
             console.log('arTime.getTime() : ', arTime.getTime());
@@ -162,7 +164,8 @@ const BackResultItem02 = () => {
             return (
               <div key={idx}>
                 <br />
-                <Box
+                <AccDetailItem times={times} stopInfo={ele} />
+                {/* <Box
                   sx={{
                     display: 'flex',
                     width: '900px',
@@ -232,7 +235,7 @@ const BackResultItem02 = () => {
                       {ele.arrival.iataCode}
                     </Typography>
                     <Typography variant='h6' component='div'>
-                      {/* 도착 : {arrivalAllTime[1]} */}
+                      도착 : {arrivalAllTime[1]}
                       도착 :
                       {' ' +
                         arTime.getFullYear() +
@@ -252,7 +255,7 @@ const BackResultItem02 = () => {
                       {ele.arrival.terminal}번 터미널
                     </Typography>
                   </Box>
-                </Box>
+                </Box> */}
               </div>
             );
           })}

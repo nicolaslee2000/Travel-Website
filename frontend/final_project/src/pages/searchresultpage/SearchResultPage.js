@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
 import SearchResultConfig from '../../components/searchresultcomponent/SearchResultConfig';
 import SearchResultHeader from '../../components/searchresultcomponent/SearchResultHeader';
 import SearchResultItem from '../../components/searchresultcomponent/SearchResultItem';
@@ -35,6 +36,7 @@ const SearchResultPage = () => {
   };
   console.log('페이지 컴포넌트', number);
   const sortArr = searchReduxData.flightOfferSearch;
+
   return (
     <>
       <Header />

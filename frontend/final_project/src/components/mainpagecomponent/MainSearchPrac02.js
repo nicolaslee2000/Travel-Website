@@ -64,7 +64,7 @@ const MainSearchPrac02 = () => {
     end: { country: '', airport: '', code: '' },
     departureDate: '2022-08-12',
     returnDate: '2022-08-14',
-    adults: 1,
+    adults: 3,
   });
   // const [axData, setAxData] = useState([
   //   { type: '', subtype: '', name: '', iataCode: '' },

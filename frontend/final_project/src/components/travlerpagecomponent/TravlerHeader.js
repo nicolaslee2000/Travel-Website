@@ -16,6 +16,7 @@ import {
   orderInit,
   travelerInit,
 } from '../../reduxes/modules/searchInfoReducer3';
+import { useNavigate } from 'react-router-dom';
 
 const TravlerHeader = () => {
   const flightRedux = useSelector((state) => {
@@ -23,22 +24,22 @@ const TravlerHeader = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [conOpen, setConOpen] = useState(false);
   const [travelerData, setTravelerData] = useState({
-    data: {
-      id: '',
-      fname: '',
-      lname: '',
-      dateOfBirth: '',
-      gender: '',
-      email: '',
-      countryCode: '',
-      phoneNumber: '',
-      passportNumber: '',
-      nationality: '',
-      passportExpiryDate: '',
-    },
+    // 무슨 일이었는지 data : 로 감싸져있었음
+    id: '',
+    fname: '',
+    lname: '',
+    dateOfBirth: '',
+    gender: '',
+    email: '',
+    countryCode: '',
+    phoneNumber: '',
+    passportNumber: '',
+    nationality: '',
+    passportExpiryDate: '',
   });
 
   const travlerConfirm = () => {
@@ -78,6 +79,7 @@ const TravlerHeader = () => {
       value: travelerData.id,
       onChange: (newValue) => {
         setTravelerData((prev) => {
+          console.log(prev);
           return { ...prev, id: newValue.target.value };
         });
       },
@@ -88,6 +90,7 @@ const TravlerHeader = () => {
       value: travelerData.fname,
       onChange: (newValue) => {
         setTravelerData((prev) => {
+          console.log(prev);
           return { ...prev, fname: newValue.target.value };
         });
       },
@@ -158,7 +161,10 @@ const TravlerHeader = () => {
       value: travelerData.passportNumber,
       onChange: (newValue) => {
         setTravelerData((prev) => {
-          return { ...prev, passportNumber: newValue.target.value };
+          return {
+            ...prev,
+            passportNumber: newValue.target.value,
+          };
         });
       },
     },
@@ -178,7 +184,10 @@ const TravlerHeader = () => {
       value: travelerData.passportExpiryDate,
       onChange: (newValue) => {
         setTravelerData((prev) => {
-          return { ...prev, passportExpiryDate: newValue.target.value };
+          return {
+            ...prev,
+            passportExpiryDate: newValue.target.value,
+          };
         });
       },
     },
@@ -193,13 +202,15 @@ const TravlerHeader = () => {
     setOpen(false);
   };
 
+  // 여기 바꿔야함
   const handleConOrder = () => {
     // setConOpen(true);
     console.log('결제확인정보 : ', flightRedux.flightPrice);
     console.log('여행자정보 : ', flightRedux.traveler);
-    postOrder(flightRedux);
+    //postOrder(flightRedux);
     console.log('이제 다음화면으로 넘겨야함');
     setConOpen(false);
+    navigate('/finalConfirm');
   };
 
   const handleConClose = () => {
@@ -208,6 +219,7 @@ const TravlerHeader = () => {
 
   const handleConfirm = () => {
     // 첫 팝업창에서 확인 눌렀을 때 이벤트
+    console.log(travelerData);
     postTraveler(travelerData);
     setOpen(false);
 
