@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
-import './travlerHeader.css';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { useDispatch, useSelector } from 'react-redux';
-import ConfirmDialog from './ConfirmDialog';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./travlerHeader.css";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { useDispatch, useSelector } from "react-redux";
+import ConfirmDialog from "./ConfirmDialog";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import axios from "axios";
 import {
   orderInit,
   travelerInit,
-} from '../../reduxes/modules/searchInfoReducer3';
-import { useNavigate } from 'react-router-dom';
+} from "../../reduxes/modules/searchInfoReducer3";
 
 const TravlerHeader = () => {
   const flightRedux = useSelector((state) => {
@@ -24,22 +23,22 @@ const TravlerHeader = () => {
   });
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [conOpen, setConOpen] = useState(false);
   const [travelerData, setTravelerData] = useState({
-    // 무슨 일이었는지 data : 로 감싸져있었음
-    id: '',
-    fname: '',
-    lname: '',
-    dateOfBirth: '',
-    gender: '',
-    email: '',
-    countryCode: '',
-    phoneNumber: '',
-    passportNumber: '',
-    nationality: '',
-    passportExpiryDate: '',
+    data: {
+      id: "",
+      fname: "",
+      lname: "",
+      dateOfBirth: "",
+      gender: "",
+      email: "",
+      countryCode: "",
+      phoneNumber: "",
+      passportNumber: "",
+      nationality: "",
+      passportExpiryDate: "",
+    },
   });
 
   const travlerConfirm = () => {
@@ -74,30 +73,28 @@ const TravlerHeader = () => {
   // ];
   const textFiledArr3 = [
     {
-      id: 'input_id',
-      label: 'id을 입력하세요',
+      id: "input_id",
+      label: "id을 입력하세요",
       value: travelerData.id,
       onChange: (newValue) => {
         setTravelerData((prev) => {
-          console.log(prev);
           return { ...prev, id: newValue.target.value };
         });
       },
     },
     {
-      id: 'input_fname',
-      label: 'fname을 입력하세요',
+      id: "input_fname",
+      label: "fname을 입력하세요",
       value: travelerData.fname,
       onChange: (newValue) => {
         setTravelerData((prev) => {
-          console.log(prev);
           return { ...prev, fname: newValue.target.value };
         });
       },
     },
     {
-      id: 'input_lname',
-      label: 'lname을 입력하세요',
+      id: "input_lname",
+      label: "lname을 입력하세요",
       value: travelerData.lname,
       onChange: (newValue) => {
         setTravelerData((prev) => {
@@ -106,8 +103,8 @@ const TravlerHeader = () => {
       },
     },
     {
-      id: 'input_dateOfBirth',
-      label: 'dateOfBirth을 입력하세요',
+      id: "input_dateOfBirth",
+      label: "dateOfBirth을 입력하세요",
       value: travelerData.dateOfBirth,
       onChange: (newValue) => {
         setTravelerData((prev) => {
@@ -116,8 +113,8 @@ const TravlerHeader = () => {
       },
     },
     {
-      id: 'input_gender',
-      label: 'gender을 입력하세요',
+      id: "input_gender",
+      label: "gender을 입력하세요",
       value: travelerData.gender,
       onChange: (newValue) => {
         setTravelerData((prev) => {
@@ -126,8 +123,8 @@ const TravlerHeader = () => {
       },
     },
     {
-      id: 'input_email',
-      label: 'email을 입력하세요',
+      id: "input_email",
+      label: "email을 입력하세요",
       value: travelerData.email,
       onChange: (newValue) => {
         setTravelerData((prev) => {
@@ -136,8 +133,8 @@ const TravlerHeader = () => {
       },
     },
     {
-      id: 'input_countryCode',
-      label: 'countryCode을 입력하세요',
+      id: "input_countryCode",
+      label: "countryCode을 입력하세요",
       value: travelerData.countryCode,
       onChange: (newValue) => {
         setTravelerData((prev) => {
@@ -146,8 +143,8 @@ const TravlerHeader = () => {
       },
     },
     {
-      id: 'input_phoneNumber',
-      label: 'phoneNumber을 입력하세요',
+      id: "input_phoneNumber",
+      label: "phoneNumber을 입력하세요",
       value: travelerData.phoneNumber,
       onChange: (newValue) => {
         setTravelerData((prev) => {
@@ -156,21 +153,18 @@ const TravlerHeader = () => {
       },
     },
     {
-      id: 'input_passportNumber',
-      label: 'passportNumber을 입력하세요',
+      id: "input_passportNumber",
+      label: "passportNumber을 입력하세요",
       value: travelerData.passportNumber,
       onChange: (newValue) => {
         setTravelerData((prev) => {
-          return {
-            ...prev,
-            passportNumber: newValue.target.value,
-          };
+          return { ...prev, passportNumber: newValue.target.value };
         });
       },
     },
     {
-      id: 'input_nationality',
-      label: 'nationality을 입력하세요',
+      id: "input_nationality",
+      label: "nationality을 입력하세요",
       value: travelerData.nationality,
       onChange: (newValue) => {
         setTravelerData((prev) => {
@@ -179,15 +173,12 @@ const TravlerHeader = () => {
       },
     },
     {
-      id: 'input_passportExpiryDate',
-      label: 'passportExpiryDate을 입력하세요',
+      id: "input_passportExpiryDate",
+      label: "passportExpiryDate을 입력하세요",
       value: travelerData.passportExpiryDate,
       onChange: (newValue) => {
         setTravelerData((prev) => {
-          return {
-            ...prev,
-            passportExpiryDate: newValue.target.value,
-          };
+          return { ...prev, passportExpiryDate: newValue.target.value };
         });
       },
     },
@@ -202,15 +193,13 @@ const TravlerHeader = () => {
     setOpen(false);
   };
 
-  // 여기 바꿔야함
   const handleConOrder = () => {
     // setConOpen(true);
-    console.log('결제확인정보 : ', flightRedux.flightPrice);
-    console.log('여행자정보 : ', flightRedux.traveler);
-    //postOrder(flightRedux);
-    console.log('이제 다음화면으로 넘겨야함');
+    console.log("결제확인정보 : ", flightRedux.flightPrice);
+    console.log("여행자정보 : ", flightRedux.traveler);
+    postOrder(flightRedux);
+    console.log("이제 다음화면으로 넘겨야함");
     setConOpen(false);
-    navigate('/finalConfirm');
   };
 
   const handleConClose = () => {
@@ -219,7 +208,6 @@ const TravlerHeader = () => {
 
   const handleConfirm = () => {
     // 첫 팝업창에서 확인 눌렀을 때 이벤트
-    console.log(travelerData);
     postTraveler(travelerData);
     setOpen(false);
 
@@ -231,73 +219,73 @@ const TravlerHeader = () => {
     // console.log('sendData : ', sendData);
     await axios
       .post(
-        'http://localhost:8090/flight/traveler',
+        "http://localhost:8090/flight/traveler",
         JSON.stringify({ data: sendData }),
         {
           headers: {
-            'Content-Type': `application/json`,
+            "Content-Type": `application/json`,
           },
         }
       )
       .then((response) => {
-        console.log('세번째 데이터 입니다.', response.data);
+        console.log("세번째 데이터 입니다.", response.data);
         dispatch(travelerInit(response.data));
-        console.log('세번째 데이터 리덕스 저장');
+        console.log("세번째 데이터 리덕스 저장");
       });
   };
 
   const postOrder = async (sendData) => {
-    console.log('sendData.flightPrice', sendData.flightPrice);
-    console.log('sendData.traveler', sendData.traveler);
+    console.log("sendData.flightPrice", sendData.flightPrice);
+    console.log("sendData.traveler", sendData.traveler);
     await axios
       .post(
-        'http://localhost:8090/flight/order',
+        "http://localhost:8090/flight/order",
         JSON.stringify({
           data: {
-            type: 'flight-order',
+            type: "flight-order",
             flightOffers: sendData.flightPrice.flightOffers,
             travelers: [sendData.traveler],
           },
         }),
         {
           headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
         }
       )
       .then((response) => {
-        console.log('마지막 데이터', response.data);
+        console.log("마지막 데이터", response.data);
         dispatch(orderInit(response.data));
       });
   };
   ///////////////////////////////////////////////////////////////////////
   return (
-    <div className='travelHeaderContainer'>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Typography variant='h5' component='div' align='center'>
-          {'결제 금액 : $' +
+    <div className="travelHeaderContainer">
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Typography variant="h5" component="div" align="center">
+          {"결제 금액 : $" +
             flightRedux.flightPrice.flightOffers[0].price.total}
         </Typography>
-        <Box textAlign='center'>
+        <Box textAlign="center">
           <Button
             onClick={handleClickOpen}
-            variant='contained'
-            size='small'
+            variant="contained"
+            size="small"
             sx={{ width: 200 }}
-            color='success'
+            color="success"
           >
             항공정보 확인
           </Button>
           <Button
             onClick={() => {
               console.log(travelerData); // state 정보
-              console.log('저장된 리덕스 파일입니다.', flightRedux.traveler);
+              console.log("저장된 리덕스 파일입니다.", flightRedux.traveler);
             }}
-            variant='contained'
-            size='small'
+            variant="contained"
+            size="small"
             sx={{ width: 200 }}
-            color='success'
+            color="success"
           >
             입력정보 확인
           </Button>
@@ -332,13 +320,13 @@ const TravlerHeader = () => {
               <TextField
                 key={idx}
                 autoFocus
-                margin='dense'
+                margin="dense"
                 id={element.id}
                 label={element.label}
-                value={element.value || ''}
+                value={element.value || ""}
                 onChange={element.onChange}
                 fullWidth
-                variant='standard'
+                variant="standard"
               />
             );
           })}
@@ -384,29 +372,29 @@ const TravlerHeader = () => {
             확인을 누르면 예약이 완료됩니다.
           </DialogContentText>
           <DialogContentText>
-            id : {flightRedux.traveler.id || ''}
+            id : {flightRedux.traveler.id || ""}
           </DialogContentText>
           <DialogContentText>
-            dateOfBirth : {flightRedux.traveler.dateOfBirth || ''}
+            dateOfBirth : {flightRedux.traveler.dateOfBirth || ""}
           </DialogContentText>
           <DialogContentText>
-            firstName : {flightRedux.traveler.name.firstName || ''}
+            firstName : {flightRedux.traveler.name.firstName || ""}
           </DialogContentText>
           <DialogContentText>
-            lastName : {flightRedux.traveler.name.lastName || ''}
+            lastName : {flightRedux.traveler.name.lastName || ""}
           </DialogContentText>
           <DialogContentText>
-            phonesNumber : {flightRedux.traveler.contact.phones[0].number || ''}
+            phonesNumber : {flightRedux.traveler.contact.phones[0].number || ""}
           </DialogContentText>
           <DialogContentText>
-            documentType :{' '}
-            {flightRedux.traveler.documents[0].documentType || ''}
+            documentType :{" "}
+            {flightRedux.traveler.documents[0].documentType || ""}
           </DialogContentText>
           <DialogContentText>
-            expiryDate : {flightRedux.traveler.documents[0].expiryDate || ''}
+            expiryDate : {flightRedux.traveler.documents[0].expiryDate || ""}
           </DialogContentText>
           <DialogContentText>
-            nationality : {flightRedux.traveler.documents[0].nationality || ''}
+            nationality : {flightRedux.traveler.documents[0].nationality || ""}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

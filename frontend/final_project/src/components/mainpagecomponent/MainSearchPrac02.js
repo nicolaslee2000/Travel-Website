@@ -180,7 +180,55 @@ const MainSearchPrac02 = () => {
                         )}
                         onChange={handleInfoChange}
                     />
-                </div>
+                  </RadioGroup>
+                </FormControl>
+                {/* 메뉴 */}
+                <Grid container spacing={0}>
+                  {/* 도시선택 */}
+                  <Grid item xs="auto">
+                    <SelectCity update={inputDate} />
+                    {/* <SelectCity01 update={inputDate} /> */}
+                  </Grid>
+                  {/* 날짜선택 */}
+                  <Grid item xs="auto">
+                    {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
+                    <CalenderComp onWay={onWay} update={inputDate} />
+                  </Grid>
+                  {/* 인원좌석 선택 */}
+                  <Grid item xs="auto">
+                    <Passenger update={inputDate} />
+                  </Grid>
+                </Grid>
+                {/* 직항여부 */}
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={nonStop}
+                      onChange={handleNonStop}
+                      inputProps={{ "aria-label": "controlled" }}
+                      sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                    />
+                  }
+                  label="직항"
+                />
+                <Button
+                  sx={{ ml: 100 }}
+                  variant="outlined"
+                  onClick={handleToResult}
+                >
+                  검색하기
+                </Button>
+                {/* 버튼 크기조절 */}
+              </>
+            </Box>
+          </Container>
+        </Box>
+      </>
+      {/* <>
+      <div className="searchContainer">
+        <SelectCity update={inputDate} />
+        <CalenderComp onWay={onWay} update={inputDate} />
+        <Passenger update={inputDate} />
 
                 {/* <div className='searchBox'>
           <Autocomplete
