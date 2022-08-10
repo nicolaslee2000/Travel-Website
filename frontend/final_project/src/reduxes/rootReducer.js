@@ -1,6 +1,7 @@
 // import { legacy_createStore as createStore } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import { combineReducers } from 'redux';
+import configReducer from './modules/searchConfigReducer';
 import searchReducer from './modules/searchInfoReducer';
 import searchReducer2 from './modules/searchInfoReducer2';
 import searchReducer3 from './modules/searchInfoReducer3';
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   searchReducer,
   searchReducer2,
   searchReducer3,
+  configReducer,
 });
 
 export default rootReducer;
