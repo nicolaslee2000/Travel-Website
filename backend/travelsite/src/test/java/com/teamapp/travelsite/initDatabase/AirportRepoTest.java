@@ -28,7 +28,7 @@ public class AirportRepoTest {
     void saveMember() {
         // given
 
-        AirportDTO airport = new AirportDTO("anything","anything","anything");
+        AirportDTO airport = new AirportDTO();
         // when
         Airport savedAirport = airportRepository.save(airport.toEntity());
 

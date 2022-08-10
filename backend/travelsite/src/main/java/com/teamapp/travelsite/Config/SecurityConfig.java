@@ -22,6 +22,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 
 @Configuration
@@ -65,6 +70,7 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
                 .passwordEncoder(passwordEncoder());
     }
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -85,9 +91,7 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .csrf().ignoringAntMatchers("/h2-console/**")
-                .and()
-                .headers().addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+                .csrf()
                 .disable()
                 .formLogin()
                 .disable()
@@ -109,8 +113,6 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
                         "/**/*.js")
                 .permitAll()
                 .antMatchers("/auth/**", "/oauth2/**")
-                .permitAll()
-                .antMatchers("/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
