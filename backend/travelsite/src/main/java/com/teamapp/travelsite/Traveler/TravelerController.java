@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class TravelerController {
 
     @PostMapping("/reg")
-    public String registerTraveler(@RequestBody RegTravelerForm){ //아무튼 뭘 받아올거임
+    public String registerTraveler(){ //아무튼 뭘 받아올거임
 
         TravelerDTO travelerDTO;
 
@@ -21,6 +21,7 @@ public class TravelerController {
     @RequestMapping("/{id}")
     public String showTraveler(@PathVariable Long key, Model model){
 
+        return null;
     }
 
 }

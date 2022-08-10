@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.initDatabase;
+package com.teamapp.travelsite.Entity;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
