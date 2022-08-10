@@ -1,12 +1,17 @@
 package com.teamapp.travelsite.Api;
 
+
+import java.util.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import java.util.stream.Collectors;
 
+import com.teamapp.travelsite.DTOs.AirlineDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,10 +38,10 @@ public class AmadeusConnect {
 	@Autowired
 	private AmadeusConnect(AmadeusConfig amadeusConfig) {
 		this.amadeusConfig= amadeusConfig;
-	
 		this.amadeus = Amadeus.builder(amadeusConfig.getApiKey(), amadeusConfig.getApiSecret()).setHostname("production").build();
 	}
-	
+
+
 
 
 	public Location[] location(String keyword) throws ResponseException {
@@ -94,23 +99,18 @@ public class AmadeusConnect {
 		}
 		return null;
 	}
-	
+
 	public List<AirlineDTO> airlineDatabaseInit() {
 		List<AirlineDTO> airlineDTOs = new ArrayList<AirlineDTO>();
 		try {
 			airlineDTOs = Arrays.stream(amadeus.referenceData.airlines.get()).map(
 					e -> new AirlineDTO(e.getIataCode(), e.getCommonName())).collect(Collectors.toList());
 
-			
-			
-			
-			
-			
 		} catch (ResponseException e) {
 			e.printStackTrace();
 		}
 		return airlineDTOs;
 	}
 
-	
+
 }

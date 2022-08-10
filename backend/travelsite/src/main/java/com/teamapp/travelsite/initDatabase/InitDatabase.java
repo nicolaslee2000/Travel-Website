@@ -1,13 +1,20 @@
 package com.teamapp.travelsite.initDatabase;
 
+import com.amadeus.Amadeus;
+import com.amadeus.exceptions.ResponseException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.teamapp.travelsite.Api.AmadeusConnect;
+import com.teamapp.travelsite.Config.AmadeusConfig;
+import com.teamapp.travelsite.DTOs.AirlineDTO;
 import com.teamapp.travelsite.DTOs.AirportDTO;
 import com.teamapp.travelsite.DTOs.CityDTO;
 import com.teamapp.travelsite.DTOs.CountryDTO;
+import com.teamapp.travelsite.Repository.AirlineRepository;
 import com.teamapp.travelsite.Repository.AirportRepository;
 import com.teamapp.travelsite.Repository.CityRepository;
 import com.teamapp.travelsite.Repository.CountryRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -24,7 +31,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
-public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> {
+@RequiredArgsConstructor
+public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitDatabaseEvent> {
     List<AirportDTO> airportsDTOs = new ArrayList<>();
     List<CityDTO> citiesDTOs = new ArrayList<>();
     List<CountryDTO> countryDTOS = new ArrayList<>();
@@ -39,9 +47,21 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired
     CountryRepository countryRepository;
 
+    List<Airline> airlineEntity = new ArrayList<>(); //Entity
+    List<AirlineDTO> airlineDTOS = new ArrayList<>();
+
+    private final AmadeusConnect amadeusConnect;
+
+
+    @Autowired
+    AirlineRepository airlineRepository;
+
     @SneakyThrows
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent(InitDatabaseCheck.InitDatabaseEvent event) {
+
+
+
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"));
         airportsDTOs = gson.fromJson(reader, new TypeToken<List<AirportDTO>>() {
@@ -57,6 +77,9 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
             countryDTOS.add(countryDTO);
         }
 
+        amadeusConnect.airlineDatabaseInit().forEach(e -> airlineEntity.add(e.toEntity()));
+        saveAllWithDevideTest(airlineEntity);
+
         System.out.println("Country saving start");
         countryDTOS.forEach(e -> countries.add(e.toEntity()));
         countryRepository.saveAll(countries);
@@ -71,8 +94,8 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
         airportsDTOs.forEach(e -> airportList.add(e.toEntity()));
         saveAllairport(airportList);
     }
-    //=============================================================================================================//
 
+    //=============================================================================================================//
     //100 insert query per Transaction
     public void saveAllairport(List<Airport> list) {
         List<Airport> tmp = new ArrayList<>();
@@ -90,6 +113,16 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
             tmp.add(i);
             if (tmp.size() == 100) {
                 cityRepository.saveAll(tmp);
+                tmp.clear();
+            }
+        });
+    }
+    public void saveAllWithDevideTest(List<Airline> list){
+        List<Airline> tmp = new ArrayList<>();
+        list.forEach(i -> {
+            tmp.add(i);
+            if (tmp.size() == 100) {
+                airlineRepository.saveAll(tmp);
                 tmp.clear();
             }
         });
@@ -113,13 +146,13 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
         Iterator<Object> keys = sets.iterator();
 
         while (keys.hasNext()){
-            if(keys.equals(null)){           //not yet
+            if(keys.next().equals(null)){           //not yet
                 sets.remove(keys);
+                keys.next();
             }
         }
         return predicate -> sets.add(key.apply(predicate));
     }
-
         //tempVariable from parsing Gson init Obj
     public void setCountryMapping(CityDTO cityDTO) {
         try {
@@ -135,6 +168,7 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
 
         }
     }
+
 }
 /* cf. Bulk Insert
 	In short, Bulk insert is faster. You can use bulk insert to insert millions of rows from a csv or xml or other files

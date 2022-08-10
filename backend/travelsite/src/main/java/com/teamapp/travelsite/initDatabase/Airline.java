@@ -19,15 +19,15 @@ import org.springframework.stereotype.Component;
 @Table(name = "AIRLINE")
 public class Airline {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(nullable = false)
-	private Long air_idx;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
+    private Long air_idx;
 
-	@Column(nullable = false)
-	private String airline_iatacode;
+    @Column(nullable = false)
+    private String airline_iatacode;
 
-	@Column(nullable = true) //주의 null값 있음
-	private String airline_name;
+    @Column(nullable = true) //주의 null값 있음
+    private String airline_name;
 
 }

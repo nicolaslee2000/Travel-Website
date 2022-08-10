@@ -1,27 +1,24 @@
 package com.teamapp.travelsite.Config;
 
+import lombok.Data;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import lombok.Data;
-
 @Configuration
-@PropertySource(value="amadeus.properties")
+@PropertySource(value="application.properties")
 @ConfigurationProperties(prefix = "travel-service")
 @Data
-public class AmadeusConfig {
-	
-	private String apiKey;
-	
-	private String apiSecret;
+public class InitDatabaseConfig {
 
+    private boolean initDatabaseSwitch;
 
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 }
- 
