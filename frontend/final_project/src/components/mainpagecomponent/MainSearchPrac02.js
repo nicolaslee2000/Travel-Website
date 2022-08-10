@@ -98,6 +98,7 @@ const MainSearchPrac02 = () => {
           departDate: sendData.departureDate,
           returnDate: sendData.returnDate,
           adults: sendData.adults,
+          max: 15,
         },
         // params: { destinationLocationCode: sendData.start.code },
         // params: { departureDate: sendData.departureDate },
