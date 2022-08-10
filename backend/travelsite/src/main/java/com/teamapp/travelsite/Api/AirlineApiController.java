@@ -33,7 +33,6 @@ import lombok.RequiredArgsConstructor;
 public class AirlineApiController {
 
 	
-	
 	private final AmadeusConnect amadeusConnect;
 	
 

@@ -133,6 +133,7 @@ import java.util.Arrays;
 
         // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.cors().and().csrf().disable();
     }
     }
 
