@@ -1,9 +1,9 @@
 .bodyContainer {
-  /* background-color: coral; */
-  background-image: url('../../assets/imgs/searchResultBack05.jpg');
-  background-size: cover;
+    /* background-color: coral; */
+    background-image: url("../../assets/imgs/searchResultBack05.jpg");
+    background-size: auto;
 }
 
 .smallMargin {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
