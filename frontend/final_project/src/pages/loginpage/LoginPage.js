@@ -4,11 +4,11 @@ import Layout from '../../components/othercomponent/Layout';
 
 const LoginPage = () => {
   return (
-    <div>
-      <Layout>
+    <>
+      <div>
         <LoginForm />
-      </Layout>
-    </div>
+      </div>
+    </>
   );
 };
 

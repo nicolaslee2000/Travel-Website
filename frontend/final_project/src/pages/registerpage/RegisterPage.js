@@ -5,9 +5,7 @@ import RegisterForm from '../../components/registercomponent/RegisterForm';
 const RegisterPage = () => {
   return (
     <>
-      <Layout>
-        <RegisterForm />
-      </Layout>
+      <RegisterForm />
     </>
   );
 };
