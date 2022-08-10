@@ -131,6 +131,7 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
 
         // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.cors().and().csrf().disable();
     }
     }
 
