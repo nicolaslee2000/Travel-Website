@@ -89,9 +89,7 @@ const SelectCity = (props) => {
 
   useEffect(() => {
     const url = `http://localhost:8090/apisearch?str=${inputArrival}`;
-    fetch(url, {
-      method: "GET",
-    })
+    fetch(url)
       .then((response) => {
         // console.log("response.json", response);
         return response.json();

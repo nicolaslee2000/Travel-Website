@@ -5,7 +5,6 @@ const CONFIRM_INIT = 'CONFIRM_INIT'; // 2번째페이지에서 alert나 3번째 
 const TRAVELER_INIT = 'TRAVELER_INIT'; // 3번쨰에서 axios로 받는값
 const ORDER_INIT = 'ORDER_INIT'; // 4번째 페이지에서 엑시오스로 받는값
 const ALL_INIT = 'ALL_INIT'; // 메인페이지 왔을때 모두 초기화
-const LOADING_INIT = 'LOADING_INIT';
 
 //2. 액션 함수
 export const offerInit = (flightOfferSearch) => {
@@ -36,13 +35,6 @@ export const orderInit = (order) => {
   };
 };
 
-export const loadingInit = (loading) => {
-  return {
-    type: LOADING_INIT,
-    loading: loading,
-  };
-};
-
 export const allInit = () => {
   return {
     type: ALL_INIT,
@@ -59,7 +51,6 @@ const octoInit = {
   flightPrice: {},
   traveler: {},
   order: {},
-  loading: false,
 };
 
 //4. 리듀서 함수
@@ -92,11 +83,6 @@ export default function searchReducer3(state = octoInit, action) {
         flightPrice: action.flightPrice,
         traveler: action.traveler,
         order: action.order,
-      };
-    case LOADING_INIT:
-      return {
-        ...state,
-        loading: action.loading,
       };
     default:
       return state;

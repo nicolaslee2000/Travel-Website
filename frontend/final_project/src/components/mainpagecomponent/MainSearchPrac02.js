@@ -29,8 +29,8 @@ const MainSearchPrac02 = () => {
   const [nonStop, setNonStop] = useState(true);
   const [onWay, setOnWay] = useState(true);
   const [flightInfo, setFlightInfo] = useState({
-    origin: { country: "", airport: "", code: "" },
-    destination: { country: "", airport: "", code: "" },
+    origin: { country: "", airport: "", code: "ICN" },
+    destination: { country: "", airport: "", code: "NRT" },
     departDate: null,
     returnDate: null,
     adults: null,
@@ -246,8 +246,8 @@ const MainSearchPrac02 = () => {
                 <Grid container spacing={0}>
                   {/* 도시선택 */}
                   <Grid item xs="auto">
-                    {/* <SelectCity update={inputDate} /> */}
-                    <SelectCity01 update={inputDate} />
+                    <SelectCity update={inputDate} />
+                    {/* <SelectCity01 update={inputDate} /> */}
                   </Grid>
                   {/* 날짜선택 */}
                   <Grid item xs="auto">

@@ -25,10 +25,6 @@ const SearchResultItem = (props) => {
   //   return state.searchReducer;
   // });
 
-  //이거 하던ㄴ거ㅓㅓㅓ
-  // const pracAxios = async (sendData) =>{
-  //   await axios.post()
-  // }
   const inputSearch = useSelector((state) => {
     return state.searchReducer;
   });
@@ -41,7 +37,7 @@ const SearchResultItem = (props) => {
         },
       })
       .then((response) => {
-        console.log('포스트 confirm 데이터', response.data);
+        console.log('포스트 데이터', response.data);
         dispatch(confirmInit(response.data));
       });
   };
@@ -64,10 +60,7 @@ const SearchResultItem = (props) => {
   //   return state.searchReducer3;
   // });
   const reduxConfirm = () => {
-    console.log(
-      'SearchResultItem 포스트로 요청, 요청 데이터 : ',
-      flightOfferSearchData
-    );
+    console.log('여기 아이템 여기서 되면 된거임', flightOfferSearchData);
     postData(flightOfferSearchData);
     navigate('/travler');
   };
