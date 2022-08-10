@@ -1,9 +1,8 @@
 package com.teamapp.travelsite.DTOs;
 
-import com.google.gson.annotations.SerializedName;
-import com.teamapp.travelsite.initDatabase.Airport;
-import com.teamapp.travelsite.initDatabase.City;
-import com.teamapp.travelsite.initDatabase.Country;
+import com.teamapp.travelsite.Entity.Airport;
+import com.teamapp.travelsite.Entity.City;
+import com.teamapp.travelsite.Entity.Country;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

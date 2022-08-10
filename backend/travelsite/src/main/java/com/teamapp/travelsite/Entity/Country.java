@@ -1,15 +1,10 @@
-package com.teamapp.travelsite.initDatabase;
+package com.teamapp.travelsite.Entity;
 
 import javax.persistence.*;
 
 import lombok.*;
-import org.apache.ibatis.annotations.One;
-import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 //@Entity
 

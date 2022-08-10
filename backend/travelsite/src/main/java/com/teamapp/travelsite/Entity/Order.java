@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.initDatabase;
+package com.teamapp.travelsite.Entity;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,10 @@ import javax.persistence.*;
 public class Order {
     @Id
     @GeneratedValue
-    @Column()
+    @Column(nullable = false)
+    private Long id;
+
+    @GeneratedValue //SEQUENCE? UNIQUE?
+    @Column(nullable = false)
     private Long orderNumber;
 }

@@ -1,9 +1,8 @@
 package com.teamapp.travelsite.DTOs;
 
 
-import com.teamapp.travelsite.Repository.CountryRepository;
-import com.teamapp.travelsite.initDatabase.City;
-import com.teamapp.travelsite.initDatabase.Country;
+import com.teamapp.travelsite.Entity.City;
+import com.teamapp.travelsite.Entity.Country;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

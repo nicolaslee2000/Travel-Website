@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Builder
@@ -46,10 +47,8 @@ public class User {
     @Column(nullable = false)
     private java.util.Date createDate; //Timestamp
 
-    @OneToOne(mappedBy = "user")
-    Traveler traveler;
-
-
+    @OneToMany(mappedBy = "user")
+    List<Traveler> traveler;
 }
 /*
     (strategy=GenerationType.IDENTITY) IDENTITY = AUTO_INCREMENT

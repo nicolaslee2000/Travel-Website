@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.modelmapper.ModelMapper;
 
-import com.teamapp.travelsite.initDatabase.Airline;
+import com.teamapp.travelsite.Entity.Airline;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

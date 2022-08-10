@@ -1,13 +1,10 @@
 package com.teamapp.travelsite.DTOs;
 
-import com.teamapp.travelsite.initDatabase.Country;
+import com.teamapp.travelsite.Entity.Country;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
 
 @Data
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.initDatabase;
+package com.teamapp.travelsite.Entity;
 
 import javax.persistence.*;
 
@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

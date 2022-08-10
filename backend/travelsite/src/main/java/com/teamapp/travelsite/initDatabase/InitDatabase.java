@@ -14,6 +14,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.teamapp.travelsite.Entity.Airline;
+import com.teamapp.travelsite.Entity.Airport;
+import com.teamapp.travelsite.Entity.City;
+import com.teamapp.travelsite.Entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
