@@ -1,11 +1,26 @@
 package com.teamapp.travelsite.initDatabase;
 
-import com.amadeus.Amadeus;
-import com.amadeus.exceptions.ResponseException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.teamapp.travelsite.Api.AmadeusConnect;
-import com.teamapp.travelsite.Config.AmadeusConfig;
 import com.teamapp.travelsite.DTOs.AirlineDTO;
 import com.teamapp.travelsite.DTOs.AirportDTO;
 import com.teamapp.travelsite.DTOs.CityDTO;
@@ -14,21 +29,9 @@ import com.teamapp.travelsite.Repository.AirlineRepository;
 import com.teamapp.travelsite.Repository.AirportRepository;
 import com.teamapp.travelsite.Repository.CityRepository;
 import com.teamapp.travelsite.Repository.CountryRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
-
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -80,15 +83,12 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
         amadeusConnect.airlineDatabaseInit().forEach(e -> airlineEntity.add(e.toEntity()));
         saveAllWithDevideTest(airlineEntity);
 
-        System.out.println("Country saving start");
         countryDTOS.forEach(e -> countries.add(e.toEntity()));
         countryRepository.saveAll(countries);
-        System.out.println("city saving start");
         List<CityDTO> distincted = deduplication(citiesDTOs, CityDTO::getCity); //cause ORA-0001
         distincted.forEach(e -> setCountryMapping(e));
         distincted.forEach(e -> cityList.add(e.toEntity()));
         saveAllcity(cityList);
-        System.out.println("airport saving start");
         List<AirportDTO> distinctedAirport = deleteNullObject(airportsDTOs, AirportDTO::getIata);
         distinctedAirport.forEach(e -> setAirportMapping(e));
         airportsDTOs.forEach(e -> airportList.add(e.toEntity()));
