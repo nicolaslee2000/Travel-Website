@@ -3,6 +3,8 @@ import { Box } from "@mui/system";
 import React, { useCallback, useEffect, useState } from "react";
 import { set } from "react-hook-form";
 import axios from "axios";
+import match from "autosuggest-highlight/match";
+import parse from "autosuggest-highlight/parse";
 
 const SelectCity = (props) => {
   const { update } = props;
@@ -147,7 +149,7 @@ const SelectCity = (props) => {
     <Stack direction="row" sx={{ minWidth: 200 }}>
       <Autocomplete
         id="arrival_city"
-        value={arrival || ""}
+        value={arrival}
         onChange={handleOnchangeArrival}
         inputValue={inputArrival}
         onInputChange={handleOnchangeInputArrival}
@@ -160,11 +162,33 @@ const SelectCity = (props) => {
         noOptionsText={"값을 입력하시오"}
         sx={{ minWidth: 300 }}
         renderInput={(params) => <TextField {...params} label="출발지" />}
+        renderOption={(props, option, { inputValue }) => {
+          // console.log(option, inputValue);
+          const matches = match(option, inputValue);
+          const parts = parse(option, matches);
+
+          return (
+            <li {...props}>
+              <div>
+                {parts.map((data, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      fontWeight: data.highlight ? 800 : 400,
+                    }}
+                  >
+                    {data.text}
+                  </span>
+                ))}
+              </div>
+            </li>
+          );
+        }}
       />
 
       <Autocomplete
         id="departure_city"
-        value={departure || ""}
+        value={departure}
         onChange={handleOnchangeDeparture}
         inputValue={inputDeparture}
         onInputChange={handleOnchangeInputDeparture}
@@ -177,6 +201,28 @@ const SelectCity = (props) => {
         noOptionsText={"값을 입력하시오"}
         sx={{ minWidth: 300 }}
         renderInput={(params) => <TextField {...params} label="도착지" />}
+        renderOption={(props, option, { inputValue }) => {
+          // console.log(option, inputValue);
+          const matches = match(option, inputValue);
+          const parts = parse(option, matches);
+
+          return (
+            <li {...props}>
+              <div>
+                {parts.map((data, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      fontWeight: data.highlight ? 800 : 400,
+                    }}
+                  >
+                    {data.text}
+                  </span>
+                ))}
+              </div>
+            </li>
+          );
+        }}
       />
     </Stack>
   );
