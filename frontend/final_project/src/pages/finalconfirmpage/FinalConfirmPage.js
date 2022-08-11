@@ -14,7 +14,6 @@ const FinalConfirmPage = () => {
     searchReduxData.flightPrice.flightOffers[0].itineraries.length;
   return (
     <div>
-      <Header />
       <Grid
         container
         spacing={4}
