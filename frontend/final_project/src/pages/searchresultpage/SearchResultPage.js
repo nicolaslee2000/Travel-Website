@@ -39,7 +39,6 @@ const SearchResultPage = () => {
 
   return (
     <>
-      <Header />
       <div className='bodyContainer'>
         <div className='smallMargin'>
           <SearchResultHeader />
