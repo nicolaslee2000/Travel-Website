@@ -57,7 +57,7 @@ const CalenderComp = (props) => {
             type="fromData"
             onChange={handleFromChange}
             renderInput={(params) => (
-              <TextField sx={{ width: 150, minHeight: 50 }} {...params} />
+              <TextField sx={{ minHeight: 50 }} {...params} />
             )}
           />
           <DesktopDatePicker
@@ -67,7 +67,7 @@ const CalenderComp = (props) => {
             onChange={hadleToChange}
             disabled={onWay}
             renderInput={(params) => (
-              <TextField sx={{ width: 150, minHeight: 50 }} {...params} />
+              <TextField sx={{ minHeight: 50 }} {...params} />
             )}
 
             //showDaysOutsideCurrentMonth

@@ -21,7 +21,7 @@ import { offerInit } from "./../../reduxes/modules/searchInfoReducer3";
 import SelectCity from "./SelectCity";
 import CalenderComp from "./CalenderComp";
 import Passenger from "./Passenger";
-import { Box, Container } from "@mui/system";
+import { Box, boxSizing, Container } from "@mui/system";
 import SelectCity01 from "./SelectCity01";
 
 const MainSearchPrac02 = () => {
@@ -191,15 +191,16 @@ const MainSearchPrac02 = () => {
     <>
       <>
         {/* Mianserch 맨 뒤 배경  */}
-        <Box className="mainSeach_background " sx={{ height: 550, border: 1 }}>
+        <Box className="mainSeach_background " sx={{ height: 550 }}>
           <Container flud>
             {/* mainSearchApp */}
             <Box
               sx={{
                 marginTop: 17,
-                width: "1200px",
+                maxWidth: 1200,
+                width: "100%",
                 height: "108px",
-                border: 1,
+                background: "grey",
               }}
             >
               <Typography
@@ -210,7 +211,13 @@ const MainSearchPrac02 = () => {
                 지금 여행을 떠나세요
               </Typography>
             </Box>
-            <Box Container sx={{ width: "1200px", height: 216, border: 1 }}>
+            <Box
+              Container
+              sx={{
+                border: 1,
+                boxSizing: "border-box",
+              }}
+            >
               <Box sx={{ p: "24px" }}>
                 {/* 직항유무 */}
                 <FormControl>
@@ -252,42 +259,42 @@ const MainSearchPrac02 = () => {
                 {/* 메뉴 */}
                 <Grid container spacing={0}>
                   {/* 도시선택 */}
-                  <Grid item xs="auto">
+                  <Grid item xs={6}>
                     <SelectCity update={inputDate} />
                     {/* <SelectCity01 update={inputDate} /> */}
                   </Grid>
                   {/* 날짜선택 */}
-                  <Grid item xs="auto">
+                  <Grid item xs={3.5}>
                     {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
                     <CalenderComp onWay={onWay} update={inputDate} />
                   </Grid>
                   {/* 인원좌석 선택 */}
-                  <Grid item xs="auto">
+                  <Grid item xs={2.5}>
                     <Passenger update={inputDate} />
                   </Grid>
                 </Grid>
-                {/* 단순 공백 */}
-                <Box sx={{ height: "24px" }}></Box>
                 {/* 직항여부 */}
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={nonStop}
-                      onChange={handleNonStop}
-                      inputProps={{ "aria-label": "controlled" }}
-                      sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
-                    />
-                  }
-                  label="직항"
-                />
-                <Button
-                  sx={{ ml: 100, width: "200px", height: "46px" }}
-                  variant="outlined"
-                  onClick={handleToResult}
-                >
-                  <Typography>검색하기</Typography>
-                </Button>
-                {/* 버튼 크기조절 */}
+                <Box sx={{ display: "flex", mt: "24px" }}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={nonStop}
+                        onChange={handleNonStop}
+                        inputProps={{ "aria-label": "controlled" }}
+                        sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                      />
+                    }
+                    label="직항"
+                  />
+                  <Button
+                    sx={{ ml: "auto", width: "200px", height: "46px" }}
+                    variant="outlined"
+                    onClick={handleToResult}
+                  >
+                    <Typography>검색하기</Typography>
+                  </Button>
+                  {/* 버튼 크기조절 */}
+                </Box>
               </Box>
             </Box>
           </Container>
