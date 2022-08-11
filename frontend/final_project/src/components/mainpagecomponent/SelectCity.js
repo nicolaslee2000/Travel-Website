@@ -11,10 +11,10 @@ const SelectCity = (props) => {
   const [jsonResults, setJsonResults] = useState([]);
 
   const [arrival, setArrial] = useState("");
-  const [inputArrival, setInputArrial] = useState("");
+  const [inputArrival, setInputArrial] = useState("icn");
 
   const [departure, setDeparture] = useState("");
-  const [inputDeparture, setInputDeparture] = useState("");
+  const [inputDeparture, setInputDeparture] = useState("nrt");
 
   const [origin, setOrigin] = useState({
     country: null,
