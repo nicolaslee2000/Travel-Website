@@ -65,7 +65,7 @@ public class AirlineApiController {
 	@PostMapping("/traveler")
 	public Traveler traveler(@RequestBody(required = true) JsonObject travelerInfo) {
 		return DatabaseConnect.traveler(travelerInfo.get("data").getAsJsonObject());
-	}
+	} //q
 
 	@PostMapping("/order")
 	public FlightOrder order(@RequestBody(required = true) JsonObject order) throws ResponseException {

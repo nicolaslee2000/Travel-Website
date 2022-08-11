@@ -1,5 +1,6 @@
 package com.teamapp.travelsite.DTOs;
 
+import com.google.gson.annotations.SerializedName;
 import com.teamapp.travelsite.Entity.Airport;
 import com.teamapp.travelsite.Entity.City;
 import com.teamapp.travelsite.Entity.Country;
@@ -13,16 +14,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AirportDTO {
     private String iata;
+    @SerializedName("name")
+    private String airportName;
+    private City cityA;
+    private Country countryA;
 
     private String city; //tempVariable for parsing Gson
-    private City cityA;
-
     private String country; //tempVariable for parsing Gson
-    private Country countryA;
     public Airport toEntity() {
-
         return Airport.builder()
-                .airport_iatacode(this.iata)
+                .airportName(this.airportName)
+                .airportIatacode(this.iata)
                 .city(cityA)
                 .country(countryA)
                 .build();

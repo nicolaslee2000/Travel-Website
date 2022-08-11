@@ -1,6 +1,7 @@
 package com.teamapp.travelsite.User;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teamapp.travelsite.Security.AuthProvider;
 import com.teamapp.travelsite.Traveler.Traveler;
 import lombok.*;
@@ -45,6 +46,7 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private java.util.Date createDate; //Timestamp
 
     @OneToMany(mappedBy = "user")

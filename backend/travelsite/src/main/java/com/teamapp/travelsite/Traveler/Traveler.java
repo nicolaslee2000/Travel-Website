@@ -18,16 +18,15 @@ public class Traveler {
 
     @Id
     private String id;
-
     private String dateOfBirth;
     private String gender;
     private String firstName;
     private String lastName;
-    private String emailAddress;
-    private String phone;
 
     @OneToMany(mappedBy = "traveler")
+
     private List<Document> documentList = new ArrayList<>();
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @JoinColumn(name = "email",referencedColumnName = "email")
     private User user;
 }
