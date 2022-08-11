@@ -52,19 +52,23 @@ const CalenderComp = (props) => {
         <Stack direction="row">
           <DesktopDatePicker
             label="출발일"
-            inputFormat="yyyy-MM-dd"
+            inputFormat="yyyy.MM.dd"
             value={fromDate}
             type="fromData"
             onChange={handleFromChange}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField sx={{ width: 150, minHeight: 50 }} {...params} />
+            )}
           />
           <DesktopDatePicker
             label="도착일"
-            inputFormat="yyyy-MM-dd"
+            inputFormat="yyyy.MM.dd"
             value={toDate}
             onChange={hadleToChange}
             disabled={onWay}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField sx={{ width: 150, minHeight: 50 }} {...params} />
+            )}
 
             //showDaysOutsideCurrentMonth
             //minDate={"0"}

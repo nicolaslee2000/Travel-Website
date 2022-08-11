@@ -105,25 +105,12 @@ export default function BasicPopover(props) {
   }, [seat]);
 
   return (
-    <div>
-      {/* <Box
-        aria-describedby={id}
-        variant="contained"
-        onClick={handleClick}
-        sx={{ width: 150, height: 50, backgroundColor: "black" }}
-      >
-        <Typography sx={{ fontSize: 15, color: "white" }} center>
-          총인원수 {AdultCount + ChildCount}명
-        </Typography>
-        <Typography color="white" center>
-          좌석 : {seat}
-        </Typography>
-      </Box> */}
+    <>
       <Button
         aria-describedby={id}
-        variant="contained"
+        variant="outlined"
         onClick={handleClick}
-        sx={{ minwidth: 100, minheight: 30 }}
+        sx={{ width: "250px", height: "56px", color: "gray" }}
       >
         총인원수 {AdultCount + ChildCount}명,좌석 : {seat}
       </Button>
@@ -200,6 +187,6 @@ export default function BasicPopover(props) {
           </Box>
         </Container>
       </Popover>
-    </div>
+    </>
   );
 }

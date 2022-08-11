@@ -194,7 +194,14 @@ const MainSearchPrac02 = () => {
         <Box className="mainSeach_background " sx={{ height: 550, border: 1 }}>
           <Container flud>
             {/* mainSearchApp */}
-            <Box sx={{ marginTop: 17, maxwidth: 1096, height: 108, border: 1 }}>
+            <Box
+              sx={{
+                marginTop: 17,
+                width: "1200px",
+                height: "108px",
+                border: 1,
+              }}
+            >
               <Typography
                 variant="h2"
                 component="div"
@@ -203,15 +210,8 @@ const MainSearchPrac02 = () => {
                 지금 여행을 떠나세요
               </Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                minwidth: 1096,
-                minheight: 216,
-                border: 1,
-              }}
-            >
-              <Box sx={{ minwidth: 600, minheight: 216, border: 1 }}>
+            <Box Container sx={{ width: "1200px", height: 216, border: 1 }}>
+              <Box sx={{ p: "24px" }}>
                 {/* 직항유무 */}
                 <FormControl>
                   <RadioGroup
@@ -266,6 +266,8 @@ const MainSearchPrac02 = () => {
                     <Passenger update={inputDate} />
                   </Grid>
                 </Grid>
+                {/* 단순 공백 */}
+                <Box sx={{ height: "24px" }}></Box>
                 {/* 직항여부 */}
                 <FormControlLabel
                   control={
@@ -278,17 +280,14 @@ const MainSearchPrac02 = () => {
                   }
                   label="직항"
                 />
-
-                {/* 버튼 크기조절 */}
-              </Box>
-              <Box sx={{ width: 496, minheight: 216, border: 1 }}>
                 <Button
-                  sx={{ minWidth: 50, minHeight: 100 }}
+                  sx={{ ml: 100, width: "200px", height: "46px" }}
                   variant="outlined"
                   onClick={handleToResult}
                 >
-                  검색하기
+                  <Typography>검색하기</Typography>
                 </Button>
+                {/* 버튼 크기조절 */}
               </Box>
             </Box>
           </Container>
