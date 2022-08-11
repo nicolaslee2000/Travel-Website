@@ -203,8 +203,15 @@ const MainSearchPrac02 = () => {
                 지금 여행을 떠나세요
               </Typography>
             </Box>
-            <Box Container sx={{ maxwidth: 1096, height: 216, border: 1 }}>
-              <>
+            <Box
+              sx={{
+                display: "flex",
+                minwidth: 1096,
+                minheight: 216,
+                border: 1,
+              }}
+            >
+              <Box sx={{ minwidth: 600, minheight: 216, border: 1 }}>
                 {/* 직항유무 */}
                 <FormControl>
                   <RadioGroup
@@ -271,15 +278,18 @@ const MainSearchPrac02 = () => {
                   }
                   label="직항"
                 />
+
+                {/* 버튼 크기조절 */}
+              </Box>
+              <Box sx={{ width: 496, minheight: 216, border: 1 }}>
                 <Button
-                  sx={{ ml: 100 }}
+                  sx={{ minWidth: 50, minHeight: 100 }}
                   variant="outlined"
                   onClick={handleToResult}
                 >
                   검색하기
                 </Button>
-                {/* 버튼 크기조절 */}
-              </>
+              </Box>
             </Box>
           </Container>
         </Box>

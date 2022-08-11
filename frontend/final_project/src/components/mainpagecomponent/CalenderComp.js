@@ -57,9 +57,6 @@ const CalenderComp = (props) => {
             type="fromData"
             onChange={handleFromChange}
             renderInput={(params) => <TextField {...params} />}
-            //showDaysOutsideCurrentMonth
-            //minDate={"0"}
-            //lable="disable"을 사용하면 선택을 못하게 가능
           />
           <DesktopDatePicker
             label="도착일"
