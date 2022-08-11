@@ -105,20 +105,20 @@ const SelectCity01 = (props) => {
 
   //useEffect 안에 들어가는 값이 []안에 들어가서 감지가 되어야한다.
   useEffect(() => {
-    console.log("slice arrival ", slice(arrival));
+    // console.log("slice arrival ", slice(arrival));
     setOrigin((prevOrigin) => ({ ...prevOrigin, code: slice(arrival) }));
     setIataCode(slice(arrival));
   }, [arrival]);
 
   useEffect(() => {
-    console.log("input iataCode", iataCode);
+    // console.log("input iataCode", iataCode);
     setOrigin((prevOrigin) => ({ ...prevOrigin, code: iataCode })); //dl
     update((prev) => ({ ...prev, origin: origin }));
   }, [iataCode]);
 
   return (
     <Stack direction="row" sx={{ minWidth: 200 }}>
-      <Autocomplete
+      {/* <Autocomplete
         id="arrival_city"
         value={arrival || ""}
         onChange={handleOnchangeArrival}
@@ -133,42 +133,28 @@ const SelectCity01 = (props) => {
         noOptionsText={"값을 입력하시오"}
         sx={{ minWidth: 300 }}
         renderInput={(params) => <TextField {...params} label="출발지" />}
-      />
-      {/* 
+      /> */}
+
       <Autocomplete
         id="arrival_city"
         value={arrival || ""}
         onChange={handleOnchangeArrival}
         inputValue={inputArrival}
         onInputChange={handleOnchangeInputArrival}
-        options={jsonResults}
+        options={jsonResults.map(
+          (info) =>
+            `${info.address.cityName}  ${capitalizeFirstLetter(info.name)}(${
+              info.iataCode
+            }) `
+        )}
         noOptionsText={"값을 입력하시오"}
-        sx={{ minWidth: 200 }}
+        sx={{ minWidth: 400 }}
         renderInput={(params) => <TextField {...params} label="출발지" />}
         renderOption={(props, option, { inputValue }) => {
-          console.log(option, inputValue);
+          // console.log(option, inputValue);
+          const matches = match(option, inputValue);
+          const parts = parse(option, matches);
 
-          console.log(
-            `${option.address.cityName}  ${capitalizeFirstLetter(
-              option.name
-            )} ${option.iataCode}`,
-            inputValue
-          );
-
-          const matches = match(
-            `${option.address.cityName}  ${capitalizeFirstLetter(
-              option.name
-            )}(${option.iataCode}) `,
-            inputValue
-          );
-          const parts = parse(
-            `${option.address.cityName}  ${capitalizeFirstLetter(
-              option.name
-            )}(${option.iataCode}) `,
-            matches
-          );
-          console.log("matches", matches);
-          // console.log("parts", parts);
           return (
             <li {...props}>
               <div>
@@ -186,7 +172,7 @@ const SelectCity01 = (props) => {
             </li>
           );
         }}
-      /> */}
+      />
 
       {/* <Autocomplete
         id="arrival_city"
