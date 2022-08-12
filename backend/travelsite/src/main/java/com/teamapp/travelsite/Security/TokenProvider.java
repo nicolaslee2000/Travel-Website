@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Random;
 
 @Service
 public class TokenProvider {
@@ -62,5 +63,24 @@ public class TokenProvider {
         }
         return false;
     }
+    
+    ////mailAuth 코드
+    private static int size = 15;
+	
+	public static String creatEmailAuth() {
+		Random ran = new Random();
+		StringBuffer buf = new StringBuffer();
+		int num = 0;
+		
+		do {
+			num = ran.nextInt(75)+48;
+			if((num>=48 && num<=57) || (num>=65 && num <=90) || (num>=97 && num<=122)) {
+				buf.append((char)num);//숫자, 영문자만
+			}
+			else continue;
+		} while(buf.length() < size);
+		
+		return buf.toString();
+	}
 
 }
