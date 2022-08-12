@@ -23,9 +23,12 @@ public class Traveler {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "traveler")
+    private  String documentType;
+    private  String number;
+    private  String expiryDate;
+    private  String issuanceCountry;
+    private  String nationality;
 
-    private List<Document> documentList = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JoinColumn(name = "email",referencedColumnName = "email")
     private User user;

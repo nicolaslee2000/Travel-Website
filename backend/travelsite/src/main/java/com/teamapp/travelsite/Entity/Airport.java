@@ -29,8 +29,6 @@ public class Airport {
 	@Column(name = "airport_name")
 	private String airportName;
 
-
-
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "city_name",referencedColumnName = "city_name")
 	private City city;
