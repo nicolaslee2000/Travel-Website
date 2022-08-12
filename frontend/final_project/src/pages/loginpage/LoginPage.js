@@ -8,6 +8,8 @@ const LoginPage = (props) => {
       <div>
         <LoginForm setIsLogin={props.setIsLogin} />
       </div>
+      <br />
+      <br />
     </>
   );
 };
