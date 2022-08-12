@@ -1,15 +1,15 @@
-import React from "react";
-import Footer from "./Footer";
-import "./Header";
-import Header from "./Header";
+import React from 'react';
+import Footer from './Footer';
+import Header from './Header';
 
-const Layout = ({ children }) => {
-    return (
-        <>
-            <Header />
-            {children}
-        </>
-    );
+const Layout = ({ children, isLogin }) => {
+  return (
+    <>
+      <Header isLogin={isLogin} />
+      {children}
+      <Footer />
+    </>
+  );
 };
 
 export default Layout;

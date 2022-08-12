@@ -36,6 +36,8 @@ const Searchresultheader = () => {
           <div className="startPoint">
             <div>출발날짜</div>
             <div>{inputSearch.departDate}</div>
+            {/* <div>{inputSearch.departureDate}</div> */}
+
             {/* <div>20xx/xx/xx</div> */}
             {/* <div>{searData3.flightOfferSearch[0].lastTicketingDate}</div> */}
           </div>

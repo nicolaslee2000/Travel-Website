@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // import { useLocation } from "react-router-dom";
-import Grid from '@mui/material/Grid';
-import CircularProgress from '@mui/material/CircularProgress';
-import SearchResultConfig from '../../components/searchresultcomponent/SearchResultConfig';
-import SearchResultHeader from '../../components/searchresultcomponent/SearchResultHeader';
-import SearchResultItem from '../../components/searchresultcomponent/SearchResultItem';
-import Header from '../../components/othercomponent/Header';
-import './searchResultPage.css';
-import Layout from './../../components/othercomponent/Layout';
-import { useSelector } from 'react-redux';
-import SearchResultItem02 from './../../components/searchresultcomponent/SearchResultItem02';
-import SearchResultItem02Back from '../../components/searchresultcomponent/SearchResultItem02Back';
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
+import SearchResultConfig from "../../components/searchresultcomponent/SearchResultConfig";
+import SearchResultHeader from "../../components/searchresultcomponent/SearchResultHeader";
+import SearchResultItem from "../../components/searchresultcomponent/SearchResultItem";
+import Header from "../../components/othercomponent/Header";
+import "./searchResultPage.css";
+import Layout from "./../../components/othercomponent/Layout";
+import { useSelector } from "react-redux";
+import SearchResultItem02 from "./../../components/searchresultcomponent/SearchResultItem02";
+import SearchResultItem02Back from "../../components/searchresultcomponent/SearchResultItem02Back";
 
 const SearchResultPage = () => {
   // const location = useLocation();
@@ -20,6 +20,8 @@ const SearchResultPage = () => {
   const searchReduxData = useSelector((state) => {
     return state.searchReducer3;
   });
+  console.log("결과확인용", searchReduxData);
+
   // const configReduxData = useSelector((state) => {
   //   return state.configReducer;
   // });
@@ -34,14 +36,15 @@ const SearchResultPage = () => {
     let dateVal = new Date(str);
     return dateVal.getTime();
   };
-  console.log('페이지 컴포넌트', number);
+  console.log("페이지 컴포넌트", number);
   const sortArr = searchReduxData.flightOfferSearch;
+  //  const test1 = searchReduxData.flightOfferSearch[0].itineraries;
+  const test2 = sortArr[0].itineraries;
 
   return (
     <>
-      <Header />
-      <div className='bodyContainer'>
-        <div className='smallMargin'>
+      <div className="bodyContainer">
+        <div className="smallMargin">
           <SearchResultHeader />
           {/* <SearchResultHeader info={info} /> */}
         </div>
@@ -103,8 +106,7 @@ const SearchResultPage = () => {
                     {
                       // 1이면 편도
                       // 1이 아니면 왕복
-                      searchReduxData.flightOfferSearch[0].itineraries
-                        .length === 1
+                      test2.length === 1
                         ? searchReduxData.flightOfferSearch.map(
                             //편도인 경우
                             (flightOfferSearchData, idx) => {
@@ -144,8 +146,7 @@ const SearchResultPage = () => {
                     {
                       // 1이면 편도
                       // 1이 아니면 왕복
-                      searchReduxData.flightOfferSearch[0].itineraries
-                        .length === 1
+                      test2.length === 1
                         ? sortArr
                             .sort(function (a, b) {
                               return a.price.total - b.price.total;
@@ -193,8 +194,7 @@ const SearchResultPage = () => {
                     {
                       // 1이면 편도
                       // 1이 아니면 왕복
-                      searchReduxData.flightOfferSearch[0].itineraries
-                        .length === 1
+                      test2.length === 1
                         ? sortArr
                             .sort(function (a, b) {
                               return (
