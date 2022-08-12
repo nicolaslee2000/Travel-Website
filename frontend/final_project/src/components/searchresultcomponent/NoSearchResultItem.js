@@ -8,7 +8,7 @@ const NoSearchResultItem = () => {
     <Card
       sx={{
         display: 'flex',
-        width: '1000px',
+        width: '850px',
         height: '900px',
         alignItems: 'center',
         justifyContent: 'center',
