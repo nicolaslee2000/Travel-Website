@@ -21,7 +21,7 @@ import { offerInit } from "./../../reduxes/modules/searchInfoReducer3";
 import SelectCity from "./SelectCity";
 import CalenderComp from "./CalenderComp";
 import Passenger from "./Passenger";
-import { Box, Container } from "@mui/system";
+import { Box, boxSizing, Container } from "@mui/system";
 import SelectCity01 from "./SelectCity01";
 
 const MainSearchPrac02 = () => {
@@ -189,77 +189,91 @@ const MainSearchPrac02 = () => {
 
   return (
     <>
-      <>
-        {/* Mianserch 맨 뒤 배경  */}
-        <Box className="mainSeach_background " sx={{ height: 550, border: 1 }}>
-          <Container flud>
-            {/* mainSearchApp */}
-            <Box sx={{ marginTop: 17, maxwidth: 1096, height: 108, border: 1 }}>
-              <Typography
-                variant="h2"
-                component="div"
-                sx={{ align: "bottom", color: "blue" }}
-              >
-                지금 여행을 떠나세요
-              </Typography>
-            </Box>
-            <Box Container sx={{ maxwidth: 1096, height: 216, border: 1 }}>
-              <>
-                {/* 직항유무 */}
-                <FormControl>
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="oneWay-roundTrip-group"
-                    value={raidoValue}
-                    onChange={handleRadioChange}
-                  >
-                    <FormControlLabel
-                      value="false"
-                      control={
-                        <Radio
-                          sx={{
-                            "& .MuiSvgIcon-root": {
-                              fontSize: 28,
-                            },
-                          }}
-                        />
-                      }
-                      label="편도"
-                    />
-                    <FormControlLabel
-                      value="true"
-                      control={
-                        <Radio
-                          sx={{
-                            "& .MuiSvgIcon-root": {
-                              fontSize: 28,
-                            },
-                          }}
-                        />
-                      }
-                      label="왕복"
-                    />
-                  </RadioGroup>
-                </FormControl>
-                {/* 메뉴 */}
-                <Grid container spacing={0}>
-                  {/* 도시선택 */}
-                  <Grid item xs="auto">
-                    <SelectCity update={inputDate} />
-                    {/* <SelectCity01 update={inputDate} /> */}
-                  </Grid>
-                  {/* 날짜선택 */}
-                  <Grid item xs="auto">
-                    {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
-                    <CalenderComp onWay={onWay} update={inputDate} />
-                  </Grid>
-                  {/* 인원좌석 선택 */}
-                  <Grid item xs="auto">
-                    <Passenger update={inputDate} />
-                  </Grid>
+      {/* Mianserch 맨 뒤 배경  */}
+      <Box className="mainSeach_background " sx={{ height: 550 }}>
+        <Container flud>
+          {/* mainSearchApp */}
+          <Box
+            sx={{
+              marginTop: 17,
+              maxWidth: 1200,
+              width: "100%",
+              height: "108px",
+              background: "grey",
+            }}
+          >
+            <Typography
+              variant="h2"
+              component="div"
+              sx={{ align: "bottom", color: "blue" }}
+            >
+              지금 여행을 떠나세요
+            </Typography>
+          </Box>
+          <Box
+            Container
+            sx={{
+              border: 1,
+              boxSizing: "border-box",
+            }}
+          >
+            <Box sx={{ p: "24px" }}>
+              {/* 직항유무 */}
+              <FormControl>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="oneWay-roundTrip-group"
+                  value={raidoValue}
+                  onChange={handleRadioChange}
+                >
+                  <FormControlLabel
+                    value="false"
+                    control={
+                      <Radio
+                        sx={{
+                          "& .MuiSvgIcon-root": {
+                            fontSize: 28,
+                          },
+                        }}
+                      />
+                    }
+                    label="편도"
+                  />
+                  <FormControlLabel
+                    value="true"
+                    control={
+                      <Radio
+                        sx={{
+                          "& .MuiSvgIcon-root": {
+                            fontSize: 28,
+                          },
+                        }}
+                      />
+                    }
+                    label="왕복"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/* 메뉴 */}
+              <Grid container spacing={0}>
+                {/* 도시선택 */}
+                <Grid item xs={6}>
+                  <SelectCity update={inputDate} />
+                  {/* <SelectCity01 update={inputDate} /> */}
                 </Grid>
-                {/* 직항여부 */}
+                {/* 날짜선택 */}
+                <Grid item xs={3.5}>
+                  {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
+                  <CalenderComp onWay={onWay} update={inputDate} />
+                </Grid>
+                {/* 인원좌석 선택 */}
+                <Grid item xs={2.5}>
+                  <Passenger update={inputDate} />
+                </Grid>
+              </Grid>
+              {/* 직항여부 */}
+              <Box sx={{ display: "flex", mt: "24px" }}>
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -272,64 +286,18 @@ const MainSearchPrac02 = () => {
                   label="직항"
                 />
                 <Button
-                  sx={{ ml: 100 }}
+                  sx={{ ml: "auto", width: "200px", height: "46px" }}
                   variant="outlined"
                   onClick={handleToResult}
                 >
-                  검색하기
+                  <Typography>검색하기</Typography>
                 </Button>
                 {/* 버튼 크기조절 */}
-              </>
+              </Box>
             </Box>
-          </Container>
-        </Box>
-      </>
-      {/* <>
-      <div className="searchContainer">
-        <SelectCity update={inputDate} />
-        <CalenderComp onWay={onWay} update={inputDate} />
-        <Passenger update={inputDate} />
-
-        {/* <div className="searchBox">
-          <Autocomplete
-            disablePortal
-            value={flightInfo}
-            options={top10Start2}
-            sx={{ width: 150 }}
-            getOptionLabel={(option) => option.origin.country}
-            renderInput={(params) => <TextField {...params} label="출발지" />}
-            onChange={handleInfoChange}
-          />
-        </div>
-        <div className="searchBox">
-          <Autocomplete
-            disablePortal
-            value={flightInfo}
-            options={top10End2}
-            getOptionLabel={(option) => option.destination.country}
-            sx={{ width: 150 }}
-            renderInput={(params) => <TextField {...params} label="도착지" />}
-            onChange={handleInfoChange}
-          />
-        </div> */}
-
-      {/* <Button variant="contained" onClick={handleToResult}>
-          검색
-        </Button>
-
-        <Button variant="contained" onClick={handleConfirm1}>
-          확인용1
-        </Button>
-
-        <Button variant="contained" onClick={handleConfirm2}>
-          확인용2
-        </Button> */}
-      {/* </div> */}
-      {/* <p>출발지 : {flightInfo.origin.country}</p>
-      <p>도착지 : {flightInfo.origin.country}</p> */}
-      {/* <p>출발지 : {info.start}</p>
-      <p>도착지 : {info.end}</p>
-    </> */}
+          </Box>
+        </Container>
+      </Box>
     </>
   );
 };

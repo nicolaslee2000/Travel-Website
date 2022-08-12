@@ -47,6 +47,7 @@ export default function BasicPopover(props) {
 
   const CountPerson = (CountPesprops) => {
     const { title, body } = CountPesprops;
+    let size = 60;
 
     if (title === "성인") {
       const plusNumber = () => {
@@ -56,15 +57,23 @@ export default function BasicPopover(props) {
         if (AdultCount > 1) setAdultCount((AdultCount) => AdultCount - 1);
       };
       return (
-        <Grid container direction="row">
-          <Typography sx={{ p: 1 }}>{body}</Typography>
-          <Button onClick={minusNumber}>
-            <RemoveCircleOutlineOutlinedIcon />
-          </Button>
-          <p>{AdultCount}</p>
-          <Button onClick={plusNumber}>
-            <AddCircleOutlineOutlinedIcon />
-          </Button>
+        <Grid
+          container
+          direction="row"
+          sx={{ justifyContent: "center", alignItems: "center" }}
+        >
+          <Typography sx={{ width: size, textAlign: "center" }}>
+            {body}
+          </Typography>
+          <Box sx={{ display: "flex", width: `calc(100% - ${size}px)` }}>
+            <Button onClick={minusNumber}>
+              <RemoveCircleOutlineOutlinedIcon />
+            </Button>
+            <p>{AdultCount}</p>
+            <Button onClick={plusNumber}>
+              <AddCircleOutlineOutlinedIcon />
+            </Button>
+          </Box>
         </Grid>
       );
     } else {
@@ -75,15 +84,23 @@ export default function BasicPopover(props) {
         if (ChildCount > 0) setChildCount((ChildCount) => ChildCount - 1);
       };
       return (
-        <Grid container direction="row">
-          <Typography sx={{ p: 1 }}>{body}</Typography>
-          <Button onClick={minusNumber}>
-            <RemoveCircleOutlineOutlinedIcon />
-          </Button>
-          <p>{ChildCount}</p>
-          <Button onClick={plusNumber}>
-            <AddCircleOutlineOutlinedIcon />
-          </Button>
+        <Grid
+          container
+          direction="row"
+          sx={{ justifyContent: "center", alignItems: "center" }}
+        >
+          <Typography sx={{ width: size, textAlign: "center" }}>
+            {body}
+          </Typography>
+          <Box sx={{ display: "flex", width: `calc(100% - ${size}px)` }}>
+            <Button onClick={minusNumber}>
+              <RemoveCircleOutlineOutlinedIcon />
+            </Button>
+            <p>{ChildCount}</p>
+            <Button onClick={plusNumber}>
+              <AddCircleOutlineOutlinedIcon />
+            </Button>
+          </Box>
         </Grid>
       );
     }
@@ -105,25 +122,12 @@ export default function BasicPopover(props) {
   }, [seat]);
 
   return (
-    <div>
-      {/* <Box
-        aria-describedby={id}
-        variant="contained"
-        onClick={handleClick}
-        sx={{ width: 150, height: 50, backgroundColor: "black" }}
-      >
-        <Typography sx={{ fontSize: 15, color: "white" }} center>
-          총인원수 {AdultCount + ChildCount}명
-        </Typography>
-        <Typography color="white" center>
-          좌석 : {seat}
-        </Typography>
-      </Box> */}
+    <>
       <Button
         aria-describedby={id}
-        variant="contained"
+        variant="outlined"
         onClick={handleClick}
-        sx={{ minwidth: 100, minheight: 30 }}
+        sx={{ height: "56px" }}
       >
         총인원수 {AdultCount + ChildCount}명,좌석 : {seat}
       </Button>
@@ -145,11 +149,13 @@ export default function BasicPopover(props) {
           <Typography className="passenger_box" sx={{ p: 5 }}>
             인원, 좌석을 고르시오
           </Typography>
-          <Box className="passenger_box">
-            <CountPerson title="성인" body="성인"></CountPerson>
-          </Box>
-          <Box className="passenger_box">
-            <CountPerson title="유/소아" body="유/소아"></CountPerson>
+          <Box>
+            <Box className="passenger_box">
+              <CountPerson title="성인" body="성인"></CountPerson>
+            </Box>
+            <Box className="passenger_box">
+              <CountPerson title="유/소아" body="유/소아"></CountPerson>
+            </Box>
           </Box>
           <Box sx={{ minWidth: 100 }}>
             <FormControl>
@@ -200,6 +206,6 @@ export default function BasicPopover(props) {
           </Box>
         </Container>
       </Popover>
-    </div>
+    </>
   );
 }
