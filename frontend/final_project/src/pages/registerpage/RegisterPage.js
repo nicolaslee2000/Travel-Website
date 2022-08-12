@@ -6,6 +6,8 @@ const RegisterPage = () => {
   return (
     <>
       <RegisterForm />
+      <br />
+      <br />
     </>
   );
 };

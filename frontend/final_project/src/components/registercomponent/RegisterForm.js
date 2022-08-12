@@ -15,7 +15,7 @@ import './registerForm.css';
 import React, { useState } from 'react';
 import { Container } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-import MailcheckForm from './MailcheckForm';
+import axios from 'axios';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -77,10 +77,10 @@ const RegisterForm = (props) => {
       response.json().then((json) => {
         if (!response.ok) {
           //   console.log(!response.ok);
-          alert('해당 아이디는 사용이 어렵니다. 다른 ID를 입력해주세요');
+          alert('해당 아이디는 이미 사용중입니다. 다른 ID를 입력해주세요');
           return Promise.reject(json);
         } else if (response.ok) {
-          navigate('/');
+          navigate('/registed');
         }
         return json;
       })
@@ -96,15 +96,49 @@ const RegisterForm = (props) => {
   //   팝업창
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = async (e) => {
+    //여기서 클릭을 했을때 dialog가 오픈이 되고, 이메일 인증코드가 발송이 되게.
     setOpen(true);
+    const data = {
+      //받아야 하는데이터가 뭘까? inputs 들만? inputs 들에서도 인증확인 유무 때문에 뭘 넘겨줘야 할까?
+      email: inputs.email,
+    };
+    console.log(data); //정상적으로 값을 가져옴.
+    // await axios
+    //.post(baseURL + 'emailAuth', data)
+    //.then((res) => {
+    //   console.log('res', res);
+    // });
+    // .catch((err) => {
+    //   console.log(err);
+    //   alert('이메일을 확인해 주세요.');
+    // })
+
+    // axios({
+    //   method: 'post',
+    //   url: baseURL + 'emailAuth',
+    //   data: { email: inputs.email },
+    // });
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const emailcheck = () => {};
+  const emailcheck = async (e) => {
+    //여기는 dialog 내부에서 확인 버튼을 누를때 인증 확인이 되었으면 눌리게
+    // await axios
+    // .get(baseURL + '/AuthSuccess')
+    // .then((res)=>{
+    //   console.log(res);
+    //   alert('이메일 인증이 확인되었습니다.');
+    // return 할때 어떤값이 true 인지 확인하기.☆★☆★☆★
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    //   alert('이메일 인증 여부를 확인해 주세요.');
+    // })
+  };
 
   return (
     <>

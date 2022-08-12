@@ -36,6 +36,8 @@ public class TicketOrder {
     @CreationTimestamp
     private Date OrderCreationDate;
 
+
+
     @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "arrive_airport", referencedColumnName = "airport_iata")
     private Airport airport;
