@@ -69,6 +69,7 @@ const SearchResultItem02Back = (props) => {
       .then((response) => {
         console.log('포스트 confirm 데이터', response.data);
         dispatch(confirmInit(response.data));
+        navigate('/travler');
       });
   };
 
@@ -93,7 +94,7 @@ const SearchResultItem02Back = (props) => {
   const reduxConfirm = () => {
     console.log('SearchResultItem 포스트로 요청, 요청 데이터 : ', rfosData);
     postData(rfosData);
-    navigate('/travler');
+    // navigate('/travler');
   };
 
   useEffect(() => {

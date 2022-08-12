@@ -19,6 +19,8 @@ const RegisteredPage = () => {
           </Button>
         </div>
       </div>
+      <br />
+      <br />
     </>
   );
 };
