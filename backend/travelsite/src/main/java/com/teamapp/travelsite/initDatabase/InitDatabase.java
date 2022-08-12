@@ -66,9 +66,6 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
     @SneakyThrows
     @Override
     public void onApplicationEvent(InitDatabaseCheck.InitDatabaseEvent event) {
-
-
-
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"));
         airportsDTOs = gson.fromJson(reader, new TypeToken<List<AirportDTO>>() {
@@ -83,20 +80,22 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
             CountryDTO countryDTO = new CountryDTO(obj.getCountry(), obj.getDisplayCountry(Locale.ENGLISH), obj.getDisplayCountry(Locale.KOREAN));
             countryDTOS.add(countryDTO);
         }
-
-        amadeusConnect.airlineDatabaseInit().forEach(e -> airlineEntity.add(e.toEntity()));
+        amadeusConnect.airlineDatabaseInit().forEach(e -> airlineEntity.add(e.toEntity())); //건영님 질문
         saveAllWithDevideTest(airlineEntity);
-
         countryDTOS.forEach(e -> countries.add(e.toEntity()));
         countryRepository.saveAll(countries);
+
         List<CityDTO> distincted = deduplication(citiesDTOs, CityDTO::getCity); //cause ORA-0001
         distincted.forEach(e -> setCountryMapping(e));
         distincted.forEach(e -> cityList.add(e.toEntity()));
         saveAllcity(cityList);
+
         List<AirportDTO> distinctedAirport = deleteNullObject(airportsDTOs, AirportDTO::getIata);
         distinctedAirport.forEach(e -> setAirportMapping(e));
         airportsDTOs.forEach(e -> airportList.add(e.toEntity()));
         saveAllairport(airportList);
+
+
     }
 
     //=============================================================================================================//
@@ -111,6 +110,7 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
             }
         });
     }
+
     public void saveAllcity(List<City> list) {
         List<City> tmp = new ArrayList<>();
         list.forEach(i -> {
@@ -136,6 +136,7 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
                 .filter(deduplication(key)) // List -> stream -> filter -> List
                 .collect(Collectors.toList());
     }
+
     private <T> Predicate<T> deduplication(Function<? super T, ?> key) {
         final Set<Object> set = ConcurrentHashMap.newKeySet();
         return predicate -> set.add(key.apply(predicate));
@@ -147,14 +148,14 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
     }
     private <T> Predicate<T> deleteNullObject(Function<? super T, ?> key) {
         Set<Object> sets = ConcurrentHashMap.newKeySet();
-        Iterator<Object> keys = sets.iterator();
-
-        while (keys.hasNext()){
-            if(keys.next().equals(null)){           //not yet
-                sets.remove(keys);
-                keys.next();
-            }
-        }
+//        Iterator<Object> keys = sets.iterator();
+//
+//        while (keys.hasNext()){
+//            if(keys.next().equals(null)){           //not yet
+//                sets.remove(keys);
+//                keys.next();
+//            }
+//        }
         return predicate -> sets.add(key.apply(predicate));
     }
         //tempVariable from parsing Gson init Obj

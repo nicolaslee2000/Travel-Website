@@ -21,7 +21,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
-
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email)
@@ -30,10 +29,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with email : " + email)
         );
-
         return UserPrincipal.create(user);
     }
-
     @Transactional
     public UserDetails loadUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(

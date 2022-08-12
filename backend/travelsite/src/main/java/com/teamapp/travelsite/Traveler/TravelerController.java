@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/traveler")
 public class TravelerController {
-
     @PostMapping("/reg")//등록
     public String registerTraveler(){ //아무튼 뭔가를 받아올거임
         //짧으면 여기다 쓰고 아니면 서비스에 구현

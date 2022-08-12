@@ -21,6 +21,7 @@ public class AirportDTO {
 
     private String city; //tempVariable for parsing Gson
     private String country; //tempVariable for parsing Gson
+
     public Airport toEntity() {
         return Airport.builder()
                 .airportName(this.airportName)

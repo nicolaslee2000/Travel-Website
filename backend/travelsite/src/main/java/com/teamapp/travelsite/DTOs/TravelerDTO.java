@@ -14,6 +14,11 @@ public class TravelerDTO {
     private  String lastName;
     private User user;
 
+    private  String documentType;
+    private  String number;
+    private  String expiryDate;
+    private  String issuanceCountry;
+    private  String nationality;
     public Traveler toEntity(){
         return Traveler.builder()
                 .dateOfBirth(this.dateOfBirth)
@@ -21,6 +26,11 @@ public class TravelerDTO {
                 .firstName(this.firstName)
                 .lastName(this.lastName)
                 .user(user)
+                .documentType(this.documentType)
+                .expiryDate(this.expiryDate)
+                .number(this.number)
+                .issuanceCountry(this.issuanceCountry)
+                .nationality(this.nationality)
                 .build();
     }
 }
