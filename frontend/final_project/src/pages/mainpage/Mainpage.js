@@ -1,11 +1,9 @@
-import { Button } from "@mui/material";
-import { Container } from "@mui/system";
-import React from "react";
-import Layout from "../../components/othercomponent/Layout";
-import MainSearchPrac02 from "../../components/mainpagecomponent/MainSearchPrac02";
-import "./mainpage.css";
-//import Log_JoinPage from '../registerpage/RegisterPage';
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import './mainPage.css';
+import MainSearch from '../../components/mainpagecomponent/MainSearch';
+import Header from '../../components/othercomponent/Header';
+import Layout from './../../components/othercomponent/Layout';
+import MainSearchPrac02 from './../../components/mainpagecomponent/MainSearchPrac02';
 
 const main = () => {
   return (
@@ -37,4 +35,4 @@ const main = () => {
   );
 };
 
-export default main;
+export default MainPage;

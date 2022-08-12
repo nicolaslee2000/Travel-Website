@@ -27,7 +27,7 @@ public class Airline {
     @Column(nullable = false)
     private String airline_iatacode;
 
-    @Column(nullable = true) //주의 null값 있음
+    @Column(nullable = true) //Warning : insert Null Data
     private String airline_name;
 
 }

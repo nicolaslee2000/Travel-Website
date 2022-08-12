@@ -17,7 +17,7 @@ public class Document {
 
     @Id
     @GeneratedValue
-    private String doc_idx;
+    private Long doc_idx;
 
     private  String documentType;
     private  String number;
