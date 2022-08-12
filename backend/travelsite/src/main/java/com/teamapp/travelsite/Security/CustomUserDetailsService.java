@@ -26,15 +26,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
-<<<<<<< Updated upstream
-=======
     
     @Autowired
 	TempMailRepository tempMailRepository;
 
 	@Autowired
 	private JavaMailSender mailSender;
->>>>>>> Stashed changes
 
     @Override
     @Transactional
