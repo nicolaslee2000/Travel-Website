@@ -1,15 +1,15 @@
 import React from 'react';
-import './mainPage.css';
+import './mainpage.css';
 import MainSearch from '../../components/mainpagecomponent/MainSearch';
 import Header from '../../components/othercomponent/Header';
 import Layout from './../../components/othercomponent/Layout';
 import MainSearchPrac02 from './../../components/mainpagecomponent/MainSearchPrac02';
 
-const main = () => {
+const MainPage = () => {
   return (
     <>
-      <div className="wrap">
-        <div className="container">
+      <div className='wrap'>
+        <div className='container'>
           <MainSearchPrac02 />
         </div>
       </div>
