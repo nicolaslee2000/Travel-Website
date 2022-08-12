@@ -2,12 +2,14 @@ package com.teamapp.travelsite.User;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.teamapp.travelsite.Entity.TicketOrder;
 import com.teamapp.travelsite.Security.AuthProvider;
 import com.teamapp.travelsite.Traveler.Traveler;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -51,6 +53,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     List<Traveler> traveler;
+
+    @OneToMany(mappedBy = "user")
+    List<TicketOrder> ticketOrders = new ArrayList<>();
 }
 /*
     (strategy=GenerationType.IDENTITY) IDENTITY = AUTO_INCREMENT

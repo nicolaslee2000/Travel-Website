@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,6 +38,9 @@ public class Airport {
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "country_name",referencedColumnName = "country_name")
 	private Country country;
+
+	@OneToMany(mappedBy = "airport",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	private List<TicketOrder> orders = new ArrayList<>();
 
 //	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "airport")
 //	private List<Order> order;
