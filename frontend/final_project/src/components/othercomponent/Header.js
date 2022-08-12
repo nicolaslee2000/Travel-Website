@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import './header.css';
-import { Button } from '@mui/material';
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
+import "./header.css";
+import { Button } from "@mui/material";
 const Header = (props) => {
   const [openProButton, setOpenProButton] = useState(true);
   const handleLogin = () => {
     setOpenProButton(!openProButton);
   };
   const titleStyle = {
-    fontSize: '30px',
-    color: 'white',
-    textShadow: '6px 2px 2px gray',
+    fontSize: "30px",
+    color: "white",
+    textShadow: "6px 2px 2px gray",
   };
 
   // 이미지 클릭 메뉴바와 비슷하게
@@ -37,20 +37,20 @@ const Header = (props) => {
   };
   return (
     <>
-      <div className='headerCotainer'>
+      <div className="headerCotainer">
         {!props.isLogin && (
-          <div className='headerButtonGroup'>
-            <div className='headerButtonPos'>
+          <div className="headerButtonGroup">
+            <div className="headerButtonPos">
               <Button
-                className='headerButton'
+                className="headerButton"
                 onClick={handleLogin}
-                href='/login'
+                href="/login"
               >
                 로그인
               </Button>
             </div>
-            <div className='headerButtonPos'>
-              <Button className='headerButton' href='/register'>
+            <div className="headerButtonPos">
+              <Button className="headerButton" href="/register">
                 회원가입
               </Button>
             </div>
@@ -58,16 +58,16 @@ const Header = (props) => {
         )}
 
         {props.isLogin && (
-          <div className='headerButtonGroup'>
+          <div className="headerButtonGroup">
             <IconButton
-              size='large'
+              size="small"
               onClick={handleClick}
-              sx={{ ml: 2 }}
-              aria-controls={open ? 'account-menu' : undefined}
-              aria-haspopup='true'
-              aria-expanded={open ? 'true' : undefined}
+              sx={{ ml: 2, width: 50, height: 50 }}
+              aria-controls={open ? "account-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
             >
-              <AccountCircleIcon fontSize='large' />
+              <AccountCircleIcon fontSize="large" />
             </IconButton>
             <Button>로그아웃</Button>
 
@@ -81,8 +81,8 @@ const Header = (props) => {
             </div> */}
           </div>
         )}
-        <div className='headerTitle'>
-          <NavLink /*activeStyle={titleStyle}*/ to='/'>
+        <div className="headerTitle">
+          <NavLink /*activeStyle={titleStyle}*/ to="/">
             자바 풀스텍 A반 3조
           </NavLink>
         </div>
@@ -90,38 +90,38 @@ const Header = (props) => {
 
       <Menu
         anchorEl={anchorEl}
-        id='account-menu'
+        id="account-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
-            '& .MuiAvatar-root': {
+            "& .MuiAvatar-root": {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
             },
-            '&:before': {
+            "&:before": {
               content: '""',
-              display: 'block',
-              position: 'absolute',
+              display: "block",
+              position: "absolute",
               top: 0,
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
           <Avatar /> Profile
@@ -132,19 +132,7 @@ const Header = (props) => {
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <PersonAdd fontSize='small' />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize='small' />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize='small' />
+            <Logout fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
