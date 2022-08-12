@@ -1,9 +1,5 @@
 import {
   Checkbox,
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   FormControlLabel,
   FormGroup,
   Input,
@@ -15,7 +11,7 @@ import './registerForm.css';
 import React, { useState } from 'react';
 import { Container } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import MailcheckForm from './MailcheckForm';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -76,11 +72,11 @@ const RegisterForm = (props) => {
     return fetch(options.url, options).then((response) =>
       response.json().then((json) => {
         if (!response.ok) {
-          //   console.log(!response.ok);
-          alert('해당 아이디는 이미 사용중입니다. 다른 ID를 입력해주세요');
+          console.log(!response.ok);
+          alert('해당 아이디는 사용이 어렵니다. 다른 ID를 입력해주세요');
           return Promise.reject(json);
         } else if (response.ok) {
-          navigate('/registed');
+          navigate('/');
         }
         return json;
       })
@@ -91,54 +87,12 @@ const RegisterForm = (props) => {
     console.log(inputs);
     e.preventDefault();
     signup(inputs);
+
+    //회원가입 완료되면 registed 창이 뜨게 설정
+    // navigate('/registed');
   };
-
-  //   팝업창
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = async (e) => {
-    //여기서 클릭을 했을때 dialog가 오픈이 되고, 이메일 인증코드가 발송이 되게.
-    setOpen(true);
-    const data = {
-      //받아야 하는데이터가 뭘까? inputs 들만? inputs 들에서도 인증확인 유무 때문에 뭘 넘겨줘야 할까?
-      email: inputs.email,
-    };
-    console.log(data); //정상적으로 값을 가져옴.
-    // await axios
-    //.post(baseURL + 'emailAuth', data)
-    //.then((res) => {
-    //   console.log('res', res);
-    // });
-    // .catch((err) => {
-    //   console.log(err);
-    //   alert('이메일을 확인해 주세요.');
-    // })
-
-    // axios({
-    //   method: 'post',
-    //   url: baseURL + 'emailAuth',
-    //   data: { email: inputs.email },
-    // });
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const emailcheck = async (e) => {
-    //여기는 dialog 내부에서 확인 버튼을 누를때 인증 확인이 되었으면 눌리게
-    // await axios
-    // .get(baseURL + '/AuthSuccess')
-    // .then((res)=>{
-    //   console.log(res);
-    //   alert('이메일 인증이 확인되었습니다.');
-    // return 할때 어떤값이 true 인지 확인하기.☆★☆★☆★
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   alert('이메일 인증 여부를 확인해 주세요.');
-    // })
-  };
+  const handleClickOpen = (e) => {};
+  const checkboxForm = () => {};
 
   return (
     <>
@@ -168,7 +122,6 @@ const RegisterForm = (props) => {
                   </div>
                   <div className='form-input email'>
                     <label>아이디 &nbsp; &nbsp; </label>
-                    {/* { !emailcheck && ( */}
                     <Input
                       type='text'
                       name='email'
@@ -181,11 +134,29 @@ const RegisterForm = (props) => {
                     <br />
                     <div className='email-checklist'>
                       <FormGroup row>
+                        {/* 인증이 안되면 체크안되고, 인증확인되면 체크가 되게 */}
+                        {/* {!emailcheck && ( */}
                         <FormControlLabel
                           value='email-checkbox'
-                          control={<Checkbox disabled />}
+                          control={
+                            <Checkbox disabled onChange={checkboxForm} />
+                          }
                           label='로그인확인'
                         />
+                        {/* )} */}
+                        {/* {emailcheck && (
+                          <FormControlLabel
+                            value='email-checkbox'
+                            control={
+                              <Checkbox
+                                disabled
+                                checked
+                                onChange={checkboxForm}
+                              />
+                            }
+                            label='로그인확인'
+                          />
+                        )} */}
                         <FormControlLabel
                           value='email-checkbutton'
                           control={
@@ -200,46 +171,6 @@ const RegisterForm = (props) => {
                         />
                       </FormGroup>
                     </div>
-                    {/* )} /*}
-                    {/* { emailcheck && (
-                    <Input
-                      type='text'
-                      name='email'
-                      placeholder='이메일을 입력하세요.'
-                      className='email'
-                      required
-                      disabled
-                      value={email}
-                      onChange={handleValueChange}
-                    ></Input>
-                    <br />
-                    <div className='email-checklist'>
-                      <FormGroup row>
-                        <FormControlLabel
-                          value='email-checkbox'
-                          control={
-                            <Checkbox
-                              disabled
-                              checked
-                            />
-                          }
-                          label='로그인확인'
-                        />
-                        <FormControlLabel
-                          value='email-checkbutton'
-                          control={
-                            <Button
-                              variant='outlined'
-                              size='small'
-                              onClick={handleClickOpen}
-                            >
-                              이메일인증
-                            </Button>
-                          }
-                        />
-                      </FormGroup>
-                    </div>
-                    )}  */}
                   </div>
                   <div className='form-input'>
                     <label className='password'>비밀번호 &nbsp; </label>
@@ -268,21 +199,6 @@ const RegisterForm = (props) => {
           </div>
         </form>
       </Container>
-
-      <Dialog open={open} onClose={handleClose} className='emailCheckDialog'>
-        <DialogTitle>이메일 인증 부탁드립니다.</DialogTitle>
-        <DialogContent>
-          <br />
-          <DialogContentText>
-            <Button variant='outlined' onClick={emailcheck}>
-              인증 확인 완료
-            </Button>
-            <Button variant='outlined' onClick={handleClose}>
-              인증 확인 취소
-            </Button>
-          </DialogContentText>
-        </DialogContent>
-      </Dialog>
     </>
   );
 };

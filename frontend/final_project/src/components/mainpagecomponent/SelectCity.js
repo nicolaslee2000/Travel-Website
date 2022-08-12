@@ -11,10 +11,10 @@ const SelectCity = (props) => {
   const [jsonResults, setJsonResults] = useState([]);
 
   const [arrival, setArrial] = useState("");
-  const [inputArrival, setInputArrial] = useState("icn");
+  const [inputArrival, setInputArrial] = useState("");
 
   const [departure, setDeparture] = useState("");
-  const [inputDeparture, setInputDeparture] = useState("nrt");
+  const [inputDeparture, setInputDeparture] = useState("");
 
   const [origin, setOrigin] = useState({
     country: null,
@@ -145,7 +145,7 @@ const SelectCity = (props) => {
   }, [destinationIataCode]);
 
   return (
-    <Stack direction="row">
+    <Stack direction="row" sx={{ minWidth: 200 }}>
       <Autocomplete
         id="arrival_city"
         value={arrival}
@@ -159,7 +159,7 @@ const SelectCity = (props) => {
             }) `
         )}
         noOptionsText={"값을 입력하시오"}
-        sx={{ flex: 1 }}
+        sx={{ minWidth: 300 }}
         renderInput={(params) => <TextField {...params} label="출발지" />}
         renderOption={(props, option, { inputValue }) => {
           // console.log(option, inputValue);
@@ -198,7 +198,7 @@ const SelectCity = (props) => {
             }) `
         )}
         noOptionsText={"값을 입력하시오"}
-        sx={{ flex: 1 }}
+        sx={{ minWidth: 300 }}
         renderInput={(params) => <TextField {...params} label="도착지" />}
         renderOption={(props, option, { inputValue }) => {
           // console.log(option, inputValue);
