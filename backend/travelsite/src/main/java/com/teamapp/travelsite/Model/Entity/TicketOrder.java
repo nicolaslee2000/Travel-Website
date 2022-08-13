@@ -1,6 +1,5 @@
 package com.teamapp.travelsite.Model.Entity;
 
-import com.teamapp.travelsite.User.User;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -39,15 +38,15 @@ public class TicketOrder {
 
 
     @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "arrive_airport", referencedColumnName = "airport_name")
+    @JoinColumn(name = "arrive_airport", referencedColumnName = "airport_iata")
     private Airport airport;
 
     @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "depart_airport", referencedColumnName = "airport_name")
+    @JoinColumn(name = "depart_airport", referencedColumnName = "airport_iata")
     private Airport airports;
 
     @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "email",referencedColumnName = "email")
     private User user;
 
 

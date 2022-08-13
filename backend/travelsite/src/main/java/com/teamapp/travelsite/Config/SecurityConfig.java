@@ -1,12 +1,13 @@
 package com.teamapp.travelsite.Config;
 
-import com.teamapp.travelsite.Security.CustomUserDetailsService;
-import com.teamapp.travelsite.Security.RestAuthenticationEntryPoint;
-import com.teamapp.travelsite.Security.TokenAuthenticationFilter;
-import com.teamapp.travelsite.Security.oauth2.CustomOAuth2UserService;
-import com.teamapp.travelsite.Security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.teamapp.travelsite.Security.oauth2.OAuth2AuthenticationFailureHandler;
-import com.teamapp.travelsite.Security.oauth2.OAuth2AuthenticationSuccessHandler;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
+import com.teamapp.travelsite.User.Security.CustomUserDetailsService;
+import com.teamapp.travelsite.User.Security.RestAuthenticationEntryPoint;
+import com.teamapp.travelsite.User.Security.TokenAuthenticationFilter;
+import com.teamapp.travelsite.User.Security.oauth2.CustomOAuth2UserService;
+import com.teamapp.travelsite.User.Security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.teamapp.travelsite.User.Security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.teamapp.travelsite.User.Security.oauth2.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,14 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 
 @Configuration
@@ -47,6 +41,9 @@ import java.util.Arrays;
 
     @Autowired
     private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter() {

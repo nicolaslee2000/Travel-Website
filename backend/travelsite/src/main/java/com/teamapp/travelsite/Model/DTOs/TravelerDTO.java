@@ -1,6 +1,6 @@
 package com.teamapp.travelsite.Model.DTOs;
-import com.teamapp.travelsite.Traveler.Traveler;
-import com.teamapp.travelsite.User.User;
+import com.teamapp.travelsite.Model.Entity.Traveler;
+import com.teamapp.travelsite.Model.Entity.User;
 import lombok.*;
 
 @Data

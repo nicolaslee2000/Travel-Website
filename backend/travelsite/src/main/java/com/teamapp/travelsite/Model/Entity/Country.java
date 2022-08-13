@@ -23,11 +23,8 @@ public class Country {
 	@Column(nullable = true)
 	private String country_code;
 
-
-
 	@Column(nullable = true)
 	private String country_name_kr;
-
 
 	@OneToMany(mappedBy = "country",cascade = CascadeType.MERGE,fetch = FetchType.LAZY) //N:1 Bothside (JPA) In DB FK Owner :: N side
 	List<City> cities;

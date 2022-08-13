@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import com.teamapp.travelsite.Model.Entity.Airline;
 import com.teamapp.travelsite.Model.Entity.Airport;
 import com.teamapp.travelsite.Model.Entity.City;
@@ -16,7 +15,6 @@ import com.teamapp.travelsite.Model.Entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.teamapp.travelsite.Api.AmadeusConnect;
@@ -65,8 +63,6 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
         }.getType());
         //Practice lambda & Functional
         //country
-
-
         for (String countryCode : locales) {
             Locale obj = new Locale("", countryCode);
             CountryDTO countryDTO = new CountryDTO(obj.getCountry(), obj.getDisplayCountry(Locale.ENGLISH), obj.getDisplayCountry(Locale.KOREAN));
@@ -82,11 +78,11 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
         distincted.forEach(e -> cityList.add(e.toEntity()));
         saveAllcity(cityList);
 
-        //List<AirportDTO> distinctedAirport = deduplication(airportsDTOs, AirportDTO::getIata);
-        deleteNullObject(airportsDTOs);
+
+        airportsDTOs = deleteNullObject(airportsDTOs);
+        airportsDTOs = deduplication(airportsDTOs, AirportDTO::getIata);
         airportsDTOs.forEach(e -> setAirportMapping(e));
         airportsDTOs.forEach(e -> airportList.add(e.toEntity()));
-
         saveAllairport(airportList);
     }
 
@@ -133,13 +129,11 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
         return predicate -> set.add(key.apply(predicate));
     }
     public List<AirportDTO> deleteNullObject(List<AirportDTO> list) {
-        System.out.println(list);
         return list.stream()
-                .filter(e -> e.getIata() != null && !e.getIata().isBlank() && !e.getIata().isEmpty())
+                .filter(e -> e.getIata() != null && !e.getIata().isBlank() && !e.getIata().isEmpty()&&!e.getIata().equals("")&&e.getIata().length()==3)
                 .collect(Collectors.toList());
-//       list.removeIf(airportDTO -> (airportDTO.getIata().equals(null)));
     }
-        //tempVariable from parsing Gson init Obj
+    //tempVariable from parsing Gson init Obj
     public void setCountryMapping(CityDTO cityDTO) {
         try {
             cityDTO.setCountrys(countryRepository.findById(cityDTO.getCountry()).get());

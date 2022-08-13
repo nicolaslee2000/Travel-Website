@@ -1,7 +1,7 @@
 package com.teamapp.travelsite.Model.DTOs;
 
 import com.teamapp.travelsite.Model.Entity.TicketOrder;
-import com.teamapp.travelsite.Traveler.Traveler;
+import com.teamapp.travelsite.Model.Entity.Traveler;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
