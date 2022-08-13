@@ -18,7 +18,7 @@ const FinalConfirmPage = lazy(() =>
     import("../pages/finalconfirmpage/FinalConfirmPage")
 );
 const Layout = lazy(() => import("../components/othercomponent/Layout"));
-
+const ErrorPage = lazy(() => import("../pages/errorpage/ErrorPage"));
 const Router = () => {
     const [isLogin, setIsLogin] = useState(false);
 
@@ -43,6 +43,7 @@ const Router = () => {
                             path="/finalConfirm"
                             element={<FinalConfirmPage />}
                         />
+                        <Route element={<ErrorPage />} />
                     </Routes>
                 </Layout>
             </Suspense>
