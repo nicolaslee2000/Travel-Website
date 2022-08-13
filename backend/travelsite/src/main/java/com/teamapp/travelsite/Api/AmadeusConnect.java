@@ -38,7 +38,7 @@ public class AmadeusConnect {
 	@Autowired
 	private AmadeusConnect(AmadeusConfig amadeusConfig) {
 		this.amadeusConfig= amadeusConfig;
-		this.amadeus = Amadeus.builder(amadeusConfig.getApiKey(), amadeusConfig.getApiSecret()).setHostname("production").build();
+		this.amadeus = Amadeus.builder(amadeusConfig.getApiKey(), amadeusConfig.getApiSecret()).setHostname(amadeusConfig.getMode()).build();
 	}
 
 	public Location[] location(String keyword) throws ResponseException {
