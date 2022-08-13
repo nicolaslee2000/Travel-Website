@@ -25,6 +25,6 @@ public class City{
 	@JoinColumn(name = "country_name",referencedColumnName = "country_name")
 	private Country country;
 
-	@OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "city",cascade = CascadeType.MERGE)
 	private List<Airport> airport;
 }
