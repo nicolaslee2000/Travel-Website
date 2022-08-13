@@ -4,9 +4,11 @@ import com.google.gson.annotations.SerializedName;
 import com.teamapp.travelsite.Model.Entity.Airport;
 import com.teamapp.travelsite.Model.Entity.Country;
 import com.teamapp.travelsite.Model.Entity.City;
+import com.teamapp.travelsite.Model.Entity.Traveler;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 
 @Data
@@ -29,5 +31,9 @@ public class AirportDTO {
                 .city(cityA)
                 .country(countryA)
                 .build();
+    }
+    public AirportDTO of(Airport airport) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(airport, AirportDTO.class); //map(Entity,DTO.class)
     }
 }

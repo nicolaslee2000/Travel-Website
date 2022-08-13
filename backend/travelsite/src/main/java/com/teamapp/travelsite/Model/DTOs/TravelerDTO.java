@@ -2,6 +2,7 @@ package com.teamapp.travelsite.Model.DTOs;
 import com.teamapp.travelsite.Model.Entity.Traveler;
 import com.teamapp.travelsite.Model.Entity.User;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 @Data
 @AllArgsConstructor
@@ -33,4 +34,6 @@ public class TravelerDTO {
                 .nationality(this.nationality)
                 .build();
     }
+
+
 }

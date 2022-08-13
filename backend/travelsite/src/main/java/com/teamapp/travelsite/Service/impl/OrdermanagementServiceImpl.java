@@ -1,46 +1,59 @@
 package com.teamapp.travelsite.Service.impl;
 
 import com.teamapp.travelsite.Model.DTOs.TicketOrderDTO;
-import com.teamapp.travelsite.Model.Entity.TicketOrder;
 import com.teamapp.travelsite.Model.Repository.AirportRepository;
 import com.teamapp.travelsite.Model.Repository.TicketOrderRepository;
+import com.teamapp.travelsite.Model.Repository.TravelerRepository;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
+import com.teamapp.travelsite.Service.OrderManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
+import java.util.List;
+
 
 @Service
-public class OrdermanagementServiceImpl {
+public
+class OrdermanagementServiceImpl implements OrderManagementService {
 
-    @Autowired
-    TicketOrderRepository orderRepository;
-    @Autowired
+    TicketOrderRepository ticketOrderRepository;
     AirportRepository airportRepository;
-
-
-
-    //프런트에서 줄게 IATA인지 AirportName인지 모르겠다. 현재 Entity Mapping : iata 해당 메서드는 Name
-
-    public void setOrderMapping(TicketOrderDTO ticketOrderDTO) {
-        try {
-//            orderDTO.setDepartAirport(airportRepository.findByAirportName(orderDTO.getDepart()).get());
-//            orderDTO.setArriveAirport(airportRepository.findByAirportName(orderDTO.getArrive()).get());
-        } catch (NoSuchElementException noSuchElementException){
-            //DB에 없는 공항입니다. 리턴
-        }
+    TravelerRepository travelerRepository;
+    UserRepository userRepository;
+    @Autowired
+    public OrdermanagementServiceImpl (TicketOrderRepository ticketOrderRepository
+            , AirportRepository airportRepository, TravelerRepository travelerRepository
+            , UserRepository userRepository) {
+        this.userRepository = userRepository;
+        this.travelerRepository = travelerRepository;
+        this.ticketOrderRepository = ticketOrderRepository;
+        this.airportRepository = airportRepository;
     }
-    public String saveOrder(TicketOrderDTO ticketOrderDTO){
-        orderRepository.save(
-                TicketOrder.builder()
-//                .depart(orderDTO.getDepartAirport())
-//                .arrive(orderDTO.getArriveAirport())
-                .departureDate(ticketOrderDTO.getDepartureDate())
-                .arrivalDate(ticketOrderDTO.getArrivalDate())
-                .build()
-        );
-        //아직 handler 작성 안했음
+
+
+
+    @Override
+    public boolean createTicketOrder() {
+        return false;
+    }
+
+    @Override
+    public TicketOrderDTO updateTicketOrder() {
         return null;
     }
 
+    @Override
+    public List<TicketOrderDTO> findOrderByUserId() {
+        return null;
+    }
 
+    @Override
+    public TicketOrderDTO findTicketOrderById() {
+        return null;
+    }
+
+    @Override
+    public boolean cancleOrder(int id) {
+        return false;
+    }
 }

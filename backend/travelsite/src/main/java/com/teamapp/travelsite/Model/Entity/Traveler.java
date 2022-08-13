@@ -1,6 +1,8 @@
 package com.teamapp.travelsite.Model.Entity;
 
+import com.teamapp.travelsite.Model.DTOs.TravelerDTO;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 
@@ -26,6 +28,11 @@ public class Traveler {
     private  String nationality;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "userId",referencedColumnName = "id")
     private User user;
+
+    public TravelerDTO of(Traveler traveler) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(traveler, TravelerDTO.class); //map(Entity,DTO.class)
+    }
 }
