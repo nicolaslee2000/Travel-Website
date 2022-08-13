@@ -1,9 +1,9 @@
 package com.teamapp.travelsite.OrderManagement;
 
-import com.teamapp.travelsite.DTOs.TicketOrderDTO;
-import com.teamapp.travelsite.Entity.TicketOrder;
-import com.teamapp.travelsite.Repository.AirportRepository;
-import com.teamapp.travelsite.Repository.TicketOrderRepository;
+import com.teamapp.travelsite.Model.DTOs.TicketOrderDTO;
+import com.teamapp.travelsite.Model.Entity.TicketOrder;
+import com.teamapp.travelsite.Model.Repository.AirportRepository;
+import com.teamapp.travelsite.Model.Repository.TicketOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

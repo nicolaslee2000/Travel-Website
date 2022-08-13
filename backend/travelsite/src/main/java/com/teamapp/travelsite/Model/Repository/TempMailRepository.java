@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.Repository;
+package com.teamapp.travelsite.Model.Repository;
 
 import java.util.List;
 import java.util.Optional;

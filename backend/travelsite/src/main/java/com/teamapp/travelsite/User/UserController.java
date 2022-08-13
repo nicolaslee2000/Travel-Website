@@ -1,15 +1,13 @@
 package com.teamapp.travelsite.User;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teamapp.travelsite.Exception.ResourceNotFoundException;
-import com.teamapp.travelsite.Repository.UserRepository;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.Security.CurrentUser;
 import com.teamapp.travelsite.Security.UserPrincipal;
 

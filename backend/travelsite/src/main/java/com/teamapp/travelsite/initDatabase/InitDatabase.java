@@ -9,10 +9,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import com.teamapp.travelsite.Entity.Airline;
-import com.teamapp.travelsite.Entity.Airport;
-import com.teamapp.travelsite.Entity.City;
-import com.teamapp.travelsite.Entity.Country;
+import com.teamapp.travelsite.Model.Entity.Airline;
+import com.teamapp.travelsite.Model.Entity.Airport;
+import com.teamapp.travelsite.Model.Entity.City;
+import com.teamapp.travelsite.Model.Entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -20,14 +20,14 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.teamapp.travelsite.Api.AmadeusConnect;
-import com.teamapp.travelsite.DTOs.AirlineDTO;
-import com.teamapp.travelsite.DTOs.AirportDTO;
-import com.teamapp.travelsite.DTOs.CityDTO;
-import com.teamapp.travelsite.DTOs.CountryDTO;
-import com.teamapp.travelsite.Repository.AirlineRepository;
-import com.teamapp.travelsite.Repository.AirportRepository;
-import com.teamapp.travelsite.Repository.CityRepository;
-import com.teamapp.travelsite.Repository.CountryRepository;
+import com.teamapp.travelsite.Model.DTOs.AirlineDTO;
+import com.teamapp.travelsite.Model.DTOs.AirportDTO;
+import com.teamapp.travelsite.Model.DTOs.CityDTO;
+import com.teamapp.travelsite.Model.DTOs.CountryDTO;
+import com.teamapp.travelsite.Model.Repository.AirlineRepository;
+import com.teamapp.travelsite.Model.Repository.AirportRepository;
+import com.teamapp.travelsite.Model.Repository.CityRepository;
+import com.teamapp.travelsite.Model.Repository.CountryRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -86,6 +86,7 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
         deleteNullObject(airportsDTOs);
         airportsDTOs.forEach(e -> setAirportMapping(e));
         airportsDTOs.forEach(e -> airportList.add(e.toEntity()));
+
         saveAllairport(airportList);
     }
 
@@ -137,8 +138,6 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
                 .filter(e -> e.getIata() != null && !e.getIata().isBlank() && !e.getIata().isEmpty())
                 .collect(Collectors.toList());
 //       list.removeIf(airportDTO -> (airportDTO.getIata().equals(null)));
-
-
     }
         //tempVariable from parsing Gson init Obj
     public void setCountryMapping(CityDTO cityDTO) {

@@ -1,7 +1,7 @@
 package com.teamapp.travelsite.Security.oauth2;
 
 import com.teamapp.travelsite.Exception.OAuth2AuthenticationProcessingException;
-import com.teamapp.travelsite.Repository.UserRepository;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.Security.UserPrincipal;
 import com.teamapp.travelsite.Security.oauth2.user.OAuth2UserInfo;
 import com.teamapp.travelsite.Security.oauth2.user.OAuth2UserInfoFactory;

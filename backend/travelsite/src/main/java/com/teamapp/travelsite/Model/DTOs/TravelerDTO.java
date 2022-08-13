@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.DTOs;
+package com.teamapp.travelsite.Model.DTOs;
 import com.teamapp.travelsite.Traveler.Traveler;
 import com.teamapp.travelsite.User.User;
 import lombok.*;

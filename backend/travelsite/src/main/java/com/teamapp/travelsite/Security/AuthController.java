@@ -1,8 +1,8 @@
 package com.teamapp.travelsite.Security;
 
 import com.teamapp.travelsite.Exception.BadRequestException;
-import com.teamapp.travelsite.Repository.TempMailRepository;
-import com.teamapp.travelsite.Repository.UserRepository;
+import com.teamapp.travelsite.Model.Repository.TempMailRepository;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.Security.OAuthBody.ApiResponse;
 import com.teamapp.travelsite.Security.OAuthBody.AuthResponse;
 import com.teamapp.travelsite.Security.OAuthBody.LoginRequest;

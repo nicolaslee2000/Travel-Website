@@ -1,7 +1,7 @@
 package com.teamapp.travelsite.User;
 
 import com.teamapp.travelsite.Exception.UserNotFoundException;
-import com.teamapp.travelsite.Repository.UserRepository;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,6 +1,6 @@
-package com.teamapp.travelsite.Repository;
+package com.teamapp.travelsite.Model.Repository;
 
-import com.teamapp.travelsite.Entity.City;
+import com.teamapp.travelsite.Model.Entity.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

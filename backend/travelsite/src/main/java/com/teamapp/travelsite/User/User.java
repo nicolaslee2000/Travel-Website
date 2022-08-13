@@ -2,7 +2,7 @@ package com.teamapp.travelsite.User;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.teamapp.travelsite.Entity.TicketOrder;
+import com.teamapp.travelsite.Model.Entity.TicketOrder;
 import com.teamapp.travelsite.Security.AuthProvider;
 import com.teamapp.travelsite.Traveler.Traveler;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.Entity;
+package com.teamapp.travelsite.Model.Entity;
 
 import javax.persistence.*;
 

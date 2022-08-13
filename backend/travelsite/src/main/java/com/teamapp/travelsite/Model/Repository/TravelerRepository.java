@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.Repository;
+package com.teamapp.travelsite.Model.Repository;
 
 import com.teamapp.travelsite.Traveler.Traveler;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package com.teamapp.travelsite.AirlineBooking;
 
 import com.teamapp.travelsite.User.User;
-import com.teamapp.travelsite.Repository.UserRepository;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.User.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

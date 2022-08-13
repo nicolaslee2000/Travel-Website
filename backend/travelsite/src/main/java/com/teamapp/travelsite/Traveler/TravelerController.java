@@ -1,6 +1,6 @@
 package com.teamapp.travelsite.Traveler;
 
-import com.teamapp.travelsite.DTOs.TravelerDTO;
+import com.teamapp.travelsite.Model.DTOs.TravelerDTO;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 

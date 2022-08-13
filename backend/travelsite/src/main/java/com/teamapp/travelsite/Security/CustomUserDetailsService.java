@@ -3,12 +3,11 @@ package com.teamapp.travelsite.Security;
 
 
 import com.teamapp.travelsite.Exception.ResourceNotFoundException;
-import com.teamapp.travelsite.Repository.TempMailRepository;
-import com.teamapp.travelsite.Repository.UserRepository;
+import com.teamapp.travelsite.Model.Repository.TempMailRepository;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.User.TempMail;
 import com.teamapp.travelsite.User.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

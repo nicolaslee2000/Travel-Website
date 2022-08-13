@@ -1,11 +1,10 @@
-package com.teamapp.travelsite.DTOs;
+package com.teamapp.travelsite.Model.DTOs;
 
 
 import javax.validation.constraints.NotBlank;
 
+import com.teamapp.travelsite.Model.Entity.Airline;
 import org.modelmapper.ModelMapper;
-
-import com.teamapp.travelsite.Entity.Airline;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
