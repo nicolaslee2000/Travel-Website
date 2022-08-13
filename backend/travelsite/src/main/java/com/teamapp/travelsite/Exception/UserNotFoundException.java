@@ -1,6 +1,5 @@
 package com.teamapp.travelsite.Exception;
 
-import com.teamapp.travelsite.User.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

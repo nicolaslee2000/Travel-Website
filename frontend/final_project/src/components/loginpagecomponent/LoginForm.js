@@ -101,13 +101,14 @@ const LoginForm = (props) => {
       });
   };
 
-  // function login(inputs) {
-  //   return request({
-  //     url: API_BASE_URL + '/auth/login',
-  //     method: 'POST',
-  //     body: JSON.stringify(inputs),
-  //   });
-  // }
+  const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
+
+  const googleLogin = () => {
+    console.log('google Login start');
+  };
+  const facebookLogin = () => {
+    console.log('facebook Login start');
+  };
 
   return (
     <Container maxWidth='sm'>
@@ -181,14 +182,36 @@ const LoginForm = (props) => {
                 <h2>SNS 계정 로그인 </h2>
                 <div className='form-input'>
                   <div>
-                    <Button>
+                    <Button
+                      type='submit'
+                      className='googleLogin'
+                      value='googleLogin'
+                      target='_blank'
+                      href={
+                        baseURL +
+                        '/oauth2/authorize/google?redirect_uri=' +
+                        OAUTH2_REDIRECT_URI
+                      }
+                      onClick={googleLogin}
+                    >
                       <GoogleIcon />
                       <label> &nbsp; 구글 아이디로 로그인하기</label>
                     </Button>
                   </div>
                   <br></br>
                   <div>
-                    <Button>
+                    <Button
+                      type='submit'
+                      className='facebookLogin'
+                      value='facebookLogin'
+                      target='_blank'
+                      href={
+                        baseURL +
+                        '/oauth2/authorize/facebook?redirect_uri=' +
+                        OAUTH2_REDIRECT_URI
+                      }
+                      onClick={facebookLogin}
+                    >
                       <FacebookIcon />
                       <label>&nbsp; 페이스북 아이디로 로그인하기</label>
                     </Button>

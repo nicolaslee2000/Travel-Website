@@ -15,7 +15,8 @@ import './registerForm.css';
 import React, { useState } from 'react';
 import { Container } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-import MailcheckForm from './MailcheckForm';
+import axios from 'axios';
+import { toBeRequired } from '@testing-library/jest-dom/dist/matchers';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -77,10 +78,10 @@ const RegisterForm = (props) => {
       response.json().then((json) => {
         if (!response.ok) {
           //   console.log(!response.ok);
-          alert('해당 아이디는 사용이 어렵니다. 다른 ID를 입력해주세요');
+          alert('해당 아이디는 이미 사용중입니다. 다른 ID를 입력해주세요');
           return Promise.reject(json);
         } else if (response.ok) {
-          navigate('/');
+          navigate('/registed');
         }
         return json;
       })
@@ -95,16 +96,39 @@ const RegisterForm = (props) => {
 
   //   팝업창
   const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
 
-  const emailcheck = () => {};
+  const handleClickOpen = async (e) => {
+    //여기서 클릭을 했을때 dialog가 오픈이 되고, 이메일 인증코드가 발송이 되게.
+    setOpen(true);
+    const data = {
+      email: inputs.email,
+    };
+    console.log(data); //정상적으로 값을 가져옴.
+
+    axios({
+      url: baseURL + '/auth/emailAuth',
+      method: 'POST',
+      data: data,
+    });
+  };
+
+  const emailcheck = async (e) => {
+    //여기는 dialog 내부에서 확인 버튼을 누를때 인증 확인이 되었으면 눌리게
+    await axios
+      .get(baseURL + '/auth/AuthSuccess')
+      .then((res) => {
+        console.log(res);
+        alert('이메일 인증이 확인되었습니다.');
+        return true;
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('이메일 인증 여부를 확인해주세요.');
+      });
+  };
 
   return (
     <>

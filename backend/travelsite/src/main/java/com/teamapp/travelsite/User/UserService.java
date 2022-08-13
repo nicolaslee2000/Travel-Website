@@ -1,7 +1,8 @@
 package com.teamapp.travelsite.User;
 
 import com.teamapp.travelsite.Exception.UserNotFoundException;
-import com.teamapp.travelsite.Repository.UserRepository;
+import com.teamapp.travelsite.Model.Entity.User;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +24,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EntityManagerFactory entityManagerFactory;
-    public User create(long id,String name, String email, String password) {
+    public User create(long id, String name, String email, String password) {
         User user = new User();
         user.setId(id);
         user.setName(name);
