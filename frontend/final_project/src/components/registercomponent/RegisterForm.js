@@ -99,7 +99,6 @@ const RegisterForm = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleClickOpen = async (e) => {
     //여기서 클릭을 했을때 dialog가 오픈이 되고, 이메일 인증코드가 발송이 되게.
     setOpen(true);
@@ -108,25 +107,40 @@ const RegisterForm = (props) => {
     };
     console.log(data); //정상적으로 값을 가져옴.
 
-    axios({
-      url: baseURL + '/auth/emailAuth',
-      method: 'POST',
-      data: data,
-    });
+    await axios
+      .post(baseURL + '/auth/emailAuth', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: Bearer ${ACCESS_TOKEN},
+        },
+      })
+      .then((res) => {
+        console.log('res', res);
+      });
+    // axios({
+    //   url: baseURL + '/auth/emailAuth',
+    //   method: 'POST',
+    //   body: JSON.stringify(data),
+    // });
   };
 
   const emailcheck = async (e) => {
     //여기는 dialog 내부에서 확인 버튼을 누를때 인증 확인이 되었으면 눌리게
+    const data = {
+      email: inputs.email,
+    };
+    console.log(data);
+
     await axios
-      .get(baseURL + '/auth/AuthSuccess')
+      .get(baseURL + `/auth/AuthSuccess?userEmail=${inputs.email}`)
       .then((res) => {
-        console.log(res);
-        alert('이메일 인증이 확인되었습니다.');
-        return true;
+        console.log('res', res);
+        alert('이메일 인증이 완료 되었습니다.');
+        setOpen(false);
       })
       .catch((err) => {
         console.log(err);
-        alert('이메일 인증 여부를 확인해주세요.');
+        alert('이메일 인증 확인 부탁드립니다.');
       });
   };
 
