@@ -17,6 +17,8 @@ public class AmadeusConfig {
 	private String apiKey;
 	
 	private String apiSecret;
+	
+	private String mode;
 
 
 	@Bean
