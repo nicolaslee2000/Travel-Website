@@ -32,7 +32,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 
-@Controller
+@RestController
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -71,37 +71,41 @@ public class AuthController {
     }
 
 
-    @PostMapping("/emailAuth")
-	public String registerMail(@Valid @RequestBody SignUpMailRequest signUpMailRequest) throws Exception {
-		if (userRepository.existsByEmail(signUpMailRequest.getEmail())) {
-			throw new BadRequestException("Email address already in use.");
-		}
-		
-		TempMail tempMail = new TempMail();
-		tempMail.setEmail(signUpMailRequest.getEmail());
-		tempMail.setEmailAuth(false);
-		tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
-		
-		sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
-		
-		TempMail result = tempMailRepository.save(tempMail);
-		System.out.println(tempMailRepository.searchEmailAuth(signUpMailRequest.getEmail()));
-		
-		
-		return "redirect:/auth/AuthSuccess?userEmail=" + signUpMailRequest.getEmail(); 
-		//대기페이지에서 메일 승인완료 누르면 가입창으로 
 
-	}
-	
-	@GetMapping("/AuthSuccess")
-	public boolean authSuccess(@RequestParam("userEmail") String userEmail)throws Exception {
-		if (!tempMailRepository.searchEmailAuth(userEmail).equals("1")){
-			throw new BadRequestException("이메일 인증을 완료해주세요.");
-		}
-		
-		System.out.println("userEmail");
-		return true;
-	}
+    @PostMapping("/emailAuth")
+    public String registerMail(@Valid @RequestBody SignUpMailRequest signUpMailRequest) throws Exception {
+        if (userRepository.existsByEmail(signUpMailRequest.getEmail())) {
+            throw new BadRequestException("Email address already in use.");
+        }
+
+        TempMail tempMail = new TempMail();
+        tempMail.setEmail(signUpMailRequest.getEmail());
+        tempMail.setEmailAuth(false);
+        tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
+
+        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
+
+        TempMail result = tempMailRepository.save(tempMail);
+        System.out.println(tempMailRepository.searchEmailAuth(signUpMailRequest.getEmail()));
+
+
+        return "redirect:/auth/AuthSuccess?userEmail=" + signUpMailRequest.getEmail(); 
+        //대기페이지에서 메일 승인완료 누르면 가입창으로 
+
+    }
+
+    @GetMapping("/AuthSuccess")
+    public Boolean authSuccess(@RequestParam("userEmail") String userEmail)throws Exception {
+
+        if (!tempMailRepository.searchEmailAuth(userEmail).equals("1")){
+            throw new BadRequestException("이메일 인증을 완료해주세요.");
+
+        }
+        System.out.println(tempMailRepository.searchEmailAuth(userEmail));
+        System.out.println("userEmail");
+
+        return true;
+    }
 	
 
 	
