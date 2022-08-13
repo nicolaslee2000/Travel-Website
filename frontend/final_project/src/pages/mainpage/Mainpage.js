@@ -1,9 +1,9 @@
 import React from "react";
-import "./mainpage.css";
+import "./MainPage.css";
 import MainSearch from "../../components/mainpagecomponent/MainSearch";
 import Header from "../../components/othercomponent/Header";
-import Layout from "./../../components/othercomponent/Layout";
-import MainSearchPrac02 from "./../../components/mainpagecomponent/MainSearchPrac02";
+import Layout from "../../components/othercomponent/Layout";
+import MainSearchPrac02 from "../../components/mainpagecomponent/MainSearchPrac02";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 
 const MainPage = () => {
