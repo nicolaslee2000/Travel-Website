@@ -1,5 +1,5 @@
 import React from 'react';
-import './mainpage.css';
+// import './mainpage.css';
 import MainSearch from '../../components/mainpagecomponent/MainSearch';
 import Header from '../../components/othercomponent/Header';
 import Layout from './../../components/othercomponent/Layout';
