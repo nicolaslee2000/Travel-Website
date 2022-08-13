@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User;
+package com.teamapp.travelsite.Controller;
 
 
 import com.teamapp.travelsite.Model.Entity.User;

@@ -42,15 +42,17 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
     List<Country> countries = new ArrayList<>();
     List<Airline> airlineEntity = new ArrayList<>(); //Entity
     String[] locales = Locale.getISOCountries();
+
     @Autowired
     AirportRepository airportRepository;
     @Autowired
     CityRepository cityRepository;
     @Autowired
     CountryRepository countryRepository;
-    private final AmadeusConnect amadeusConnect;
     @Autowired
     AirlineRepository airlineRepository;
+    private final AmadeusConnect amadeusConnect;
+
     @SneakyThrows
     @Override
     public void onApplicationEvent(InitDatabaseCheck.InitDatabaseEvent event) {

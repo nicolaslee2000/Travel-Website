@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
+
 import java.util.Date;
 
 @Data
@@ -27,5 +29,9 @@ public class TicketOrderDTO {
                 .departureDate(this.departureDate)
                 .arrivalDate(this.arrivalDate)
                 .build();
+    }
+    public TicketOrderDTO of(TicketOrder ticketOrder) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(ticketOrder, TicketOrderDTO.class); //map(Entity,DTO.class)
     }
 }

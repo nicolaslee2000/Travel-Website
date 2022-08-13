@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User;
+package com.teamapp.travelsite.Service.impl;
 
 import com.teamapp.travelsite.Exception.UserNotFoundException;
 import com.teamapp.travelsite.Model.Entity.User;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 @EnableJpaRepositories
-public class UserService {
+public class UserServiceImpl {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EntityManagerFactory entityManagerFactory;
@@ -34,12 +34,14 @@ public class UserService {
         return user;
     }
 
+    @Deprecated
     public Page<User> getList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.userRepository.findAll(pageable);
     }
+
 
     public User getUser(String name) {
         Optional<User> user = this.userRepository.findByname(name);

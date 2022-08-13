@@ -29,8 +29,6 @@ public class AirlineDTO {
     private String airline_name;
 
 
-
-
     // Entity -> DTO //대부분의 로직은 저장시에만 DTO 으로 건들고 꺼내오는건 리포지토리에서 엔티티를 바로 꺼내올거같은데. 과연 필요할까.
     public static AirlineDTO of(Airline airline) {
 

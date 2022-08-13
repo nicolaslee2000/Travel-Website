@@ -2,9 +2,7 @@ package com.teamapp.travelsite.Model.Entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.teamapp.travelsite.Model.Entity.TicketOrder;
 import com.teamapp.travelsite.User.Security.AuthProvider;
-import com.teamapp.travelsite.Model.Entity.Traveler;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
