@@ -55,7 +55,7 @@ public class User {
     List<Traveler> traveler;
 
     @OneToMany(mappedBy = "user")
-    List<TicketOrder> ticketOrders = new ArrayList<>();
+    List<TicketOrder> ticketOrders = new ArrayList<>(); //lombok @Builder 관련 경고 발생위치
 }
 /*
     (strategy=GenerationType.IDENTITY) IDENTITY = AUTO_INCREMENT

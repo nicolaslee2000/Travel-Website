@@ -3,12 +3,7 @@ package com.teamapp.travelsite.initDatabase;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -43,9 +38,11 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
     List<AirportDTO> airportsDTOs = new ArrayList<>();
     List<CityDTO> citiesDTOs = new ArrayList<>();
     List<CountryDTO> countryDTOS = new ArrayList<>();
+    List<AirlineDTO> airlineDTOS = new ArrayList<>();
     List<Airport> airportList = new ArrayList<>();
     List<City> cityList = new ArrayList<>();
     List<Country> countries = new ArrayList<>();
+    List<Airline> airlineEntity = new ArrayList<>(); //Entity
     String[] locales = Locale.getISOCountries();
     @Autowired
     AirportRepository airportRepository;
@@ -53,16 +50,9 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
     CityRepository cityRepository;
     @Autowired
     CountryRepository countryRepository;
-
-    List<Airline> airlineEntity = new ArrayList<>(); //Entity
-    List<AirlineDTO> airlineDTOS = new ArrayList<>();
-
     private final AmadeusConnect amadeusConnect;
-
-
     @Autowired
     AirlineRepository airlineRepository;
-
     @SneakyThrows
     @Override
     public void onApplicationEvent(InitDatabaseCheck.InitDatabaseEvent event) {
@@ -75,12 +65,14 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
         }.getType());
         //Practice lambda & Functional
         //country
+
+
         for (String countryCode : locales) {
             Locale obj = new Locale("", countryCode);
             CountryDTO countryDTO = new CountryDTO(obj.getCountry(), obj.getDisplayCountry(Locale.ENGLISH), obj.getDisplayCountry(Locale.KOREAN));
             countryDTOS.add(countryDTO);
         }
-        amadeusConnect.airlineDatabaseInit().forEach(e -> airlineEntity.add(e.toEntity())); //건영님 질문
+        amadeusConnect.airlineDatabaseInit().forEach(e -> airlineEntity.add(e.toEntity()));
         saveAllWithDevideTest(airlineEntity);
         countryDTOS.forEach(e -> countries.add(e.toEntity()));
         countryRepository.saveAll(countries);
@@ -90,12 +82,11 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
         distincted.forEach(e -> cityList.add(e.toEntity()));
         saveAllcity(cityList);
 
-        List<AirportDTO> distinctedAirport = deleteNullObject(airportsDTOs, AirportDTO::getIata);
-        distinctedAirport.forEach(e -> setAirportMapping(e));
+        //List<AirportDTO> distinctedAirport = deduplication(airportsDTOs, AirportDTO::getIata);
+        deleteNullObject(airportsDTOs);
+        airportsDTOs.forEach(e -> setAirportMapping(e));
         airportsDTOs.forEach(e -> airportList.add(e.toEntity()));
         saveAllairport(airportList);
-
-
     }
 
     //=============================================================================================================//
@@ -110,7 +101,6 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
             }
         });
     }
-
     public void saveAllcity(List<City> list) {
         List<City> tmp = new ArrayList<>();
         list.forEach(i -> {
@@ -131,32 +121,24 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
             }
         });
     }
+    //==================================================================================================================//
     public <T> List<T> deduplication(List<T> list, Function<? super T, ?> key) {
         return list.stream()
                 .filter(deduplication(key)) // List -> stream -> filter -> List
                 .collect(Collectors.toList());
     }
-
     private <T> Predicate<T> deduplication(Function<? super T, ?> key) {
         final Set<Object> set = ConcurrentHashMap.newKeySet();
         return predicate -> set.add(key.apply(predicate));
     }
-    public <T> List<T> deleteNullObject(List<T> list, Function<? super T, ?> key) {
+    public List<AirportDTO> deleteNullObject(List<AirportDTO> list) {
+        System.out.println(list);
         return list.stream()
-                .filter(deleteNullObject(key))
+                .filter(e -> e.getIata() != null && !e.getIata().isBlank() && !e.getIata().isEmpty())
                 .collect(Collectors.toList());
-    }
-    private <T> Predicate<T> deleteNullObject(Function<? super T, ?> key) {
-        Set<Object> sets = ConcurrentHashMap.newKeySet();
-//        Iterator<Object> keys = sets.iterator();
-//
-//        while (keys.hasNext()){
-//            if(keys.next().equals(null)){           //not yet
-//                sets.remove(keys);
-//                keys.next();
-//            }
-//        }
-        return predicate -> sets.add(key.apply(predicate));
+//       list.removeIf(airportDTO -> (airportDTO.getIata().equals(null)));
+
+
     }
         //tempVariable from parsing Gson init Obj
     public void setCountryMapping(CityDTO cityDTO) {

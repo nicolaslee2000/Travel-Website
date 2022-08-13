@@ -16,8 +16,6 @@ public class InitDatabaseCheck implements ApplicationListener<ContextRefreshedEv
     private final InitDatabaseConfig initDatabaseConfig;
     @Autowired
     private final ApplicationEventPublisher applicationEventPublisher;
-
-
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
          final CustomEventPublisher customEventPublisher = new CustomEventPublisher();
@@ -25,6 +23,7 @@ public class InitDatabaseCheck implements ApplicationListener<ContextRefreshedEv
          customEventPublisher.publish(initDatabaseConfig);
         }
     }
+
     //Event
     public class InitDatabaseEvent extends ApplicationEvent {
         private String message;
@@ -36,9 +35,7 @@ public class InitDatabaseCheck implements ApplicationListener<ContextRefreshedEv
     //EventPublisher
     public class CustomEventPublisher {
          InitDatabaseConfig initDatabaseConfig;
-
         public void publish(InitDatabaseConfig initDatabaseConfig) {
-
             this.initDatabaseConfig = initDatabaseConfig;
             applicationEventPublisher.publishEvent(new InitDatabaseEvent(initDatabaseConfig));
             }

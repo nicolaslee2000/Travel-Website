@@ -23,7 +23,7 @@ public class Airport {
 	private Long id;
 
 	@SerializedName("iata")
-	@Column(nullable = true,name = "airport_iata")
+	@Column(nullable = false,name = "airport_iata")
 	private String airportIatacode;
 
 	@Column(name = "airport_name")

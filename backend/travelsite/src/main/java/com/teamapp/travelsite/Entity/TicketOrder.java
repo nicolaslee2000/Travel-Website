@@ -39,11 +39,11 @@ public class TicketOrder {
 
 
     @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "arrive_airport", referencedColumnName = "airport_iata")
+    @JoinColumn(name = "arrive_airport", referencedColumnName = "airport_name")
     private Airport airport;
 
     @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "depart_airport", referencedColumnName = "airport_iata")
+    @JoinColumn(name = "depart_airport", referencedColumnName = "airport_name")
     private Airport airports;
 
     @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
