@@ -8,6 +8,7 @@ import {
   Grid,
   Radio,
   RadioGroup,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -22,7 +23,6 @@ import SelectCity from "./SelectCity";
 import CalenderComp from "./CalenderComp";
 import Passenger from "./Passenger";
 import { Box, boxSizing, Container } from "@mui/system";
-import SelectCity01 from "./SelectCity01";
 
 const MainSearchPrac02 = () => {
   const [raidoValue, setRadioValue] = useState(false);
@@ -259,8 +259,18 @@ const MainSearchPrac02 = () => {
               <Grid container spacing={0}>
                 {/* 도시선택 */}
                 <Grid item xs={6}>
-                  <SelectCity update={inputDate} />
-                  {/* <SelectCity01 update={inputDate} /> */}
+                  <Stack direction="row">
+                    <SelectCity
+                      id="arrival_city"
+                      update={inputDate}
+                      label="출발지"
+                    />
+                    <SelectCity
+                      id="departure_city"
+                      update={inputDate}
+                      label="도착지"
+                    />
+                  </Stack>
                 </Grid>
                 {/* 날짜선택 */}
                 <Grid item xs={3.5}>
