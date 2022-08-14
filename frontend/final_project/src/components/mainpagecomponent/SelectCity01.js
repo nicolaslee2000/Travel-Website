@@ -12,7 +12,7 @@ const SelectCity01 = (props) => {
   const { update } = props;
 
   const [jsonResults, setJsonResults] = useState([]);
-
+  const [viewValue, setViewValue] = useState(""); //검색창에 보여주는 텍스트 state값
   const [arrival, setArrial] = useState("");
   const [inputArrival, setInputArrial] = useState("");
   const [origin, setOrigin] = useState({
@@ -30,16 +30,21 @@ const SelectCity01 = (props) => {
   //   //이전값을 가져옴
   // };
 
-  const handleOnchangeArrival = (newArrival) => {
-    console.log("디바운스 확인");
-    setArrial(newArrival);
+  const handleOnchangeArrival = (e, value) => {
+    setArrial(value);
   };
 
-  const handleOnchangeInputArrival = debounce((event, newInputArrival) => {
-    console.log("확인", newInputArrival);
-    setInputArrial(newInputArrival);
-    //이전값을 가져옴
-  }, 2000);
+  const handleOnchangeInputArrival = useCallback(
+    debounce((value) => {
+      setInputArrial(value);
+    }, 200),
+    []
+  );
+  //테스트중
+  const handleOnchangeInputView = (e, value) => {
+    setViewValue(value);
+    handleOnchangeInputArrival(value);
+  };
 
   //항공사이름, 도시이름, 공항코드 => 검색 o, 나라이름-> 검색 x
   //      국가(국가코드), 항공사이름(공항코드)
@@ -128,6 +133,7 @@ const SelectCity01 = (props) => {
       } else {
         setJsonResults([]);
       }
+      console.log("호츨확인");
     } catch (error) {
       console.log(error);
     }
@@ -197,10 +203,10 @@ const SelectCity01 = (props) => {
 
       <Autocomplete
         id="arrival_city"
-        value={arrival || ""}
+        value={arrival}
         onChange={handleOnchangeArrival}
-        inputValue={inputArrival}
-        onInputChange={handleOnchangeInputArrival}
+        inputValue={viewValue}
+        onInputChange={handleOnchangeInputView}
         options={jsonResults.map(
           (info, idx) =>
             `${info.address.cityName}  ${capitalizeFirstLetter(info.name)}(${
@@ -211,7 +217,6 @@ const SelectCity01 = (props) => {
         sx={{ minWidth: 400 }}
         renderInput={(params) => <TextField {...params} label="출발지" />}
         renderOption={(props, option, { inputValue }) => {
-          // console.log(option, inputValue);
           const matches = match(option, inputValue);
           const parts = parse(option, matches);
 
