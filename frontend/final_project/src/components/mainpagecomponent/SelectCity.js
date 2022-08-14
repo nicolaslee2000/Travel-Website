@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
+import { debounce } from "lodash";
 
 const SelectCity = (props) => {
   const { update } = props;
@@ -11,10 +12,12 @@ const SelectCity = (props) => {
   const [jsonResults, setJsonResults] = useState([]);
 
   const [arrival, setArrial] = useState("");
-  const [inputArrival, setInputArrial] = useState("icn");
+  const [inputArrival, setInputArrial] = useState("");
+  const [arrivalViewValue, setArrivalViewValue] = useState("");
 
   const [departure, setDeparture] = useState("");
-  const [inputDeparture, setInputDeparture] = useState("nrt");
+  const [inputDeparture, setInputDeparture] = useState("");
+  const [departureViewValue, setDepartureViewValue] = useState("");
 
   const [origin, setOrigin] = useState({
     country: null,
@@ -31,25 +34,35 @@ const SelectCity = (props) => {
   const [destinationIataCode, setdestinationIataCode] = useState("");
   //api를 통해 자료 받기
 
-  const handleOnchangeArrival = (event, newArrival) => {
-    setArrial(newArrival);
-    //console.log("arrival :" + arrival);
-    //이전값을 가져옴
+  const handleOnchangeArrival = (e, value) => {
+    setArrial(value);
   };
-  const handleOnchangeInputArrival = (event, newInputArrival) => {
-    setInputArrial(newInputArrival);
-    //console.log("setarrival :" + setInputArrial);
-    //이전값을 가져옴
+
+  const handleOnchangeInputArrival = useCallback(
+    debounce((value) => {
+      setInputArrial(value);
+    }, 200),
+    []
+  );
+  //테스트중
+  const handleOnchangeInpuArrivaltView = (e, value) => {
+    setArrivalViewValue(value);
+    handleOnchangeInputArrival(value);
   };
+
   const handleOnchangeDeparture = (event, newDeparture) => {
     setDeparture(newDeparture);
-    //console.log("departure :" + departure);
-    //이전값을 가져옴
   };
-  const handleOnchangeInputDeparture = (event, newInputDeparture) => {
-    setInputDeparture(newInputDeparture);
-    //console.log("setDeparture :" + inputDeparture);
-    //이전값을 가져옴
+  const handleOnchangeInputDeparture = useCallback(
+    debounce((value) => {
+      setInputDeparture(value);
+    }, 200),
+    []
+  );
+
+  const handleOnchangeInpuDepartureView = (e, value) => {
+    setDepartureViewValue(value);
+    handleOnchangeInputDeparture(value);
   };
 
   //항공사이름, 도시이름, 공항코드 => 검색 o, 나라이름-> 검색 x
@@ -88,31 +101,69 @@ const SelectCity = (props) => {
     }
   }, []);
 
-  useEffect(() => {
-    const url = `http://localhost:8090/apisearch?str=${inputArrival}`;
-    fetch(url)
-      .then((response) => {
-        // console.log("response.json", response);
-        return response.json();
-      })
-      .then((json) =>
-        // console.log("json.promise", json),
-        setJsonResults(json)
-      );
-  }, [inputArrival]);
+  // useEffect(() => {
+  //   const url = `http://localhost:8090/apisearch?str=${inputArrival}`;
+  //   fetch(url)
+  //     .then((response) => {
+  //       // console.log("response.json", response);
+  //       return response.json();
+  //     })
+  //     .then((json) =>
+  //       // console.log("json.promise", json),
+  //       setJsonResults(json)
+  //     );
+  // }, [inputArrival]);
+
+  const arrivalAutoList = useCallback(async (input) => {
+    try {
+      let url = `http://localhost:8090/apisearch`;
+      const res = await axios.get(url, { params: { str: input } });
+      if (Array.isArray(res.data)) {
+        setJsonResults(res.data);
+      } else {
+        setJsonResults([]);
+      }
+      console.log("호츨확인");
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
-    const url = `http://localhost:8090/apisearch?str=${inputDeparture}`;
-    fetch(url)
-      .then((response) => {
-        // console.log("response.json", response);
-        return response.json();
-      })
-      .then((json) =>
-        // console.log("json.promise", json),
-        setJsonResults(json)
-      );
-  }, [inputDeparture]);
+    arrivalAutoList(inputArrival);
+  }, [arrivalAutoList, inputArrival]);
+
+  // useEffect(() => {
+  //   const url = `http://localhost:8090/apisearch?str=${inputDeparture}`;
+  //   fetch(url)
+  //     .then((response) => {
+  //       // console.log("response.json", response);
+  //       return response.json();
+  //     })
+  //     .then((json) =>
+  //       // console.log("json.promise", json),
+  //       setJsonResults(json)
+  //     );
+  // }, [inputDeparture]);
+
+  const departureAutoList = useCallback(async (input) => {
+    try {
+      let url = `http://localhost:8090/apisearch`;
+      const res = await axios.get(url, { params: { str: input } });
+      if (Array.isArray(res.data)) {
+        setJsonResults(res.data);
+      } else {
+        setJsonResults([]);
+      }
+      console.log("호츨확인");
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    departureAutoList(inputDeparture);
+  }, [departureAutoList, inputDeparture]);
 
   useEffect(() => {
     // console.log("slice arrival ", slice(arrival));
@@ -150,8 +201,8 @@ const SelectCity = (props) => {
         id="arrival_city"
         value={arrival}
         onChange={handleOnchangeArrival}
-        inputValue={inputArrival}
-        onInputChange={handleOnchangeInputArrival}
+        inputValue={arrivalViewValue}
+        onInputChange={handleOnchangeInpuArrivaltView}
         options={jsonResults.map(
           (info) =>
             `${info.address.cityName}  ${capitalizeFirstLetter(info.name)}(${
@@ -189,8 +240,8 @@ const SelectCity = (props) => {
         id="departure_city"
         value={departure}
         onChange={handleOnchangeDeparture}
-        inputValue={inputDeparture}
-        onInputChange={handleOnchangeInputDeparture}
+        inputValue={departureViewValue}
+        onInputChange={handleOnchangeInpuDepartureView}
         options={jsonResults.map(
           (info) =>
             `${info.address.cityName}  ${capitalizeFirstLetter(info.name)}(${
