@@ -259,8 +259,8 @@ const MainSearchPrac02 = () => {
               <Grid container spacing={0}>
                 {/* 도시선택 */}
                 <Grid item xs={6}>
-                  <SelectCity update={inputDate} />
-                  {/* <SelectCity01 update={inputDate} /> */}
+                  {/* <SelectCity update={inputDate} /> */}
+                  <SelectCity01 update={inputDate} />
                 </Grid>
                 {/* 날짜선택 */}
                 <Grid item xs={3.5}>
