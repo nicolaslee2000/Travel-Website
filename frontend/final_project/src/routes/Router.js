@@ -28,7 +28,12 @@ const TravelerInfo = lazy(() =>
 const Traveler = lazy(() =>
     import("../pages/userDashboard/TravelerInfo/PersonalDetails/Traveler")
 );
-
+const TravelerAdd = lazy(() =>
+    import("../pages/userDashboard/TravelerInfo/TravelerEdit/TravelerAdd")
+);
+const TravelerEdit = lazy(() =>
+    import("../pages/userDashboard/TravelerInfo/TravelerEdit/TravelerEdit")
+);
 const Layout = lazy(() => import("../components/othercomponent/Layout"));
 const ErrorPage = lazy(() => import("../pages/errorpage/ErrorPage"));
 const Router = () => {
@@ -57,13 +62,16 @@ const Router = () => {
                         />
 
                         <Route path="dashboard" element={<UserDashboard />}>
-                            <Route
-                                path="travelerInfo"
-                                element={<TravelerInfo />}
-                                exact
-                            >
+                            <Route path="travelerInfo">
+                                <Route index element={<TravelerInfo />} />
                                 <Route path="traveler" element={<Traveler />} />
+                                <Route path="travelerAdd" element={<TravelerAdd />} />
+                                <Route path="traveler/edit" element={<TravelerEdit />} />
                             </Route>
+                            <Route
+                                path="travelerInfo/traveler"
+                                element={<Traveler />}
+                            />
                         </Route>
 
                         {/* error page */}

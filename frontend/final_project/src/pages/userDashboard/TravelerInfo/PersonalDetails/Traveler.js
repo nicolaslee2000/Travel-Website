@@ -17,7 +17,7 @@ const Traveler = () => {
     const trav = state.data;
     return (
         <Box sx={{ width: 600 }}>
-            <Backlink text="travel info" link="/dashboards/travelerInfo" />
+            <Backlink text="travel info" link="/dashboard/travelerInfo" />
             <Container>
                 <Typography align="center" variant="h1">
                     {trav.name}

@@ -8,7 +8,7 @@ const UserDashboard = () => {
         <Box sx={{ display: "flex", flex: "1 auto" }}>
             <Sidebar />
 
-            <Container>
+            <Container sx={{ mt: 10 }}>
                 <Outlet />
             </Container>
         </Box>

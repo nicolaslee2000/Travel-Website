@@ -17,7 +17,7 @@ const TravelerListItem = ({ trav }) => {
                 disablePadding
                 component={Link}
                 to="traveler"
-                state={{ trav: trav }}
+                state={{ data: trav }}
                 sx={{ textDecoration: "none", color: "black", fontSize: "50" }}
             >
                 <ListItemButton>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -18,6 +18,7 @@ import LogoIcon from "../../global/assets/images/logo/LogoIcon.png";
 import LogoName from "../../global/assets/images/logo/LogoName.png";
 
 const Header = (props) => {
+    const [open, setOpen] = React.useState(false);
     const [openProButton, setOpenProButton] = useState(true);
     const navigate = useNavigate();
     const handleLogin = () => {
@@ -31,16 +32,17 @@ const Header = (props) => {
 
     // 이미지 클릭 메뉴바와 비슷하게
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
+        setOpen(true);
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
         setOpenProButton(!openProButton);
-        console.log(anchorEl);
-        console.log(open);
+        setOpen(false);
     };
+
     return (
         <>
             {/* <div className="headerCotainer">
@@ -193,13 +195,8 @@ const Header = (props) => {
                     >
                         <MenuItem
                             onClick={() => {
-                                console.log("open" + open);
-                                console.log("anchor" + anchorEl);
                                 handleClose();
-                                setAnchorEl(null);
-                                navigate("/dashboard");
-                                console.log("open" + open);
-                                console.log("anchor" + anchorEl);
+                                navigate("/dashboard/travelerInfo");
                             }}
                         >
                             <Avatar />
