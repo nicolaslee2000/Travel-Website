@@ -1,17 +1,17 @@
-import React from "react";
-import { useLocation } from "react-router";
-import { Link, NavLink } from "react-router-dom";
 import {
     Box,
     Drawer,
-    useMediaQuery,
     List,
     ListItem,
     ListItemIcon,
     ListItemText,
-} from "@material-ui/core";
-import { SidebarWidth } from "../../../assets/global/Theme-variable";
-import LogoIcon from "../Logo/LogoIcon";
+    useMediaQuery,
+} from "@mui/material";
+import React from "react";
+import { useLocation } from "react-router";
+import { Link, NavLink } from "react-router-dom";
+
+import { SidebarWidth } from "../../../global/assets/global/Theme-variable";
 import Menuitems from "./data";
 
 const Sidebar = (props) => {
@@ -93,11 +93,13 @@ const Sidebar = (props) => {
                     [`& .MuiDrawer-paper`]: {
                         boxSizing: "border-box",
                     },
+                    overflow: "hidden",
                 }}
                 PaperProps={{
                     sx: {
                         width: SidebarWidth,
                         marginTop: 10,
+                        height: 300,
                     },
                 }}
             >

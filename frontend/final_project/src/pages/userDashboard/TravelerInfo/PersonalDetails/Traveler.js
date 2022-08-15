@@ -5,16 +5,16 @@ import {
     CardContent,
     Container,
     Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import Backlink from "../Backlink";
+import Backlink from "../../../../components/backlink/Backlink";
 import DocumentDetailsList from "./DocumentDetailsList";
 import PersonalDetailsList from "./PersonalDetailsList";
 
 const Traveler = () => {
     const { state } = useLocation();
-    const trav = state.trav;
+    const trav = state.data;
     return (
         <Box sx={{ width: 600 }}>
             <Backlink text="travel info" link="/dashboards/travelerInfo" />

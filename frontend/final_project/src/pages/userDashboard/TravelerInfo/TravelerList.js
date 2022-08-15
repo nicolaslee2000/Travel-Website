@@ -4,11 +4,11 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
-import { AddCircleOutline, ArrowForwardIos } from "@material-ui/icons";
 import TravelerListItem from "./TravelerListItem";
 import { Link } from "react-router-dom";
+import { AddCircleOutline, ArrowForwardIos } from "@mui/icons-material";
 
 const TravelerList = () => {
     const [travelers, setTravelers] = React.useState([

@@ -38,6 +38,8 @@ const Header = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
         setOpenProButton(!openProButton);
+        console.log(anchorEl);
+        console.log(open);
     };
     return (
         <>
@@ -189,8 +191,19 @@ const Header = (props) => {
                             vertical: "bottom",
                         }}
                     >
-                        <MenuItem>
-                            <Avatar /> Profile
+                        <MenuItem
+                            onClick={() => {
+                                console.log("open" + open);
+                                console.log("anchor" + anchorEl);
+                                handleClose();
+                                setAnchorEl(null);
+                                navigate("/dashboard");
+                                console.log("open" + open);
+                                console.log("anchor" + anchorEl);
+                            }}
+                        >
+                            <Avatar />
+                            Profile
                         </MenuItem>
                         <MenuItem>
                             <Avatar /> My account

@@ -17,6 +17,18 @@ const TravlerPage = lazy(() => import("../pages/travelerpage/TravlerPage"));
 const FinalConfirmPage = lazy(() =>
     import("../pages/finalconfirmpage/FinalConfirmPage")
 );
+
+//UserDashboard
+const UserDashboard = lazy(() =>
+    import("../pages/userDashboard/UserDashboard")
+);
+const TravelerInfo = lazy(() =>
+    import("../pages/userDashboard/TravelerInfo/TravelerInfo")
+);
+const Traveler = lazy(() =>
+    import("../pages/userDashboard/TravelerInfo/PersonalDetails/Traveler")
+);
+
 const Layout = lazy(() => import("../components/othercomponent/Layout"));
 const ErrorPage = lazy(() => import("../pages/errorpage/ErrorPage"));
 const Router = () => {
@@ -43,6 +55,16 @@ const Router = () => {
                             path="/finalConfirm"
                             element={<FinalConfirmPage />}
                         />
+
+                        <Route path="dashboard" element={<UserDashboard />}>
+                            <Route
+                                path="travelerInfo"
+                                element={<TravelerInfo />}
+                                exact
+                            >
+                                <Route path="traveler" element={<Traveler />} />
+                            </Route>
+                        </Route>
 
                         {/* error page */}
                         <Route path="*" element={<ErrorPage />} />
