@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface TravelerService {
 
-
     List<TravelerDTO> findTravelerByUserId(Long id);
 
     void saveUpdatedTraveler(TravelerDTO travelerDTO) throws Exception;
