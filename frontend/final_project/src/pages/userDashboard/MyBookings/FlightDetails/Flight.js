@@ -240,7 +240,7 @@ const Traveler = () => {
             </Typography>
             <FlightTravelerTable travelers={travelers} />
 
-            <Box textAlign="center" sx={{ mt: 5 }}>
+            <Box textAlign="center" sx={{ mt: 5, mb: 5 }}>
                 <Button
                     color="error"
                     variant="contained"

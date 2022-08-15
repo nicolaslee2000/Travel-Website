@@ -34,6 +34,15 @@ const TravelerAdd = lazy(() =>
 const TravelerEdit = lazy(() =>
     import("../pages/userDashboard/TravelerInfo/TravelerEdit/TravelerEdit")
 );
+const MyBookingsPage = lazy(() =>
+    import("../pages/userDashboard/MyBookings/MyBookingsPage")
+);
+const Flight = lazy(() =>
+    import("../pages/userDashboard/MyBookings/FlightDetails/Flight")
+);
+const MyAccountPage = lazy(() =>
+    import("../pages/userDashboard/MyAccount/MyAccountPage")
+);
 const Layout = lazy(() => import("../components/othercomponent/Layout"));
 const ErrorPage = lazy(() => import("../pages/errorpage/ErrorPage"));
 const Router = () => {
@@ -65,13 +74,23 @@ const Router = () => {
                             <Route path="travelerInfo">
                                 <Route index element={<TravelerInfo />} />
                                 <Route path="traveler" element={<Traveler />} />
-                                <Route path="travelerAdd" element={<TravelerAdd />} />
-                                <Route path="traveler/edit" element={<TravelerEdit />} />
+                                <Route
+                                    path="travelerAdd"
+                                    element={<TravelerAdd />}
+                                />
+                                <Route
+                                    path="traveler/edit"
+                                    element={<TravelerEdit />}
+                                />
                             </Route>
-                            <Route
-                                path="travelerInfo/traveler"
-                                element={<Traveler />}
-                            />
+                            <Route path="mybookings">
+                                <Route index element={<MyBookingsPage />} />
+                                <Route path="flight" element={<Flight />} />
+                            </Route>
+
+                            <Route path="account">
+                                <Route index element={<MyAccountPage />} />
+                            </Route>
                         </Route>
 
                         {/* error page */}
