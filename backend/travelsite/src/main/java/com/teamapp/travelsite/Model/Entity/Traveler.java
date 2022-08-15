@@ -1,6 +1,7 @@
 package com.teamapp.travelsite.Model.Entity;
 
 import com.teamapp.travelsite.Model.DTOs.TravelerDTO;
+import com.teamapp.travelsite.User.Security.AuthProvider;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
@@ -16,7 +17,6 @@ import java.util.Date;
 public class Traveler {
 
     @Id
-
     private Long id;
     private String title;
     private Date dateOfBirth;
@@ -36,8 +36,9 @@ public class Traveler {
     @Column(name = "user_id",insertable = false, updatable = false)
     private Long userId;
 
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "userId",referencedColumnName = "id")
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
     public TravelerDTO of(Traveler traveler) {

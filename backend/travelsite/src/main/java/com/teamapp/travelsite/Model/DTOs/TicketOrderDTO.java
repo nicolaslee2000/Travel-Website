@@ -20,18 +20,13 @@ public class TicketOrderDTO {
     private Date arrivalDate;
     private Date departureDate;
 
-    private Traveler traveler;
+    private TravelerDTO travelerDTO;
 
-    private TicketOrder toEntity() {
-        return TicketOrder.builder()
-                .depart(this.depart)
-                .arrive(this.arrive)
-                .departureDate(this.departureDate)
-                .arrivalDate(this.arrivalDate)
-                .build();
+    private UserDTO userDTO;
+
+    public TicketOrder toEntity(TicketOrderDTO ticketOrderDTO) {
+    ModelMapper modelMapper = new ModelMapper();
+    return modelMapper.map(ticketOrderDTO, TicketOrder.class);
     }
-    public TicketOrderDTO of(TicketOrder ticketOrder) {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(ticketOrder, TicketOrderDTO.class); //map(Entity,DTO.class)
-    }
+
 }

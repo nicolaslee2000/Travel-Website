@@ -19,7 +19,8 @@ public class InitDatabaseCheck implements ApplicationListener<ContextRefreshedEv
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
          final CustomEventPublisher customEventPublisher = new CustomEventPublisher();
-        if (initDatabaseConfig.isInitDatabaseSwitch() == true) {
+
+         if (initDatabaseConfig.isInitDatabaseSwitch() == true) {
          customEventPublisher.publish(initDatabaseConfig);
         }
     }

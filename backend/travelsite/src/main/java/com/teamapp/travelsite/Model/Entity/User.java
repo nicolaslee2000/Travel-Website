@@ -2,9 +2,11 @@ package com.teamapp.travelsite.Model.Entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.teamapp.travelsite.Model.DTOs.UserDTO;
 import com.teamapp.travelsite.User.Security.AuthProvider;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -49,12 +51,21 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private java.util.Date createDate; //Timestamp
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     List<Traveler> traveler;
 
-    @OneToMany(mappedBy = "user")
-    List<TicketOrder> ticketOrders = new ArrayList<>(); //lombok @Builder 관련 경고 발생위치
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<TicketOrder> ticketOrders; //lombok @Builder 관련 경고 발생위치
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<TempMail> tempMails;
+
+    public UserDTO of (User user) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(user, UserDTO.class);
+    }
 }
+
 /*
     (strategy=GenerationType.IDENTITY) IDENTITY = AUTO_INCREMENT
     SEQUENCE (ORACLE, PostgreSQL, DB2, H2) order by sequence file or table

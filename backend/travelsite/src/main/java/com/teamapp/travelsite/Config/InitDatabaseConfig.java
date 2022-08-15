@@ -15,9 +15,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @ConfigurationProperties(prefix = "travel-service")
 @Data
 public class InitDatabaseConfig {
-
     private boolean initDatabaseSwitch;
-
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
