@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //com.teamapp.travelsite.Model.Repository 하위에 있는 jpaRepository를 상속한 repository scan
 @EntityScan(basePackages = {"com.teamapp.travelsite.Model.Entity"})
 // com.teamapp.travelsite.Model.Entity 하위에 있는 @Entity 클래스 scan
-
 @SpringBootApplication
 public class TravelsiteApplication {
 	public static void main(String[] args) {

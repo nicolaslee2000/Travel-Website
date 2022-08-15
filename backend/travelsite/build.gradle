@@ -57,6 +57,10 @@ dependencies {
 	implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.7.0'
 
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'de.codecentric:spring-boot-admin-starter-client:2.6.6'
+
+
 
 }
 
