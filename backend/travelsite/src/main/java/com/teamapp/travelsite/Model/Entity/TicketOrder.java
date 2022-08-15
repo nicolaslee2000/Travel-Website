@@ -1,7 +1,9 @@
 package com.teamapp.travelsite.Model.Entity;
 
+import com.teamapp.travelsite.Model.DTOs.TicketOrderDTO;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "ORDER")
 @Builder
+@Getter
 //rename reason : statch between javax.persistence.*
 public class TicketOrder {
     @Id
@@ -35,6 +38,8 @@ public class TicketOrder {
     @CreationTimestamp
     private Date OrderCreationDate;
 
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Long userId;
 
 
     @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -46,8 +51,12 @@ public class TicketOrder {
     private Airport airports;
 
     @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "email",referencedColumnName = "email")
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
+    public TicketOrderDTO of(TicketOrder ticketOrder) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(ticketOrder, TicketOrderDTO.class); //map(Entity,DTO.class)
+    }
 
 }

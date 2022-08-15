@@ -2,19 +2,22 @@ package com.teamapp.travelsite.Service;
 
 
 import com.teamapp.travelsite.Model.DTOs.TicketOrderDTO;
+import com.teamapp.travelsite.Model.DTOs.TravelerDTO;
+import com.teamapp.travelsite.Model.Entity.TicketOrder;
 
 import java.util.List;
 
 public interface OrderManagementService {
-    boolean createTicketOrder ();
+    boolean createTicketOrder (TicketOrderDTO ticketOrderDTO);
 
-    TicketOrderDTO updateTicketOrder ();
+    boolean isOrderSaved(Long orderId) throws Exception;
 
-    List<TicketOrderDTO> findOrderByUserId ();
+    void saveUpdatedOrder(TicketOrderDTO ticketOrderDTO) throws Exception;
 
-    TicketOrderDTO findTicketOrderById ();
+    boolean deleteOrder(Long id) throws Exception;
 
-    boolean cancleOrder(int id);
+    List<TicketOrderDTO> findTicketOrderByUserId (Long id);
+
 
 
 }

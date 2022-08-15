@@ -32,8 +32,10 @@ public class TempMail {
 //      EMAIL 대문자 변경
 	    @Column(name = "EMAILAUTH")
 	  	private Boolean emailAuth;
-	  	private String emailAuthKey; 
+	  	private String emailAuthKey;
 
+		@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+		User user;
 
 	}
 	

@@ -1,8 +1,11 @@
 package com.teamapp.travelsite.Service.impl;
 
+import com.amadeus.exceptions.NotFoundException;
+import com.teamapp.travelsite.Exception.NotFoundExceptionMessage;
 import com.teamapp.travelsite.Exception.UserNotFoundException;
 import com.teamapp.travelsite.Model.Entity.User;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
+import com.teamapp.travelsite.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 @EnableJpaRepositories
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EntityManagerFactory entityManagerFactory;
@@ -42,7 +45,6 @@ public class UserServiceImpl {
         return this.userRepository.findAll(pageable);
     }
 
-
     public User getUser(String name) {
         Optional<User> user = this.userRepository.findByname(name);
         if (user.isPresent()) {
@@ -50,6 +52,39 @@ public class UserServiceImpl {
         } else {
             throw new UserNotFoundException("user not found");
         }
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        Optional<User> byEmail = this.userRepository.findByEmail(email);
+        if (byEmail.isPresent()) {
+            return byEmail.get();
+        } else throw new NotFoundExceptionMessage("user Not found");
 
     }
+
+    @Override
+    public User findUserByUserId(int id) {
+        Optional<User> byId = this.userRepository.findById(Long.valueOf(id));
+        if (byId.isPresent()) {
+            return byId.get();
+        } else throw new UserNotFoundException("User Not Founded");
+    }
+
+    @Override
+    public void saveUpdatedUser(User user) throws Exception {
+
+    }
+
+    @Override
+    public boolean deleteUser(int id) throws Exception {
+        return false;
+    }
+
+    @Override
+    public boolean isUserSaved(Long id, String userEmail) throws Exception {
+        return false;
+    }
+
+
 }
