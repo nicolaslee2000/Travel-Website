@@ -1,10 +1,12 @@
 package com.teamapp.travelsite.Model.Entity;
 
 import com.teamapp.travelsite.Model.DTOs.TravelerDTO;
+import com.teamapp.travelsite.User.Security.AuthProvider;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Table(name = "TRAVELER")
@@ -15,9 +17,11 @@ import javax.persistence.*;
 public class Traveler {
 
     @Id
-    private String id;
-    private String dateOfBirth;
-    private String gender;
+    private Long id;
+    private String Title;
+    private Date dateOfBirth;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     private String firstName;
     private String lastName;
 
@@ -27,8 +31,12 @@ public class Traveler {
     private  String issuanceCountry;
     private  String nationality;
 
+
+    @Column(name = "user_id",insertable = false, updatable = false)
+    private String userId;
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "userId",referencedColumnName = "id")
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
     public TravelerDTO of(Traveler traveler) {

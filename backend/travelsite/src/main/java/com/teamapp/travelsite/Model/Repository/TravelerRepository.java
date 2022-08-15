@@ -10,7 +10,8 @@ import java.util.Optional;
 @Repository
 public interface TravelerRepository extends JpaRepository<Traveler, Integer> {
 
-    List<Traveler> findByEmail(String email);
 
-    List<Traveler> findByUserId(int id);
+    List<Traveler> findByUserId(Long id);
+
+    List<Traveler> findByTitle(String title);
 }
