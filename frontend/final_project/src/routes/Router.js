@@ -25,9 +25,9 @@ const Router = () => {
     return (
         <BrowserRouter>
             <Suspense fallback={<Spinner />}>
-                <Layout isLogin={isLogin}>
-                    <Routes>
-                        <Route path="/" element={<MainPage />} />
+                <Routes>
+                    <Route path="/" element={<Layout isLogin={isLogin} />}>
+                        <Route index element={<MainPage />} exact />
                         <Route path="register" element={<RegisterPage />} />
                         <Route path="registed" element={<RegisteredPage />} />
                         <Route
@@ -43,9 +43,33 @@ const Router = () => {
                             path="/finalConfirm"
                             element={<FinalConfirmPage />}
                         />
-                        <Route element={<ErrorPage />} />
+
+                        {/* error page */}
+                        <Route path="*" element={<ErrorPage />} />
+                    </Route>
+                </Routes>
+
+                {/* <Layout isLogin={isLogin}>
+                    <Routes>
+                        <Route path="/" element={<MainPage />} exact />
+                        <Route path="register" element={<RegisterPage />} />
+                        <Route path="registed" element={<RegisteredPage />} />
+                        <Route
+                            path="login"
+                            element={<LoginPage setIsLogin={setIsLogin} />}
+                        />
+                        <Route
+                            path="/searchResult"
+                            element={<SearchResultPage />}
+                        />
+                        <Route path="/travler" element={<TravlerPage />} />
+                        <Route
+                            path="/finalConfirm"
+                            element={<FinalConfirmPage />}
+                        />
+                        <Route path="*" element={<ErrorPage />} />
                     </Routes>
-                </Layout>
+                </Layout> */}
             </Suspense>
         </BrowserRouter>
     );
