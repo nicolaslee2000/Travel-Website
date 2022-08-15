@@ -30,6 +30,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Random;
+import java.util.UUID;
 
 
 @RestController
@@ -78,12 +80,17 @@ public class AuthController {
             throw new BadRequestException("Email address already in use.");
         }
 
+        Random ran = new Random();
+        long ranId = ran.nextLong();
+        
         TempMail tempMail = new TempMail();
+        tempMail.setId(ranId);
         tempMail.setEmail(signUpMailRequest.getEmail());
         tempMail.setEmailAuth(false);
         tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
 
         sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
+//        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
         TempMail result = tempMailRepository.save(tempMail);
         System.out.println(tempMailRepository.searchEmailAuth(signUpMailRequest.getEmail()));
@@ -166,6 +173,14 @@ public class AuthController {
 	public @ResponseBody String reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
 		CUDService.mailAuth(userEmail, authKey);
 	
+		
+		Boolean result = CUDService.mailAuth(userEmail, authKey);
+		
+		if(result.equals(true)) {
+			return "인증 완료 후에 페이지로 연결";
+		}else {
+			return "만료된 인증 메일입니다";
+		}
 	
 		
 		return "인증 완료 후에 페이지로 연결";
