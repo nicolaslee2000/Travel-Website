@@ -135,56 +135,56 @@ const RegisterForm = (props) => {
 
   return (
     <>
-      <Container maxWidth='sm'>
+      <Container maxWidth="sm">
         <form onSubmit={handleSubmit}>
-          <div className='tab-regform'>
-            <div className='tab-head'>
+          <div className="tab-regform">
+            <div className="tab-head">
               <Tabs value={value}>
-                <Tab label='통합회원 회원가입' />
+                <Tab label="통합회원 회원가입" />
               </Tabs>
             </div>
-            <div className='form'>
-              <TabPanel value={value} index={0} className='test'>
-                <div className='register active'>
+            <div className="form">
+              <TabPanel value={value} index={0} className="test">
+                <div className="register active">
                   <h2>통합회원 회원가입 </h2>
-                  <div className='form-input name'>
+                  <div className="form-input name">
                     <label>이름 &nbsp; &nbsp; </label>
                     <Input
-                      type='text'
-                      name='name'
-                      placeholder='이름 입력하세요.'
-                      className='name'
+                      type="text"
+                      name="name"
+                      placeholder="이름 입력하세요."
+                      className="name"
                       required
                       value={name}
                       onChange={handleValueChange}
                     ></Input>
                   </div>
-                  <div className='form-input email'>
+                  <div className="form-input email">
                     {!emailcheckForm && (
                       <div>
                         <label>아이디 &nbsp; &nbsp; </label>
                         <Input
-                          type='text'
-                          name='email'
-                          placeholder='이메일을 입력하세요.'
-                          className='email'
+                          type="text"
+                          name="email"
+                          placeholder="이메일을 입력하세요."
+                          className="email"
                           required
                           value={email}
                           onChange={handleValueChange}
                         ></Input>
-                        <div className='email-checklist'>
+                        <div className="email-checklist">
                           <FormGroup row>
                             <FormControlLabel
-                              value='email-checkbox'
+                              value="email-checkbox"
                               control={<Checkbox disabled />}
-                              label='로그인확인'
+                              label="로그인확인"
                             />
                             <FormControlLabel
-                              value='email-checkbutton'
+                              value="email-checkbutton"
                               control={
                                 <Button
-                                  variant='outlined'
-                                  size='small'
+                                  variant="outlined"
+                                  size="small"
                                   onClick={handleClickOpen}
                                 >
                                   이메일인증
@@ -199,29 +199,29 @@ const RegisterForm = (props) => {
                       <div>
                         <label>아이디 &nbsp; &nbsp; </label>
                         <Input
-                          type='text'
-                          name='email'
-                          placeholder='이메일을 입력하세요.'
-                          className='email'
+                          type="text"
+                          name="email"
+                          placeholder="이메일을 입력하세요."
+                          className="email"
                           required
                           disabled
                           value={email}
                           onChange={handleValueChange}
                         ></Input>
                         <br />
-                        <div className='email-checklist'>
+                        <div className="email-checklist">
                           <FormGroup row>
                             <FormControlLabel
-                              value='email-checkbox'
+                              value="email-checkbox"
                               control={<Checkbox disabled checked />}
-                              label='로그인확인'
+                              label="로그인확인"
                             />
                             <FormControlLabel
-                              value='email-checkbutton'
+                              value="email-checkbutton"
                               control={
                                 <Button
-                                  variant='outlined'
-                                  size='small'
+                                  variant="outlined"
+                                  size="small"
                                   onClick={handleClickOpen}
                                 >
                                   이메일인증
@@ -233,26 +233,29 @@ const RegisterForm = (props) => {
                       </div>
                     )}
                   </div>
-                  <div className='form-input'>
-                    <label className='password'>비밀번호 &nbsp; </label>
+                  <div className="form-input">
+                    <label className="password">비밀번호 &nbsp; </label>
                     <Input
-                      type='password'
-                      name='password'
-                      placeholder='비밀번호를 입력하세요.'
-                      className='password'
+                      type="password"
+                      name="password"
+                      placeholder="비밀번호를 입력하세요."
+                      className="password"
                       required
                       value={password}
                       onChange={handleValueChange}
                     ></Input>
                   </div>
-                  <div className='form-input'>
+                  <div className="form-input">
                     <br></br>
-                    <Button variant='text' href='/'>
+                    <Button variant="text" href="/">
                       이전
                     </Button>
-                    <Button type='submit' variant='contained'>
-                      확인
-                    </Button>
+                    {!emailcheckForm && <Button disabled>확인</Button>}
+                    {emailcheckForm && (
+                      <Button type="submit" variant="contained">
+                        확인
+                      </Button>
+                    )}
                   </div>
                 </div>
               </TabPanel>
@@ -261,15 +264,15 @@ const RegisterForm = (props) => {
         </form>
       </Container>
 
-      <Dialog open={open} onClose={handleClose} className='emailCheckDialog'>
+      <Dialog open={open} onClose={handleClose} className="emailCheckDialog">
         <DialogTitle>이메일 인증 부탁드립니다.</DialogTitle>
         <DialogContent>
           <br />
           <DialogContentText>
-            <Button variant='contained' onClick={emailcheck}>
+            <Button variant="contained" onClick={emailcheck}>
               인증 확인 완료
             </Button>
-            <Button variant='outlined' onClick={handleClose}>
+            <Button variant="outlined" onClick={handleClose}>
               인증 확인 취소
             </Button>
           </DialogContentText>

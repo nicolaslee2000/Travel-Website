@@ -74,7 +74,7 @@ public class AuthController {
         tempMail.setEmailAuth(false);
         //tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
 
-        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
+//        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
         TempMail result = tempMailRepository.save(tempMail);
         System.out.println(tempMailRepository.searchEmailAuth(signUpMailRequest.getEmail()));
@@ -113,8 +113,7 @@ public class AuthController {
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
 				.buildAndExpand(result.getId()).toUri();
-
-		tempMailRepository.deleteTempMail(signUpRequest.getEmail());
+        tempMailRepository.delete(tempMailRepository.findByEmail(signUpRequest.getEmail()).get());
 
 		
 		return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully@"));

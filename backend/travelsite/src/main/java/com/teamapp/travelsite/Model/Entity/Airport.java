@@ -17,6 +17,7 @@ import java.util.List;
 @Builder
 @Table(name = "AIRPORT")
 public class Airport {
+
 	@Id
 	@GeneratedValue
 	@Column(nullable = false)
