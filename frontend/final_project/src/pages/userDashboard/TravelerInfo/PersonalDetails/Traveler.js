@@ -34,7 +34,7 @@ const Traveler = () => {
                         <Typography variant="h3">Personal details</Typography>
                         <Link
                             to="edit"
-                            state={{ trav: trav }}
+                            state={{ data: trav }}
                             style={{ textDecoration: "none" }}
                         >
                             <Button color="primary">edit</Button>

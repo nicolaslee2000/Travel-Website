@@ -17,7 +17,7 @@ const FlightListItem = ({ flight }) => {
                 disablePadding
                 component={Link}
                 to="flight"
-                state={{ flight: flight }}
+                state={{ DataTransferItemList: flight }}
                 sx={{ textDecoration: "none", color: "black", fontSize: "50" }}
             >
                 <ListItemButton>
