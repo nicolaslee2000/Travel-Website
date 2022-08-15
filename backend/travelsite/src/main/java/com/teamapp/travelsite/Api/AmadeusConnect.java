@@ -1,8 +1,6 @@
 package com.teamapp.travelsite.Api;
 
 
-import java.util.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,7 +9,7 @@ import java.util.Map;
 
 import java.util.stream.Collectors;
 
-import com.teamapp.travelsite.DTOs.AirlineDTO;
+import com.teamapp.travelsite.Model.DTOs.AirlineDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +24,6 @@ import com.amadeus.resources.FlightPrice;
 import com.amadeus.resources.Location;
 import com.google.gson.JsonObject;
 import com.teamapp.travelsite.Config.AmadeusConfig;
-import com.teamapp.travelsite.DTOs.AirlineDTO;
 
 @Component
 public class AmadeusConnect {

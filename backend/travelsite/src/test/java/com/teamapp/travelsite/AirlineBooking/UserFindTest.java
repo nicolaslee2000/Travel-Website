@@ -1,8 +1,8 @@
 package com.teamapp.travelsite.AirlineBooking;
 
-import com.teamapp.travelsite.User.User;
-import com.teamapp.travelsite.Repository.UserRepository;
-import com.teamapp.travelsite.User.UserService;
+import com.teamapp.travelsite.Model.Entity.User;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
+import com.teamapp.travelsite.Service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ public class UserFindTest {
     private UserRepository userRepository;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
     @Test
     void testUserFind(){
         //given
