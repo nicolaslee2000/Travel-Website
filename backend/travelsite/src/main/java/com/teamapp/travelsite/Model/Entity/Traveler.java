@@ -5,6 +5,7 @@ import lombok.*;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Table(name = "TRAVELER")
@@ -15,9 +16,13 @@ import javax.persistence.*;
 public class Traveler {
 
     @Id
-    private String id;
-    private String dateOfBirth;
-    private String gender;
+
+    private Long id;
+    private String title;
+    private Date dateOfBirth;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
     private String firstName;
     private String lastName;
 
@@ -26,6 +31,10 @@ public class Traveler {
     private  String expiryDate;
     private  String issuanceCountry;
     private  String nationality;
+
+
+    @Column(name = "user_id",insertable = false, updatable = false)
+    private Long userId;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JoinColumn(name = "userId",referencedColumnName = "id")

@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "ORDER")
 @Builder
-//rename reason : statch between javax.persistence.*
+@Getter
 public class TicketOrder {
     @Id
     @GeneratedValue
