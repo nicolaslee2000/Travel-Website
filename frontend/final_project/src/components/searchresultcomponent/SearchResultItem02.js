@@ -90,7 +90,7 @@ const SearchResultItem02 = (props) => {
 
   useEffect(() => {
     //console.log('실제 코드찍히는거', goStart.operating.carrierCode);
-    console.log('실제 코드찍히는거', goOper.carrierCode);
+    //console.log('실제 코드찍히는거', goOper.carrierCode);
     getLogo(goStart.carrierCode, setImgSrc); // 출국
     // setLoading(true);
   }, [rfosData]);

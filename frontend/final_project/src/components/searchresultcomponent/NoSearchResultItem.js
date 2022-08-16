@@ -5,20 +5,17 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSelector } from 'react-redux';
-const NoSearchResultItem = () => {
-  const [loading, setLoading] = useState(true);
+const NoSearchResultItem = (props) => {
   // const searData2 = useSelector((state) => {
   //   return state.searchReducer2;
   // });
-  const offerInit = useSelector((state) => {
-    setLoading(false);
-    return state.searchReducer3.flightOfferSearch;
-  });
 
   return (
     <>
-      {loading ? (
-        <CircularProgress />
+      {props.pageLoaded ? (
+        <Card>
+          <CircularProgress />
+        </Card>
       ) : (
         <Card
           sx={{

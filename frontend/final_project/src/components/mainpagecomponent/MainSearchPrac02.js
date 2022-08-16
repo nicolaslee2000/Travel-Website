@@ -30,6 +30,7 @@ const MainSearchPrac02 = () => {
   const [raidoValue, setRadioValue] = useState(false);
   const [nonStop, setNonStop] = useState(true);
   const [onWay, setOnWay] = useState(true);
+  const [pageLoaded, setPageLoaded] = useState(false);
   const [flightInfo, setFlightInfo] = useState({
     // origin: { country: "", airport: "", code: "" },
     // destination: { country: "", airport: "", code: "" },
@@ -43,61 +44,11 @@ const MainSearchPrac02 = () => {
     nonStop: null,
   });
 
-  // const top10Start = [
-  //   { start: "한국" },
-  //   { start: "미국" },
-  //   { start: "일본" },
-  //   { start: "중국" },
-  //   { start: "미얀마" },
-  //   { start: "캐나다" },
-  //   { start: "인도" },
-  //   { start: "프랑스" },
-  //   { start: "영국" },
-  // ];
-
-  // const top10Start2 = [
-  //   { start: { country: "한국", airport: "인천", code: "ICN" } },
-  //   { start: { country: "일본", airport: "나리타", code: "NRT" } },
-  // ];
-
-  // const top10End2 = [
-  //   { end: { country: "한국", airport: "인천", code: "ICN" } },
-  //   { end: { country: "일본", airport: "나리타", code: "NRT" } },
-  // ];
-
-  // const top10End = [
-  //   { end: "미국" },
-  //   { end: "일본" },
-  //   { end: "중국" },
-  //   { end: "미얀마" },
-  //   { end: "캐나다" },
-  //   { end: "인도" },
-  //   { end: "프랑스" },
-  //   { end: "영국" },
-  // ];
-  // const { inputSearch } = useSelector((state) => {
-  //   console.log('test -============================');
-  //   console.log(state.searchReducer.inputSearch);
-  //   return state.searchReducer;
-  // });
-
   const dispatch = useDispatch();
-  // const searData2 = useSelector((state) => {
-  //   return state.searchReducer2;
-  // });
 
   const searData3 = useSelector((state) => {
     return state.searchReducer3;
   });
-
-  // const [info2, setInfo2] = useState({
-  //   start: { country: "", airport: "", code: "" },
-  //   end: { country: "", airport: "", code: "" },
-  //   departureDate: "2022-08-12",
-  //   returnDate: "2022-08-14",
-  //   adults: 1,
-  // });
-
   const inputDate = (e) => {
     console.log('input :' + e);
     setFlightInfo(e);
@@ -118,29 +69,13 @@ const MainSearchPrac02 = () => {
           travelClass: sendData.travelClass,
           nonStop: sendData.nonStop,
         },
-        // params: { destinationLocationCode: sendData.start.code },
-        // params: { departureDate: sendData.departureDate },
-        // params: { adults: sendData.adults },
       })
       .then((response) => {
         dispatch(offerInit(response.data));
-        // navigate("/searchResult");
-        //dispatch(seInit(response.data));
-        //setAxData(response.data);
-        //console.log('상태데이터로 받음', axData);
+        setPageLoaded(true);
       })
       .catch((err) => console.log('안됌ㅋ : ' + err.message));
   };
-
-  // 삭제?
-  // const handleInfoChange = (e, newValue) => {
-  //   // setInfo((prev) => {
-  //   //   return { ...prev, ...newValue };
-  //   // });
-  //   setFlightInfo((prev) => {
-  //     return { ...prev, ...newValue };
-  //   });
-  // };
 
   const navigate = useNavigate();
 
@@ -148,26 +83,8 @@ const MainSearchPrac02 = () => {
     console.log('result :' + flightInfo);
     dispatch(searchInit(flightInfo));
     searchData(flightInfo);
-    navigate('/searchResult');
-    // let data = SearchData(' ');
-    // console.log('메인페이지에서 엑시오스 실행 결과', data);
+    navigate('/searchResult', { state: { pageLoaded: pageLoaded } });
   };
-
-  // const handleConfirm1 = () => {
-  //   searchData3(flightInfo);
-  //   //searchData(' ');
-  // };
-
-  // const handleConfirm2 = () => {
-  //   //console.log('상태데이터로 받음', axData);
-  //   //console.log(info2);
-  //   //console.log('제발 떠라 제발', searData2);
-  //   console.log(
-  //     "제발 떠라 제발",
-  //     searData3.flightOfferSearch[3].price.currency
-  //   );
-  //   console.log("제발 22", searData3);
-  // };
 
   const handleRadioChange = (e) => {
     setRadioValue(e.target.value);
