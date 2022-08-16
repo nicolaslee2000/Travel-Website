@@ -1,14 +1,20 @@
 import {
+    Avatar,
     Button,
     Card,
     CardActionArea,
     CardActions,
     CardContent,
     CardMedia,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
     Typography,
 } from "@mui/material";
 import newyork from "../../../global/assets/images/temp/newyork.jpg";
 import React from "react";
+import { Flight } from "@mui/icons-material";
 
 const FlightRecommendationCard = () => {
     return (
@@ -19,24 +25,41 @@ const FlightRecommendationCard = () => {
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    alt="green iguana"
-                    height="140"
+                    alt="img"
+                    height="170"
                     image={newyork}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                    <Typography gutterBottom variant="h3" component="div">
+                        New York
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles,
-                        with over 6,000 species, ranging across all continents
-                        except Antarctica
-                    </Typography>
+                    <List>
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <Flight />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary="THU, Oct 3"
+                                secondary="BKK - NYC"
+                            />
+                        </ListItem>
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <Flight />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary="THU, Oct 3"
+                                secondary="NYC - BKK"
+                            />
+                        </ListItem>
+                    </List>
                 </CardContent>
-                <CardActions>
-                    <Button size="small" sx={{ align: "right" }}>
-                        From 29999usd
-                    </Button>
+                <CardActions sx={{ justifyContent: "right" }}>
+                    <Button size="small">{"From 29999usd  >>"}</Button>
                 </CardActions>
             </CardActionArea>
         </Card>
