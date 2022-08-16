@@ -7,6 +7,7 @@ import {
     ListItemText,
     useMediaQuery,
 } from "@mui/material";
+import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
 import { useLocation } from "react-router";
 import { Link, NavLink } from "react-router-dom";
@@ -29,7 +30,6 @@ const Sidebar = (props) => {
     };
 
     const SidebarContent = (
-        // "calc(100vh - 40px)"
         <Box sx={{ p: 3, height: "calc(100vh - 40px)", overflow: "auto" }}>
             {/* <Link to="/">
                 <Box sx={{ display: "flex", alignItems: "Center" }}>
@@ -70,6 +70,7 @@ const Sidebar = (props) => {
                                         sx={{
                                             ...(pathDirect === item.href && {
                                                 color: "white",
+                                                textAlign: "center",
                                             }),
                                         }}
                                     >
@@ -86,48 +87,54 @@ const Sidebar = (props) => {
     );
     if (lgUp) {
         return (
-            <Drawer
-                variant="permanent"
-                sx={{
-                    marginTop: 50,
-                    flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: {
-                        boxSizing: "border-box",
-                    },
-                    overflow: "hidden",
-                }}
-                PaperProps={{
-                    sx: {
-                        width: SidebarWidth,
-                        marginTop: 10,
-                        height: 300,
-                    },
-                }}
-            >
-                {SidebarContent}
-            </Drawer>
+            // <Drawer
+            //     variant="permanent"
+            //     sx={{
+            //         marginTop: 50,
+            //         flexShrink: 0,
+            //         [`& .MuiDrawer-paper`]: {
+            //             boxSizing: "border-box",
+            //         },
+            //         overflow: "hidden",
+            //     }}
+            //     PaperProps={{
+            //         sx: {
+            //             width: SidebarWidth,
+            //             marginTop: 10,
+            //             height: 300,
+            //         },
+            //     }}
+            // >
+            //     {SidebarContent}
+            // </Drawer>
+            <Box sx={{ width: 400}}>
+            {SidebarContent}
+            </Box>
         );
     }
     return (
-        <Drawer
-            anchor="left"
-            open={props.isMobileSidebarOpen}
-            onClose={props.onSidebarClose}
-            PaperProps={{
-                sx: {
-                    width: SidebarWidth,
-                },
-            }}
-            sx={{
-                flexShrink: 0,
-                [`& .MuiDrawer-paper`]: {
-                    boxSizing: "border-box",
-                },
-            }}
-            variant="permanent"
-        >
-            {SidebarContent}
-        </Drawer>
+        // <Drawer
+        //     anchor="left"
+        //     open={props.isMobileSidebarOpen}
+        //     onClose={props.onSidebarClose}
+        //     PaperProps={{
+        //         sx: {
+        //             width: SidebarWidth,
+        //         },
+        //     }}
+        //     sx={{
+        //         flexShrink: 0,
+        //         [`& .MuiDrawer-paper`]: {
+        //             boxSizing: "border-box",
+        //         },
+        //     }}
+        //     variant="permanent"
+        // >
+        //     {SidebarContent}
+        // </Drawer>
+        <Box sx={{ width: 400}}>
+        {SidebarContent}
+        </Box>
     );
 };
 
