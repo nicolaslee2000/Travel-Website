@@ -120,8 +120,6 @@ public class AuthController {
 	}
 
 	// 메일 보내기
-	// @Async
-	// @RequestMapping("/sendMail")
 	public ModelAndView sendEmail(String email, String emailAuthKey) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
@@ -129,7 +127,6 @@ public class AuthController {
 
 		CUDService.sendEmail(email, key);
 
-//		mv.setViewName("/");
 		return mv;
 	}
 
