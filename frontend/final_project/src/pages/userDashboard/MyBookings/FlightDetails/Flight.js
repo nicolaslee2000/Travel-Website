@@ -1,4 +1,4 @@
-import { FlightTakeoff } from "@mui/icons-material";
+import { FlightLand, FlightTakeoff } from "@mui/icons-material";
 import {
     Box,
     Button,
@@ -233,6 +233,15 @@ const Traveler = () => {
                             </Box>
                         </Grid>
                     </Grid>
+                </CardContent>
+                <Divider />
+                <CardContent>
+                    <Box sx={{ display: "flex", mt: 1, mb: -2 }}>
+                        <FlightLand sx={{ mr: 2.5, alignSelf: "center" }} />
+                        <Typography variant="h4">
+                            {"Frankfurt am Main(FRA)"}
+                        </Typography>
+                    </Box>
                 </CardContent>
             </Card>
             <Typography variant="h4" sx={{ mt: 4 }}>

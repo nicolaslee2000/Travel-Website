@@ -24,6 +24,7 @@ import Passenger from "./Passenger";
 import { Box, boxSizing, Container } from "@mui/system";
 import SelectCity01 from "./SelectCity01";
 import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
+import FlightRecommendation from "./FlightRecommendation/FlightRecommendation";
 
 const MainSearchPrac02 = () => {
     const [raidoValue, setRadioValue] = useState(false);
@@ -328,6 +329,7 @@ const MainSearchPrac02 = () => {
                     </Box>
                 </Container>
             </Box>
+            <FlightRecommendation />
         </Box>
     );
 };
