@@ -207,11 +207,7 @@ const MainSearchPrac02 = () => {
         };
     }, []);
     return (
-        <Box
-            sx={{
-                height: 700,
-            }}
-        >
+        <Box>
             <Box
                 sx={{
                     backgroundImage: `url(${BackgroundImage})`,
