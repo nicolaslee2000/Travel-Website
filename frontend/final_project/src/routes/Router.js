@@ -94,31 +94,12 @@ const Router = () => {
                         </Route>
 
                         {/* error page */}
-                        <Route path="*" element={<ErrorPage />} />
+                        <Route
+                            path="*"
+                            element={<ErrorPage text={"Page not found!"} />}
+                        />
                     </Route>
                 </Routes>
-
-                {/* <Layout isLogin={isLogin}>
-                    <Routes>
-                        <Route path="/" element={<MainPage />} exact />
-                        <Route path="register" element={<RegisterPage />} />
-                        <Route path="registed" element={<RegisteredPage />} />
-                        <Route
-                            path="login"
-                            element={<LoginPage setIsLogin={setIsLogin} />}
-                        />
-                        <Route
-                            path="/searchResult"
-                            element={<SearchResultPage />}
-                        />
-                        <Route path="/travler" element={<TravlerPage />} />
-                        <Route
-                            path="/finalConfirm"
-                            element={<FinalConfirmPage />}
-                        />
-                        <Route path="*" element={<ErrorPage />} />
-                    </Routes>
-                </Layout> */}
             </Suspense>
         </BrowserRouter>
     );
