@@ -25,6 +25,7 @@ import Passenger from "./Passenger";
 import { Box, boxSizing, Container, fontWeight } from "@mui/system";
 
 import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
+// import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage1.jpg";
 
 const MainSearchPrac02 = () => {
   const [raidoValue, setRadioValue] = useState(false);
@@ -202,6 +203,7 @@ const MainSearchPrac02 = () => {
           backgroundSize: "100%, 100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right 0 top 80%",
+          height: "550px",
         }}
       >
         <Container sx={{ paddingTop: 5 }}>
