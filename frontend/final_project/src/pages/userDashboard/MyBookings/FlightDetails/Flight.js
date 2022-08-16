@@ -1,3 +1,4 @@
+import { FlightLand, FlightTakeoff } from "@mui/icons-material";
 import {
     Box,
     Button,
@@ -11,11 +12,10 @@ import {
     List,
     ListItem,
     Typography,
-} from "@material-ui/core";
-import { FlightTakeoff } from "@material-ui/icons";
+} from "@mui/material";
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Backlink from "../../TravelerInfo/Backlink";
+import Backlink from "../../../../components/backlink/Backlink";
 import FlightCancelDialog from "./FlightCancelDialog";
 import FlightTravelerTable from "./FlightTravelerTable";
 
@@ -26,7 +26,7 @@ const Traveler = () => {
     ]);
     const [openDialog, setOpenDialog] = React.useState(false);
     const { state } = useLocation();
-    const flight = state.flight;
+    const flight = state.data;
 
     return (
         <Box sx={{ width: 800 }}>
@@ -234,13 +234,22 @@ const Traveler = () => {
                         </Grid>
                     </Grid>
                 </CardContent>
+                <Divider />
+                <CardContent>
+                    <Box sx={{ display: "flex", mt: 1, mb: -2 }}>
+                        <FlightLand sx={{ mr: 2.5, alignSelf: "center" }} />
+                        <Typography variant="h4">
+                            {"Frankfurt am Main(FRA)"}
+                        </Typography>
+                    </Box>
+                </CardContent>
             </Card>
             <Typography variant="h4" sx={{ mt: 4 }}>
                 Passenger information:
             </Typography>
             <FlightTravelerTable travelers={travelers} />
 
-            <Box textAlign="center" sx={{ mt: 5 }}>
+            <Box textAlign="center" sx={{ mt: 5, mb: 5 }}>
                 <Button
                     color="error"
                     variant="contained"

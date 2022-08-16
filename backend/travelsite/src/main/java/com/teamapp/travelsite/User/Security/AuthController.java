@@ -30,8 +30,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Random;
-import java.util.UUID;
 
 
 @RestController
@@ -50,28 +48,19 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private TokenProvider tokenProvider;
+
     
 	@Autowired
 	private CustomUserDetailsService CUDService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
-                        loginRequest.getPassword()
-                )
-        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String token = tokenProvider.createToken(authentication);
-        return ResponseEntity.ok(new AuthResponse(token));
+    public String authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        if (userRepository.findByEmail(loginRequest.getEmail()).isPresent()) {
+           userRepository.findByEmail(loginRequest.getEmail()).get();
+            System.out.println("유저를 찾았습니다!!!");
+           return userRepository.findByEmail(loginRequest.getEmail()).get().getEmail();
+        } else throw new RuntimeException("anything");
     }
-
 
 
     @PostMapping("/emailAuth")
@@ -80,16 +69,11 @@ public class AuthController {
             throw new BadRequestException("Email address already in use.");
         }
 
-        Random ran = new Random();
-        long ranId = ran.nextLong();
-        
         TempMail tempMail = new TempMail();
-        tempMail.setId(ranId);
         tempMail.setEmail(signUpMailRequest.getEmail());
         tempMail.setEmailAuth(false);
-        tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
+        //tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
 
-        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 //        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
         TempMail result = tempMailRepository.save(tempMail);
@@ -118,36 +102,19 @@ public class AuthController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-//			throws Exception {
-//		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//			throw new BadRequestException("Email address already in use.");
-//		}
-	
-//		System.out.println(" dd");
-//		String userEmail = null;
-//		
-//		Map<String, ?> flashMap =RequestContextUtils.getInputFlashMap(request);
-//		  if(flashMap!=null) {
-//	            
-//	          userEmail =(String)flashMap.get("userEmail");
-//	        }
-      
-		// Creating user's account
 		User user = new User();
-		
 		user.setName(signUpRequest.getName());
 		user.setEmail(signUpRequest.getEmail());
 		user.setPassword(signUpRequest.getPassword());
 		user.setProvider(AuthProvider.local);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-
 		User result = userRepository.save(user);
 		
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
 				.buildAndExpand(result.getId()).toUri();
+        tempMailRepository.delete(tempMailRepository.findByEmail(signUpRequest.getEmail()).get());
 
-		tempMailRepository.deleteTempMail(signUpRequest.getEmail());
 		
 		return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully@"));
 	
@@ -173,14 +140,6 @@ public class AuthController {
 	public @ResponseBody String reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
 		CUDService.mailAuth(userEmail, authKey);
 	
-		
-		Boolean result = CUDService.mailAuth(userEmail, authKey);
-		
-		if(result.equals(true)) {
-			return "인증 완료 후에 페이지로 연결";
-		}else {
-			return "만료된 인증 메일입니다";
-		}
 	
 		
 		return "인증 완료 후에 페이지로 연결";

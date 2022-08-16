@@ -1,12 +1,12 @@
+import { ArrowForwardIos } from "@mui/icons-material";
 import {
     Divider,
     ListItem,
     ListItemButton,
     ListItemIcon,
     ListItemText,
-} from "@material-ui/core";
+} from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
-import { ArrowForwardIos } from "@material-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const TravelerListItem = ({ trav }) => {
                 disablePadding
                 component={Link}
                 to="traveler"
-                state={{ trav: trav }}
+                state={{ data: trav }}
                 sx={{ textDecoration: "none", color: "black", fontSize: "50" }}
             >
                 <ListItemButton>

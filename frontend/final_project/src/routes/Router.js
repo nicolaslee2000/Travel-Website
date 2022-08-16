@@ -17,6 +17,32 @@ const TravlerPage = lazy(() => import("../pages/travelerpage/TravlerPage"));
 const FinalConfirmPage = lazy(() =>
     import("../pages/finalconfirmpage/FinalConfirmPage")
 );
+
+//UserDashboard
+const UserDashboard = lazy(() =>
+    import("../pages/userDashboard/UserDashboard")
+);
+const TravelerInfo = lazy(() =>
+    import("../pages/userDashboard/TravelerInfo/TravelerInfo")
+);
+const Traveler = lazy(() =>
+    import("../pages/userDashboard/TravelerInfo/PersonalDetails/Traveler")
+);
+const TravelerAdd = lazy(() =>
+    import("../pages/userDashboard/TravelerInfo/TravelerEdit/TravelerAdd")
+);
+const TravelerEdit = lazy(() =>
+    import("../pages/userDashboard/TravelerInfo/TravelerEdit/TravelerEdit")
+);
+const MyBookingsPage = lazy(() =>
+    import("../pages/userDashboard/MyBookings/MyBookingsPage")
+);
+const Flight = lazy(() =>
+    import("../pages/userDashboard/MyBookings/FlightDetails/Flight")
+);
+const MyAccountPage = lazy(() =>
+    import("../pages/userDashboard/MyAccount/MyAccountPage")
+);
 const Layout = lazy(() => import("../components/othercomponent/Layout"));
 const ErrorPage = lazy(() => import("../pages/errorpage/ErrorPage"));
 const Router = () => {
@@ -44,32 +70,36 @@ const Router = () => {
                             element={<FinalConfirmPage />}
                         />
 
+                        <Route path="dashboard" element={<UserDashboard />}>
+                            <Route path="travelerInfo">
+                                <Route index element={<TravelerInfo />} />
+                                <Route path="traveler" element={<Traveler />} />
+                                <Route
+                                    path="travelerAdd"
+                                    element={<TravelerAdd />}
+                                />
+                                <Route
+                                    path="traveler/edit"
+                                    element={<TravelerEdit />}
+                                />
+                            </Route>
+                            <Route path="mybookings">
+                                <Route index element={<MyBookingsPage />} />
+                                <Route path="flight" element={<Flight />} />
+                            </Route>
+
+                            <Route path="account">
+                                <Route index element={<MyAccountPage />} />
+                            </Route>
+                        </Route>
+
                         {/* error page */}
-                        <Route path="*" element={<ErrorPage />} />
+                        <Route
+                            path="*"
+                            element={<ErrorPage text={"Page not found!"} />}
+                        />
                     </Route>
                 </Routes>
-
-                {/* <Layout isLogin={isLogin}>
-                    <Routes>
-                        <Route path="/" element={<MainPage />} exact />
-                        <Route path="register" element={<RegisterPage />} />
-                        <Route path="registed" element={<RegisteredPage />} />
-                        <Route
-                            path="login"
-                            element={<LoginPage setIsLogin={setIsLogin} />}
-                        />
-                        <Route
-                            path="/searchResult"
-                            element={<SearchResultPage />}
-                        />
-                        <Route path="/travler" element={<TravlerPage />} />
-                        <Route
-                            path="/finalConfirm"
-                            element={<FinalConfirmPage />}
-                        />
-                        <Route path="*" element={<ErrorPage />} />
-                    </Routes>
-                </Layout> */}
             </Suspense>
         </BrowserRouter>
     );

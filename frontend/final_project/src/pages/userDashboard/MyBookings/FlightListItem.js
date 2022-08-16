@@ -4,11 +4,11 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
-} from "@material-ui/core";
+} from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
-import { ArrowForwardIos } from "@material-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
+import { ArrowForwardIos } from "@mui/icons-material";
 
 const FlightListItem = ({ flight }) => {
     return (
@@ -17,7 +17,7 @@ const FlightListItem = ({ flight }) => {
                 disablePadding
                 component={Link}
                 to="flight"
-                state={{ flight: flight }}
+                state={{ DataTransferItemList: flight }}
                 sx={{ textDecoration: "none", color: "black", fontSize: "50" }}
             >
                 <ListItemButton>

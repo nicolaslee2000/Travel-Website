@@ -10,7 +10,7 @@ const Backlink = (props) => {
                 sx={{ fontSize: "medium", fontFamily: "DM sans" }}
                 component={Link}
                 to={props.link}
-                state={{ trav: props.trav }}
+                state={{ data: props.data }}
             >
                 <ArrowBackIosIcon sx={{ fontSize: "small" }} />
                 {props.text}

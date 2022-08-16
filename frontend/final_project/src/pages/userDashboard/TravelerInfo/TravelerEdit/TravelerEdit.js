@@ -7,21 +7,19 @@ import {
     TextField,
     Typography,
     Button,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Backlink from "../Backlink";
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { DatePicker } from "@mui/x-date-pickers";
-import { LocalizationProvider } from '@mui/x-date-pickers';
-
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import Backlink from "../../../../components/backlink/Backlink";
 
 const TravelerEdit = () => {
-
-    const DATEFORMAT = "YYYY-MM-DD"
+    const DATEFORMAT = "YYYY-MM-DD";
 
     const { state } = useLocation();
-    const trav = state.trav;
+    const trav = state.data;
     const [gender, setGender] = React.useState("");
     const [nationality, setNationality] = React.useState("");
     const [issuer, setIssuer] = React.useState("");
@@ -30,15 +28,14 @@ const TravelerEdit = () => {
     const [doi, setDoi] = React.useState(null);
     const [doe, setDoe] = React.useState(null);
 
-
-    let countries = ['korea', 'us', 'austrailia', 'egypt'];
+    let countries = ["korea", "us", "austrailia", "egypt"];
 
     return (
         <Box sx={{ width: 600 }}>
             <Backlink
                 text={trav.name}
                 link="/dashboards/travelerInfo/traveler"
-                trav={trav}
+                data={trav}
             />
             <Container>
                 <Typography align="center" variant="h1">
@@ -108,30 +105,39 @@ const TravelerEdit = () => {
                             }}
                         >
                             {countries.map((country) => (
-                                <MenuItem
-                                    key={country}
-                                    value={country}
-                                >
+                                <MenuItem key={country} value={country}>
                                     {country}
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <LocalizationProvider dateAdapter={AdapterMoment} >
-                        <DatePicker
-                            label="Date of birth"
-                            value={dob}
-                            onChange={(newDate) => {
-                            setDob(newDate ? newDate.format(DATEFORMAT):null);
-                            }}
-                            renderInput={(params) => <TextField {...params} name="dob" fullWidth id="dob" sx={{
-                                mb: 2,
-                            }}/>}
-                        />
+                        <LocalizationProvider dateAdapter={AdapterMoment}>
+                            <DatePicker
+                                label="Date of birth"
+                                value={dob}
+                                onChange={(newDate) => {
+                                    setDob(
+                                        newDate
+                                            ? newDate.format(DATEFORMAT)
+                                            : null
+                                    );
+                                }}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        name="dob"
+                                        fullWidth
+                                        id="dob"
+                                        sx={{
+                                            mb: 2,
+                                        }}
+                                    />
+                                )}
+                            />
                         </LocalizationProvider>
-                <Typography  variant="h3" sx={{mb:4}}>
-                    {"Document"}
-                </Typography>
-                <TextField
+                        <Typography variant="h3" sx={{ mb: 4 }}>
+                            {"Document"}
+                        </Typography>
+                        <TextField
                             id="documentType"
                             name="documentType"
                             label="Document type"
@@ -149,7 +155,6 @@ const TravelerEdit = () => {
                             sx={{ mb: 2 }}
                             required
                         />
-                        
 
                         <TextField
                             fullWidth
@@ -166,47 +171,65 @@ const TravelerEdit = () => {
                             required
                         >
                             {countries.map((country) => (
-                                <MenuItem
-                                    key={country}
-                                    value={country}
-                                >
+                                <MenuItem key={country} value={country}>
                                     {country}
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <LocalizationProvider dateAdapter={AdapterMoment} >
-                        <DatePicker
-                            label="Date of issue"
-                            value={doi}
-                            onChange={(newDate) => {
-                            setDoi(newDate ? newDate.format(DATEFORMAT):null);
-                            }}
-                            renderInput={(params) => <TextField {...params} fullWidth id="doi" name="doi" sx={{
-                                mb: 2,
-                            }}
-                            
-                            required/>}
-                        />
+                        <LocalizationProvider dateAdapter={AdapterMoment}>
+                            <DatePicker
+                                label="Date of issue"
+                                value={doi}
+                                onChange={(newDate) => {
+                                    setDoi(
+                                        newDate
+                                            ? newDate.format(DATEFORMAT)
+                                            : null
+                                    );
+                                }}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        fullWidth
+                                        id="doi"
+                                        name="doi"
+                                        sx={{
+                                            mb: 2,
+                                        }}
+                                        required
+                                    />
+                                )}
+                            />
                         </LocalizationProvider>
-                        <LocalizationProvider dateAdapter={AdapterMoment} >
-                        <DatePicker
-                            label="Expiry date"
-                            value={doe}
-                            onChange={(newDate) => {
-                            setDoe(newDate ? newDate.format(DATEFORMAT):null);
-                            }}
-                            renderInput={(params) => <TextField {...params} fullWidth id="doe" name="doe" sx={{
-                                mb: 2,
-                            }}
-                            required
-                            />}
-                        />
-                        </LocalizationProvider> 
-
+                        <LocalizationProvider dateAdapter={AdapterMoment}>
+                            <DatePicker
+                                label="Expiry date"
+                                value={doe}
+                                onChange={(newDate) => {
+                                    setDoe(
+                                        newDate
+                                            ? newDate.format(DATEFORMAT)
+                                            : null
+                                    );
+                                }}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        fullWidth
+                                        id="doe"
+                                        name="doe"
+                                        sx={{
+                                            mb: 2,
+                                        }}
+                                        required
+                                    />
+                                )}
+                            />
+                        </LocalizationProvider>
 
                         <Button
                             variant="contained"
-                            sx={{mt:5}}
+                            sx={{ mt: 5 }}
                             type="submit"
                         >
                             Save traveler

@@ -46,26 +46,6 @@ const LoginForm = (props) => {
     });
   };
 
-  // setSaveIDFlag(e.target.check);
-  // if (e.target.check) {
-  //   setCookie('rememberID', saveid, { maxAge: 2000 });
-  // } else {
-  //   removeCookie('rememberID');
-  // }
-  // };
-
-  // const [saveid, setSaveid] = useState('');
-  // const [saveIDFlag, setSaveIDFlag] = useState(false);
-  // const [cookies, setCookie, removeCookie] = useCookies(['rememberID']);
-
-  // useEffect(() => {
-  //   //undefined 일때 A component is changing a controlled input to be uncontrolled. 발생
-  //   if (cookies.rememberID !== undefined) {
-  //     setSaveid(cookies.rememberID);
-  //     setSaveIDFlag(true);
-  //   }
-  // }, []);
-
   const loginStart = async (e) => {
     console.log(inputs);
     e.preventDefault();
@@ -74,7 +54,6 @@ const LoginForm = (props) => {
       email: inputs.email,
       password: inputs.password,
     };
-    // console.log('111', data);
     await axios
       .post(baseURL + '/auth/login', JSON.stringify(data), {
         // headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
@@ -149,18 +128,6 @@ const LoginForm = (props) => {
                     onChange={handleValueChange}
                   ></Input>
                 </div>
-                {/* <div className='form_saveID'>
-                  <input
-                    type='checkbox'
-                    name='saveEmail'
-                    id='saveEmail'
-                    checked={saveIDFlag}
-                    onChange={loginStart}
-                  />
-                  <label>
-                    <span>아이디 저장</span>
-                  </label>
-                </div> */}
                 <div className='form-button'>
                   <br></br>
                   <Button variant='text' href='/'>

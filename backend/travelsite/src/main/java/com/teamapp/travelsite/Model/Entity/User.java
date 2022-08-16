@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Builder
@@ -23,8 +24,7 @@ import java.util.List;
         @UniqueConstraint(columnNames = "email")
 })
 public class User {
-
-
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

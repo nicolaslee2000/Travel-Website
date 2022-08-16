@@ -1,12 +1,6 @@
 import React from "react";
 
-import {
-    Card,
-    CardContent,
-    Box,
-    Typography,
-    Container,
-} from "@material-ui/core";
+import { Card, CardContent, Box, Typography, Container } from "@mui/material";
 import FlightList from "./FlightList";
 
 const MyBookingsPage = () => {
