@@ -12,7 +12,6 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import "./header.css";
 import { Box, Button, Link } from "@mui/material";
 import LogoIcon from "../../global/assets/images/logo/LogoIcon.png";
 import LogoName from "../../global/assets/images/logo/LogoName.png";
@@ -101,7 +100,11 @@ const Header = (props) => {
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
                     >
-                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                        {/* <Avatar sx={{ width: 32, height: 32 }} >M</Avatar> */}
+                        <AccountCircleIcon
+                            color="disabled"
+                            sx={{ width: 32, height: 32 }}
+                        />
                     </IconButton>
                 </Tooltip>
                 <Menu
@@ -154,7 +157,12 @@ const Header = (props) => {
                         <Avatar />
                         Profile
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem
+                        onClick={() => {
+                            handleClose();
+                            navigate("/dashboard/account");
+                        }}
+                    >
                         <Avatar /> My account
                     </MenuItem>
                     <Divider />
