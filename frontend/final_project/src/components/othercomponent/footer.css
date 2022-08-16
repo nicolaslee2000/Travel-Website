@@ -15,11 +15,13 @@
 .footer-list {
   list-style: none;
   text-align: center;
+  text-decoration: none;
 }
 
-.footer-list-1 {
+ .footer-list-1 {
   list-style: none;
   text-align: right;
+  text-decoration: none;
 }
 .div {
   max-width: fit-content;

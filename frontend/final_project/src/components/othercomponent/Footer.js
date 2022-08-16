@@ -19,7 +19,7 @@ const Footer = () => {
         {/* <Grid item xs={2}></Grid> */}
         <Grid item xs={2}>
           <div className='footer-container-1'>
-            <h4>url</h4>
+            {/* <h4>url</h4>
             <ul className='footer-list-1'>
               <li>
                 <a href='/'>메인</a>
@@ -30,7 +30,7 @@ const Footer = () => {
               <li>
                 <a href='/register'>회원가입</a>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </Grid>
         <Grid item xs={8}>

@@ -17,6 +17,7 @@ const TravlerPage = lazy(() => import("../pages/travelerpage/TravlerPage"));
 const FinalConfirmPage = lazy(() =>
     import("../pages/finalconfirmpage/FinalConfirmPage")
 );
+const Emailconfirmed = lazy(()=> import("../pages/registeredpage/Emailconfirmed"));
 
 //UserDashboard
 const UserDashboard = lazy(() =>
@@ -54,7 +55,9 @@ const Router = () => {
                 <Routes>
                     <Route path="/" element={<Layout isLogin={isLogin} />}>
                         <Route index element={<MainPage />} exact />
-                        <Route path="register" element={<RegisterPage />} />
+                        <Route path="register" element={<RegisterPage />} >
+                        </Route>
+                        <Route path="register/emailconfirmed" element={<Emailconfirmed />} />
                         <Route path="registed" element={<RegisteredPage />} />
                         <Route
                             path="login"
@@ -91,34 +94,16 @@ const Router = () => {
                             <Route path="account">
                                 <Route index element={<MyAccountPage />} />
                             </Route>
+
+                            
                         </Route>
 
                         {/* error page */}
-                        <Route path="*" element={<ErrorPage />} />
+                        <Route path="*" element={<ErrorPage text="Page not found!" />} />
+                        <Route path="register/expired" element={<ErrorPage text="인증 만료된 이메일 입니다. "/> } />
                     </Route>
                 </Routes>
 
-                {/* <Layout isLogin={isLogin}>
-                    <Routes>
-                        <Route path="/" element={<MainPage />} exact />
-                        <Route path="register" element={<RegisterPage />} />
-                        <Route path="registed" element={<RegisteredPage />} />
-                        <Route
-                            path="login"
-                            element={<LoginPage setIsLogin={setIsLogin} />}
-                        />
-                        <Route
-                            path="/searchResult"
-                            element={<SearchResultPage />}
-                        />
-                        <Route path="/travler" element={<TravlerPage />} />
-                        <Route
-                            path="/finalConfirm"
-                            element={<FinalConfirmPage />}
-                        />
-                        <Route path="*" element={<ErrorPage />} />
-                    </Routes>
-                </Layout> */}
             </Suspense>
         </BrowserRouter>
     );

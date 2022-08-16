@@ -3,13 +3,13 @@ import { Container } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ErrorPage = () => {
+const ErrorPage = (props) => {
     const navigate = useNavigate();
     return (
         <Box sx={{ width: 500, height: 500 }}>
             <Container>
                 <Typography variant="h1" color="error">
-                    Page not found!
+                    {props.text}
                 </Typography>
                 <Button
                     sx={{ mt: 10 }}

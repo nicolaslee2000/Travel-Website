@@ -9,6 +9,7 @@ import {
   Input,
   Tab,
   Tabs,
+  Tooltip,
 } from '@mui/material';
 import Button from '@mui/material/Button';
 import './registerForm.css';
@@ -250,7 +251,13 @@ const RegisterForm = (props) => {
                     <Button variant="text" href="/">
                       이전
                     </Button>
-                    {!emailcheckForm && <Button disabled>확인</Button>}
+                    {!emailcheckForm && (
+                      <Tooltip title="이메일 인증을 먼저 해주세요">
+                        <span>
+                    <Button variant="contained" disabled >확인</Button>
+                    </span>
+                    </Tooltip>
+                    )}
                     {emailcheckForm && (
                       <Button type="submit" variant="contained">
                         확인
