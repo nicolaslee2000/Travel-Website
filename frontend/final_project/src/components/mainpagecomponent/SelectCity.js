@@ -12,16 +12,8 @@ const SelectCity = (props) => {
   const [viewValue, setViewValue] = useState(""); //검색창에 보여주는 텍스트 state값
   const [arrival, setArrial] = useState("");
   const [inputArrival, setInputArrial] = useState("");
-  const [orgin, setOrigin] = useState({
-    country: null,
-    airport: null,
-    code: null,
-  });
-  const [destination, setDestination] = useState({
-    country: null,
-    airport: null,
-    code: null,
-  });
+  const [orgin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
   const [iataCode, setIataCode] = useState("");
 
   const handleOnchangeArrival = (e, value) => {
@@ -73,25 +65,6 @@ const SelectCity = (props) => {
     setIataCode(slice(arrival));
   }, [arrival]);
 
-  useEffect(() => {
-    if (label === "출발지") {
-      setOrigin((prevOrigin) => ({ ...prevOrigin, code: iataCode }));
-    } else if (label === "도착지") {
-      setDestination((prevDestination) => ({
-        ...prevDestination,
-        code: iataCode,
-      }));
-    }
-  }, [label, iataCode]);
-
-  useEffect(() => {
-    if (label === "출발지") {
-      update((prev) => ({ ...prev, origin: orgin }));
-    } else if (label === "도착지") {
-      update((prev) => ({ ...prev, destination: destination }));
-    }
-  }, [label, orgin, destination]);
-
   // useEffect(() => {
   //   if (label === "출발지") {
   //     update((prev) => ({ ...prev, orgin: iataCode }));
@@ -99,6 +72,14 @@ const SelectCity = (props) => {
   //     update((prev) => ({ ...prev, destination: iataCode }));
   //   }
   // }, [label, iataCode, origin, destination]);
+
+  useEffect(() => {
+    if (label === "출발지") {
+      update((prev) => ({ ...prev, origin: iataCode }));
+    } else if (label === "도착지") {
+      update((prev) => ({ ...prev, destination: iataCode }));
+    }
+  }, [label, iataCode]);
 
   return (
     <Autocomplete
