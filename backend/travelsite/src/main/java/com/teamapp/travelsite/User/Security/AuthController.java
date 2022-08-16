@@ -71,6 +71,7 @@ public class AuthController {
         Random ran = new Random();
         long ranId = ran.nextInt(333)+1;
 
+
         TempMail tempMail = new TempMail();
         tempMail.setId(ranId);
         tempMail.setEmail(signUpMailRequest.getEmail());
