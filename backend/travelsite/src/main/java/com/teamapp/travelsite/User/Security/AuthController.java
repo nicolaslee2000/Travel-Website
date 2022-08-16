@@ -69,7 +69,7 @@ public class AuthController {
         }
         
         Random ran = new Random();
-        long ranId = ran.nextLong(999)+1;
+        long ranId = ran.nextInt(999)+1;
 
         TempMail tempMail = new TempMail();
         tempMail.setId(ranId);
@@ -77,7 +77,7 @@ public class AuthController {
         tempMail.setEmailAuth(false);
         tempMail.setEmailAuthKey(CUDService.creatEmailAuth());
 
-//        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
+        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
         tempMailRepository.save(tempMail);
 
@@ -134,6 +134,10 @@ public class AuthController {
 	
 	@GetMapping("/emailconfirmed")
 	public String reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
+		 if (!tempMailRepository.existsByEmail(userEmail)) {
+			 	return "redirect:/auth/register/expired";
+	        }
+		
 		CUDService.mailAuth(userEmail, authKey);
 		
 		Boolean result = CUDService.mailAuth(userEmail, authKey);
