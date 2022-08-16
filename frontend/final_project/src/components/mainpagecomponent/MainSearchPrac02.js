@@ -31,10 +31,10 @@ const MainSearchPrac02 = () => {
   const [nonStop, setNonStop] = useState(true);
   const [onWay, setOnWay] = useState(true);
   const [flightInfo, setFlightInfo] = useState({
-    // origin: { country: "", airport: "", code: "" },
-    // destination: { country: "", airport: "", code: "" },
-    origin: null,
-    destination: null,
+    origin: { country: "", airport: "", code: "" },
+    destination: { country: "", airport: "", code: "" },
+    // origin: null,
+    // destination: null,
     departDate: null,
     returnDate: null,
     adults: null,
@@ -108,10 +108,10 @@ const MainSearchPrac02 = () => {
     await axios
       .get("http://localhost:8090/flight/flights", {
         params: {
-          // origin: sendData.origin.code,
-          // destination: sendData.destination.code,
-          origin: sendData.origin,
-          destination: sendData.destination,
+          origin: sendData.origin.code,
+          destination: sendData.destination.code,
+          // origin: sendData.origin,
+          // destination: sendData.destination,
           departDate: sendData.departDate,
           returnDate: sendData.returnDate,
           adults: sendData.adults,
@@ -185,7 +185,7 @@ const MainSearchPrac02 = () => {
   };
 
   useEffect(() => {
-    //console.log(flightInfo);
+    console.log(flightInfo);
     //console.log("selecity test용" + { flightInfo });
   }, [flightInfo]);
 
