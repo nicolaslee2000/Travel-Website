@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Autocomplete,
   Button,
@@ -11,20 +11,20 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import "./mainSearch.css";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { searchInit } from "./../../reduxes/modules/searchInfoReducer";
-import axios from "axios";
-import { seInit } from "./../../reduxes/modules/searchInfoReducer2";
-import { offerInit } from "./../../reduxes/modules/searchInfoReducer3";
-import SelectCity from "./SelectCity";
-import CalenderComp from "./CalenderComp";
-import Passenger from "./Passenger";
-import { Box, boxSizing, Container } from "@mui/system";
+} from '@mui/material';
+import './mainSearch.css';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchInit } from './../../reduxes/modules/searchInfoReducer';
+import axios from 'axios';
+import { seInit } from './../../reduxes/modules/searchInfoReducer2';
+import { allInit, offerInit } from './../../reduxes/modules/searchInfoReducer3';
+import SelectCity from './SelectCity';
+import CalenderComp from './CalenderComp';
+import Passenger from './Passenger';
+import { Box, boxSizing, Container } from '@mui/system';
 
-import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
+import BackgroundImage from '../../global/assets/images/backgrounds/BackgroundImage.jpg';
 
 const MainSearchPrac02 = () => {
   const [raidoValue, setRadioValue] = useState(false);
@@ -99,14 +99,14 @@ const MainSearchPrac02 = () => {
   // });
 
   const inputDate = (e) => {
-    console.log("input :" + e);
+    console.log('input :' + e);
     setFlightInfo(e);
   };
 
   // http://localhost:8090/flight/flights?originLocationCode=ICN&destinationLocationCode=NRT&departureDate=2022-08-05&adults=1
   const searchData = async (sendData) => {
     await axios
-      .get("http://localhost:8090/flight/flights", {
+      .get('http://localhost:8090/flight/flights', {
         params: {
           // origin: sendData.origin.code,
           // destination: sendData.destination.code,
@@ -123,16 +123,13 @@ const MainSearchPrac02 = () => {
         // params: { adults: sendData.adults },
       })
       .then((response) => {
-        console.log("MainSearchPrac02 리스폰스", response);
-        console.log("MainSearchPrac02 리스폰스 데이터", response.data);
         dispatch(offerInit(response.data));
-        console.log("MainSearchPrac02 디스패치 실행 후임");
-        navigate("/searchResult");
+        // navigate("/searchResult");
         //dispatch(seInit(response.data));
         //setAxData(response.data);
         //console.log('상태데이터로 받음', axData);
       })
-      .catch((err) => console.log("안됌ㅋ : " + err.message));
+      .catch((err) => console.log('안됌ㅋ : ' + err.message));
   };
 
   // 삭제?
@@ -148,10 +145,10 @@ const MainSearchPrac02 = () => {
   const navigate = useNavigate();
 
   const handleToResult = () => {
-    console.log("result :" + flightInfo);
+    console.log('result :' + flightInfo);
     dispatch(searchInit(flightInfo));
     searchData(flightInfo);
-    // navigate("/searchResult");
+    navigate('/searchResult');
     // let data = SearchData(' ');
     // console.log('메인페이지에서 엑시오스 실행 결과', data);
   };
@@ -194,6 +191,10 @@ const MainSearchPrac02 = () => {
     setFlightInfo((prev) => ({ ...prev, nonStop: nonStop }));
   }, [nonStop]);
 
+  useEffect(() => {
+    dispatch(allInit());
+  }, []);
+
   return (
     <Box
       sx={{
@@ -203,13 +204,13 @@ const MainSearchPrac02 = () => {
       <Box
         sx={{
           backgroundImage: `url(${BackgroundImage})`,
-          backgroundSize: "100%, 100%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right 0 top 80%",
+          backgroundSize: '100%, 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right 0 top 80%',
         }}
       >
         <Container sx={{ paddingTop: 5 }}>
-          <Typography variant="h1" color={"white"} align="center">
+          <Typography variant='h1' color={'white'} align='center'>
             Travel your dream away!
           </Typography>
         </Container>
@@ -218,14 +219,14 @@ const MainSearchPrac02 = () => {
           <Box
             sx={{
               maxWidth: 1200,
-              width: "100%",
-              height: "108px",
+              width: '100%',
+              height: '108px',
             }}
           >
             <Typography
-              variant="h2"
-              component="div"
-              sx={{ align: "bottom", color: "blue" }}
+              variant='h2'
+              component='div'
+              sx={{ align: 'bottom', color: 'blue' }}
             >
               지금 여행을 떠나세요
             </Typography>
@@ -234,45 +235,45 @@ const MainSearchPrac02 = () => {
             Container
             sx={{
               border: 1,
-              boxSizing: "border-box",
-              bgcolor: "#ededed",
+              boxSizing: 'border-box',
+              bgcolor: '#ededed',
             }}
           >
-            <Box sx={{ p: "24px" }}>
+            <Box sx={{ p: '24px' }}>
               {/* 직항유무 */}
               <FormControl>
                 <RadioGroup
                   row
-                  aria-labelledby="demo-controlled-radio-buttons-group"
-                  name="oneWay-roundTrip-group"
+                  aria-labelledby='demo-controlled-radio-buttons-group'
+                  name='oneWay-roundTrip-group'
                   value={raidoValue}
                   onChange={handleRadioChange}
                 >
                   <FormControlLabel
-                    value="false"
+                    value='false'
                     control={
                       <Radio
                         sx={{
-                          "& .MuiSvgIcon-root": {
+                          '& .MuiSvgIcon-root': {
                             fontSize: 28,
                           },
                         }}
                       />
                     }
-                    label="편도"
+                    label='편도'
                   />
                   <FormControlLabel
-                    value="true"
+                    value='true'
                     control={
                       <Radio
                         sx={{
-                          "& .MuiSvgIcon-root": {
+                          '& .MuiSvgIcon-root': {
                             fontSize: 28,
                           },
                         }}
                       />
                     }
-                    label="왕복"
+                    label='왕복'
                   />
                 </RadioGroup>
               </FormControl>
@@ -280,16 +281,16 @@ const MainSearchPrac02 = () => {
               <Grid container spacing={0}>
                 {/* 도시선택 */}
                 <Grid item xs={6}>
-                  <Stack direction="row">
+                  <Stack direction='row'>
                     <SelectCity
-                      id="arrival_city"
+                      id='arrival_city'
                       update={inputDate}
-                      label="출발지"
+                      label='출발지'
                     />
                     <SelectCity
-                      id="departure_city"
+                      id='departure_city'
                       update={inputDate}
-                      label="도착지"
+                      label='도착지'
                     />
                   </Stack>
                 </Grid>
@@ -304,21 +305,21 @@ const MainSearchPrac02 = () => {
                 </Grid>
               </Grid>
               {/* 직항여부 */}
-              <Box sx={{ display: "flex", mt: "24px" }}>
+              <Box sx={{ display: 'flex', mt: '24px' }}>
                 <FormControlLabel
                   control={
                     <Checkbox
                       checked={nonStop}
                       onChange={handleNonStop}
-                      inputProps={{ "aria-label": "controlled" }}
-                      sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                      inputProps={{ 'aria-label': 'controlled' }}
+                      sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
                     />
                   }
-                  label="직항"
+                  label='직항'
                 />
                 <Button
-                  sx={{ ml: "auto", width: "200px", height: "46px" }}
-                  variant="outlined"
+                  sx={{ ml: 'auto', width: '200px', height: '46px' }}
+                  variant='outlined'
                   onClick={handleToResult}
                 >
                   <Typography>검색하기</Typography>
