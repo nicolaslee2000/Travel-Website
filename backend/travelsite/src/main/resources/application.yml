@@ -1,9 +1,13 @@
 springdoc:
   swagger-ui:
     path: docs.html
-  version: v6
+  version: v1
   paths-to-match:
     - /flight/**
     - /auth/**
     - /traveler/**
     - /order/**
+spring:
+  mvc:
+    converters:
+      preferred-json-mapper: 'gson'

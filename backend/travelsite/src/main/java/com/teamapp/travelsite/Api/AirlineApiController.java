@@ -80,6 +80,7 @@ public class AirlineApiController {
 					
 			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofByteArray());
 		} catch(java.io.IOException | InterruptedException | URISyntaxException e) {
+
 			
 		}
 		
