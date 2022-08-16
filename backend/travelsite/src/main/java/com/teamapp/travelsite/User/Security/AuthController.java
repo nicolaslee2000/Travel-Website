@@ -69,7 +69,10 @@ public class AuthController {
         }
         
         Random ran = new Random();
+
         long ranId = ran.nextInt(999)+1;
+
+
 
         TempMail tempMail = new TempMail();
         tempMail.setId(ranId);

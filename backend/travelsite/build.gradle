@@ -45,7 +45,6 @@ dependencies {
 	//Oauth
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
-	//JWT
 
 	implementation 'org.modelmapper:modelmapper:2.4.2'
 
@@ -56,6 +55,9 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'de.codecentric:spring-boot-admin-starter-client:2.6.6'
+
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+
 
 
 

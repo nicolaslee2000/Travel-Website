@@ -37,9 +37,9 @@ public class OrdermanagementServiceImpl implements OrderManagementService {
 
 
     @Override
-    public boolean createTicketOrder(TicketOrderDTO ticketOrderDTO) {
-        this.ticketOrderRepository.save(ticketOrderDTO.toEntity(ticketOrderDTO));
-        return false;
+    public Long createTicketOrder(TicketOrderDTO ticketOrderDTO) {
+        TicketOrder ticketOrder = this.ticketOrderRepository.save(ticketOrderDTO.toEntity(ticketOrderDTO));
+        return ticketOrder.getId();
     }
 
     public boolean isOrderSaved(Long orderId) throws Exception {
@@ -52,13 +52,15 @@ public class OrdermanagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    public void saveUpdatedOrder(TicketOrderDTO ticketOrderDTO) throws Exception {
+    public Long saveUpdatedOrder(TicketOrderDTO ticketOrderDTO) throws Exception {
         TicketOrder ticketOrder = ticketOrderDTO.toEntity(ticketOrderDTO);
         Optional<TicketOrder> byId = this.ticketOrderRepository.findById(ticketOrder.getId());
         if (byId.isPresent()) {
             ticketOrderRepository.delete(byId.get());
-        }
-        this.ticketOrderRepository.save(ticketOrder);
+            return this.ticketOrderRepository.save(ticketOrder).getId();
+        } else throw new NotFoundExceptionMessage("maybe not created");
+
+
     }
 
     @Override

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Autocomplete,
   Button,
@@ -11,25 +11,26 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import "./mainSearch.css";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { searchInit } from "./../../reduxes/modules/searchInfoReducer";
-import axios from "axios";
-import { seInit } from "./../../reduxes/modules/searchInfoReducer2";
-import { offerInit } from "./../../reduxes/modules/searchInfoReducer3";
-import SelectCity from "./SelectCity";
-import CalenderComp from "./CalenderComp";
-import Passenger from "./Passenger";
-import { Box, boxSizing, Container } from "@mui/system";
+} from '@mui/material';
+import './mainSearch.css';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchInit } from './../../reduxes/modules/searchInfoReducer';
+import axios from 'axios';
+import { seInit } from './../../reduxes/modules/searchInfoReducer2';
+import { allInit, offerInit } from './../../reduxes/modules/searchInfoReducer3';
+import SelectCity from './SelectCity';
+import CalenderComp from './CalenderComp';
+import Passenger from './Passenger';
+import { Box, boxSizing, Container } from '@mui/system';
 
-import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
+import BackgroundImage from '../../global/assets/images/backgrounds/BackgroundImage.jpg';
 
 const MainSearchPrac02 = () => {
   const [raidoValue, setRadioValue] = useState(false);
   const [nonStop, setNonStop] = useState(true);
   const [onWay, setOnWay] = useState(true);
+  const [pageLoaded, setPageLoaded] = useState(false);
   const [flightInfo, setFlightInfo] = useState({
     // origin: { country: "", airport: "", code: "" },
     // destination: { country: "", airport: "", code: "" },
@@ -43,70 +44,20 @@ const MainSearchPrac02 = () => {
     nonStop: null,
   });
 
-  // const top10Start = [
-  //   { start: "한국" },
-  //   { start: "미국" },
-  //   { start: "일본" },
-  //   { start: "중국" },
-  //   { start: "미얀마" },
-  //   { start: "캐나다" },
-  //   { start: "인도" },
-  //   { start: "프랑스" },
-  //   { start: "영국" },
-  // ];
-
-  // const top10Start2 = [
-  //   { start: { country: "한국", airport: "인천", code: "ICN" } },
-  //   { start: { country: "일본", airport: "나리타", code: "NRT" } },
-  // ];
-
-  // const top10End2 = [
-  //   { end: { country: "한국", airport: "인천", code: "ICN" } },
-  //   { end: { country: "일본", airport: "나리타", code: "NRT" } },
-  // ];
-
-  // const top10End = [
-  //   { end: "미국" },
-  //   { end: "일본" },
-  //   { end: "중국" },
-  //   { end: "미얀마" },
-  //   { end: "캐나다" },
-  //   { end: "인도" },
-  //   { end: "프랑스" },
-  //   { end: "영국" },
-  // ];
-  // const { inputSearch } = useSelector((state) => {
-  //   console.log('test -============================');
-  //   console.log(state.searchReducer.inputSearch);
-  //   return state.searchReducer;
-  // });
-
   const dispatch = useDispatch();
-  // const searData2 = useSelector((state) => {
-  //   return state.searchReducer2;
-  // });
 
   const searData3 = useSelector((state) => {
     return state.searchReducer3;
   });
-
-  // const [info2, setInfo2] = useState({
-  //   start: { country: "", airport: "", code: "" },
-  //   end: { country: "", airport: "", code: "" },
-  //   departureDate: "2022-08-12",
-  //   returnDate: "2022-08-14",
-  //   adults: 1,
-  // });
-
   const inputDate = (e) => {
-    console.log("input :" + e);
+    console.log('input :' + e);
     setFlightInfo(e);
   };
 
   // http://localhost:8090/flight/flights?originLocationCode=ICN&destinationLocationCode=NRT&departureDate=2022-08-05&adults=1
   const searchData = async (sendData) => {
     await axios
-      .get("http://localhost:8090/flight/flights", {
+      .get('http://localhost:8090/flight/flights', {
         params: {
           // origin: sendData.origin.code,
           // destination: sendData.destination.code,
@@ -118,59 +69,22 @@ const MainSearchPrac02 = () => {
           travelClass: sendData.travelClass,
           nonStop: sendData.nonStop,
         },
-        // params: { destinationLocationCode: sendData.start.code },
-        // params: { departureDate: sendData.departureDate },
-        // params: { adults: sendData.adults },
       })
       .then((response) => {
-        console.log("MainSearchPrac02 리스폰스", response);
-        console.log("MainSearchPrac02 리스폰스 데이터", response.data);
         dispatch(offerInit(response.data));
-        console.log("MainSearchPrac02 디스패치 실행 후임");
-        navigate("/searchResult");
-        //dispatch(seInit(response.data));
-        //setAxData(response.data);
-        //console.log('상태데이터로 받음', axData);
+        setPageLoaded(true);
       })
-      .catch((err) => console.log("안됌ㅋ : " + err.message));
+      .catch((err) => console.log('안됌ㅋ : ' + err.message));
   };
-
-  // 삭제?
-  // const handleInfoChange = (e, newValue) => {
-  //   // setInfo((prev) => {
-  //   //   return { ...prev, ...newValue };
-  //   // });
-  //   setFlightInfo((prev) => {
-  //     return { ...prev, ...newValue };
-  //   });
-  // };
 
   const navigate = useNavigate();
 
   const handleToResult = () => {
-    console.log("result :" + flightInfo);
+    console.log('result :' + flightInfo);
     dispatch(searchInit(flightInfo));
     searchData(flightInfo);
-    // navigate("/searchResult");
-    // let data = SearchData(' ');
-    // console.log('메인페이지에서 엑시오스 실행 결과', data);
+    navigate('/searchResult', { state: { pageLoaded: pageLoaded } });
   };
-
-  // const handleConfirm1 = () => {
-  //   searchData3(flightInfo);
-  //   //searchData(' ');
-  // };
-
-  // const handleConfirm2 = () => {
-  //   //console.log('상태데이터로 받음', axData);
-  //   //console.log(info2);
-  //   //console.log('제발 떠라 제발', searData2);
-  //   console.log(
-  //     "제발 떠라 제발",
-  //     searData3.flightOfferSearch[3].price.currency
-  //   );
-  //   console.log("제발 22", searData3);
-  // };
 
   const handleRadioChange = (e) => {
     setRadioValue(e.target.value);
@@ -194,6 +108,10 @@ const MainSearchPrac02 = () => {
     setFlightInfo((prev) => ({ ...prev, nonStop: nonStop }));
   }, [nonStop]);
 
+  useEffect(() => {
+    dispatch(allInit());
+  }, []);
+
   return (
     <Box
       sx={{
@@ -203,13 +121,13 @@ const MainSearchPrac02 = () => {
       <Box
         sx={{
           backgroundImage: `url(${BackgroundImage})`,
-          backgroundSize: "100%, 100%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right 0 top 80%",
+          backgroundSize: '100%, 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right 0 top 80%',
         }}
       >
         <Container sx={{ paddingTop: 5 }}>
-          <Typography variant="h1" color={"white"} align="center">
+          <Typography variant='h1' color={'white'} align='center'>
             Travel your dream away!
           </Typography>
         </Container>
@@ -218,14 +136,14 @@ const MainSearchPrac02 = () => {
           <Box
             sx={{
               maxWidth: 1200,
-              width: "100%",
-              height: "108px",
+              width: '100%',
+              height: '108px',
             }}
           >
             <Typography
-              variant="h2"
-              component="div"
-              sx={{ align: "bottom", color: "blue" }}
+              variant='h2'
+              component='div'
+              sx={{ align: 'bottom', color: 'blue' }}
             >
               지금 여행을 떠나세요
             </Typography>
@@ -234,45 +152,45 @@ const MainSearchPrac02 = () => {
             Container
             sx={{
               border: 1,
-              boxSizing: "border-box",
-              bgcolor: "#ededed",
+              boxSizing: 'border-box',
+              bgcolor: '#ededed',
             }}
           >
-            <Box sx={{ p: "24px" }}>
+            <Box sx={{ p: '24px' }}>
               {/* 직항유무 */}
               <FormControl>
                 <RadioGroup
                   row
-                  aria-labelledby="demo-controlled-radio-buttons-group"
-                  name="oneWay-roundTrip-group"
+                  aria-labelledby='demo-controlled-radio-buttons-group'
+                  name='oneWay-roundTrip-group'
                   value={raidoValue}
                   onChange={handleRadioChange}
                 >
                   <FormControlLabel
-                    value="false"
+                    value='false'
                     control={
                       <Radio
                         sx={{
-                          "& .MuiSvgIcon-root": {
+                          '& .MuiSvgIcon-root': {
                             fontSize: 28,
                           },
                         }}
                       />
                     }
-                    label="편도"
+                    label='편도'
                   />
                   <FormControlLabel
-                    value="true"
+                    value='true'
                     control={
                       <Radio
                         sx={{
-                          "& .MuiSvgIcon-root": {
+                          '& .MuiSvgIcon-root': {
                             fontSize: 28,
                           },
                         }}
                       />
                     }
-                    label="왕복"
+                    label='왕복'
                   />
                 </RadioGroup>
               </FormControl>
@@ -280,16 +198,16 @@ const MainSearchPrac02 = () => {
               <Grid container spacing={0}>
                 {/* 도시선택 */}
                 <Grid item xs={6}>
-                  <Stack direction="row">
+                  <Stack direction='row'>
                     <SelectCity
-                      id="arrival_city"
+                      id='arrival_city'
                       update={inputDate}
-                      label="출발지"
+                      label='출발지'
                     />
                     <SelectCity
-                      id="departure_city"
+                      id='departure_city'
                       update={inputDate}
-                      label="도착지"
+                      label='도착지'
                     />
                   </Stack>
                 </Grid>
@@ -304,21 +222,21 @@ const MainSearchPrac02 = () => {
                 </Grid>
               </Grid>
               {/* 직항여부 */}
-              <Box sx={{ display: "flex", mt: "24px" }}>
+              <Box sx={{ display: 'flex', mt: '24px' }}>
                 <FormControlLabel
                   control={
                     <Checkbox
                       checked={nonStop}
                       onChange={handleNonStop}
-                      inputProps={{ "aria-label": "controlled" }}
-                      sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                      inputProps={{ 'aria-label': 'controlled' }}
+                      sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
                     />
                   }
-                  label="직항"
+                  label='직항'
                 />
                 <Button
-                  sx={{ ml: "auto", width: "200px", height: "46px" }}
-                  variant="outlined"
+                  sx={{ ml: 'auto', width: '200px', height: '46px' }}
+                  variant='outlined'
                   onClick={handleToResult}
                 >
                   <Typography>검색하기</Typography>
