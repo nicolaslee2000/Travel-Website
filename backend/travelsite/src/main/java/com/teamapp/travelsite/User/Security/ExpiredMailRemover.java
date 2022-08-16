@@ -14,7 +14,7 @@ public class ExpiredMailRemover {
 	
 
 //	@Scheduled(cron = "0/10 * * * * *")	//보여주기용 10초
-	@Scheduled(cron = "0 0/1 * * * *")	//10분 마다 쿼리 날림
+	@Scheduled(cron = "0 0/1 * * * *")	//1분 마다 쿼리 날림
 	public void searchExpiredMail() {
 		if(tempMailRepository.searchExpiredMail() != null) {
 //			System.out.println(tempMailRepository.searchExpiredMail());
