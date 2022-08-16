@@ -1,0 +1,9 @@
+springdoc:
+  swagger-ui:
+    path: docs.html
+  version: v6
+  paths-to-match:
+    - /flight/**
+    - /auth/**
+    - /traveler/**
+    - /order/**

@@ -8,11 +8,11 @@ import com.teamapp.travelsite.Model.Entity.TicketOrder;
 import java.util.List;
 
 public interface OrderManagementService {
-    boolean createTicketOrder (TicketOrderDTO ticketOrderDTO);
+    Long createTicketOrder (TicketOrderDTO ticketOrderDTO);
 
     boolean isOrderSaved(Long orderId) throws Exception;
 
-    void saveUpdatedOrder(TicketOrderDTO ticketOrderDTO) throws Exception;
+    Long saveUpdatedOrder(TicketOrderDTO ticketOrderDTO) throws Exception;
 
     boolean deleteOrder(Long id) throws Exception;
 
