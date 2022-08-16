@@ -7,8 +7,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
+import com.teamapp.travelsite.Model.DTOs.TravelerDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +19,7 @@ import com.amadeus.exceptions.ResponseException;
 import com.amadeus.resources.FlightOfferSearch;
 import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
-import com.amadeus.resources.Traveler;
 import com.google.gson.JsonObject;
-import com.teamapp.travelsite.Config.AmadeusConfig;
 
 import lombok.RequiredArgsConstructor;
 
@@ -62,7 +59,7 @@ public class AirlineApiController {
 	}
 
 	@PostMapping("/traveler")
-	public Traveler traveler(@RequestBody(required = true) JsonObject travelerInfo) {
+	public TravelerDTO traveler(@RequestBody(required = true) JsonObject travelerInfo) {
 		return DatabaseConnect.traveler(travelerInfo.get("data").getAsJsonObject());
 	} //q
 
@@ -82,7 +79,8 @@ public class AirlineApiController {
 					.build();
 					
 			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofByteArray());
-		} catch( java.io.IOException | InterruptedException | URISyntaxException e) {
+		} catch(java.io.IOException | InterruptedException | URISyntaxException e) {
+
 			
 		}
 		

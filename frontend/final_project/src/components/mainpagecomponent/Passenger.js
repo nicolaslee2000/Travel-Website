@@ -129,7 +129,9 @@ export default function BasicPopover(props) {
         onClick={handleClick}
         sx={{ height: "56px" }}
       >
-        총인원수 {AdultCount + ChildCount}명,좌석 : {seat}
+        총인원수 {AdultCount + ChildCount}명, 좌석 : {seat}
+        {/* 총인원수 {AdultCount + ChildCount}명<br />
+        좌석 : {seat} */}
       </Button>
       <Popover
         id={id}
