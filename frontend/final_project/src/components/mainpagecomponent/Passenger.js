@@ -106,11 +106,11 @@ export default function BasicPopover(props) {
     }
   };
 
-  const seatIndexStyle = (seat) => {
-    <Typography sx={{ fontSize: "30px", fontWeight: "500" }}>
-      {seat}
-    </Typography>;
-  };
+  // const seatIndexStyle = (seat) => {
+  //   <Typography sx={{ fontSize: "30px", fontWeight: "500" }}>
+  //     {seat}
+  //   </Typography>;
+  // };
 
   useEffect(() => {
     console.log("AdultCount :" + AdultCount);
@@ -133,12 +133,16 @@ export default function BasicPopover(props) {
         aria-describedby={id}
         variant="outlined"
         onClick={handleClick}
-        sx={{ height: "56px", border: "1px solid rgba(0, 0, 0, 0.2)" }}
+        sx={{
+          width: "100%",
+          height: "56px",
+          border: "1px solid rgba(0, 0, 0, 0.2)",
+        }}
       >
         <Typography sx={{ color: "rgba(0, 0, 0, 0.8)" }}>
-          총인원수 {AdultCount + ChildCount}명, 좌석 : {seat}
-          {/* 총인원수 {AdultCount + ChildCount}명<br />
-        좌석 : {seat} */}
+          {/* 총인원수 {AdultCount + ChildCount}명, 좌석 : {seat} */}
+          총인원수 {AdultCount + ChildCount}명<br />
+          좌석 : {seat}
         </Typography>
       </Button>
       <Popover
@@ -179,7 +183,8 @@ export default function BasicPopover(props) {
                 <FormControlLabel
                   value="ECONOMY"
                   control={<Radio />}
-                  label={seatIndexStyle("ECONOMY")}
+                  // label={seatIndexStyle("ECONOMY")}
+                  label="ECONOMY"
                 />
                 <FormControlLabel
                   value="PREMIUM_ECONOMY"

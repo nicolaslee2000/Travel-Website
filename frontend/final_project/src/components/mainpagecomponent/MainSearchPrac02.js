@@ -25,6 +25,7 @@ import Passenger from "./Passenger";
 import { Box, boxSizing, Container, fontWeight } from "@mui/system";
 
 import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
+import { Brightness1 } from "@mui/icons-material";
 // import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage1.jpg";
 
 const MainSearchPrac02 = () => {
@@ -195,6 +196,7 @@ const MainSearchPrac02 = () => {
     <Box
       sx={{
         height: 700,
+        position: "relative",
       }}
     >
       <Box
@@ -204,174 +206,186 @@ const MainSearchPrac02 = () => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right 0 top 80%",
           height: "550px",
+          filter: "Brightness(50%)",
         }}
-      >
-        <Container sx={{ paddingTop: 5 }}>
+      ></Box>
+      {/* <Container sx={{ paddingTop: 5 }}>
           <Typography variant="h1" color={"white"} align="center">
             Travel your dream away!
           </Typography>
-        </Container>
-        <Container sx={{ paddingTop: 5, paddingBottom: 7 }}>
-          {/* mainSearchApp */}
-          <Box
+        </Container> */}
+      {/* <Container sx={{ paddingTop: 17, paddingBottom: 7 }}> */}
+      <Container
+        sx={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -70%)",
+        }}
+      >
+        {/* mainSearchApp */}
+        <Box
+          sx={{
+            maxWidth: 1050,
+            width: "100%",
+            height: "90px",
+          }}
+        >
+          <Typography
+            variant="h1"
+            fontSize={50}
+            fontWeight={600}
+            component="div"
             sx={{
-              maxWidth: 1200,
-              width: "100%",
-              height: "108px",
+              align: "bottom",
+              color: "white",
+              // textShadow:
+              //   "-0.6px 0px black, 0px 0.6px black, 0.6px 0px black, 0px -0.6px black",
             }}
           >
-            <Typography
-              variant="h1"
-              fontSize={65}
-              component="div"
-              sx={{
-                align: "bottom",
-                color: "white",
-                textShadow:
-                  "-0.6px 0px black, 0px 0.6px black, 0.6px 0px black, 0px -0.px black",
-              }}
-            >
-              지금 여행을 떠나세요
-            </Typography>
-          </Box>
+            지금 여행을 떠나세요
+          </Typography>
+        </Box>
+        <Box
+          Container
+          sx={{
+            boxSizing: "border-box",
+            bgcolor: "#ededed",
+            borderRadius: 3,
+            boxShadow: 10,
+          }}
+        >
           <Box
-            Container
             sx={{
-              boxSizing: "border-box",
-              bgcolor: "#ededed",
-              borderRadius: "0.25rem",
+              p: "25px",
             }}
           >
-            <Box sx={{ p: "24px" }}>
-              {/* 직항유무 */}
-              <FormControl>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-controlled-radio-buttons-group"
-                  name="oneWay-roundTrip-group"
-                  value={raidoValue}
-                  onChange={handleRadioChange}
-                >
-                  <FormControlLabel
-                    value="false"
-                    control={
-                      <Radio
-                        sx={{
-                          "& .MuiSvgIcon-root": {
-                            fontSize: 28,
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Typography
-                        sx={{
-                          fontSize: "20px",
-                          fontWeight: "700",
-                          // color: "white",
-                        }}
-                      >
-                        편도
-                      </Typography>
-                    }
-                  />
-                  <FormControlLabel
-                    value="true"
-                    control={
-                      <Radio
-                        sx={{
-                          "& .MuiSvgIcon-root": {
-                            fontSize: 28,
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Typography
-                        sx={{
-                          fontSize: "20px",
-                          fontWeight: "700",
-                          // color: "white",
-                        }}
-                      >
-                        왕복
-                      </Typography>
-                    }
-                  />
-                </RadioGroup>
-              </FormControl>
-              {/* 메뉴 */}
-              <Grid container spacing={0}>
-                {/* 도시선택 */}
-                <Grid item xs={6}>
-                  <Stack direction="row">
-                    <SelectCity
-                      id="arrival_city"
-                      update={inputDate}
-                      label="출발지"
-                    />
-                    <SelectCity
-                      id="departure_city"
-                      update={inputDate}
-                      label="도착지"
-                    />
-                  </Stack>
-                </Grid>
-                {/* 날짜선택 */}
-                <Grid item xs={3.5}>
-                  {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
-                  <CalenderComp onWay={onWay} update={inputDate} />
-                </Grid>
-                {/* 인원좌석 선택 */}
-                <Grid item xs={2.5}>
-                  <Passenger update={inputDate} />
-                </Grid>
-              </Grid>
-              {/* 직항여부 */}
-              <Box sx={{ display: "flex", mt: "24px" }}>
+            {/* 직항유무 */}
+            <FormControl>
+              <RadioGroup
+                row
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="oneWay-roundTrip-group"
+                value={raidoValue}
+                onChange={handleRadioChange}
+              >
                 <FormControlLabel
+                  value="false"
                   control={
-                    <Checkbox
-                      checked={nonStop}
-                      onChange={handleNonStop}
-                      inputProps={{ "aria-label": "controlled" }}
-                      sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                    <Radio
+                      sx={{
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 28,
+                        },
+                      }}
                     />
                   }
                   label={
                     <Typography
                       sx={{
-                        fontSize: "20px",
+                        fontSize: "17px",
                         fontWeight: "700",
                         // color: "white",
                       }}
                     >
-                      직항
+                      편도
                     </Typography>
                   }
                 />
-                <Button
-                  sx={{
-                    ml: "auto",
-                    width: "240px",
-                    height: "60px",
-                    bgcolor: "#02122c",
-                  }}
-                  variant="outlined"
-                  onClick={handleToResult}
-                >
+                <FormControlLabel
+                  value="true"
+                  control={
+                    <Radio
+                      sx={{
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 28,
+                        },
+                      }}
+                    />
+                  }
+                  label={
+                    <Typography
+                      sx={{
+                        fontSize: "17px",
+                        fontWeight: "700",
+                        // color: "white",
+                      }}
+                    >
+                      왕복
+                    </Typography>
+                  }
+                />
+              </RadioGroup>
+            </FormControl>
+            {/* 메뉴 */}
+            <Grid container spacing={0}>
+              {/* 도시선택 */}
+              <Grid item xs={6}>
+                <Stack direction="row">
+                  <SelectCity
+                    id="arrival_city"
+                    update={inputDate}
+                    label="출발지"
+                  />
+                  <SelectCity
+                    id="departure_city"
+                    update={inputDate}
+                    label="도착지"
+                  />
+                </Stack>
+              </Grid>
+              {/* 날짜선택 */}
+              <Grid item xs={3.5}>
+                {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
+                <CalenderComp onWay={onWay} update={inputDate} />
+              </Grid>
+              {/* 인원좌석 선택 */}
+              <Grid item xs={2.5}>
+                <Passenger update={inputDate} />
+              </Grid>
+            </Grid>
+            {/* 직항여부 */}
+            <Box sx={{ display: "flex", mt: "24px" }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={nonStop}
+                    onChange={handleNonStop}
+                    inputProps={{ "aria-label": "controlled" }}
+                    sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                  />
+                }
+                label={
                   <Typography
-                    sx={{ fontSize: 30, fontWeight: 550, color: "white" }}
+                    sx={{
+                      fontSize: "17px",
+                      fontWeight: "700",
+                      // color: "white",
+                    }}
                   >
-                    검색하기
+                    직항
                   </Typography>
-                </Button>
-                {/* 버튼 크기조절 */}
-              </Box>
+                }
+              />
+              <Button
+                sx={{
+                  ml: "auto",
+                  width: "200px",
+                  height: "60px",
+                  // bgcolor: "#02122c",
+                }}
+                variant="outlined"
+                onClick={handleToResult}
+              >
+                <Typography sx={{ fontSize: 25, fontWeight: 550 }}>
+                  검색하기
+                </Typography>
+              </Button>
+              {/* 버튼 크기조절 */}
             </Box>
           </Box>
-        </Container>
-      </Box>
+        </Box>
+      </Container>
     </Box>
   );
 };
