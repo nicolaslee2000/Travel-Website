@@ -8,13 +8,13 @@ public interface TravelerService {
 
     List<TravelerDTO> findTravelerByUserId(Long id);
 
-    void saveUpdatedTraveler(TravelerDTO travelerDTO) throws Exception;
+    Long saveUpdatedTraveler(TravelerDTO travelerDTO) throws Exception;
 
-    boolean deleteTraveler(int id) throws Exception;
+    boolean deleteTraveler(Long id) throws Exception;
 
-    boolean isTravelerSaved(Long TravelerId, String userEmail) throws Exception;
+    boolean isTravelerSaved(Long TravelerId) throws Exception;
 
-    void CreateTraveler(TravelerDTO travelerDTO);
+    Long CreateTraveler(TravelerDTO travelerDTO);
 
     List<TravelerDTO> findTravelerByTitle(String title);
 

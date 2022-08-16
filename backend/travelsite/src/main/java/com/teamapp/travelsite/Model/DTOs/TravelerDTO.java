@@ -12,6 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class TravelerDTO {
+
+    private String title;
     private Date dateOfBirth;
     private  Enum gender;
     private  String firstName;
