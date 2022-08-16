@@ -30,6 +30,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Random;
 
 
 @RestController
@@ -48,8 +49,6 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-    
 	@Autowired
 	private CustomUserDetailsService CUDService;
 
@@ -68,17 +67,19 @@ public class AuthController {
         if (userRepository.existsByEmail(signUpMailRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
         }
+        
+        Random ran = new Random();
+        long ranId = ran.nextLong(999)+1;
 
         TempMail tempMail = new TempMail();
+        tempMail.setId(ranId);
         tempMail.setEmail(signUpMailRequest.getEmail());
         tempMail.setEmailAuth(false);
-        //tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
+        tempMail.setEmailAuthKey(CUDService.creatEmailAuth());
 
 //        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
-        TempMail result = tempMailRepository.save(tempMail);
-        System.out.println(tempMailRepository.searchEmailAuth(signUpMailRequest.getEmail()));
-
+        tempMailRepository.save(tempMail);
 
         return "redirect:/auth/AuthSuccess?userEmail=" + signUpMailRequest.getEmail(); 
         //대기페이지에서 메일 승인완료 누르면 가입창으로 
@@ -92,8 +93,6 @@ public class AuthController {
             throw new BadRequestException("이메일 인증을 완료해주세요.");
 
         }
-        System.out.println(tempMailRepository.searchEmailAuth(userEmail));
-        System.out.println("userEmail");
 
         return true;
     }
@@ -137,13 +136,16 @@ public class AuthController {
 	
 	
 	@GetMapping("/emailconfirmed")
-	public @ResponseBody String reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
+	public String reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
 		CUDService.mailAuth(userEmail, authKey);
-	
-	
 		
-		return "인증 완료 후에 페이지로 연결";
-		// 페이지 고민중
+		Boolean result = CUDService.mailAuth(userEmail, authKey);
+		
+		if(result.equals(true)) {
+			return "redirect:/auth/register/emailconfirmed";
+		}else {
+			return "redirect:/auth/register/expired";
+		}
 	}
 
 }
