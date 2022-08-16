@@ -12,8 +12,6 @@ const SelectCity = (props) => {
   const [viewValue, setViewValue] = useState(""); //검색창에 보여주는 텍스트 state값
   const [arrival, setArrial] = useState("");
   const [inputArrival, setInputArrial] = useState("");
-  const [orgin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
   const [iataCode, setIataCode] = useState("");
 
   const handleOnchangeArrival = (e, value) => {
@@ -64,14 +62,6 @@ const SelectCity = (props) => {
   useEffect(() => {
     setIataCode(slice(arrival));
   }, [arrival]);
-
-  // useEffect(() => {
-  //   if (label === "출발지") {
-  //     update((prev) => ({ ...prev, orgin: iataCode }));
-  //   } else if (label === "도착지") {
-  //     update((prev) => ({ ...prev, destination: iataCode }));
-  //   }
-  // }, [label, iataCode, origin, destination]);
 
   useEffect(() => {
     if (label === "출발지") {
