@@ -1,5 +1,7 @@
 package com.teamapp.travelsite.AutocompleteSearch;
 
+import java.util.Arrays;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

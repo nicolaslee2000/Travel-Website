@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import {
-    Autocomplete,
-    Button,
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    Grid,
-    Radio,
-    RadioGroup,
-    TextField,
-    Typography,
+
+  Autocomplete,
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  Stack,
+  TextField,
+  Typography,
+
 } from "@mui/material";
 import "./mainSearch.css";
 import { useNavigate } from "react-router-dom";
@@ -22,8 +25,9 @@ import SelectCity from "./SelectCity";
 import CalenderComp from "./CalenderComp";
 import Passenger from "./Passenger";
 import { Box, boxSizing, Container } from "@mui/system";
-import SelectCity01 from "./SelectCity01";
+
 import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
+
 
 const MainSearchPrac02 = () => {
     const [raidoValue, setRadioValue] = useState(false);
@@ -269,64 +273,63 @@ const MainSearchPrac02 = () => {
                                             />
                                         }
                                         label="왕복"
-                                    />
-                                </RadioGroup>
-                            </FormControl>
-                            {/* 메뉴 */}
-                            <Grid container spacing={0}>
-                                {/* 도시선택 */}
-                                <Grid item xs={6}>
-                                    <SelectCity update={inputDate} />
-                                    {/* <SelectCity01 update={inputDate} /> */}
-                                </Grid>
-                                {/* 날짜선택 */}
-                                <Grid item xs={3.5}>
-                                    {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
-                                    <CalenderComp
-                                        onWay={onWay}
-                                        update={inputDate}
-                                    />
-                                </Grid>
-                                {/* 인원좌석 선택 */}
-                                <Grid item xs={2.5}>
-                                    <Passenger update={inputDate} />
-                                </Grid>
-                            </Grid>
-                            {/* 직항여부 */}
-                            <Box sx={{ display: "flex", mt: "24px" }}>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={nonStop}
-                                            onChange={handleNonStop}
-                                            inputProps={{
-                                                "aria-label": "controlled",
-                                            }}
-                                            sx={{
-                                                "& .MuiSvgIcon-root": {
-                                                    fontSize: 30,
-                                                },
-                                            }}
-                                        />
-                                    }
-                                    label="직항"
-                                />
-                                <Button
-                                    sx={{
-                                        ml: "auto",
-                                        width: "200px",
-                                        height: "46px",
-                                    }}
-                                    variant="outlined"
-                                    onClick={handleToResult}
-                                >
-                                    <Typography>검색하기</Typography>
-                                </Button>
-                                {/* 버튼 크기조절 */}
-                            </Box>
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/* 메뉴 */}
+              <Grid container spacing={0}>
+                {/* 도시선택 */}
+                <Grid item xs={6}>
+                  <Stack direction="row">
+                    <SelectCity
+                      id="arrival_city"
+                      update={inputDate}
+                      label="출발지"
+                    />
+                    <SelectCity
+                      id="departure_city"
+                      update={inputDate}
+                      label="도착지"
+                    />
+                  </Stack>
+                </Grid>
+                {/* 날짜선택 */}
+                <Grid item xs={3.5}>
+                  {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
+                  <CalenderComp onWay={onWay} update={inputDate} />
+                </Grid>
+                {/* 인원좌석 선택 */}
+                <Grid item xs={2.5}>
+                  <Passenger update={inputDate} />
+                </Grid>
+              </Grid>
+              {/* 직항여부 */}
+              <Box sx={{ display: "flex", mt: "24px" }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={nonStop}
+                      onChange={handleNonStop}
+                      inputProps={{ "aria-label": "controlled" }}
+                      sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                    />
+                  }
+                  label="직항"
+                />
+                <Button
+                  sx={{ ml: "auto", width: "200px", height: "46px" }}
+                  variant="outlined"
+                  onClick={handleToResult}
+                >
+                  <Typography>검색하기</Typography>
+                </Button>
+                {/* 버튼 크기조절 */}
+              </Box>
                         </Box>
                     </Box>
                 </Container>
+
+                    
             </Box>
         </Box>
     );
