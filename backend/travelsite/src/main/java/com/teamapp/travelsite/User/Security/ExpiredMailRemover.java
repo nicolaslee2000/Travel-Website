@@ -1,5 +1,17 @@
 package com.teamapp.travelsite.User.Security;
 
-public class ExpiredMailRemover {
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
+import com.teamapp.travelsite.Model.Repository.TempMailRepository;
+
+@Component
+public class ExpiredMailRemover {
+	
+	TempMailRepository tempMailRepository;
+	
+	@Scheduled
+	public void ExpiredMailRemover() {
+//		tempMailRepository.delete(tempMailRepository.fi);
+	}
 }

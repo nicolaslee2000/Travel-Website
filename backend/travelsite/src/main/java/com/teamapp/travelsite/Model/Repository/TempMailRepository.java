@@ -1,5 +1,7 @@
 package com.teamapp.travelsite.Model.Repository;
 
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,5 +20,6 @@ public interface TempMailRepository  extends JpaRepository<TempMail,Long> {
     @Query(value = "select emailauth from tempmail_table WHERE email = :email", nativeQuery = true)
     String searchEmailAuth(@Param("email") String email);
 
-
+    @Query(value = "delete from tempmail_table where ((SYSTIMESTAMP - INTERVAL ‘10’ MINUTE) > createDate)", nativeQuery = true)
+    List<TempMail> deleteExpiredMail(Timestamp createDate); 
 }
