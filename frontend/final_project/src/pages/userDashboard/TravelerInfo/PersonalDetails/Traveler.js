@@ -51,6 +51,7 @@ const Traveler = () => {
                     >
                         <PersonalDetailsList trav={trav} />
                     </Box>
+
                     <Typography variant="h3">Travel Document</Typography>
                     <Box
                         sx={{

@@ -20,7 +20,7 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
     overflow: "hidden",
 
     backgroundColor: theme.palette.background.default,
-
+    paddingBottom: 50,
     [theme.breakpoints.up("lg")]: {
         paddingTop: "TopbarHeight",
     },
