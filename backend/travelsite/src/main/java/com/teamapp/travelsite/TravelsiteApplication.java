@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EntityScan(basePackages = {"com.teamapp.travelsite.Model.Entity"})
 // com.teamapp.travelsite.Model.Entity 하위에 있는 @Entity 클래스 scan
 @SpringBootApplication
-@EnableWebMvc
 public class TravelsiteApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TravelsiteApplication.class, args);

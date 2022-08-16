@@ -24,7 +24,6 @@ import com.amadeus.resources.Traveler;
 import com.google.gson.JsonObject;
 import com.teamapp.travelsite.Config.AmadeusConfig;
 
-import io.jsonwebtoken.io.IOException;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -83,7 +82,7 @@ public class AirlineApiController {
 					.build();
 					
 			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofByteArray());
-		} catch(IOException | java.io.IOException | InterruptedException | URISyntaxException e) {
+		} catch( java.io.IOException | InterruptedException | URISyntaxException e) {
 			
 		}
 		
