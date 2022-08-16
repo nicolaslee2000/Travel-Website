@@ -22,7 +22,7 @@ import { offerInit } from "./../../reduxes/modules/searchInfoReducer3";
 import SelectCity from "./SelectCity";
 import CalenderComp from "./CalenderComp";
 import Passenger from "./Passenger";
-import { Box, boxSizing, Container } from "@mui/system";
+import { Box, boxSizing, Container, fontWeight } from "@mui/system";
 
 import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
 
@@ -223,9 +223,15 @@ const MainSearchPrac02 = () => {
             }}
           >
             <Typography
-              variant="h2"
+              variant="h1"
+              fontSize={65}
               component="div"
-              sx={{ align: "bottom", color: "blue" }}
+              sx={{
+                align: "bottom",
+                color: "white",
+                textShadow:
+                  "-0.6px 0px black, 0px 0.6px black, 0.6px 0px black, 0px -0.px black",
+              }}
             >
               지금 여행을 떠나세요
             </Typography>
@@ -233,9 +239,9 @@ const MainSearchPrac02 = () => {
           <Box
             Container
             sx={{
-              border: 1,
               boxSizing: "border-box",
               bgcolor: "#ededed",
+              borderRadius: "0.25rem",
             }}
           >
             <Box sx={{ p: "24px" }}>
@@ -259,7 +265,17 @@ const MainSearchPrac02 = () => {
                         }}
                       />
                     }
-                    label="편도"
+                    label={
+                      <Typography
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: "700",
+                          // color: "white",
+                        }}
+                      >
+                        편도
+                      </Typography>
+                    }
                   />
                   <FormControlLabel
                     value="true"
@@ -272,7 +288,17 @@ const MainSearchPrac02 = () => {
                         }}
                       />
                     }
-                    label="왕복"
+                    label={
+                      <Typography
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: "700",
+                          // color: "white",
+                        }}
+                      >
+                        왕복
+                      </Typography>
+                    }
                   />
                 </RadioGroup>
               </FormControl>
@@ -314,14 +340,33 @@ const MainSearchPrac02 = () => {
                       sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
                     />
                   }
-                  label="직항"
+                  label={
+                    <Typography
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: "700",
+                        // color: "white",
+                      }}
+                    >
+                      직항
+                    </Typography>
+                  }
                 />
                 <Button
-                  sx={{ ml: "auto", width: "200px", height: "46px" }}
+                  sx={{
+                    ml: "auto",
+                    width: "240px",
+                    height: "60px",
+                    bgcolor: "#02122c",
+                  }}
                   variant="outlined"
                   onClick={handleToResult}
                 >
-                  <Typography>검색하기</Typography>
+                  <Typography
+                    sx={{ fontSize: 30, fontWeight: 550, color: "white" }}
+                  >
+                    검색하기
+                  </Typography>
                 </Button>
                 {/* 버튼 크기조절 */}
               </Box>
