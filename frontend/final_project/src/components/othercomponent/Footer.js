@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Link } from '@mui/material';
 import { Box } from '@mui/system';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -18,44 +18,42 @@ const Footer = () => {
       <Grid container spacing={5}>
         {/* <Grid item xs={2}></Grid> */}
         <Grid item xs={2}>
-          <div className='footer-container-1'>
-            {/* <h4>url</h4>
-            <ul className='footer-list-1'>
-              <li>
-                <a href='/'>메인</a>
-              </li>
-              <li>
-                <a href='/login'>로그인</a>
-              </li>
-              <li>
-                <a href='/register'>회원가입</a>
-              </li>
-            </ul> */}
-          </div>
         </Grid>
         <Grid item xs={8}>
           <div className='footer-container'>
-            <h4>팀원들한테 물어보고 개인 git주소 연결</h4>
+            <h4>Travel Service</h4>
             <ul className='footer-list'>
               <li>
-                <a href='/'>손상기</a>
-                <span className='text_dot'>·</span>
-                <a href='/'>엽은준</a>
-                <span className='text_dot'>·</span>
-                <a href='/'>유민정</a>
-                <span className='text_dot'>·</span>
-                <a href='/'>유정현</a>
-                <span className='text_dot'>·</span>
-                <a href='/'>이건영</a>
-                <span className='text_dot'>·</span>
-                <a href='/'>황준혁</a>
+              <Link underline="hover" color="inherit" href="/" target='_blank' fontSize="small">
+                손상기
+              </Link>
+              <span className='text_dot'>&nbsp;·&nbsp;</span>
+              <Link underline="hover" color="inherit" href="https://github.com/eunjuny" target='_blank' fontSize="small">
+              엽은준
+              </Link>
+              <span className='text_dot'>&nbsp;·&nbsp;</span>
+              <Link underline="hover" color="inherit" href="https://github.com/yooxx" target='_blank' fontSize="small">
+              유민정
+              </Link>
+              <span className='text_dot'>&nbsp;·&nbsp;</span>
+              <Link underline="hover" color="inherit" href="https://github.com/cupmilk" target='_blank' fontSize="small">
+              유정현
+              </Link>
+              <span className='text_dot'>&nbsp;·&nbsp;</span>
+              <Link underline="hover" color="inherit" href="https://github.com/nicolaslee2000" target='_blank' fontSize="small">
+              이건영
+              </Link>
+              <span className='text_dot'>&nbsp;·&nbsp;</span>
+              <Link underline="hover" color="inherit" href="https://github.com/Blaze-F" target='_blank' fontSize="small">
+              황준혁
+              </Link>  
               </li>
               <li>
                 <div className='footer-icon'>
                   <a
                     className='footer-icon'
                     href='https://github.com/nicolaslee2000/Travel-Website'
-                    target='_blank' //새 창 열어주는거
+                    target='_blank'
                     rel='noreferrer'
                   >
                     <GitHubIcon fontSize='large' color='secondary' />

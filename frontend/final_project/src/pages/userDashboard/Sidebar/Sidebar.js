@@ -29,6 +29,7 @@ const Sidebar = (props) => {
     };
 
     const SidebarContent = (
+        // "calc(100vh - 40px)"
         <Box sx={{ p: 3, height: "calc(100vh - 40px)", overflow: "auto" }}>
             {/* <Link to="/">
                 <Box sx={{ display: "flex", alignItems: "Center" }}>
