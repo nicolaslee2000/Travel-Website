@@ -7,17 +7,21 @@ import {
     CardMedia,
     Typography,
 } from "@mui/material";
+import newyork from "../../../global/assets/images/temp/newyork.jpg";
 import React from "react";
 
 const FlightRecommendationCard = () => {
     return (
-        <Card variant="outlined" sx={{ mt: 8, borderRadius: 2, mb: 8 }}>
+        <Card
+            variant="outlined"
+            sx={{ mt: 8, borderRadius: 2, mb: 8, width: 280 }}
+        >
             <CardActionArea>
                 <CardMedia
                     component="img"
                     alt="green iguana"
                     height="140"
-                    image="../../../global/assets/images/temp/newyork.jpg"
+                    image={newyork}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
