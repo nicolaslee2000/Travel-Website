@@ -20,48 +20,78 @@ const SearchResultConfig = () => {
   };
   return (
     <>
-      <div className='configContainer'>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: 215,
+        }}
+      >
         {/* <div className='configTitle'>정렬 및 검색</div> */}
         <fieldset className='configWrapper'>
-          <legend>정렬 및 검색</legend>
+          <legend>
+            <Typography variant='h1' color={'white'} fontWeight={'bold'}>
+              {' '}
+              정렬 및 검색
+            </Typography>
+          </legend>
 
-          <div className='checkBox'>
-            <FormControlLabel
-              control={<Checkbox />}
-              label={
-                <Box component='div' fontSize={20} fontWeight={'bold'}>
-                  최저가순
-                </Box>
-              }
-              sx={{
-                '& .MuiSvgIcon-root': { fontSize: 28 },
-              }}
-            />
-            <FormControlLabel
-              control={<Checkbox />}
-              label={
-                <Box component='div' fontSize={20} fontWeight={'bold'}>
-                  출발시간순
-                </Box>
-              }
-              sx={{
-                '& .MuiSvgIcon-root': { fontSize: 28 },
-              }}
-            />
-            <FormControlLabel
-              control={<Checkbox />}
-              label={
-                <Box component='div' fontSize={20} fontWeight={'bold'}>
-                  경유여부
-                </Box>
-              }
-              sx={{
-                '& .MuiSvgIcon-root': { fontSize: 28 },
-              }}
-            />
-          </div>
-          <div className='timeBox'>
-            <div>출발시간</div>
+          <FormControlLabel
+            control={<Checkbox />}
+            label={
+              <Box
+                component='div'
+                fontSize={20}
+                fontWeight={'bold'}
+                color={'white'}
+              >
+                최저가순
+              </Box>
+            }
+            sx={{
+              '& .MuiSvgIcon-root': { fontSize: 28 },
+            }}
+          />
+          <FormControlLabel
+            control={<Checkbox />}
+            label={
+              <Box
+                component='div'
+                fontSize={20}
+                fontWeight={'bold'}
+                color={'white'}
+              >
+                출발시간순
+              </Box>
+            }
+            sx={{
+              '& .MuiSvgIcon-root': { fontSize: 28 },
+            }}
+          />
+          <FormControlLabel
+            control={<Checkbox />}
+            label={
+              <Box
+                component='div'
+                fontSize={20}
+                fontWeight={'bold'}
+                color={'white'}
+              >
+                경유여부
+              </Box>
+            }
+            sx={{
+              '& .MuiSvgIcon-root': { fontSize: 28 },
+            }}
+          />
+
+          <Box sx={{ marginTop: 2 }}>
+            <Typography variant='h2' color={'white'} fontWeight={'bold'}>
+              {' '}
+              출발시간
+            </Typography>
+
             <FormControl sx={{ m: 1, minWidth: 60 }}>
               <InputLabel variant='standard' htmlFor='uncontrolled-native'>
                 출발시간
@@ -87,27 +117,6 @@ const SearchResultConfig = () => {
                 })}
               </NativeSelect>
             </FormControl>
-            {/* <FormControl fullWidth>
-              <InputLabel id='demo-simple-select-label'>출발시간</InputLabel>
-              <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                value={departTime}
-                label='departTime'
-                onChange={handleSelectChange}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-
-                {Hour_Select.map((hour, idx) => {
-                  return (
-                    <MenuItem key={idx} value={hour}>
-                      {hour}시
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl> */}
             <Box
               sx={{
                 display: 'flex',
@@ -115,19 +124,19 @@ const SearchResultConfig = () => {
                 marginTop: '20px',
               }}
             >
-              <Typography variant='h10' component='div'>
+              <Typography variant='h2' color={'white'} fontWeight={'bold'}>
                 도착시간
               </Typography>
-              <Typography variant='h10' component='div'>
+              <Typography variant='h2' color={'white'} fontWeight={'bold'}>
                 {parseInt(departTime) + 3 > 24
                   ? parseInt(departTime) + 3 - 24
                   : parseInt(departTime) + 3}
                 시
               </Typography>
             </Box>
-          </div>
+          </Box>
         </fieldset>
-      </div>
+      </Box>
     </>
   );
 };
