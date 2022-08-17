@@ -8,6 +8,7 @@ import TravlerHeader from './../../components/travlerpagecomponent/TravlerHeader
 import GoResultItem02 from './../../components/travlerpagecomponent/GoResultItem02';
 import BackResultItem02 from '../../components/travlerpagecomponent/BackResultItem02';
 import { useSelector } from 'react-redux';
+import ConfirmButton from '../../components/travlerpagecomponent/ConfirmButton';
 
 const TravlerPage = () => {
   const searchReduxData = useSelector((state) => {
@@ -21,7 +22,7 @@ const TravlerPage = () => {
 
       <Grid
         container
-        spacing={2}
+        spacing={3}
         direction='column'
         alignItems='center'
         justifyContent='center'
@@ -35,6 +36,11 @@ const TravlerPage = () => {
         <Grid item xs={3}>
           {/* <BackResultItem /> */}
           {goBackBool === 1 ? <div></div> : <BackResultItem02 />}
+          {/* <BackResultItem02 /> */}
+        </Grid>
+        <Grid item xs={3}>
+          {/* <BackResultItem /> */}
+          <ConfirmButton />
           {/* <BackResultItem02 /> */}
         </Grid>
       </Grid>

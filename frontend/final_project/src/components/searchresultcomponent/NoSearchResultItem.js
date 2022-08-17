@@ -12,7 +12,8 @@ const NoSearchResultItem = (props) => {
 
   return (
     <>
-      {props.pageLoaded ? (
+      <CircularProgress />
+      {/* {props.pageLoaded ? (
         <Card>
           <CircularProgress />
         </Card>
@@ -35,7 +36,7 @@ const NoSearchResultItem = (props) => {
             </Box>
           </CardContent>
         </Card>
-      )}
+      )} */}
     </>
   );
 };

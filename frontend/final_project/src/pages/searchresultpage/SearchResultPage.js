@@ -59,8 +59,7 @@ const SearchResultPage = () => {
           <Grid item xs={2}>
             <SearchResultConfig resultPageNumUpdate={handleNumber} />
           </Grid>
-          <Grid item xs={2}>
-            {/* <div>한번확인해보자</div> */}
+          <Grid item xs={1}>
             <div></div>
           </Grid>
           <Grid item xs={7}>
