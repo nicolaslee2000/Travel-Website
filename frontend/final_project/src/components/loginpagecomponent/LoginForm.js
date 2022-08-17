@@ -22,7 +22,8 @@ function TabPanel(props) {
 
 const LoginForm = (props) => {
   const baseURL = 'http://localhost:8090';
-  const ACCESS_TOKEN = 'accessToken';
+
+  const [cookies, setCookie, removeCookie] = useCookies(['this_is_login']);
 
   const navigate = useNavigate();
 
@@ -47,7 +48,6 @@ const LoginForm = (props) => {
   };
 
   const loginStart = async (e) => {
-    console.log(inputs);
     e.preventDefault();
 
     const data = {
@@ -56,26 +56,19 @@ const LoginForm = (props) => {
     };
     await axios
       .post(baseURL + '/auth/login', JSON.stringify(data), {
-        // headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
         },
       })
       .then((res) => {
-        console.log('data:', res);
-        console.log('res.data', res.data);
-        localStorage.setItem(ACCESS_TOKEN, res.data.accessToken);
-        console.log('res.data.accessToken', res.data.accessToken);
-        console.log('localStorage.getiTem', localStorage.getItem(ACCESS_TOKEN));
         alert('로그인되었습니다, 감사합니다.');
+        setCookie('this_is_login', res.data); //이메일 을 저장
+        console.log('this_is_login', res.data); //이메일 가져옴
+        // props.setIsLogin(true);
 
-        props.setIsLogin(true);
-
-        navigate('/'); //팝업창 확인 후 메인페이지로.
+        navigate('/');
       })
       .catch((err) => {
-        console.log('err', err);
         alert('아이디와 비밀번호를 다시 확인해 주세요.');
       });
   };
@@ -91,7 +84,6 @@ const LoginForm = (props) => {
 
   return (
     <Container maxWidth='sm'>
-      {/* onSubmit={handleSubmit} */}
       <form>
         <div className='tab-form'>
           <div className='tab-head'>
