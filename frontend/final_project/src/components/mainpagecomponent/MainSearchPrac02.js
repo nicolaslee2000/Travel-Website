@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchInit } from "./../../reduxes/modules/searchInfoReducer";
 import axios from "axios";
 import { seInit } from "./../../reduxes/modules/searchInfoReducer2";
-import { offerInit } from "./../../reduxes/modules/searchInfoReducer3";
+import { allInit, offerInit } from "./../../reduxes/modules/searchInfoReducer3";
 import SelectCity from "./SelectCity";
 import CalenderComp from "./CalenderComp";
 import Passenger from "./Passenger";
