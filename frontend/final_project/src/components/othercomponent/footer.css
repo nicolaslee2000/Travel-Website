@@ -1,5 +1,6 @@
 .footer-main {
-  background-color: blanchedalmond;
+  background-color: rgb(42, 42, 46);
+  color: rgb(215, 215, 219);
 }
 .footer-container {
   text-align: center;
@@ -8,7 +9,6 @@
   text-align: right;
 }
 .footer-row {
-  /* border: 1px solid red; */
   float: flex;
 }
 
@@ -17,19 +17,9 @@
   text-align: center;
 }
 
-.footer-list-1 {
-  list-style: none;
-  text-align: right;
-}
 .div {
   max-width: fit-content;
   text-align: center;
-}
-.footer-col {
-  width: auto;
-  height: auto;
-  text-align: center;
-  border: 1px solid blue;
 }
 
 .footer-bottom {
