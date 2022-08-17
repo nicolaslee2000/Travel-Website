@@ -18,7 +18,7 @@ import {
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 import "./Passenger.css";
-import { Container } from "@mui/system";
+import { Container, fontWeight } from "@mui/system";
 
 export default function BasicPopover(props) {
   const { update } = props;
@@ -106,6 +106,12 @@ export default function BasicPopover(props) {
     }
   };
 
+  // const seatIndexStyle = (seat) => {
+  //   <Typography sx={{ fontSize: "30px", fontWeight: "500" }}>
+  //     {seat}
+  //   </Typography>;
+  // };
+
   useEffect(() => {
     console.log("AdultCount :" + AdultCount);
     update((prev) => ({ ...prev, adults: AdultCount }));
@@ -127,11 +133,17 @@ export default function BasicPopover(props) {
         aria-describedby={id}
         variant="outlined"
         onClick={handleClick}
-        sx={{ height: "56px" }}
+        sx={{
+          width: "100%",
+          height: "56px",
+          border: "1px solid rgba(0, 0, 0, 0.2)",
+        }}
       >
-        총인원수 {AdultCount + ChildCount}명, 좌석 : {seat}
-        {/* 총인원수 {AdultCount + ChildCount}명<br />
-        좌석 : {seat} */}
+        <Typography sx={{ color: "rgba(0, 0, 0, 0.8)" }}>
+          {/* 총인원수 {AdultCount + ChildCount}명, 좌석 : {seat} */}
+          총인원수 {AdultCount + ChildCount}명<br />
+          좌석 : {seat}
+        </Typography>
       </Button>
       <Popover
         id={id}
@@ -171,6 +183,7 @@ export default function BasicPopover(props) {
                 <FormControlLabel
                   value="ECONOMY"
                   control={<Radio />}
+                  // label={seatIndexStyle("ECONOMY")}
                   label="ECONOMY"
                 />
                 <FormControlLabel
