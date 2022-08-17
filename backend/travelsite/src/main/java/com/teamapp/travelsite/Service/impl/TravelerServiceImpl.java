@@ -34,16 +34,17 @@ public class TravelerServiceImpl implements TravelerService {
 
     }
     @Override
-    public void saveUpdatedTraveler(TravelerDTO travelerDTO) throws Exception {
+    public Long saveUpdatedTraveler(TravelerDTO travelerDTO) throws Exception {
         Traveler traveler = travelerDTO.toEntity();
-        Optional<Traveler> byId = this.travelerRepository.findById(Math.toIntExact(traveler.getId()));
+        Optional<Traveler> byId = this.travelerRepository.findById(traveler.getId());
         if (byId.isPresent()){
             travelerRepository.delete(byId.get());
-        }
-        this.travelerRepository.save(traveler);
+            return this.travelerRepository.save(traveler).getId();
+        } else throw new NotFoundExceptionMessage("maybe not saved");
+
     }
     @Override
-    public boolean deleteTraveler(int id) throws Exception {
+    public boolean deleteTraveler(Long id) throws Exception {
         Optional<Traveler> byId = this.travelerRepository.findById(id);
         if (byId.isPresent()) {
             this.travelerRepository.delete(byId.get());
@@ -53,17 +54,27 @@ public class TravelerServiceImpl implements TravelerService {
         }
     }
     @Override
-    public boolean isTravelerSaved(Long TravelerId, String userEmail) throws Exception {
-        Optional<Traveler> byId = this.travelerRepository.findById(Math.toIntExact(TravelerId));
+    public boolean isTravelerSaved(Long TravelerId) throws Exception {
+        Optional<Traveler> byId = this.travelerRepository.findById(TravelerId);
         if(byId.isPresent()) {
             return true;
         } else {
             return false;
         }
     }
+
+    public boolean isTravelerSavedByTitle(String title) {
+        List<Traveler> byTitle = this.travelerRepository.findByTitle(title);
+        if (!byTitle.isEmpty()) {
+            return true;
+        } else {
+            throw new RuntimeException("Not Saved");
+        }
+    }
     @Override
-    public void CreateTraveler(TravelerDTO travelerDTO) {
-        this.travelerRepository.save(travelerDTO.toEntity());
+    public Long CreateTraveler(TravelerDTO travelerDTO) {
+        Traveler traveler = this.travelerRepository.save(travelerDTO.toEntity());
+        return traveler.getId();
     }
 
     @Override

@@ -12,11 +12,13 @@ import { useSelector } from 'react-redux';
 import SearchResultItem02 from './../../components/searchresultcomponent/SearchResultItem02';
 import SearchResultItem02Back from '../../components/searchresultcomponent/SearchResultItem02Back';
 import NoSearchResultItem from '../../components/searchresultcomponent/NoSearchResultItem';
+import { useLocation } from 'react-router-dom';
 
 const SearchResultPage = () => {
-  // const location = useLocation();
+  const { state } = useLocation();
   // const [info, setInfo] = useState(location.state.info);
   // const dataExample = [info, info, info, info, info, info];
+  const [pageLoaded, setPageLoaded] = useState(() => state.pageLoaded);
   const [number, setNumber] = useState(0);
   const searchReduxData = useSelector((state) => {
     return state.searchReducer3;
@@ -101,7 +103,7 @@ const SearchResultPage = () => {
 
             {sortArr.length === 0 ? (
               <>
-                <NoSearchResultItem />
+                <NoSearchResultItem pageLoaded={pageLoaded} />
               </>
             ) : (
               // 비었다는걸 보여주는 걸 넣어야함

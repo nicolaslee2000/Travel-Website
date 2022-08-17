@@ -15,7 +15,6 @@ import lombok.Data;
 public class TempMail {
 
 	    @Id
-	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    private Long id;
 
 //      EMAIL 대문자 변경

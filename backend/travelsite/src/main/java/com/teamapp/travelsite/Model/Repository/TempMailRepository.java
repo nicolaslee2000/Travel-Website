@@ -11,21 +11,8 @@ import com.teamapp.travelsite.Model.Entity.TempMail;
 
 @Repository
 public interface TempMailRepository  extends JpaRepository<TempMail,Long> {
-//	
-////    @Query(value = "select id from USER_TABLE where id = : id", nativeQuery = true)
-////    List<TempMail> searchParamRepo(@Param("id") String id);
-////
-////    Optional<TempMail> findByname(String username);
-//
-//    @Query(value =
-//            "SELECT * FROM TEMPMAIL_TABLE" +
-//                    "ORDER BY email"
-//            ,nativeQuery = true)
-//    List<TempMail> searchByEmail(@Param("email") String email);
-//
 
-//
-//    Boolean existsByEmail(String email);
+	Boolean existsByEmail(String email);
 	
     Optional<TempMail> findByEmail(String email);
     
@@ -33,7 +20,12 @@ public interface TempMailRepository  extends JpaRepository<TempMail,Long> {
     @Query(value = "select emailauth from tempmail_table WHERE email = :email", nativeQuery = true)
     String searchEmailAuth(@Param("email") String email);
 
-    @Query(value = "DELETE FROM TEMPMAIL_TABLE WHERE EMAIL = :email", nativeQuery = true)
-    void deleteTempMail(@Param("email") String email);
-
+//    전송시간이 10분 이상 지난 인증 메일을 배열로 조회  
+    @Query(value = "SELECT \"id\" FROM TEMPMAIL_TABLE WHERE (SYSTIMESTAMP - INTERVAL '10' minute) > \"createDate\"", nativeQuery = true)
+    long[] searchExpiredMail(); 
+    
+//    //보여주기용 10초
+//    @Query(value = "SELECT \"id\" FROM TEMPMAIL_TABLE WHERE (SYSTIMESTAMP - INTERVAL '10' second) > \"createDate\"", nativeQuery = true)
+//    long[] searchExpiredMail(); 
+    
 }
