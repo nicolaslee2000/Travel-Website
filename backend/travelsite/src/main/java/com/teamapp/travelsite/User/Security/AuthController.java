@@ -11,6 +11,8 @@ import com.teamapp.travelsite.User.Security.OAuthPayload.SignUpMailRequest;
 import com.teamapp.travelsite.Model.Entity.TempMail;
 import com.teamapp.travelsite.Model.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -80,11 +82,12 @@ public class AuthController {
         tempMail.setEmailAuth(false);
         tempMail.setEmailAuthKey(CUDService.creatEmailAuth());
 
-        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
+        //sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
         tempMailRepository.save(tempMail);
 
-        return "redirect:/auth/AuthSuccess?userEmail=" + signUpMailRequest.getEmail(); 
+//        "redirect:/auth/AuthSuccess?userEmail=" +
+		return signUpMailRequest.getEmail(); 
         //대기페이지에서 메일 승인완료 누르면 가입창으로 
 
     }
@@ -136,19 +139,23 @@ public class AuthController {
 	
 	
 	@GetMapping("/emailconfirmed")
-	public String reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
-		 if (!tempMailRepository.existsByEmail(userEmail)) {
-			 	return "redirect:/auth/register/expired";
+	public ResponseEntity<?> reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		if (!tempMailRepository.existsByEmail(userEmail)) {
+				headers.setLocation(URI.create("http://localhost:3000/register/expired"));
+				return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
 	        }
 		
-		CUDService.mailAuth(userEmail, authKey);
+		CUDService.mailAuth(userEmail, authKey); 
 		
 		Boolean result = CUDService.mailAuth(userEmail, authKey);
 		
 		if(result.equals(true)) {
-			return "redirect:/auth/register/emailconfirmed";
+			headers.setLocation(URI.create("http://localhost:3000/register/emailconfirmed"));
+			return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
 		}else {
-			return "redirect:/auth/register/expired";
+			headers.setLocation(URI.create("http://localhost:3000/register/expired"));
+			return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
 		}
 	}
 
