@@ -43,7 +43,7 @@ const FinalConfirmPage = () => {
         style={{ minHeight: "70vh" }}
       >
         {" "}
-        <Grid item xs={3}>
+        <Grid item xs={3} mt="25px">
           {/* <GoResultItem /> */}
           <GoResultItem02 />
         </Grid>
