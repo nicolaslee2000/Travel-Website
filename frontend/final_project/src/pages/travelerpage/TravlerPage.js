@@ -30,18 +30,13 @@ const TravlerPage = () => {
       >
         {' '}
         <Grid item xs={3}>
-          {/* <GoResultItem /> */}
           <GoResultItem02 />
         </Grid>
         <Grid item xs={3}>
-          {/* <BackResultItem /> */}
           {goBackBool === 1 ? <div></div> : <BackResultItem02 />}
-          {/* <BackResultItem02 /> */}
         </Grid>
         <Grid item xs={3}>
-          {/* <BackResultItem /> */}
           <ConfirmButton />
-          {/* <BackResultItem02 /> */}
         </Grid>
       </Grid>
     </div>

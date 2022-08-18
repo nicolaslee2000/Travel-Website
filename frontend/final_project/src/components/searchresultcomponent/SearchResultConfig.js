@@ -10,7 +10,10 @@ import NativeSelect from '@mui/material/NativeSelect';
 import Typography from '@mui/material/Typography';
 import './searchResultConfig.css';
 
-const SearchResultConfig = () => {
+const SearchResultConfig = (props) => {
+  const { resultPageNumUpdate } = props; // 정렬용, 체크에 따라 number값이 바뀜
+  const [num, setNum] = useState(0);
+
   const [departTime, setDepartTime] = useState('1');
   const Hour_Select = [...Array(24)].map((v, i) => i + 1);
   const handleSelectChange = (e) => {
@@ -18,6 +21,17 @@ const SearchResultConfig = () => {
       return e.target.value;
     });
   };
+
+  const handleChkChangeAll = (inNum) => {
+    if (num === inNum) {
+      setNum(0);
+      resultPageNumUpdate(0);
+    } else {
+      setNum(inNum);
+      resultPageNumUpdate(inNum);
+    }
+  };
+
   return (
     <>
       <Box
@@ -38,7 +52,14 @@ const SearchResultConfig = () => {
           </legend>
 
           <FormControlLabel
-            control={<Checkbox />}
+            control={
+              <Checkbox
+                checked={num === 1}
+                onChange={() => {
+                  handleChkChangeAll(1);
+                }}
+              />
+            }
             label={
               <Box
                 component='div'
@@ -54,7 +75,14 @@ const SearchResultConfig = () => {
             }}
           />
           <FormControlLabel
-            control={<Checkbox />}
+            control={
+              <Checkbox
+                checked={num === 2}
+                /*{chk.c2}*/ onChange={() => {
+                  handleChkChangeAll(2);
+                }}
+              />
+            }
             label={
               <Box
                 component='div'
@@ -70,7 +98,14 @@ const SearchResultConfig = () => {
             }}
           />
           <FormControlLabel
-            control={<Checkbox />}
+            control={
+              <Checkbox
+                checked={num === 3}
+                /*{chk.c3}*/ onChange={() => {
+                  handleChkChangeAll(3);
+                }}
+              />
+            }
             label={
               <Box
                 component='div'

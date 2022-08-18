@@ -11,21 +11,21 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import "./mainSearch.css";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { searchInit } from "./../../reduxes/modules/searchInfoReducer";
-import axios from "axios";
-import { seInit } from "./../../reduxes/modules/searchInfoReducer2";
-import { allInit, offerInit } from "./../../reduxes/modules/searchInfoReducer3";
-import SelectCity from "./SelectCity";
-import CalenderComp from "./CalenderComp";
-import Passenger from "./Passenger";
-import { Box, boxSizing, Container, fontWeight } from "@mui/system";
+} from '@mui/material';
+import './mainSearch.css';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchInit } from './../../reduxes/modules/searchInfoReducer';
+import axios from 'axios';
+import { seInit } from './../../reduxes/modules/searchInfoReducer2';
+import { allInit, offerInit } from './../../reduxes/modules/searchInfoReducer3';
+import SelectCity from './SelectCity';
+import CalenderComp from './CalenderComp';
+import Passenger from './Passenger';
+import { Box, boxSizing, Container, fontWeight } from '@mui/system';
 
-import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
-import { Brightness1 } from "@mui/icons-material";
+import BackgroundImage from '../../global/assets/images/backgrounds/BackgroundImage.jpg';
+import { Brightness1 } from '@mui/icons-material';
 // import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage1.jpg";
 
 const MainSearchPrac02 = () => {
@@ -66,6 +66,7 @@ const MainSearchPrac02 = () => {
           adults: sendData.adults,
           travelClass: sendData.travelClass,
           nonStop: sendData.nonStop,
+          max: 10,
         },
       })
       .then((response) => {
@@ -114,17 +115,17 @@ const MainSearchPrac02 = () => {
     <Box
       sx={{
         height: 700,
-        position: "relative",
+        position: 'relative',
       }}
     >
       <Box
         sx={{
           backgroundImage: `url(${BackgroundImage})`,
-          backgroundSize: "100%, 100%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right 0 top 80%",
-          height: "550px",
-          filter: "Brightness(50%)",
+          backgroundSize: '100%, 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right 0 top 80%',
+          height: '550px',
+          filter: 'Brightness(50%)',
         }}
       ></Box>
       {/* <Container sx={{ paddingTop: 5 }}>
@@ -135,28 +136,28 @@ const MainSearchPrac02 = () => {
       {/* <Container sx={{ paddingTop: 17, paddingBottom: 7 }}> */}
       <Container
         sx={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -70%)",
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -70%)',
         }}
       >
         {/* mainSearchApp */}
         <Box
           sx={{
             maxWidth: 1050,
-            width: "100%",
-            height: "90px",
+            width: '100%',
+            height: '90px',
           }}
         >
           <Typography
-            variant="h1"
+            variant='h1'
             fontSize={50}
             fontWeight={600}
-            component="div"
+            component='div'
             sx={{
-              align: "bottom",
-              color: "white",
+              align: 'bottom',
+              color: 'white',
               // textShadow:
               //   "-0.6px 0px black, 0px 0.6px black, 0.6px 0px black, 0px -0.6px black",
             }}
@@ -167,32 +168,32 @@ const MainSearchPrac02 = () => {
         <Box
           Container
           sx={{
-            boxSizing: "border-box",
-            bgcolor: "#ededed",
+            boxSizing: 'border-box',
+            bgcolor: '#ededed',
             borderRadius: 3,
             boxShadow: 10,
           }}
         >
           <Box
             sx={{
-              p: "25px",
+              p: '25px',
             }}
           >
             {/* 직항유무 */}
             <FormControl>
               <RadioGroup
                 row
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="oneWay-roundTrip-group"
+                aria-labelledby='demo-controlled-radio-buttons-group'
+                name='oneWay-roundTrip-group'
                 value={raidoValue}
                 onChange={handleRadioChange}
               >
                 <FormControlLabel
-                  value="false"
+                  value='false'
                   control={
                     <Radio
                       sx={{
-                        "& .MuiSvgIcon-root": {
+                        '& .MuiSvgIcon-root': {
                           fontSize: 28,
                         },
                       }}
@@ -201,8 +202,8 @@ const MainSearchPrac02 = () => {
                   label={
                     <Typography
                       sx={{
-                        fontSize: "17px",
-                        fontWeight: "700",
+                        fontSize: '17px',
+                        fontWeight: '700',
                         // color: "white",
                       }}
                     >
@@ -211,11 +212,11 @@ const MainSearchPrac02 = () => {
                   }
                 />
                 <FormControlLabel
-                  value="true"
+                  value='true'
                   control={
                     <Radio
                       sx={{
-                        "& .MuiSvgIcon-root": {
+                        '& .MuiSvgIcon-root': {
                           fontSize: 28,
                         },
                       }}
@@ -224,8 +225,8 @@ const MainSearchPrac02 = () => {
                   label={
                     <Typography
                       sx={{
-                        fontSize: "17px",
-                        fontWeight: "700",
+                        fontSize: '17px',
+                        fontWeight: '700',
                         // color: "white",
                       }}
                     >
@@ -239,16 +240,16 @@ const MainSearchPrac02 = () => {
             <Grid container spacing={0}>
               {/* 도시선택 */}
               <Grid item xs={6}>
-                <Stack direction="row">
+                <Stack direction='row'>
                   <SelectCity
-                    id="arrival_city"
+                    id='arrival_city'
                     update={inputDate}
-                    label="출발지"
+                    label='출발지'
                   />
                   <SelectCity
-                    id="departure_city"
+                    id='departure_city'
                     update={inputDate}
-                    label="도착지"
+                    label='도착지'
                   />
                 </Stack>
               </Grid>
@@ -263,21 +264,21 @@ const MainSearchPrac02 = () => {
               </Grid>
             </Grid>
             {/* 직항여부 */}
-            <Box sx={{ display: "flex", mt: "24px" }}>
+            <Box sx={{ display: 'flex', mt: '24px' }}>
               <FormControlLabel
                 control={
                   <Checkbox
                     checked={nonStop}
                     onChange={handleNonStop}
-                    inputProps={{ "aria-label": "controlled" }}
-                    sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                    sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
                   />
                 }
                 label={
                   <Typography
                     sx={{
-                      fontSize: "17px",
-                      fontWeight: "700",
+                      fontSize: '17px',
+                      fontWeight: '700',
                       // color: "white",
                     }}
                   >
@@ -287,12 +288,12 @@ const MainSearchPrac02 = () => {
               />
               <Button
                 sx={{
-                  ml: "auto",
-                  width: "200px",
-                  height: "60px",
+                  ml: 'auto',
+                  width: '200px',
+                  height: '60px',
                   // bgcolor: "#02122c",
                 }}
-                variant="outlined"
+                variant='outlined'
                 onClick={handleToResult}
               >
                 <Typography sx={{ fontSize: 25, fontWeight: 550 }}>
