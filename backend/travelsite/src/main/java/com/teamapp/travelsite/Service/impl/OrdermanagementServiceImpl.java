@@ -34,8 +34,6 @@ public class OrdermanagementServiceImpl implements OrderManagementService {
         this.airportRepository = airportRepository;
     }
 
-
-
     @Override
     public Long createTicketOrder(TicketOrderDTO ticketOrderDTO) {
         TicketOrder ticketOrder = this.ticketOrderRepository.save(ticketOrderDTO.toEntity(ticketOrderDTO));
@@ -75,7 +73,6 @@ public class OrdermanagementServiceImpl implements OrderManagementService {
     @Override
     public List<TicketOrderDTO> findTicketOrderByUserId(Long id) {
         List<TicketOrder> byUserId = this.ticketOrderRepository.findByUserId(id);
-
         if (!byUserId.isEmpty()) {
             List<TicketOrderDTO> ticketOrderDTOS = new ArrayList<>();
             byUserId.forEach(e -> ticketOrderDTOS.add(e.of(e)));

@@ -14,7 +14,12 @@ import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './goResultItem.css';
-import { CardActions, CardHeader } from '@mui/material';
+import {
+  CardActions,
+  CardHeader,
+  createTheme,
+  ThemeProvider,
+} from '@mui/material';
 import { useSelector } from 'react-redux';
 import { display } from '@mui/system';
 
@@ -41,9 +46,21 @@ const AccDetailItem = (props) => {
         setImgSrc(objectURL);
       });
   };
+
   useEffect(() => {
     getLogo(stopInfo.carrierCode);
   }, [stopInfo]);
+
+  const theme = createTheme({
+    typography: {
+      myStyle: {
+        //color: 'white',
+        fontWeight: 'bold',
+        fontSize: 19,
+      },
+    },
+  });
+
   return (
     <div>
       <Box
@@ -54,93 +71,109 @@ const AccDetailItem = (props) => {
           //   height: '200px',
           justifyContent: 'space-evenly',
           //   justifyContent: 'flex-start',
-          //   border: 2,
+          // border: 2,
         }}
       >
-        <Box component='img' src={imgSrc} />
-        {/* <Box component='img' src={imgSrc[idx]}/> */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography variant='h4' component='div'>
-            {stopInfo.departure.iataCode}
-          </Typography>
-          <Typography variant='h6' component='div'>
-            출발:
-            {' ' +
-              times.deTime.getFullYear() +
-              '년 ' +
-              (times.deTime.getMonth() + 1) +
-              '월 ' +
-              times.deTime.getDate() +
-              '일 ' +
-              times.deTime.getHours() +
-              '시 ' +
-              times.deTime.getMinutes() +
-              '분 ' +
-              times.deTime.getSeconds() +
-              '초'}
-          </Typography>
-          <Typography variant='h7' component='div'>
-            {stopInfo.departure.terminal}번 터미널
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            margin: '0px 10px',
-          }}
-        >
-          <Typography variant='h7' component='div'>
-            소요시간
-            <br />
-            {Math.floor(times.leTime / 60) +
-              '시간' +
-              (times.leTime % 60) +
-              '분'}
-          </Typography>
-          <Typography>
-            <TrendingFlatIcon sx={{ fontSize: 60 }} />
-          </Typography>
-        </Box>
+        <ThemeProvider theme={theme}>
+          <Box
+            component='img'
+            src={imgSrc}
+            sx={{
+              borderRight: 2,
+              width: 100,
+              paddingRight: 2,
+            }}
+          />
+          {/* <Box component='img' src={imgSrc[idx]}/> */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Typography variant='myStyle' fontSize={32}>
+              {stopInfo.departure.iataCode}
+            </Typography>
+            <Typography variant='myStyle'>
+              출발:
+              {
+                ' ' +
+                  times.deTime.getFullYear() +
+                  '년 ' +
+                  (times.deTime.getMonth() + 1) +
+                  '월 ' +
+                  times.deTime.getDate() +
+                  '일 ' +
+                  times.deTime.getHours() +
+                  '시 ' +
+                  times.deTime.getMinutes() +
+                  '분 '
+                // +
+                // times.deTime.getSeconds() +
+                // '초'
+              }
+            </Typography>
+            {/* <Typography variant='h7' component='div'>
+              {stopInfo.departure.terminal}번 터미널
+            </Typography> */}
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              margin: '0px 10px',
+            }}
+          >
+            <Typography variant='myStyle'>
+              소요시간
+              <br />
+              {Math.floor(times.leTime / 60) +
+                '시간' +
+                (times.leTime % 60) +
+                '분'}
+            </Typography>
+            <Typography>
+              <TrendingFlatIcon sx={{ fontSize: 60 }} />
+            </Typography>
+          </Box>
 
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginLeft: '20px',
-          }}
-        >
-          <Typography variant='h4' component='div'>
-            {stopInfo.arrival.iataCode}
-          </Typography>
-          <Typography variant='h6' component='div'>
-            {/* 도착 : {arrivalAllTime[1]} */}
-            도착 :
-            {' ' +
-              times.arTime.getFullYear() +
-              '년 ' +
-              (times.arTime.getMonth() + 1) +
-              '월 ' +
-              times.arTime.getDate() +
-              '일 ' +
-              times.arTime.getHours() +
-              '시 ' +
-              times.arTime.getMinutes() +
-              '분 ' +
-              times.arTime.getSeconds() +
-              '초'}
-          </Typography>
-          <Typography variant='h7' component='div'>
-            {stopInfo.arrival.terminal}번 터미널
-          </Typography>
-        </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginLeft: '20px',
+            }}
+          >
+            <Typography variant='myStyle' fontSize={32}>
+              {stopInfo.arrival.iataCode}
+            </Typography>
+            <Typography variant='myStyle'>
+              {/* 도착 : {arrivalAllTime[1]} */}
+              도착 :
+              {
+                ' ' +
+                  times.arTime.getFullYear() +
+                  '년 ' +
+                  (times.arTime.getMonth() + 1) +
+                  '월 ' +
+                  times.arTime.getDate() +
+                  '일 ' +
+                  times.arTime.getHours() +
+                  '시 ' +
+                  times.arTime.getMinutes() +
+                  '분 '
+                // +
+                // times.arTime.getSeconds() +
+                // '초'
+              }
+            </Typography>
+            {/* <Typography variant='h7' component='div'>
+              {stopInfo.arrival.terminal}번 터미널
+            </Typography> */}
+          </Box>
+        </ThemeProvider>
       </Box>
     </div>
   );
