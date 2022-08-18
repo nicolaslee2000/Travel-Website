@@ -27,7 +27,6 @@ import { Box, boxSizing, Container, fontWeight } from "@mui/system";
 
 // import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
 import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage02.jpg";
-
 import { Brightness1 } from "@mui/icons-material";
 import FlightRecommendation from "./FlightRecommendation/FlightRecommendation";
 
@@ -53,7 +52,6 @@ const MainSearchPrac02 = () => {
     return state.searchReducer3;
   });
   const inputDate = (e) => {
-    console.log("input :" + e);
     setFlightInfo(e);
   };
 
@@ -82,7 +80,6 @@ const MainSearchPrac02 = () => {
   const navigate = useNavigate();
 
   const handleToResult = () => {
-    console.log("result :" + flightInfo);
     dispatch(searchInit(flightInfo));
     searchData(flightInfo);
     navigate("/searchResult", { state: { pageLoaded: pageLoaded } });
@@ -101,7 +98,7 @@ const MainSearchPrac02 = () => {
   };
 
   useEffect(() => {
-    console.log(flightInfo);
+    console.log();
     //console.log("selecity test용" + { flightInfo });
   }, [flightInfo]);
 
@@ -186,7 +183,6 @@ const MainSearchPrac02 = () => {
               </Typography>
             </Box>
             <Box
-              Container
               sx={{
                 boxSizing: "border-box",
                 bgcolor: "#ededed",
@@ -275,7 +271,6 @@ const MainSearchPrac02 = () => {
                   </Grid>
                   {/* 날짜선택 */}
                   <Grid item xs={3.5}>
-                    {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
                     <CalenderComp onWay={onWay} update={inputDate} />
                   </Grid>
                   {/* 인원좌석 선택 */}
