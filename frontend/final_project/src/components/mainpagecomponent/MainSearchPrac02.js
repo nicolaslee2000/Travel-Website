@@ -50,12 +50,12 @@ const MainSearchPrac02 = () => {
 
   const dispatch = useDispatch();
 
-  const searData3 = useSelector((state) => {
-    return state.searchReducer3;
-  });
-  const inputDate = (e) => {
-    setFlightInfo(e);
-  };
+    const searData3 = useSelector((state) => {
+        return state.searchReducer3;
+    });
+    const inputDate = (e) => {
+        setFlightInfo(e);
+    };
 
   // http://localhost:8090/flight/flights?originLocationCode=ICN&destinationLocationCode=NRT&departureDate=2022-08-05&adults=1
   const searchData = async (sendData) => {
@@ -81,11 +81,13 @@ const MainSearchPrac02 = () => {
 
   const navigate = useNavigate();
 
-  const handleToResult = () => {
-    dispatch(searchInit(flightInfo));
-    searchData(flightInfo);
-    navigate("/searchResult", { state: { pageLoaded: pageLoaded } });
-  };
+
+    const handleToResult = () => {
+        dispatch(searchInit(flightInfo));
+        searchData(flightInfo);
+        navigate("/searchResult", { state: { pageLoaded: pageLoaded } });
+    };
+
 
   const handleRadioChange = (e) => {
     setRadioValue(e.target.value);
@@ -99,10 +101,11 @@ const MainSearchPrac02 = () => {
     //  console.log(event.target.checked);
   };
 
-  useEffect(() => {
-    console.log();
-    //console.log("selecity test용" + { flightInfo });
-  }, [flightInfo]);
+    useEffect(() => {
+        console.log();
+        //console.log("selecity test용" + { flightInfo });
+    }, [flightInfo]);
+
 
   useEffect(() => {
     //console.log(nonStop);
@@ -326,12 +329,184 @@ const MainSearchPrac02 = () => {
                         fontWeight: 550,
                       }}
                     >
-                      검색하기
-                    </Typography>
-                  </Button>
-                  {/* 버튼 크기조절 */}
-                </Box>
-              </Box>
+                        {/* mainSearchApp */}
+
+                        <Box
+                            sx={{
+                                maxWidth: 1050,
+                                width: "100%",
+                                height: "90px",
+                            }}
+                        >
+                            <Typography
+                                variant="h1"
+                                fontSize={50}
+                                fontWeight={600}
+                                component="div"
+                                sx={{
+                                    align: "bottom",
+                                    color: "white",
+                                    // textShadow:
+                                    //   "-0.6px 0px black, 0px 0.6px black, 0.6px 0px black, 0px -0.6px black",
+                                }}
+                            >
+                                Travel your dream away!
+                            </Typography>
+                        </Box>
+                        <Box
+                            sx={{
+                                boxSizing: "border-box",
+                                bgcolor: "#ededed",
+                                borderRadius: 3,
+                                boxShadow: 10,
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    p: "25px",
+                                }}
+                            >
+                                {/* 직항유무 */}
+                                <FormControl>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-controlled-radio-buttons-group"
+                                        name="oneWay-roundTrip-group"
+                                        value={raidoValue}
+                                        onChange={handleRadioChange}
+                                    >
+                                        <FormControlLabel
+                                            value="false"
+                                            control={
+                                                <Radio
+                                                    sx={{
+                                                        "& .MuiSvgIcon-root": {
+                                                            fontSize: 28,
+                                                        },
+                                                    }}
+                                                />
+                                            }
+                                            label={
+                                                <Typography
+                                                    sx={{
+                                                        fontSize: "17px",
+                                                        fontWeight: "700",
+                                                        // color: "white",
+                                                    }}
+                                                >
+                                                    편도
+                                                </Typography>
+                                            }
+                                        />
+                                        <FormControlLabel
+                                            value="true"
+                                            control={
+                                                <Radio
+                                                    sx={{
+                                                        "& .MuiSvgIcon-root": {
+                                                            fontSize: 28,
+                                                        },
+                                                    }}
+                                                />
+                                            }
+                                            label={
+                                                <Typography
+                                                    sx={{
+                                                        fontSize: "17px",
+                                                        fontWeight: "700",
+                                                        // color: "white",
+                                                    }}
+                                                >
+                                                    왕복
+                                                </Typography>
+                                            }
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
+                                {/* 메뉴 */}
+                                <Grid container spacing={0}>
+                                    {/* 도시선택 */}
+                                    <Grid item xs={6}>
+                                        <Stack direction="row">
+                                            <SelectCity
+                                                id="arrival_city"
+                                                update={inputDate}
+                                                label="출발지"
+                                            />
+                                            <SelectCity
+                                                id="departure_city"
+                                                update={inputDate}
+                                                label="도착지"
+                                            />
+                                        </Stack>
+                                    </Grid>
+                                    {/* 날짜선택 */}
+                                    <Grid item xs={3.5}>
+                                        {/* 회석. onChange라는 props이름을 쓰면 base이벤트랑 겹칠 수 있기때문에 updateEvent로 이름 바꿨습니다. */}
+                                        <CalenderComp
+                                            onWay={onWay}
+                                            update={inputDate}
+                                        />
+                                    </Grid>
+                                    {/* 인원좌석 선택 */}
+                                    <Grid item xs={2.5}>
+                                        <Passenger update={inputDate} />
+                                    </Grid>
+                                </Grid>
+                                {/* 직항여부 */}
+                                <Box sx={{ display: "flex", mt: "24px" }}>
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={nonStop}
+                                                onChange={handleNonStop}
+                                                inputProps={{
+                                                    "aria-label": "controlled",
+                                                }}
+                                                sx={{
+                                                    "& .MuiSvgIcon-root": {
+                                                        fontSize: 30,
+                                                    },
+                                                }}
+                                            />
+                                        }
+                                        label={
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "17px",
+                                                    fontWeight: "700",
+                                                    // color: "white",
+                                                }}
+                                            >
+                                                직항
+                                            </Typography>
+                                        }
+                                    />
+                                    <Button
+                                        sx={{
+                                            ml: "auto",
+                                            width: "200px",
+                                            height: "60px",
+                                            // bgcolor: "#02122c",
+                                        }}
+                                        variant="outlined"
+                                        onClick={handleToResult}
+                                    >
+                                        <Typography
+                                            sx={{
+                                                fontSize: 25,
+                                                fontWeight: 550,
+                                            }}
+                                        >
+                                            검색하기
+                                        </Typography>
+                                    </Button>
+                                    {/* 버튼 크기조절 */}
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Container>
+                </Fade>
             </Box>
           </Container>
         </Fade>
