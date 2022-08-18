@@ -86,6 +86,7 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
         airportsDTOs.forEach(e -> setAirportMapping(e));
         airportsDTOs.forEach(e -> airportList.add(e.toEntity()));
         saveAllairport(airportList);
+
     }
 
     //=============================================================================================================//
