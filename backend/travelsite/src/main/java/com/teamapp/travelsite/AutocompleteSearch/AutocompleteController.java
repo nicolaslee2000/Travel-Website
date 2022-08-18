@@ -2,6 +2,8 @@ package com.teamapp.travelsite.AutocompleteSearch;
 
 import java.util.Arrays;
 
+import com.amadeus.exceptions.ClientException;
+import com.teamapp.travelsite.Exception.NotFoundExceptionMessage;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,9 +31,14 @@ public class AutocompleteController {
 //		return service.getAirports(str) ;
 //	}
 
-	
 	@GetMapping("/apisearch")
 	public Location[] search(@RequestParam String str) {
-		return amadeusConnect.search(str);
+		Location[] loc = new Location[10];
+		try{
+			loc = amadeusConnect.search(str);
+		} catch (NullPointerException e) {
+			//e.printStackTrace();
+		}
+			return loc;
 	}
 }
