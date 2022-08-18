@@ -192,12 +192,10 @@ const Header = (props) => {
               </MenuItem>
               <Divider />
               <MenuItem onClick={isLogout}>
-                {/* <Button onClick={isLogout}> */}
                 <ListItemIcon>
                   <Logout fontSize='small' />
                 </ListItemIcon>
                 Logout
-                {/* </Button> */}
               </MenuItem>
             </Menu>
           </div>

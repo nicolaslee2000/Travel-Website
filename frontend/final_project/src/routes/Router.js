@@ -18,6 +18,9 @@ const TravlerPage = lazy(() => import('../pages/travelerpage/TravlerPage'));
 const FinalConfirmPage = lazy(() =>
   import('../pages/finalconfirmpage/FinalConfirmPage')
 );
+const Emailconfirmed = lazy(() =>
+  import('../pages/registeredpage/Emailconfirmed')
+);
 
 //UserDashboard
 const UserDashboard = lazy(() =>
@@ -51,7 +54,7 @@ const Router = () => {
 
   return (
     <React.StrictMode>
-      {/* 모든 컴퓨넌트에서 쿠키를 사용할 수 있도록 설정 */}
+      {/* 모든 컴포넌트에서 쿠키를 사용할 수 있도록 설정 */}
       <CookiesProvider>
         <BrowserRouter>
           <Suspense fallback={<Spinner />}>
@@ -62,6 +65,10 @@ const Router = () => {
               >
                 <Route index element={<MainPage />} exact />
                 <Route path='register' element={<RegisterPage />} />
+                <Route
+                  path='register/emailconfirmed'
+                  element={<Emailconfirmed />}
+                />
                 <Route path='registed' element={<RegisteredPage />} />
                 <Route
                   path='login'
@@ -92,6 +99,10 @@ const Router = () => {
                 <Route
                   path='*'
                   element={<ErrorPage text={'Page not found!'} />}
+                />
+                <Route
+                  path='register/expired'
+                  element={<ErrorPage text='인증 만료된 이메일 입니다. ' />}
                 />
               </Route>
             </Routes>
