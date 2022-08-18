@@ -52,7 +52,6 @@ const MainSearchPrac02 = () => {
         return state.searchReducer3;
     });
     const inputDate = (e) => {
-        console.log("input :" + e);
         setFlightInfo(e);
     };
 
@@ -81,7 +80,6 @@ const MainSearchPrac02 = () => {
     const navigate = useNavigate();
 
     const handleToResult = () => {
-        console.log("result :" + flightInfo);
         dispatch(searchInit(flightInfo));
         searchData(flightInfo);
         navigate("/searchResult", { state: { pageLoaded: pageLoaded } });
@@ -100,7 +98,7 @@ const MainSearchPrac02 = () => {
     };
 
     useEffect(() => {
-        console.log(flightInfo);
+        console.log();
         //console.log("selecity test용" + { flightInfo });
     }, [flightInfo]);
 
@@ -185,7 +183,6 @@ const MainSearchPrac02 = () => {
                             </Typography>
                         </Box>
                         <Box
-                            Container
                             sx={{
                                 boxSizing: "border-box",
                                 bgcolor: "#ededed",
