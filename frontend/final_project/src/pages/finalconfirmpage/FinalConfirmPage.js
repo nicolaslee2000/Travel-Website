@@ -1,10 +1,12 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import Grid from '@mui/material/Grid';
-import Header from '../../components/othercomponent/Header';
-import GoResultItem02 from './../../components/travlerpagecomponent/GoResultItem02';
-import BackResultItem02 from '../../components/travlerpagecomponent/BackResultItem02';
-import TravlerInfo from '../../components/finalconfirmcomponent/TravlerInfo';
+import React from "react";
+import { useSelector } from "react-redux";
+import Grid from "@mui/material/Grid";
+import Header from "../../components/othercomponent/Header";
+import GoResultItem02 from "./../../components/travlerpagecomponent/GoResultItem02";
+import BackResultItem02 from "../../components/travlerpagecomponent/BackResultItem02";
+import TravlerInfo from "../../components/finalconfirmcomponent/TravlerInfo";
+import { Box } from "@mui/system";
+import { Typography } from "@mui/material";
 
 const FinalConfirmPage = () => {
   const searchReduxData = useSelector((state) => {
@@ -13,17 +15,35 @@ const FinalConfirmPage = () => {
   const goBackBool =
     searchReduxData.flightPrice.flightOffers[0].itineraries.length;
   return (
-    <div>
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          fontWeight: "bold",
+          border: "2px solid black",
+          justifyContent: "center",
+          // backgroundColor: 'aquamarine',
+          backgroundColor: "#0a4b78",
+          height: "200px",
+        }}
+      >
+        <Typography sx={{ fontSize: 40, fontWeight: 700, color: "white" }}>
+          예약자 정보 확인
+        </Typography>
+      </Box>
+
       <Grid
         container
         spacing={4}
-        direction='column'
-        alignItems='center'
-        justifyContent='center'
-        style={{ minHeight: '70vh' }}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "70vh" }}
       >
-        {' '}
-        <Grid item xs={3}>
+        {" "}
+        <Grid item xs={3} mt="25px">
           {/* <GoResultItem /> */}
           <GoResultItem02 />
         </Grid>
@@ -38,7 +58,7 @@ const FinalConfirmPage = () => {
           <TravlerInfo />
         </Grid>
       </Grid>
-    </div>
+    </>
   );
 };
 
