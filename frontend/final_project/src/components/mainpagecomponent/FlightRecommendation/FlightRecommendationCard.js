@@ -58,10 +58,10 @@ const FlightRecommendationCard = () => {
                         </ListItem>
                     </List>
                 </CardContent>
-                <CardActions sx={{ justifyContent: "right" }}>
-                    <Button size="small">{"From 29999usd  >>"}</Button>
-                </CardActions>
             </CardActionArea>
+            <CardActions sx={{ justifyContent: "right" }}>
+                <Button size="small">{"From 29999usd  >>"}</Button>
+            </CardActions>
         </Card>
     );
 };

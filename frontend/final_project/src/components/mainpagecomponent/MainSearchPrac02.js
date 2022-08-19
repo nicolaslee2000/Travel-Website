@@ -25,7 +25,9 @@ import CalenderComp from "./CalenderComp";
 import Passenger from "./Passenger";
 import { Box, boxSizing, Container, fontWeight } from "@mui/system";
 
-import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
+// import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage.jpg";
+import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage02.jpg";
+
 import { Brightness1 } from "@mui/icons-material";
 import FlightRecommendation from "./FlightRecommendation/FlightRecommendation";
 // import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundImage1.jpg";
@@ -47,7 +49,6 @@ const MainSearchPrac02 = () => {
   });
 
   const dispatch = useDispatch();
-
   const searData3 = useSelector((state) => {
     return state.searchReducer3;
   });
