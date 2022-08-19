@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teamapp.travelsite.Exception.ResourceNotFoundException;
-import com.teamapp.travelsite.User.Security.CurrentUser;
-import com.teamapp.travelsite.User.Security.UserPrincipal;
+import com.teamapp.travelsite.User.CurrentUser;
+import com.teamapp.travelsite.User.UserPrincipal;
 
 import lombok.RequiredArgsConstructor;
 

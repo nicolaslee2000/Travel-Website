@@ -6,7 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -53,6 +55,9 @@ public class TicketOrder {
     @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
+
+    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.MERGE,mappedBy = "ticketOrderList")
+    private List<Traveler> travelers = new ArrayList<>();
 
     public TicketOrderDTO of(TicketOrder ticketOrder) {
         ModelMapper modelMapper = new ModelMapper();

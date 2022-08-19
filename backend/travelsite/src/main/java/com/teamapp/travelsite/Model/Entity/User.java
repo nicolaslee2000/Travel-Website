@@ -3,15 +3,13 @@ package com.teamapp.travelsite.Model.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teamapp.travelsite.Model.DTOs.UserDTO;
-import com.teamapp.travelsite.User.Security.AuthProvider;
+import com.teamapp.travelsite.User.AuthProvider;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @NoArgsConstructor
 @Builder

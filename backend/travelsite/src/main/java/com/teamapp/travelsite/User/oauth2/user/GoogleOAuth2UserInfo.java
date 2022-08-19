@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User.Security.oauth2.user;
+package com.teamapp.travelsite.User.oauth2.user;
 
 import java.util.Map;
 

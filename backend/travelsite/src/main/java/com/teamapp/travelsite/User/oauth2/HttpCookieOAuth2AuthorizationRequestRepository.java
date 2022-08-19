@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User.Security.oauth2;
+package com.teamapp.travelsite.User.oauth2;
 
 import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.teamapp.travelsite.util.CookieUtils;
