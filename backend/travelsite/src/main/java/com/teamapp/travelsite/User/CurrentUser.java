@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User.Security;
+package com.teamapp.travelsite.User;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 

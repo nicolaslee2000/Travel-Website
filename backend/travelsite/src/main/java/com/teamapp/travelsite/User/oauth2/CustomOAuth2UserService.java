@@ -1,10 +1,10 @@
-package com.teamapp.travelsite.User.Security.oauth2;
+package com.teamapp.travelsite.User.oauth2;
 
 import com.teamapp.travelsite.Exception.OAuth2AuthenticationProcessingException;
-import com.teamapp.travelsite.User.Security.AuthProvider;
-import com.teamapp.travelsite.User.Security.UserPrincipal;
-import com.teamapp.travelsite.User.Security.oauth2.user.OAuth2UserInfo;
-import com.teamapp.travelsite.User.Security.oauth2.user.OAuth2UserInfoFactory;
+import com.teamapp.travelsite.User.AuthProvider;
+import com.teamapp.travelsite.User.UserPrincipal;
+import com.teamapp.travelsite.User.oauth2.user.OAuth2UserInfo;
+import com.teamapp.travelsite.User.oauth2.user.OAuth2UserInfoFactory;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.Model.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

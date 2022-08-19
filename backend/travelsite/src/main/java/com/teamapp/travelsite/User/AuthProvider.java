@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User.Security;
+package com.teamapp.travelsite.User;
 
 public enum AuthProvider {
     local,

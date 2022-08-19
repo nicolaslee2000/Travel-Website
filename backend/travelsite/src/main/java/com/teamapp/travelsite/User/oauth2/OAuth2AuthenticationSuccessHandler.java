@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User.Security.oauth2;
+package com.teamapp.travelsite.User.oauth2;
 
 
 import com.teamapp.travelsite.Config.AppProperties;
