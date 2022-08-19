@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import NativeSelect from '@mui/material/NativeSelect';
-import Typography from '@mui/material/Typography';
-import './searchResultConfig.css';
+import React, { useState } from "react";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import NativeSelect from "@mui/material/NativeSelect";
+import Typography from "@mui/material/Typography";
+import "./searchResultConfig.css";
+import { color, display } from "@mui/system";
 
 const SearchResultConfig = (props) => {
   const { resultPageNumUpdate } = props; // 정렬용, 체크에 따라 number값이 바뀜
   const [num, setNum] = useState(0);
 
-  const [departTime, setDepartTime] = useState('1');
+  const [departTime, setDepartTime] = useState("1");
   const Hour_Select = [...Array(24)].map((v, i) => i + 1);
   const handleSelectChange = (e) => {
     setDepartTime((prev) => {
@@ -36,20 +37,35 @@ const SearchResultConfig = (props) => {
     <>
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: 215,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          minWidth: 225,
         }}
       >
         {/* <div className='configTitle'>정렬 및 검색</div> */}
-        <fieldset className='configWrapper'>
-          <legend>
-            <Typography variant='h1' color={'white'} fontWeight={'bold'}>
-              {' '}
-              정렬 및 검색
-            </Typography>
-          </legend>
+        {/* <fieldset className="configWrapper"> */}
+        <Box
+          className="configWrapper"
+          sx={{
+            boxSizing: "border-box",
+            p: "15px",
+            border: 1,
+            borderColor: "#ccc",
+            boxShadow: 1,
+            borderRadius: 4,
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#111236",
+              fontSize: "2rem",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            정렬 및 검색
+          </Typography>
 
           <FormControlLabel
             control={
@@ -62,16 +78,16 @@ const SearchResultConfig = (props) => {
             }
             label={
               <Box
-                component='div'
+                component="div"
                 fontSize={20}
-                fontWeight={'bold'}
-                color={'white'}
+                fontWeight={"bold"}
+                color={"111236"}
               >
                 최저가순
               </Box>
             }
             sx={{
-              '& .MuiSvgIcon-root': { fontSize: 28 },
+              "& .MuiSvgIcon-root": { fontSize: 28 },
             }}
           />
           <FormControlLabel
@@ -85,16 +101,16 @@ const SearchResultConfig = (props) => {
             }
             label={
               <Box
-                component='div'
+                component="div"
                 fontSize={20}
-                fontWeight={'bold'}
-                color={'white'}
+                fontWeight={"bold"}
+                color={"111236"}
               >
                 출발시간순
               </Box>
             }
             sx={{
-              '& .MuiSvgIcon-root': { fontSize: 28 },
+              "& .MuiSvgIcon-root": { fontSize: 28 },
             }}
           />
           <FormControlLabel
@@ -108,27 +124,27 @@ const SearchResultConfig = (props) => {
             }
             label={
               <Box
-                component='div'
+                component="div"
                 fontSize={20}
-                fontWeight={'bold'}
-                color={'white'}
+                fontWeight={"bold"}
+                color={"111236"}
               >
                 경유여부
               </Box>
             }
             sx={{
-              '& .MuiSvgIcon-root': { fontSize: 28 },
+              "& .MuiSvgIcon-root": { fontSize: 28 },
             }}
           />
 
           <Box sx={{ marginTop: 2 }}>
-            <Typography variant='h2' color={'white'} fontWeight={'bold'}>
-              {' '}
+            <Typography variant="h2" color={"111236"} fontWeight={"bold"}>
+              {" "}
               출발시간
             </Typography>
 
             <FormControl sx={{ m: 1, minWidth: 60 }}>
-              <InputLabel variant='standard' htmlFor='uncontrolled-native'>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
                 출발시간
               </InputLabel>
               <NativeSelect
@@ -154,15 +170,15 @@ const SearchResultConfig = (props) => {
             </FormControl>
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginTop: '20px',
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "20px",
               }}
             >
-              <Typography variant='h2' color={'white'} fontWeight={'bold'}>
+              <Typography variant="h2" color={"111236"} fontWeight={"bold"}>
                 도착시간
               </Typography>
-              <Typography variant='h2' color={'white'} fontWeight={'bold'}>
+              <Typography variant="h2" color={"111236"} fontWeight={"bold"}>
                 {parseInt(departTime) + 3 > 24
                   ? parseInt(departTime) + 3 - 24
                   : parseInt(departTime) + 3}
@@ -170,7 +186,7 @@ const SearchResultConfig = (props) => {
               </Typography>
             </Box>
           </Box>
-        </fieldset>
+        </Box>
       </Box>
     </>
   );
