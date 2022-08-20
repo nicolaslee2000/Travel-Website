@@ -1,12 +1,14 @@
 package com.teamapp.travelsite.Controller;
 
 
+import com.teamapp.travelsite.Exception.NotFoundExceptionMessage;
+import com.teamapp.travelsite.Exception.UserNotFoundException;
+import com.teamapp.travelsite.Model.DTOs.UserDTO;
 import com.teamapp.travelsite.Model.Entity.User;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.teamapp.travelsite.Exception.ResourceNotFoundException;
 import com.teamapp.travelsite.User.CurrentUser;
@@ -25,4 +27,13 @@ public class UserController {
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
-}}
+}
+    @PostMapping("user/mypage/")
+    public UserDTO showCurrentUser(@RequestParam String email) {
+        User user = userRepository.findByEmail(email).get();
+        if (!user.getEmail().isEmpty()) {
+            return user.of(user);
+        } else throw new NotFoundExceptionMessage("not founded");
+
+    }
+}
