@@ -1,21 +1,19 @@
 package com.teamapp.travelsite.Controller;
 
 
+import com.teamapp.travelsite.Exception.NotFoundExceptionMessage;
+import com.teamapp.travelsite.Exception.UserNotFoundException;
 import com.teamapp.travelsite.Model.DTOs.UserDTO;
 import com.teamapp.travelsite.Model.Entity.User;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.google.gson.JsonObject;
 import com.teamapp.travelsite.Exception.ResourceNotFoundException;
-import com.teamapp.travelsite.User.Security.CurrentUser;
-import com.teamapp.travelsite.User.Security.UserPrincipal;
+import com.teamapp.travelsite.User.CurrentUser;
+import com.teamapp.travelsite.User.UserPrincipal;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -30,36 +28,12 @@ public class UserController {
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
 }
-    
-    @PostMapping("/getUser")
-    public User getUserById(@RequestBody UserDTO dto) {
-    	System.out.println(dto);
-    	return userRepository.findByEmail(dto.getEmail()).orElseThrow();
-    }
-    
-    @PostMapping("/testingtesting")
-    public String getTesting(@RequestBody JsonObject test) {
-    	test.addProperty("hi", "hello");
-    	System.out.println(test.toString());
-    	return "hey it works";
-    }
+    @PostMapping("user/mypage/")
+    public UserDTO showCurrentUser(@RequestParam String email) {
+        User user = userRepository.findByEmail(email).get();
+        if (!user.getEmail().isEmpty()) {
+            return user.of(user);
+        } else throw new NotFoundExceptionMessage("not founded");
 
-}
-
-class TestClass{
-	public TestClass() {
-		
-	}
-	private String name;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+this.name;
-	}
+    }
 }

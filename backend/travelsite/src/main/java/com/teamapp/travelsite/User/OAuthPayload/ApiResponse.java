@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User.Security.OAuthPayload;
+package com.teamapp.travelsite.User.OAuthPayload;
 
 public class ApiResponse {
     private boolean success;

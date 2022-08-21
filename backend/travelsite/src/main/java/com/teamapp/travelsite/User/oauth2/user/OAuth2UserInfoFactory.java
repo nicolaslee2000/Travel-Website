@@ -1,7 +1,7 @@
-package com.teamapp.travelsite.User.Security.oauth2.user;
+package com.teamapp.travelsite.User.oauth2.user;
 
 import com.teamapp.travelsite.Exception.OAuth2AuthenticationProcessingException;
-import com.teamapp.travelsite.User.Security.AuthProvider;
+import com.teamapp.travelsite.User.AuthProvider;
 
 import java.util.Map;
 

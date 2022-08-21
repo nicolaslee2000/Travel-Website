@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User.Security;
+package com.teamapp.travelsite.User;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
