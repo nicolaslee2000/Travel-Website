@@ -36,7 +36,8 @@ public class TravelerServiceImpl implements TravelerService {
     @Override
     public Long saveUpdatedTraveler(TravelerDTO travelerDTO) throws Exception {
         Traveler traveler = travelerDTO.toEntity();
-        Optional<Traveler> byId = this.travelerRepository.findById(traveler.getId());
+        
+        Optional<Traveler> byId = this.travelerRepository.findById(travelerDTO.getId());
         if (byId.isPresent()){
             travelerRepository.delete(byId.get());
             return this.travelerRepository.save(traveler).getId();

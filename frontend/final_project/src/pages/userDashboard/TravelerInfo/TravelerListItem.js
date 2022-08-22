@@ -24,7 +24,9 @@ const TravelerListItem = ({ trav }) => {
                     <ListItemIcon>
                         <CircleIcon fontSize="20" />
                     </ListItemIcon>
-                    <ListItemText primary={trav.name} />
+                    <ListItemText
+                        primary={trav.firstName + " " + trav.lastName}
+                    />
                     <ListItemIcon>
                         <ArrowForwardIos />
                     </ListItemIcon>

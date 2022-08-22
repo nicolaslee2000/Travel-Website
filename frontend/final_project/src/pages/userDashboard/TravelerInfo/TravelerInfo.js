@@ -1,10 +1,53 @@
 import React from "react";
 
-import { Card, CardContent, Box, Typography, Container } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    Box,
+    Typography,
+    Container,
+    Button,
+} from "@mui/material";
 
 import TravelerList from "./TravelerList";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const TravelerInfo = () => {
+    const [userId, setUserId] = React.useState();
+    const [cookies, setCookie, removeCookie] = useCookies(["this_is_login"]);
+    const [travelers, setTravelers] = React.useState([]);
+    const getUserId = async (data, setState) => {
+        await axios
+            .post(`http://localhost:8090/user/getId`, {
+                email: cookies.this_is_login,
+            })
+            .then((response) => response.data)
+            .then((id) => {
+                setUserId(id);
+            })
+            .catch((error) => console.log(error));
+    };
+    const getTravelers = async (data, setState) => {
+        if (userId === undefined) {
+            return;
+        }
+        await axios
+            .get(`http://localhost:8090/traveler/travelers`, {
+                params: { id: userId },
+            })
+            .then((response) => response.data)
+            .then((travelers) => setTravelers((data) => travelers));
+    };
+
+    React.useEffect(() => {
+        getUserId();
+    }, []);
+    React.useEffect(() => {
+        getTravelers();
+    }, [userId]);
+
     return (
         <Box sx={{ width: 800 }}>
             <Container>
@@ -23,8 +66,7 @@ const TravelerInfo = () => {
                             },
                         }}
                     >
-                        <TravelerList />
-                        {/* <ExTable /> */}
+                        <TravelerList userId={userId} travelers={travelers} />
                     </Box>
                 </CardContent>
             </Card>

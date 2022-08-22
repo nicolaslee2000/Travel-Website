@@ -13,9 +13,10 @@ import java.util.Date;
 @Builder
 public class TravelerDTO {
 
+	private Long id;
     private String title;
     private Date dateOfBirth;
-    private  Enum gender;
+    private  String gender;
     private  String firstName;
     private  String lastName;
 
@@ -23,7 +24,9 @@ public class TravelerDTO {
     private  String number;
     private  String expiryDate;
     private  String issuanceCountry;
+    private String dateOfIssue;
     private  String nationality;
+    private String userId;
 
     private UserDTO userDTO;
 
@@ -31,7 +34,7 @@ public class TravelerDTO {
     public Traveler toEntity(){
         return Traveler.builder()
                 .dateOfBirth(this.dateOfBirth)
-                .gender((Gender) gender)
+                .gender( this.gender)
                 .firstName(this.firstName)
                 .lastName(this.lastName)
                 .user(userDTO.toEntity(userDTO))
@@ -39,7 +42,9 @@ public class TravelerDTO {
                 .expiryDate(this.expiryDate)
                 .number(this.number)
                 .issuanceCountry(this.issuanceCountry)
+                .dateOfIssue(this.dateOfIssue)
                 .nationality(this.nationality)
+                .title(title)
                 .build();
     }
 

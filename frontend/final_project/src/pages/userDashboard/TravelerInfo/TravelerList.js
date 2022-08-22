@@ -10,29 +10,17 @@ import TravelerListItem from "./TravelerListItem";
 import { Link } from "react-router-dom";
 import { AddCircleOutline, ArrowForwardIos } from "@mui/icons-material";
 
-const TravelerList = () => {
-    const [travelers, setTravelers] = React.useState([
-        {
-            id: 1,
-            name: "nick",
-        },
-        {
-            id: 2,
-            name: "jack",
-        },
-    ]);
-    //fetch
-    //can use transition later
-
+const TravelerList = ({ userId, travelers }) => {
     return (
         <List>
             {travelers.map((trav, index) => {
-                return <TravelerListItem key={trav.id} trav={trav} />;
+                return <TravelerListItem key={index} trav={trav} />;
             })}
             <ListItem
                 disablePadding
                 component={Link}
                 to={"travelerAdd"}
+                state={{ userId: userId }}
                 sx={{ textDecoration: "none", color: "black", fontSize: "50" }}
             >
                 <ListItemButton>

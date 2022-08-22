@@ -23,8 +23,8 @@ public class Traveler {
     private String title;
     private Date dateOfBirth;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+//    @Enumerated(EnumType.STRING)
+    private String gender;
 
     private String firstName;
     private String lastName;
@@ -33,6 +33,7 @@ public class Traveler {
     private  String number;
     private  String expiryDate;
     private  String issuanceCountry;
+    private String dateOfIssue;
     private  String nationality;
 
     @Column(name = "user_id",insertable = false, updatable = false)
