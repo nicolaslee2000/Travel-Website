@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @NoArgsConstructor
@@ -21,7 +22,7 @@ import java.util.List;
 @Table(name = "USER_TABLE",uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -29,7 +30,7 @@ public class User {
     @Column
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar2(20) default 'defaultName'")
     private String name;
 
     @Column(nullable = false)
@@ -56,6 +57,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<TempMail> tempMails;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<GroupChatMessage> groupChatMessages;
+
 
     public UserDTO of (User user) {
         ModelMapper modelMapper = new ModelMapper();

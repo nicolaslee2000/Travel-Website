@@ -1,6 +1,7 @@
 package com.teamapp.travelsite.Model.Entity;
 
 import com.teamapp.travelsite.Model.DTOs.TravelerDTO;
+import com.teamapp.travelsite.Model.Entity.ForJoinTable.TravelerWithOrder;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
@@ -42,8 +43,9 @@ public class Traveler {
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    private List<TicketOrder> ticketOrderList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "traveler")
+    private List<TravelerWithOrder> travelerWithOrderList ;
+
 
     public TravelerDTO of(Traveler traveler) {
         ModelMapper modelMapper = new ModelMapper();

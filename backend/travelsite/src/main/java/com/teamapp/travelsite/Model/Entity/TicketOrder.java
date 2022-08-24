@@ -1,6 +1,7 @@
 package com.teamapp.travelsite.Model.Entity;
 
 import com.teamapp.travelsite.Model.DTOs.TicketOrderDTO;
+import com.teamapp.travelsite.Model.Entity.ForJoinTable.TravelerWithOrder;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.modelmapper.ModelMapper;
@@ -56,8 +57,8 @@ public class TicketOrder {
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.MERGE,mappedBy = "ticketOrderList")
-    private List<Traveler> travelers = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TravelerWithOrder> travelerWithOrderList;
 
     public TicketOrderDTO of(TicketOrder ticketOrder) {
         ModelMapper modelMapper = new ModelMapper();
