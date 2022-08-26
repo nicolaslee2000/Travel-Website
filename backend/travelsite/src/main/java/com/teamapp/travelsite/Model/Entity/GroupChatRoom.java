@@ -3,6 +3,7 @@ package com.teamapp.travelsite.Model.Entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,5 +22,7 @@ public class GroupChatRoom {
 
     @OneToOne
     private Group group;
+
+    private Timestamp createTime;
 
 }

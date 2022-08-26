@@ -20,11 +20,11 @@ public class TravelerWithOrder implements Serializable {
     private Long orderGroupNumber;
 
     @ManyToOne
-    @JoinColumn(name = "travelerId")
+    @JoinColumn(name = "travelerId",referencedColumnName = "id")
     private Traveler traveler;
 
     @ManyToOne
-    @JoinColumn(name = "orderId")
+    @JoinColumn(name = "orderId",referencedColumnName = "id")
     private TicketOrder ticketOrder;
 
 

@@ -16,7 +16,6 @@ import java.util.List;
 public class OnlyTestController {
     UserServiceImpl userService;
 
-
     @GetMapping("/userlist")
     public List<UserDTO> showAllUsers(@RequestParam String key) {
         if (key.equals("key")) {
@@ -25,4 +24,6 @@ public class OnlyTestController {
             throw new RuntimeException("GET OUT");
         }
     }
+
+
 }

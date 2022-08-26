@@ -30,6 +30,7 @@ public class TicketOrder {
 
     @Column(name = "depart_airport",insertable = false,updatable = false)
     private String depart;
+
     @Column(name = "arrive_airport",insertable = false,updatable = false)
     private String arrive;
 
@@ -53,11 +54,11 @@ public class TicketOrder {
     @JoinColumn(name = "depart_airport", referencedColumnName = "airport_iata")
     private Airport airports;
 
-    @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ticketOrder")
     private List<TravelerWithOrder> travelerWithOrderList;
 
     public TicketOrderDTO of(TicketOrder ticketOrder) {

@@ -15,7 +15,7 @@ public class Comment {
     @GeneratedValue
     private Long commentNum;
 
-    @Column(nullable = true)
+    @Column
     private String comment;
 
     @ManyToOne

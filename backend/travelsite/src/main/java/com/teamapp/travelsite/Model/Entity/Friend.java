@@ -5,18 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "FRIENDLIST")
-public class FriendList {
+@Table(name = "FRIEND")
+public class Friend implements Serializable {
+
     @Id
     @Column(nullable = false)
-    private User user;
+    @GeneratedValue
+    private Long dummy;
 
-    @Column(nullable = false)
-    private User friend;
+//    @Id
+//    @ManyToOne
+//    private User user;
+//
+//    @ManyToOne
+//    private User friend;
 
-
-}
+} //make to friend to user too

@@ -17,10 +17,12 @@ import java.io.Serializable;
 @Table(name = "GROUP_MEMBER")
 public class GroupWithMember implements Serializable {
 
-    @Column(nullable = false,columnDefinition = "default 0")
-    private boolean isMaster; //Group Master Flag Column
+    @Column(nullable = true)
+    private boolean isMaster;
 
-    //make for group CRUD is for only Master
+    //Group Master Flag Column
+
+    //make for group administrate is for only Master
 
     @Id
     @ManyToOne
@@ -28,6 +30,6 @@ public class GroupWithMember implements Serializable {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "GroupId", referencedColumnName = "groupId")
+    @JoinColumn(name = "groupId", referencedColumnName = "group_id")
     private Group group;
 }

@@ -4,40 +4,41 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teamapp.travelsite.Model.DTOs.ChatMessageDTO;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CHATMESSAGE")
+@Table(name = "GROUPCHATMSG")
 @Builder
-public class GroupChatMessage {
+@DynamicUpdate
+public class GroupChatMsg {
+
     @Id
     @GeneratedValue //change SEQ yet
-    private Long MessageNumber;
+    private Long messageNumber;
 
     @Column(insertable = false,updatable = false)
-    private String userName;
 
-    private String messageContainer;
+    private String sender;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "YYYY-MM-DD")
-    private Date sendDate;
+    private String content;
 
-
-    public GroupChatMessage of(ChatMessageDTO chatMessageDTO) {
-        ModelMapper modelMapper =  new ModelMapper();
-        return modelMapper.map(chatMessageDTO, GroupChatMessage.class);
-    }
+    private Timestamp sendDate;
 
     @ManyToOne
-    @JoinColumn(name = "userName",referencedColumnName = "email")
     User user;
+    public GroupChatMsg of(ChatMessageDTO chatMessageDTO) {
+        ModelMapper modelMapper =  new ModelMapper();
+        return modelMapper.map(chatMessageDTO, GroupChatMsg.class);
+    }
+
+
 
 }

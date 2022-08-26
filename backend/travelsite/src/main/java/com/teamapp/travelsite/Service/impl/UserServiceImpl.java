@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getUser(String name) {
-        Optional<User> user = this.userRepository.findByname(name);
+        Optional<User> user = this.userRepository.findByName(name);
         if (user.isPresent()) {
             return user.get();
         } else {

@@ -7,7 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,6 +19,7 @@ import java.util.Date;
 @Table(name = "GROUP")
 public class Group implements Serializable {
     @Id
+    @Column(name = "group_id")
     private Long groupId;
 
     private String groupName;
@@ -26,14 +29,11 @@ public class Group implements Serializable {
 
     private String groupDescribe;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-DD")
-    private Date creationDate;
+    private Timestamp creationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "groupMembers")
-    private GroupWithMember groupMember;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "group")
+    private List<GroupWithMember> groupWithMemberList;
 
     @OneToOne(mappedBy = "group", cascade = CascadeType.ALL)
     private GroupBoard groupBoard;

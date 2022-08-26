@@ -58,6 +58,7 @@ const MainSearch = () => {
     // dispatch(searchInit(param));
   };
 
+
   const handleInfoChange2 = (e, newValue) => {
     console.log('체인지 동작은 함');
     dispatch(searchInit(newValue));

@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,7 +23,7 @@ import java.util.List;
 @Table(name = "USER_TABLE",uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
-public class User implements Serializable {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,7 +31,7 @@ public class User implements Serializable {
     @Column
     private String password;
 
-    @Column(nullable = false, columnDefinition = "varchar2(20) default 'defaultName'")
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -59,7 +60,11 @@ public class User implements Serializable {
     List<TempMail> tempMails;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<GroupChatMessage> groupChatMessages;
+    List<GroupChatMsg> groupChatMessages;
+
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    List<DirectMessage> directMessages;
+
 
 
     public UserDTO of (User user) {

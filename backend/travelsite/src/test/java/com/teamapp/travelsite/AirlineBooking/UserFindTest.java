@@ -27,7 +27,7 @@ public class UserFindTest {
     void testUserFind(){
         //given
         final String username = "username";
-        given(userRepository.findByname(any())).willReturn(Optional.of(new User()));
+        given(userRepository.findByName(any())).willReturn(Optional.of(new User()));
 
          //when
         User user = userService.getUser(username);
