@@ -16,13 +16,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findByName(String username);
 
-    //examples
-    @Query(value =
-            "SELECT * FROM USER_TABLE" +
-                    "ORDER BY email"
-            ,nativeQuery = true)
-    List<User> searchByEmail(@Param("email") String email);
-
     Optional<User> findByEmail(String email);
 
     Boolean existsByEmail(String email);

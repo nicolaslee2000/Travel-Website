@@ -24,16 +24,20 @@ public class GroupChatMsg {
     @GeneratedValue //change SEQ yet
     private Long messageNumber;
 
-    @Column(insertable = false,updatable = false)
-
-    private String sender;
 
     private String content;
 
     private Timestamp sendDate;
 
     @ManyToOne
-    User user;
+    @JoinColumn(name = "sender")
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "group_chat_no")
+    private GroupChatRoom groupChatRoom;
+
+
     public GroupChatMsg of(ChatMessageDTO chatMessageDTO) {
         ModelMapper modelMapper =  new ModelMapper();
         return modelMapper.map(chatMessageDTO, GroupChatMsg.class);

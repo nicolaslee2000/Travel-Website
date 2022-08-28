@@ -23,6 +23,5 @@ public class GroupChatRoom {
     @OneToOne
     private Group group;
 
-    private Timestamp createTime;
 
 }

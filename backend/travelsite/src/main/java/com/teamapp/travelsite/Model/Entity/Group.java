@@ -1,14 +1,10 @@
 package com.teamapp.travelsite.Model.Entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.teamapp.travelsite.Model.Entity.ForJoinTable.GroupWithMember;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -31,14 +27,16 @@ public class Group implements Serializable {
 
     private Timestamp creationDate;
 
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "group")
-    private List<GroupWithMember> groupWithMemberList;
-
     @OneToOne(mappedBy = "group", cascade = CascadeType.ALL)
     private GroupBoard groupBoard;
 
     @OneToOne(mappedBy = "group", cascade = CascadeType.ALL)
     private GroupChatRoom groupChatRoom;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<Member> members;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<GroupChatRoom> groupChatRooms;
 
 }

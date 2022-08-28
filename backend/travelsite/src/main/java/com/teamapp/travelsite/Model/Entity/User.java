@@ -59,12 +59,11 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<TempMail> tempMails;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<GroupChatMsg> groupChatMessages;
-
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     List<DirectMessage> directMessages;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Member> members;
 
 
     public UserDTO of (User user) {
