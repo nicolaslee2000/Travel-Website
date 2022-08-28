@@ -1,9 +1,11 @@
 package com.teamapp.travelsite.Model.Entity;
 
+import com.teamapp.travelsite.Model.DTOs.MemberDTO;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 
@@ -28,4 +30,9 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public MemberDTO of(Member member) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(member,MemberDTO.class);
+    }
 }

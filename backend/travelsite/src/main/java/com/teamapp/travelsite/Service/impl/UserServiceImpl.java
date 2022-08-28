@@ -27,7 +27,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final EntityManagerFactory entityManagerFactory;
     public User create(long id, String name, String email, String password) {
         User user = new User();
         user.setId(id);

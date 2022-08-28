@@ -7,10 +7,14 @@ import com.teamapp.travelsite.User.AuthProvider;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,12 +22,12 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @Entity
-@Setter
 @Getter
+@Setter
 @Table(name = "USER_TABLE",uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -69,6 +73,54 @@ public class User {
     public UserDTO of (User user) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    //계정이 갖고있는 권한 목록은 리턴
+    @Override
+    public Collection <? extends GrantedAuthority > getAuthorities() {
+
+        Collection < GrantedAuthority > collectors = new ArrayList<>();
+        collectors.add(() -> {
+            return "계정별 등록할 권한";
+        });
+
+        //collectors.add(new SimpleGrantedAuthority("Role"));
+
+        return collectors;
+    }
+
+    //계정이 만료되지 않았는지 리턴 (true: 만료 안됨)
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    //계정이 잠겨있는지 않았는지 리턴. (true: 잠기지 않음)
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    //비밀번호가 만료되지 않았는지 리턴한다. (true: 만료 안됨)
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    //계정이 활성화(사용가능)인지 리턴 (true: 활성화)
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
 
