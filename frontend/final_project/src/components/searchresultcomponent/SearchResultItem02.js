@@ -42,6 +42,18 @@ const SearchResultItem02 = (props) => {
     console.log(str);
     // console.log(str.replace("T", " ").substring(11, 16));
     let stArr = str.split("T");
+
+    // let stArr = str.replace("T", " ").substring(11, 16);
+    return stArr;
+  };
+  const transDate = (str) => {
+    // console.log(str.replace("T", " ").substring(0, 10));
+    let stArr = str.replace("T", " ").substring(0, 10);
+    return stArr;
+  };
+
+  const transTime = (str) => {
+    let stArr = str.replace("T", " ").substring(11, 16);
     return stArr;
   };
 
@@ -103,15 +115,15 @@ const SearchResultItem02 = (props) => {
     // navigate('/travler');
   };
 
-  const [goStartDate, goStartTime] = dateTrans(goStart.departure.at);
+  // const [goStartDate, goStartTime] = dateTrans(goStart.departure.at);
+  const goStartDate = transDate(goStart.departure.at);
+  const goStartTime = transTime(goStart.departure.at);
+
   const [goStartTimeForm, setGoStartTimeForm] = useState("");
 
-  const [goEndDate, goEndTime] = dateTrans(goEnd.arrival.at);
-
-  const transTimeForm = (date) => {
-    format(date, "H:MM");
-  };
-
+  // const [goEndDate, goEndTime] = dateTrans(goEnd.arrival.at);
+  const goEndDate = transDate(goEnd.arrival.at);
+  const goEndTime = transTime(goEnd.arrival.at);
   useEffect(() => {
     //console.log('실제 코드찍히는거', goStart.operating.carrierCode);
     //console.log('실제 코드찍히는거', goOper.carrierCode);
@@ -187,13 +199,19 @@ const SearchResultItem02 = (props) => {
             >
               <Typography
                 variant="myStyle"
-                sx={{ fontWeight: 700, fontSize: "25px" }}
+                sx={{ fontSize: 15, fontWeight: 500 }}
+              >
+                {goStartDate}
+              </Typography>
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 33, fontWeight: 700 }}
               >
                 {goStartTime}
               </Typography>
               <Typography
                 variant="myStyle"
-                sx={{ fontSize: 20, fontWeight: 600 }}
+                sx={{ fontSize: 22, fontWeight: 700 }}
               >
                 {goStart.departure.iataCode}
               </Typography>
@@ -247,14 +265,23 @@ const SearchResultItem02 = (props) => {
                 width: 200,
               }}
             >
-              <Typography variant="myStyle" fontSize={23}>
-                {/* {info.end} */}
-                {goEnd.arrival.iataCode}
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 15, fontWeight: 500 }}
+              >
+                {goEndDate}
               </Typography>
-              <Typography variant="myStyle">
-                {"도착날짜: " + goEndDate}
-                <br />
-                {"도착시간: " + goEndTime}
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 33, fontWeight: 700 }}
+              >
+                {goEndTime}
+              </Typography>
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 22, fontWeight: 700 }}
+              >
+                {goEnd.arrival.iataCode}
               </Typography>
             </CardContent>
 
