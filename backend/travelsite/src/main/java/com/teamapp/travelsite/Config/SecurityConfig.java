@@ -5,8 +5,8 @@ import com.teamapp.travelsite.User.CustomUserDetailsService;
 import com.teamapp.travelsite.User.RestAuthenticationEntryPoint;
 import com.teamapp.travelsite.User.oauth2.CustomOAuth2UserService;
 import com.teamapp.travelsite.User.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.teamapp.travelsite.User.oauth2.OAuth2AuthenticationFailureHandler;
-import com.teamapp.travelsite.User.oauth2.OAuth2AuthenticationSuccessHandler;
+import com.teamapp.travelsite.User.oauth2.handler.OAuth2AuthenticationFailureHandler;
+import com.teamapp.travelsite.User.oauth2.handler.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -74,20 +74,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
         http
                 .cors()
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .csrf()
-                .disable()
-                .formLogin()
-                .disable()
-                .httpBasic()
-                .disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                    .csrf()
+                    .disable()
+                    .formLogin()
+                    .disable()
+                    .httpBasic()
+                    .disable()
+                    .exceptionHandling()
+                    .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
-                .authorizeRequests()
-                .antMatchers("/",
+                    .authorizeRequests()
+                    .antMatchers("/",
                         "/error",
                         "/favicon.ico",
                         "/**/*.png",
@@ -97,27 +97,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js")
-                .permitAll()
-                .antMatchers("/auth/**", "/oauth2/**")
-                .permitAll()
-                .antMatchers("/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                    .permitAll()
+                    .antMatchers("/auth/**", "/oauth2/**")
+                    .permitAll()
+                    .antMatchers("/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated()
                 .and()
-                .oauth2Login()
-                .authorizationEndpoint()
-                .baseUri("/oauth2/authorize")
-                .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                    .oauth2Login()
+                    .authorizationEndpoint()
+                    .baseUri("/oauth2/authorize")
+                    .authorizationRequestRepository(cookieAuthorizationRequestRepository())
                 .and()
-                .redirectionEndpoint()
-                .baseUri("/oauth2/callback/*")
+                    .redirectionEndpoint()
+                    .baseUri("/oauth2/callback/*")
                 .and()
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService)
+                    .userInfoEndpoint()
+                    .userService(customOAuth2UserService)
                 .and()
-                .successHandler(oAuth2AuthenticationSuccessHandler)
-                .failureHandler(oAuth2AuthenticationFailureHandler);
+                    .successHandler(oAuth2AuthenticationSuccessHandler)
+                    .failureHandler(oAuth2AuthenticationFailureHandler);
 
     }
     }

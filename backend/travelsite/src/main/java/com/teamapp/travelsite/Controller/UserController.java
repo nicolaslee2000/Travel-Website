@@ -18,22 +18,15 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private final UserRepository userRepository;
-    @GetMapping("/user/me")
+    @GetMapping("/me")
     @PreAuthorize("hasRole('USER')")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        return userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
-}
-    @PostMapping("user/mypage/")
-    public UserDTO showCurrentUser(@RequestParam String email) {
-        User user = userRepository.findByEmail(email).get();
-        if (!user.getEmail().isEmpty()) {
-            return user.of(user);
-        } else throw new NotFoundExceptionMessage("not founded");
-
+        return userRepository.findByEmail(userPrincipal.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getEmail()));
     }
 }

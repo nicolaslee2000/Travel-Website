@@ -1,4 +1,4 @@
-package com.teamapp.travelsite.User.oauth2.user;
+package com.teamapp.travelsite.User.oauth2.info;
 
 import com.teamapp.travelsite.Exception.OAuth2AuthenticationProcessingException;
 import com.teamapp.travelsite.User.AuthProvider;

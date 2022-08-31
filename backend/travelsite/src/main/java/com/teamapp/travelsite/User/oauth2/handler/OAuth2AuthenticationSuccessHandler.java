@@ -1,9 +1,10 @@
-package com.teamapp.travelsite.User.oauth2;
+package com.teamapp.travelsite.User.oauth2.handler;
 
 
 import com.teamapp.travelsite.Config.AppProperties;
 import com.teamapp.travelsite.Exception.BadRequestException;
 
+import com.teamapp.travelsite.User.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.teamapp.travelsite.util.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
