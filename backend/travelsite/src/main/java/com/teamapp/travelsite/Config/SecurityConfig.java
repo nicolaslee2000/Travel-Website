@@ -7,6 +7,7 @@ import com.teamapp.travelsite.User.oauth2.CustomOAuth2UserService;
 import com.teamapp.travelsite.User.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.teamapp.travelsite.User.oauth2.handler.OAuth2AuthenticationFailureHandler;
 import com.teamapp.travelsite.User.oauth2.handler.OAuth2AuthenticationSuccessHandler;
+import com.teamapp.travelsite.User.token.TokenAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -40,8 +42,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
     @Autowired
     private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
+    @Bean
+    public TokenAuthenticationFilter tokenAuthenticationFilter() {
+        return new TokenAuthenticationFilter();
+    }
+
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AppProperties appProperties;
 
 
     @Bean
@@ -118,6 +128,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
                 .and()
                     .successHandler(oAuth2AuthenticationSuccessHandler)
                     .failureHandler(oAuth2AuthenticationFailureHandler);
+        // Add our custom Token based authentication filter
+        http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
     }

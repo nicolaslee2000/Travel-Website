@@ -86,7 +86,7 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
                 user.getProvider(),
                 RoleType.USER,
                 Collections.singletonList(new SimpleGrantedAuthority(RoleType.USER.getCode())
-        );
+        ));
     }
 
     public static UserPrincipal create(User user, Map<String, Object> attributes) {

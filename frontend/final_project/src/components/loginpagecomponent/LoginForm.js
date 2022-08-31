@@ -9,6 +9,7 @@ import { Route, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { login } from '../../ApiConnect/ApiEndPoints';
+import { ACCESS_TOKEN } from '../../ApiConnect/constants';
 
 function TabPanel(props) {
   const navigate = useNavigate();
@@ -49,18 +50,18 @@ const LoginForm = (props) => {
 
   const loginStart = async (e) => {
     e.preventDefault();
-
     const data = {
       email: inputs.email,
       password: inputs.password,
     };
+
   login(data)
       .then((res) => {
         alert('로그인되었습니다, 감사합니다.');
         setCookie('this_is_login', res.data); //이메일 을 저장
         console.log('this_is_login', res.data); //이메일 가져옴
+        localStorage.setItem(ACCESS_TOKEN, Response.accessToken);
         // props.setIsLogin(true);
-
         navigate('/');
       })
       .catch((err) => {
