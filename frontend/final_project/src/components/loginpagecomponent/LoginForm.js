@@ -8,6 +8,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { Route, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { login } from '../../ApiConnect/ApiEndPoints';
 
 function TabPanel(props) {
   const navigate = useNavigate();
@@ -21,8 +22,7 @@ function TabPanel(props) {
 }
 
 const LoginForm = (props) => {
-  const baseURL = 'http://localhost:8090';
-
+  const baseURL = 'http://localhost:8090'
   const [cookies, setCookie, removeCookie] = useCookies(['this_is_login']);
 
   const navigate = useNavigate();
@@ -54,12 +54,7 @@ const LoginForm = (props) => {
       email: inputs.email,
       password: inputs.password,
     };
-    await axios
-      .post(baseURL + '/auth/login', JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+  login(data)
       .then((res) => {
         alert('로그인되었습니다, 감사합니다.');
         setCookie('this_is_login', res.data); //이메일 을 저장
