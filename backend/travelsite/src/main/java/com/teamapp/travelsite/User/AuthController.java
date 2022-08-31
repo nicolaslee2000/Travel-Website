@@ -1,13 +1,11 @@
 package com.teamapp.travelsite.User;
 
-import com.teamapp.travelsite.Config.AppProperties;
 import com.teamapp.travelsite.Exception.BadRequestException;
 import com.teamapp.travelsite.User.OAuthPayload.*;
 import com.teamapp.travelsite.Model.Repository.TempMailRepository;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.Model.Entity.TempMail;
 import com.teamapp.travelsite.Model.Entity.User;
-import com.teamapp.travelsite.User.token.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,9 +34,6 @@ import java.util.Random;
 @RequestMapping("/auth")
 public class AuthController {
 
-	private AppProperties appProperties;
-	private TokenProvider tokenProvider;
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -54,23 +49,21 @@ public class AuthController {
 	@Autowired
 	private CustomUserDetailsService CUDService;
 
+	@Autowired
+	private TokenProvider tokenProvider;
 
     @PostMapping("/login")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
 						loginRequest.getEmail(),
 						loginRequest.getPassword()
 				)
 		);
-
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-
 		String token = tokenProvider.createToken(authentication);
 		return ResponseEntity.ok(new AuthResponse(token));
-	}
-
+    }
 
 
     @PostMapping("/emailAuth")
@@ -111,32 +104,27 @@ public class AuthController {
 
         return true;
     }
+	
 
-
-
+	
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-		if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-			throw new BadRequestException("Email address already in use.");
-		}
-
-		// Creating user's account
 		User user = new User();
 		user.setName(signUpRequest.getName());
 		user.setEmail(signUpRequest.getEmail());
 		user.setPassword(signUpRequest.getPassword());
 		user.setProvider(AuthProvider.local);
-
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-
 		User result = userRepository.save(user);
-
-		URI location = ServletUriComponentsBuilder
-				.fromCurrentContextPath().path("/user/me")
+		
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
 				.buildAndExpand(result.getId()).toUri();
+        tempMailRepository.delete(tempMailRepository.findByEmail(signUpRequest.getEmail()).get());
 
-		return ResponseEntity.created(location)
-				.body(new ApiResponse(true, "User registered successfully@"));
+		
+		return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully@"));
+	
 	}
 
 	// 메일 보내기
@@ -149,6 +137,8 @@ public class AuthController {
 
 		return mv;
 	}
+
+	
 	
 	@GetMapping("/emailconfirmed")
 	public ResponseEntity<?> reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {

@@ -56,16 +56,18 @@ const LoginForm = (props) => {
     };
 
   login(data)
-      .then((res) => {
+      .then((response) => {
         alert('로그인되었습니다, 감사합니다.');
-        setCookie('this_is_login', res.data); //이메일 을 저장
-        console.log('this_is_login', res.data); //이메일 가져옴
+        setCookie('this_is_login', response.data); //이메일 을 저장
+        console.log('this_is_login', response); //이메일 가져옴
         localStorage.setItem(ACCESS_TOKEN, Response.accessToken);
         // props.setIsLogin(true);
+        this.props.history.push("/");
         navigate('/');
       })
       .catch((err) => {
         alert('아이디와 비밀번호를 다시 확인해 주세요.');
+        
       });
   };
 
