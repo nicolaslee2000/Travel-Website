@@ -66,9 +66,7 @@ const RegisterForm = (props) => {
             response.json().then((json) => {
                 if (!response.ok) {
                     //   console.log(!response.ok);
-                    alert(
-                        "해당 아이디는 이미 사용중입니다. 다른 ID를 입력해주세요"
-                    );
+                    alert("이름과 비밀번호 형식이 올바르지 않습니다.");
                     return Promise.reject(json);
                 } else if (response.ok) {
                     navigate("/registed");
@@ -79,6 +77,7 @@ const RegisterForm = (props) => {
     }; //JWT
 
     const handleSubmit = async (e) => {
+        console.log(inputs);
         e.preventDefault();
         signup(inputs);
     };
@@ -95,6 +94,7 @@ const RegisterForm = (props) => {
         const data = {
             email: inputs.email,
         };
+        console.log(data); //정상적으로 값을 가져옴.
 
         await axios
             .post(BASE_URL + "/auth/emailAuth", JSON.stringify(data), {
@@ -103,8 +103,11 @@ const RegisterForm = (props) => {
                     // Authorization: Bearer ${ACCESS_TOKEN},
                 },
             })
-            .then((res) => {})
+            .then((res) => {
+                console.log("res", res);
+            })
             .catch((err) => {
+                console.log("err", err);
                 alert(
                     "해당 아이디는 이미 사용중입니다. 다른 ID를 입력해주세요"
                 );
@@ -115,10 +118,12 @@ const RegisterForm = (props) => {
         const data = {
             email: inputs.email,
         };
+        console.log(data);
 
         await axios
             .get(BASE_URL + `/auth/AuthSuccess?userEmail=${inputs.email}`)
             .then((res) => {
+                console.log("res", res);
                 alert("이메일 인증이 완료 되었습니다.");
                 setEmailCheckForm(true);
                 setOpen(false);
@@ -148,7 +153,7 @@ const RegisterForm = (props) => {
                                         <Input
                                             type="text"
                                             name="name"
-                                            placeholder="이름 입력하세요."
+                                            placeholder="한글 2~5자"
                                             className="name"
                                             required
                                             value={name}
@@ -253,7 +258,7 @@ const RegisterForm = (props) => {
                                         <Input
                                             type="password"
                                             name="password"
-                                            placeholder="비밀번호를 입력하세요."
+                                            placeholder="숫자+문자 6자리 이상."
                                             className="password"
                                             required
                                             value={password}
