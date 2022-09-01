@@ -11,6 +11,7 @@ import GeneralInfo from "./GeneralInfo";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../ApiConnect/constants";
 
 const MyAccountPage = () => {
     const [user, setUser] = React.useState();
@@ -18,7 +19,7 @@ const MyAccountPage = () => {
     let navigate = useNavigate();
     const getUser = async (data, setState) => {
         await axios
-            .post(`http://localhost:8090/user/current`, {
+            .post(BASE_URL + `/user/current`, {
                 email: cookies.this_is_login,
             })
             .then((response) => response.data)

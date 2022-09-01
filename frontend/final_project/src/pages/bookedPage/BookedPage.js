@@ -11,10 +11,6 @@ const BookedPage = () => {
         return state.searchReducer3;
     });
 
-    React.useEffect(() => {
-        console.log(travelers);
-        console.log(flightRedux.flightPrice);
-    }, []);
     return (
         <Container sx={{ mt: 10 }}>
             <Box sx={{ width: 800 }}>

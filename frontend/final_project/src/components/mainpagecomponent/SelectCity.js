@@ -4,6 +4,7 @@ import axios from "axios";
 import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
 import { debounce } from "lodash";
+import { BASE_URL } from "../../ApiConnect/constants";
 
 const SelectCity = (props) => {
     const { update, id, label } = props;
@@ -45,7 +46,7 @@ const SelectCity = (props) => {
             return;
         }
         try {
-            let url = `http://localhost:8090/apisearch`;
+            let url = BASE_URL + `/apisearch`;
             const res = await axios.get(url, { params: { str: input } });
             if (Array.isArray(res.data)) {
                 setJsonResults(res.data);

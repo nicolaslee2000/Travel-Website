@@ -13,6 +13,7 @@ import TravelerList from "./TravelerList";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../ApiConnect/constants";
 
 const TravelerInfo = ({ isBooking, setSelectedTravelers }) => {
     const [userId, setUserId] = React.useState();
@@ -21,7 +22,7 @@ const TravelerInfo = ({ isBooking, setSelectedTravelers }) => {
     const getUserId = async (data, setState) => {
         console.log(cookies.this_is_login);
         await axios
-            .post(`http://localhost:8090/user/getId`, {
+            .post(BASE_URL + `/user/getId`, {
                 email: cookies.this_is_login,
             })
             .then((response) => response.data)
@@ -35,7 +36,7 @@ const TravelerInfo = ({ isBooking, setSelectedTravelers }) => {
             return;
         }
         await axios
-            .get(`http://localhost:8090/traveler/travelers`, {
+            .get(BASE_URL + `/traveler/travelers`, {
                 params: { id: userId },
             })
             .then((response) => response.data)

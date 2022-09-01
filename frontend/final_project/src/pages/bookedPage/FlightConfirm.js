@@ -17,6 +17,7 @@ import axios from "axios";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../ApiConnect/constants";
 import FlightCancelDialog from "../userDashboard/MyBookings/FlightDetails/FlightCancelDialog";
 import FlightTravelerTable from "../userDashboard/MyBookings/FlightDetails/FlightTravelerTable";
 
@@ -69,7 +70,7 @@ const Traveler = ({ flight, travelers }) => {
     const [cookies, setCookie, removeCookie] = useCookies(["this_is_login"]);
     const getUserId = async (data, setState) => {
         await axios
-            .post(`http://localhost:8090/user/getId`, {
+            .post(BASE_URL + `/user/getId`, {
                 email: cookies.this_is_login,
             })
             .then((response) => response.data)
@@ -84,7 +85,7 @@ const Traveler = ({ flight, travelers }) => {
     const navigate = useNavigate();
     const createOrder = async (order) => {
         await axios
-            .post(`http://localhost:8090/order/create`, {
+            .post(BASE_URL + `/order/create`, {
                 ...order,
                 userId: userId,
             })
@@ -99,7 +100,7 @@ const Traveler = ({ flight, travelers }) => {
 
     const getAirportName = async (data) => {
         await axios
-            .get("http://localhost:8090/traveler/airportName", {
+            .get(BASE_URL + "/traveler/airportName", {
                 params: { iata: flightOrder.departCityIata },
             })
             .then((res) => {
@@ -107,7 +108,7 @@ const Traveler = ({ flight, travelers }) => {
                 flightOrder.departCityName = departName;
             });
         await axios
-            .get("http://localhost:8090/traveler/airportName", {
+            .get(BASE_URL + "/traveler/airportName", {
                 params: { iata: flightOrder.arrivalCityIata },
             })
             .then((res) => {

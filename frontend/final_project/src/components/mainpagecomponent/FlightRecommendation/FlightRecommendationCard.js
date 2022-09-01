@@ -22,6 +22,7 @@ import axios from "axios";
 import { offerInit } from "../../../reduxes/modules/searchInfoReducer3";
 import { useNavigate } from "react-router-dom";
 import { searchInit } from "../../../reduxes/modules/searchInfoReducer";
+import { BASE_URL } from "../../../ApiConnect/constants";
 
 const FlightRecommendationCard = (props) => {
     const [pageLoaded, setPageLoaded] = useState(false);
@@ -38,7 +39,7 @@ const FlightRecommendationCard = (props) => {
 
     const searchData = async (sendData) => {
         await axios
-            .get("http://localhost:8090/flight/flights", {
+            .get(BASE_URL + "/flight/flights", {
                 params: {
                     origin: sendData.origin,
                     destination: sendData.destination,

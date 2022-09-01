@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { border } from "@mui/system";
 import TravelerInfo from "../../pages/userDashboard/TravelerInfo/TravelerInfo";
 import { Container } from "@mui/material";
+import { BASE_URL } from "../../ApiConnect/constants";
 
 const ConfirmButton = () => {
     const flightRedux = useSelector((state) => {
@@ -202,7 +203,7 @@ const ConfirmButton = () => {
         console.log("sendData : ", { data: sendData });
         await axios
             .post(
-                "http://localhost:8090/flight/traveler",
+                BASE_URL + "/flight/traveler",
                 JSON.stringify({ data: sendData }),
                 {
                     headers: {
@@ -217,31 +218,31 @@ const ConfirmButton = () => {
             });
     };
 
-    const postOrder = async (sendData) => {
-        console.log("sendData.flightPrice", sendData.flightPrice);
-        console.log("sendData.traveler", sendData.traveler);
-        await axios
-            .post(
-                "http://localhost:8090/flight/order",
-                JSON.stringify({
-                    data: {
-                        type: "flight-order",
-                        flightOffers: sendData.flightPrice.flightOffers,
-                        travelers: [sendData.traveler],
-                    },
-                }),
-                {
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                    },
-                }
-            )
-            .then((response) => {
-                console.log("마지막 데이터", response.data);
-                dispatch(orderInit(response.data));
-            });
-    };
+    // const postOrder = async (sendData) => {
+    //     console.log("sendData.flightPrice", sendData.flightPrice);
+    //     console.log("sendData.traveler", sendData.traveler);
+    //     await axios
+    //         .post(
+    //             "http://localhost:8090/flight/order",
+    //             JSON.stringify({
+    //                 data: {
+    //                     type: "flight-order",
+    //                     flightOffers: sendData.flightPrice.flightOffers,
+    //                     travelers: [sendData.traveler],
+    //                 },
+    //             }),
+    //             {
+    //                 headers: {
+    //                     Accept: "application/json",
+    //                     "Content-Type": "application/json",
+    //                 },
+    //             }
+    //         )
+    //         .then((response) => {
+    //             console.log("마지막 데이터", response.data);
+    //             dispatch(orderInit(response.data));
+    //         });
+    // };
     ///////////////////////////////////////////////////////////////////////
     return (
         <div>

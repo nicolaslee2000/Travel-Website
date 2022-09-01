@@ -30,6 +30,7 @@ import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundIm
 
 import { Brightness1 } from "@mui/icons-material";
 import FlightRecommendation from "./FlightRecommendation/FlightRecommendation";
+import { BASE_URL } from "../../ApiConnect/constants";
 
 const MainSearchPrac02 = () => {
     const [raidoValue, setRadioValue] = useState(false);
@@ -58,7 +59,7 @@ const MainSearchPrac02 = () => {
     // http://localhost:8090/flight/flights?originLocationCode=ICN&destinationLocationCode=NRT&departureDate=2022-08-05&adults=1
     const searchData = async (sendData) => {
         await axios
-            .get("http://localhost:8090/flight/flights", {
+            .get(BASE_URL + "/flight/flights", {
                 params: {
                     origin: sendData.origin,
                     destination: sendData.destination,

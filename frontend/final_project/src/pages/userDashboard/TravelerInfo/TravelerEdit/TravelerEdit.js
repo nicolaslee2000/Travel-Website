@@ -16,6 +16,7 @@ import Backlink from "../../../../components/backlink/Backlink";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { BASE_URL } from "../../../../ApiConnect/constants";
 
 const TravelerAdd = () => {
     const DATEFORMAT = "YYYY-MM-DD";
@@ -25,7 +26,7 @@ const TravelerAdd = () => {
 
     const getUserId = async (data, setState) => {
         await axios
-            .post(`http://localhost:8090/user/getId`, {
+            .post(BASE_URL + `/user/getId`, {
                 email: cookies.this_is_login,
             })
             .then((response) => response.data)
@@ -37,7 +38,7 @@ const TravelerAdd = () => {
     React.useEffect(() => {
         (async () => {
             await axios
-                .get("http://localhost:8090/traveler/countries")
+                .get(BASE_URL + "/traveler/countries")
                 .then((response) => {
                     return response.data.map((e) => e.countryName);
                 })
@@ -55,7 +56,7 @@ const TravelerAdd = () => {
     const trav = state.data;
     const updateTraveler = async (traveler) => {
         await axios
-            .post(`http://localhost:8090/traveler/update`, {
+            .post(BASE_URL + `/traveler/update`, {
                 ...traveler,
                 userId: userId,
             })

@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../../ApiConnect/constants";
 import Backlink from "../../../../components/backlink/Backlink";
 import DocumentDetailsList from "./DocumentDetailsList";
 import PersonalDetailsList from "./PersonalDetailsList";
@@ -20,7 +21,7 @@ const Traveler = () => {
 
     const deleteTraveler = async (id) => {
         await axios
-            .get("http://localhost:8090/traveler/delete", {
+            .get(BASE_URL + "/traveler/delete", {
                 params: { id: id },
             })
             .then((res) => navigate("/dashboard/travelerInfo"));

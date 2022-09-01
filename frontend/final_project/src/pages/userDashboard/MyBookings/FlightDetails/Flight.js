@@ -16,6 +16,7 @@ import {
 import axios from "axios";
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { BASE_URL } from "../../../../ApiConnect/constants";
 import Backlink from "../../../../components/backlink/Backlink";
 import FlightCancelDialog from "./FlightCancelDialog";
 import FlightTravelerTable from "./FlightTravelerTable";
@@ -47,12 +48,12 @@ const Flight = () => {
     }, []);
     const getAirportName = async (data) => {
         await axios
-            .get("http://localhost:8090/traveler/airportName", {
+            .get(BASE_URL + "/traveler/airportName", {
                 params: { iata: flightOrder.departCityIata },
             })
             .then((res) => setDepartName(res.data));
         await axios
-            .get("http://localhost:8090/traveler/airportName", {
+            .get(BASE_URL + "/traveler/airportName", {
                 params: { iata: flightOrder.arrivalCityIata },
             })
             .then((res) => setArrivalName(res.data));

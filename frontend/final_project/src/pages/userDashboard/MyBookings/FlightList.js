@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../ApiConnect/constants";
 
 import FlightListItem from "./FlightListItem";
 const FlightList = () => {
@@ -13,7 +14,7 @@ const FlightList = () => {
     let navigate = useNavigate();
     const getUser = async (data, setState) => {
         await axios
-            .post(`http://localhost:8090/user/current`, {
+            .post(BASE_URL + `/user/current`, {
                 email: cookies.this_is_login,
             })
             .then((response) => response.data)
@@ -33,7 +34,7 @@ const FlightList = () => {
 
     const getFlights = async (params) => {
         await axios
-            .get(`http://localhost:8090/order/`, { params: { id: user.id } })
+            .get(BASE_URL + `/order/`, { params: { id: user.id } })
             .then((response) => setFlights(response.data));
     };
 

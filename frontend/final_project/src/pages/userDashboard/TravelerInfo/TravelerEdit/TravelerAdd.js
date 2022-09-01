@@ -15,6 +15,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import Backlink from "../../../../components/backlink/Backlink";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import { BASE_URL } from "../../../../ApiConnect/constants";
 const TravelerAdd = () => {
     const DATEFORMAT = "YYYY-MM-DD";
 
@@ -23,7 +24,7 @@ const TravelerAdd = () => {
     React.useEffect(() => {
         (async () => {
             await axios
-                .get("http://localhost:8090/traveler/countries")
+                .get(BASE_URL + "/traveler/countries")
                 .then((response) => {
                     return response.data.map((e) => e.countryName);
                 })
@@ -37,7 +38,7 @@ const TravelerAdd = () => {
     const { state } = useLocation();
     const addTraveler = async (traveler) => {
         await axios
-            .post(`http://localhost:8090/traveler/create`, {
+            .post(BASE_URL + `/traveler/create`, {
                 ...traveler,
                 userId: state.userId,
             })
