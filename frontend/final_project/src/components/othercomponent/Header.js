@@ -15,8 +15,10 @@ import Logout from '@mui/icons-material/Logout';
 import { Box, Button, Link } from '@mui/material';
 import LogoIcon from '../../global/assets/images/logo/LogoIcon.png';
 import LogoName from '../../global/assets/images/logo/LogoName.png';
+import Triplus_logo from '../../global/assets/images/logo/Triplus_logo.PNG';
 import { useCookies } from 'react-cookie';
 import { remove } from 'lodash';
+import { margin } from '@mui/system';
 
 const Header = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -81,7 +83,7 @@ const Header = (props) => {
                         height={240}
                         style={{ alignSelf: "center" }}
                     /> */}
-        <Typography
+        {/* <Typography
           variant='h1'
           sx={{
             alignSelf: 'center',
@@ -91,7 +93,10 @@ const Header = (props) => {
           noWrap
         >
           Travel Service
-        </Typography>
+        </Typography> */}
+        <Box sx={{ margin: 'auto' }}>
+          <img src={Triplus_logo} alt='Logo name' width={224} height={63} />
+        </Box>
       </Box>
 
       <Box sx={{ mt: 2 }}>
