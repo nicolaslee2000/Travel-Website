@@ -155,9 +155,9 @@ const SearchResultItem02Back = (props) => {
             elevation={5}
             sx={{
               display: "flex",
-              width: "1000px",
-              justifyContent: "space-evenly",
-              border: 3,
+              width: "950px",
+              justifyContent: "space-around",
+              boxShadow: "0px 2px 3px rgb(0 0 0 / 10%)",
             }}
           >
             <CardContent
@@ -185,6 +185,7 @@ const SearchResultItem02Back = (props) => {
                 // marginRight: '40px',
                 // paddingRight: '20px',
                 borderLeft: 2,
+                borderColor: "#d3d3d3",
                 justifyContent: "center",
               }}
             >
@@ -216,12 +217,12 @@ const SearchResultItem02Back = (props) => {
             <CardContent
               sx={{
                 // marginTop: '15px',
+                marginTop: "15px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                marginLeft: "5px",
                 justifyContent: "center",
-                width: 180,
+                width: 200,
               }}
             >
               <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -244,7 +245,14 @@ const SearchResultItem02Back = (props) => {
                   {goStart.departure.iataCode}
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
+
+              <Box
+                sx={{
+                  marginTop: "60px",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 <Typography
                   variant="myStyle"
                   sx={{ fontSize: 15, fontWeight: 500 }}
@@ -265,14 +273,14 @@ const SearchResultItem02Back = (props) => {
                 </Typography>
               </Box>
             </CardContent>
-
             <CardContent
               sx={{
-                margin: "0px 10px",
+                marginTop: "15px",
                 display: "flex",
                 flexDirection: "column",
-                marginRight: 3,
-                width: 150,
+                alignItems: "center",
+                justifyContent: "center",
+                width: 200,
               }}
             >
               <Box
@@ -320,12 +328,12 @@ const SearchResultItem02Back = (props) => {
             <CardContent
               sx={{
                 // marginTop: '15px',
+                marginTop: "15px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                marginLeft: "5px",
                 justifyContent: "center",
-                width: 180,
+                width: 200,
               }}
             >
               <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -381,12 +389,13 @@ const SearchResultItem02Back = (props) => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                // marginTop: '60px',
+                // marginTop: '15px',
                 marginLeft: "30px",
-                borderLeft: 2,
                 justifyContent: "center",
                 alignItems: "center",
-                width: 100,
+                width: 150,
+                borderLeft: 2,
+                borderColor: "#d3d3d3",
               }}
             >
               <Typography variant="myStyle" fontSize={23}>

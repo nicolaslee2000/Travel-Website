@@ -39,7 +39,7 @@ const SearchResultItem02 = (props) => {
   const [loading, setLoading] = useState(true);
   const dateTrans = (str) => {
     // let st = str.replace('T', );
-    console.log(str);
+    // console.log(str);
     // console.log(str.replace("T", " ").substring(11, 16));
     let stArr = str.split("T");
 
@@ -144,8 +144,6 @@ const SearchResultItem02 = (props) => {
             display: "flex",
             width: "950px",
             justifyContent: "space-around",
-            border: 2,
-            border: "#a8a8a8",
             boxShadow: "0px 2px 3px rgb(0 0 0 / 10%)",
           }}
         >
