@@ -1,18 +1,16 @@
 package com.teamapp.travelsite.Controller;
 
 
-import com.teamapp.travelsite.Exception.NotFoundExceptionMessage;
-import com.teamapp.travelsite.Exception.UserNotFoundException;
-import com.teamapp.travelsite.Model.DTOs.UserDTO;
 import com.teamapp.travelsite.Model.Entity.User;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
+import com.teamapp.travelsite.User.CurrentUser;
+import com.teamapp.travelsite.User.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.teamapp.travelsite.Exception.ResourceNotFoundException;
-import com.teamapp.travelsite.User.CurrentUser;
-import com.teamapp.travelsite.User.UserPrincipal;
+
 
 import lombok.RequiredArgsConstructor;
 
