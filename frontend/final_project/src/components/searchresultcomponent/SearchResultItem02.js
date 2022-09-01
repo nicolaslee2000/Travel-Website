@@ -293,7 +293,7 @@ const SearchResultItem02 = (props) => {
                 marginLeft: "30px",
                 justifyContent: "center",
                 alignItems: "center",
-                width: 100,
+                width: 150,
                 borderLeft: 2,
                 borderColor: "#d3d3d3",
               }}

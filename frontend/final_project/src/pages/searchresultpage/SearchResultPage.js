@@ -21,6 +21,8 @@ const SearchResultPage = () => {
   // const dataExample = [info, info, info, info, info, info];
   const [pageLoaded, setPageLoaded] = useState(() => state.pageLoaded);
   const [number, setNumber] = useState(0);
+  const [resultState, setResultState] = useState("");
+
   const searchReduxData = useSelector((state) => {
     return state.searchReducer3;
   });
@@ -45,11 +47,14 @@ const SearchResultPage = () => {
   //  const test1 = searchReduxData.flightOfferSearch[0].itineraries;
   // const test2 = sortArr[0].itineraries;
 
+  // const handleResultState =()=>{}
+
+
   return (
     <>
       <Box className="bodyContainer" sx={{ backgroundColor: "#F1F2F8" }}>
         <Box className="smallMargin" sx={{ mb: "20px" }}>
-          <SearchResultHeader />
+          <SearchResultHeader resultState={resultState} />
           {/* <SearchResultHeader info={info} /> */}
         </Box>
         <Grid container spacing={3}>
@@ -110,7 +115,7 @@ const SearchResultPage = () => {
               {
                 0: (
                   <div>
-                    0번입니다
+                    {/* 0번입니다 */}
                     {
                       // 1이면 편도
                       // 1이 아니면 왕복
