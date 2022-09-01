@@ -1,6 +1,7 @@
 package com.teamapp.travelsite.Model.Entity;
 
 import com.teamapp.travelsite.Model.DTOs.TicketOrderDTO;
+import com.teamapp.travelsite.Model.Entity.ForJoinTable.TravelerWithOrder;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.modelmapper.ModelMapper;
@@ -29,6 +30,7 @@ public class TicketOrder {
 
     @Column(name = "depart_airport",insertable = false,updatable = false)
     private String depart;
+
     @Column(name = "arrive_airport",insertable = false,updatable = false)
     private String arrive;
 
@@ -52,12 +54,12 @@ public class TicketOrder {
     @JoinColumn(name = "depart_airport", referencedColumnName = "airport_iata")
     private Airport airports;
 
-    @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.MERGE,mappedBy = "ticketOrderList")
-    private List<Traveler> travelers = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ticketOrder")
+    private List<TravelerWithOrder> travelerWithOrderList;
 
     public TicketOrderDTO of(TicketOrder ticketOrder) {
         ModelMapper modelMapper = new ModelMapper();

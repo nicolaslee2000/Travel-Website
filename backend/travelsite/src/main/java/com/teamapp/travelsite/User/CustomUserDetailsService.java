@@ -1,15 +1,11 @@
 package com.teamapp.travelsite.User;
 
 
-
 import com.teamapp.travelsite.Exception.ResourceNotFoundException;
-import com.teamapp.travelsite.Model.Repository.TempMailRepository;
-import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.Model.Entity.TempMail;
 import com.teamapp.travelsite.Model.Entity.User;
-
-import java.util.Random;
-
+import com.teamapp.travelsite.Model.Repository.TempMailRepository;
+import com.teamapp.travelsite.Model.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-
+    @Autowired
 	UserRepository userRepository;
     
     @Autowired
@@ -34,7 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
 
     @Override
     @Transactional
@@ -44,10 +39,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with email : " + email)
         );
-
         return UserPrincipal.create(user);
     }
-
     @Transactional
     public UserDetails loadUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(
@@ -72,35 +65,19 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 	
 	@Transactional
-	public boolean mailAuth(String userEmail, String authKey) throws Exception {
+	public void mailAuth(String userEmail, String authKey) throws Exception {
 		TempMail tempMail = tempMailRepository.findByEmail(userEmail) 
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + userEmail));
 		
+		System.out.println("ser");
+		System.out.println(authKey);
+		System.out.println(tempMail.getEmailAuthKey());
+		System.out.println(tempMail.getEmailAuth());
+		
 		if(authKey.equals(tempMail.getEmailAuthKey())) {
 			tempMail.setEmailAuth(true);
-		return true;
-		}else {
-			return false;
+		System.out.println(tempMail.getEmailAuth());
 		}
 	
-	}
-	
-	  ////mailAuth 코드
-    private static int size = 15;
-	
-	public static String creatEmailAuth() {
-		Random ran = new Random();
-		StringBuffer buf = new StringBuffer();
-		int num = 0;
-		
-		do {
-			num = ran.nextInt(75)+48;
-			if((num>=48 && num<=57) || (num>=65 && num <=90) || (num>=97 && num<=122)) {
-				buf.append((char)num);//숫자, 영문자만
-			}
-			else continue;
-		} while(buf.length() < size);
-		
-		return buf.toString();
 	}
 }

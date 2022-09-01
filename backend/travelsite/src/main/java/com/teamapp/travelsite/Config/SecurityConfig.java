@@ -3,6 +3,7 @@ package com.teamapp.travelsite.Config;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.User.CustomUserDetailsService;
 import com.teamapp.travelsite.User.RestAuthenticationEntryPoint;
+import com.teamapp.travelsite.User.TokenAuthenticationFilter;
 import com.teamapp.travelsite.User.oauth2.CustomOAuth2UserService;
 import com.teamapp.travelsite.User.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.teamapp.travelsite.User.oauth2.OAuth2AuthenticationFailureHandler;
@@ -19,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -43,7 +45,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
     @Autowired
     private UserRepository userRepository;
 
+    public SecurityConfig() {
+    }
 
+    @Bean
+    public TokenAuthenticationFilter tokenAuthenticationFilter() {
+        return new TokenAuthenticationFilter();
+    }
+
+    /*
+      By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
+      the authorization request. But, since our service is stateless, we can't save it in
+      the session. We'll save the request in a Base64 encoded cookie instead.
+    */
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
@@ -119,6 +133,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
                 .successHandler(oAuth2AuthenticationSuccessHandler)
                 .failureHandler(oAuth2AuthenticationFailureHandler);
 
+        // Add our custom Token based authentication filter
+        http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.cors().and().csrf().disable();
     }
     }
 

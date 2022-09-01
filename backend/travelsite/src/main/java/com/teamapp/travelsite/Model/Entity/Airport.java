@@ -25,7 +25,7 @@ public class Airport {
 
 	@SerializedName("iata")
 	@Column(nullable = false,name = "airport_iata")
-	private String airportIatacode;
+	private String airportIataCode;
 
 	@Column(name = "airport_name")
 	private String airportName;

@@ -27,7 +27,7 @@ public class AirportDTO {
     public Airport toEntity() {
         return Airport.builder()
                 .airportName(this.airportName)
-                .airportIatacode(this.iata)
+                .airportIataCode(this.iata)
                 .city(cityA)
                 .country(countryA)
                 .build();

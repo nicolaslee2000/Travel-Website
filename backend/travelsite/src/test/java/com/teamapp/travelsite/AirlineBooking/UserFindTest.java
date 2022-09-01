@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 import java.util.Optional;
 
@@ -27,17 +28,12 @@ public class UserFindTest {
     void testUserFind(){
         //given
         final String username = "username";
-        given(userRepository.findByname(any())).willReturn(Optional.of(new User()));
-
-         //when
+        given(userRepository.findById(any())).willReturn(Optional.of(new User()));
+        //when
         User user = userService.getUser(username);
-
         //then
         assertNotNull(user);
-
         }
-
-
     }
 
 

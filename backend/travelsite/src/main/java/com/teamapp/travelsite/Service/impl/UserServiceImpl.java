@@ -3,6 +3,7 @@ package com.teamapp.travelsite.Service.impl;
 import com.amadeus.exceptions.NotFoundException;
 import com.teamapp.travelsite.Exception.NotFoundExceptionMessage;
 import com.teamapp.travelsite.Exception.UserNotFoundException;
+import com.teamapp.travelsite.Model.DTOs.UserDTO;
 import com.teamapp.travelsite.Model.Entity.User;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.Service.UserService;
@@ -26,7 +27,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final EntityManagerFactory entityManagerFactory;
     public User create(long id, String name, String email, String password) {
         User user = new User();
         user.setId(id);
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getUser(String name) {
-        Optional<User> user = this.userRepository.findByname(name);
+        Optional<User> user = this.userRepository.findByName(name);
         if (user.isPresent()) {
             return user.get();
         } else {
@@ -84,6 +84,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isUserSaved(Long id, String userEmail) throws Exception {
         return false;
+    }
+
+    public List<UserDTO> showAllUsers() {
+       List<User> userList = userRepository.findAll();
+       List<UserDTO> userDTOList = new ArrayList<>();
+        userList.forEach(e -> userDTOList.add(e.of(e)));
+        return userDTOList;
+
+        //test for USERDTO in id
     }
 
 
