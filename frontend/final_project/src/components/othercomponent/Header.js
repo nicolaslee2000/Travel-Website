@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import IconButton from "@mui/material/IconButton";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
-import { Box, Button, Link } from "@mui/material";
-import LogoIcon from "../../global/assets/images/logo/LogoIcon.png";
-import LogoName from "../../global/assets/images/logo/LogoName.png";
-import { useCookies } from "react-cookie";
-import { remove } from "lodash";
+
+import React, { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
+import { Box, Button, Link } from '@mui/material';
+import LogoIcon from '../../global/assets/images/logo/LogoIcon.png';
+import LogoName from '../../global/assets/images/logo/LogoName.png';
+import Triplus_logo from '../../global/assets/images/logo/Triplus_logo.PNG';
+import { useCookies } from 'react-cookie';
+import { remove } from 'lodash';
+import { margin } from '@mui/system';
 
 const Header = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -81,8 +84,8 @@ const Header = (props) => {
                         height={240}
                         style={{ alignSelf: "center" }}
                     /> */}
-        <Typography
-          variant="h1"
+        {/* <Typography
+          variant='h1'
           sx={{
             alignSelf: "center",
             fontFamily: "comic sans MS",
@@ -91,7 +94,10 @@ const Header = (props) => {
           noWrap
         >
           Travel Service
-        </Typography>
+        </Typography> */}
+        <Box sx={{ margin: 'auto' }}>
+          <img src={Triplus_logo} alt='Logo name' width={224} height={63} />
+        </Box>
       </Box>
 
       <Box sx={{ mt: "3.5%" }}>
