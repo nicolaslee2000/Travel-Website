@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // import { useLocation } from "react-router-dom";
-import Grid from '@mui/material/Grid';
-import CircularProgress from '@mui/material/CircularProgress';
-import SearchResultConfig from '../../components/searchresultcomponent/SearchResultConfig';
-import SearchResultHeader from '../../components/searchresultcomponent/SearchResultHeader';
-import SearchResultItem from '../../components/searchresultcomponent/SearchResultItem';
-import Header from '../../components/othercomponent/Header';
-import './searchResultPage.css';
-import Layout from './../../components/othercomponent/Layout';
-import { useSelector } from 'react-redux';
-import SearchResultItem02 from './../../components/searchresultcomponent/SearchResultItem02';
-import SearchResultItem02Back from '../../components/searchresultcomponent/SearchResultItem02Back';
-import NoSearchResultItem from '../../components/searchresultcomponent/NoSearchResultItem';
-import { useLocation } from 'react-router-dom';
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
+import SearchResultConfig from "../../components/searchresultcomponent/SearchResultConfig";
+import SearchResultHeader from "../../components/searchresultcomponent/SearchResultHeader";
+import SearchResultItem from "../../components/searchresultcomponent/SearchResultItem";
+import Header from "../../components/othercomponent/Header";
+import "./searchResultPage.css";
+import Layout from "./../../components/othercomponent/Layout";
+import { useSelector } from "react-redux";
+import SearchResultItem02 from "./../../components/searchresultcomponent/SearchResultItem02";
+import SearchResultItem02Back from "../../components/searchresultcomponent/SearchResultItem02Back";
+import NoSearchResultItem from "../../components/searchresultcomponent/NoSearchResultItem";
+import { useLocation } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const SearchResultPage = () => {
   const { state } = useLocation();
@@ -20,10 +21,12 @@ const SearchResultPage = () => {
   // const dataExample = [info, info, info, info, info, info];
   const [pageLoaded, setPageLoaded] = useState(() => state.pageLoaded);
   const [number, setNumber] = useState(0);
+  const [resultState, setResultState] = useState("");
+
   const searchReduxData = useSelector((state) => {
     return state.searchReducer3;
   });
-  console.log('결과확인용', searchReduxData);
+  console.log("결과확인용", searchReduxData);
 
   // const configReduxData = useSelector((state) => {
   //   return state.configReducer;
@@ -39,18 +42,21 @@ const SearchResultPage = () => {
     let dateVal = new Date(str);
     return dateVal.getTime();
   };
-  console.log('페이지 컴포넌트', number);
+  console.log("페이지 컴포넌트", number);
   const sortArr = searchReduxData.flightOfferSearch;
   //  const test1 = searchReduxData.flightOfferSearch[0].itineraries;
   // const test2 = sortArr[0].itineraries;
 
+  // const handleResultState =()=>{}
+
+
   return (
     <>
-      <div className='bodyContainer'>
-        <div className='smallMargin'>
-          <SearchResultHeader />
+      <Box className="bodyContainer" sx={{ backgroundColor: "#F1F2F8" }}>
+        <Box className="smallMargin" sx={{ mb: "20px" }}>
+          <SearchResultHeader resultState={resultState} />
           {/* <SearchResultHeader info={info} /> */}
-        </div>
+        </Box>
         <Grid container spacing={3}>
           <Grid item xs={1}>
             {/* <div>한번확인해보자</div> */}
@@ -109,7 +115,7 @@ const SearchResultPage = () => {
               {
                 0: (
                   <div>
-                    0번입니다
+                    {/* 0번입니다 */}
                     {
                       // 1이면 편도
                       // 1이 아니면 왕복
@@ -373,7 +379,7 @@ const SearchResultPage = () => {
         </Grid>
 
         {/* <SearchResultBox info={info} /> */}
-      </div>
+      </Box>
     </>
   );
   // return (
