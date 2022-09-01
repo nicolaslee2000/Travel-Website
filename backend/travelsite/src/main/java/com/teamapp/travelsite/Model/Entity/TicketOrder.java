@@ -1,12 +1,15 @@
 package com.teamapp.travelsite.Model.Entity;
 
 import com.teamapp.travelsite.Model.DTOs.TicketOrderDTO;
+import com.teamapp.travelsite.Model.Entity.ForJoinTable.TravelerWithOrder;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,6 +30,7 @@ public class TicketOrder {
 
     @Column(name = "depart_airport",insertable = false,updatable = false)
     private String depart;
+
     @Column(name = "arrive_airport",insertable = false,updatable = false)
     private String arrive;
 
@@ -50,9 +54,12 @@ public class TicketOrder {
     @JoinColumn(name = "depart_airport", referencedColumnName = "airport_iata")
     private Airport airports;
 
-    @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ticketOrder")
+    private List<TravelerWithOrder> travelerWithOrderList;
 
     public TicketOrderDTO of(TicketOrder ticketOrder) {
         ModelMapper modelMapper = new ModelMapper();

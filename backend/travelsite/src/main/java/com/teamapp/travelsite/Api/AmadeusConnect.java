@@ -9,6 +9,7 @@ import java.util.Map;
 
 import java.util.stream.Collectors;
 
+import com.amadeus.exceptions.ClientException;
 import com.teamapp.travelsite.Model.DTOs.AirlineDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -79,8 +80,10 @@ public class AmadeusConnect {
 		
 		try {
 			return amadeus.referenceData.locations.get(Params.with("subType", "AIRPORT").and("keyword", str));
+		} catch (ClientException e) {
+			//e.printStackTrace();
 		} catch (ResponseException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return null;
 	}

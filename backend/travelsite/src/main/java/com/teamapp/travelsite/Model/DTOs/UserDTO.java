@@ -1,7 +1,7 @@
 package com.teamapp.travelsite.Model.DTOs;
 
 import com.teamapp.travelsite.Model.Entity.User;
-import com.teamapp.travelsite.User.Security.AuthProvider;
+import com.teamapp.travelsite.User.AuthProvider;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

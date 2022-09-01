@@ -10,7 +10,6 @@ import java.util.Optional;
 @Repository
 public interface TravelerRepository extends JpaRepository<Traveler, Long> {
 
-
     List<Traveler> findByUserId(Long id);
 
     List<Traveler> findByTitle(String title);

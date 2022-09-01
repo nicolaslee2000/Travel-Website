@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 @Builder
 @Table(name = "AIRLINE")
 public class Airline {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
@@ -29,5 +28,4 @@ public class Airline {
 
     @Column(nullable = true) //Warning : insert Null Data
     private String airline_name;
-
 }

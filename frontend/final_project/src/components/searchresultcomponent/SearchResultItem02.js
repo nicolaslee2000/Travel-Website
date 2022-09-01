@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import Card from '@mui/material/Card';
+import React, { useEffect, useState } from "react";
+import Card from "@mui/material/Card";
 // import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 //import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
-import CircularProgress from '@mui/material/CircularProgress';
-import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
-import { CardActions, CardHeader } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { confirmInit } from '../../reduxes/modules/searchInfoReducer3';
-import { useNavigate } from 'react-router-dom';
+import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
+import CircularProgress from "@mui/material/CircularProgress";
+import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
+import {
+  CardActions,
+  CardHeader,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { confirmInit } from "../../reduxes/modules/searchInfoReducer3";
+import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 
 const SearchResultItem02 = (props) => {
   const dispatch = useDispatch();
@@ -29,33 +35,57 @@ const SearchResultItem02 = (props) => {
   const height = 150;
   const width = 150;
 
-  const [imgSrc, setImgSrc] = useState('');
+  const [imgSrc, setImgSrc] = useState("");
   const [loading, setLoading] = useState(true);
   const dateTrans = (str) => {
     // let st = str.replace('T', );
-    let stArr = str.split('T');
+    console.log(str);
+    // console.log(str.replace("T", " ").substring(11, 16));
+    let stArr = str.split("T");
+
+    // let stArr = str.replace("T", " ").substring(11, 16);
     return stArr;
   };
+  const transDate = (str) => {
+    // console.log(str.replace("T", " ").substring(0, 10));
+    let stArr = str.replace("T", " ").substring(0, 10);
+    return stArr;
+  };
+
+  const transTime = (str) => {
+    let stArr = str.replace("T", " ").substring(11, 16);
+    return stArr;
+  };
+
+  const theme = createTheme({
+    typography: {
+      myStyle: {
+        //color: 'white',
+        fontWeight: "bold",
+        //fontSize: 25,
+      },
+    },
+  });
   const leadTrans = (str) => {
     let s = str;
-    !s.includes('M') ? (s = s + '00M') : (s = s);
-    s = s.replace('PT', '');
-    s = s.replace('H', '시간 ');
-    s = s.replace('M', '분 ');
+    !s.includes("M") ? (s = s + "00M") : (s = s);
+    s = s.replace("PT", "");
+    s = s.replace("H", "시간 ");
+    s = s.replace("M", "분 ");
     return s;
   };
 
   const postData = async (sendData) => {
     await axios
-      .post('http://localhost:8090/flight/confirm', JSON.stringify(sendData), {
+      .post("http://localhost:8090/flight/confirm", JSON.stringify(sendData), {
         headers: {
-          'Content-Type': `application/json`,
+          "Content-Type": `application/json`,
         },
       })
       .then((response) => {
-        console.log('포스트 confirm 데이터', response.data);
+        console.log("포스트 confirm 데이터", response.data);
         dispatch(confirmInit(response.data));
-        navigate('/travler');
+        navigate("/travler");
       });
   };
 
@@ -65,14 +95,14 @@ const SearchResultItem02 = (props) => {
     await fetch(
       `http://localhost:8090/flight/logo?iatacode=${data}&width=${width}&height=${height}`,
       {
-        method: 'get',
+        method: "get",
       }
     )
       .then((response) => response.blob())
       .then((blob) => {
         const objectURL = URL.createObjectURL(blob);
-        console.log('load값 false로 초기화');
-        console.log('objectURL : ', objectURL);
+        console.log("load값 false로 초기화");
+        console.log("objectURL : ", objectURL);
         setState(objectURL);
         setLoading(false);
         ////
@@ -80,14 +110,20 @@ const SearchResultItem02 = (props) => {
   };
 
   const reduxConfirm = () => {
-    console.log('SearchResultItem02 포스트로 요청, 요청 데이터 : ', rfosData);
+    console.log("SearchResultItem02 포스트로 요청, 요청 데이터 : ", rfosData);
     postData(rfosData);
     // navigate('/travler');
   };
 
-  const [goStartDate, goStartTime] = dateTrans(goStart.departure.at);
-  const [goEndDate, goEndTime] = dateTrans(goEnd.arrival.at);
+  // const [goStartDate, goStartTime] = dateTrans(goStart.departure.at);
+  const goStartDate = transDate(goStart.departure.at);
+  const goStartTime = transTime(goStart.departure.at);
 
+  const [goStartTimeForm, setGoStartTimeForm] = useState("");
+
+  // const [goEndDate, goEndTime] = dateTrans(goEnd.arrival.at);
+  const goEndDate = transDate(goEnd.arrival.at);
+  const goEndTime = transTime(goEnd.arrival.at);
   useEffect(() => {
     //console.log('실제 코드찍히는거', goStart.operating.carrierCode);
     //console.log('실제 코드찍히는거', goOper.carrierCode);
@@ -98,139 +134,186 @@ const SearchResultItem02 = (props) => {
   return (
     <div>
       {loading ? (
-        <Box sx={{ boxShadow: 3, backgroundColor: 'white' }}>
+        <Box sx={{ boxShadow: 3, backgroundColor: "white" }}>
           <CircularProgress />
         </Box>
       ) : (
         <Card
           elevation={5}
           sx={{
-            display: 'flex',
-            width: '850px',
-            justifyContent: 'space-around',
-            border: 1,
+            display: "flex",
+            width: "950px",
+            justifyContent: "space-around",
+            border: 2,
+            border: "#a8a8a8",
+            boxShadow: "0px 2px 3px rgb(0 0 0 / 10%)",
           }}
         >
-          <CardHeader title='편도' />
-          <CardContent sx={{ display: 'flex' /*alignItems: 'center'*/ }}>
-            <Box
+          <ThemeProvider theme={theme}>
+            {/* <CardHeader title='편도' sx={{ width: 50 }} /> */}
+            <CardContent
               sx={{
-                marginTop: '30px',
-                marginRight: '40px',
-                // paddingRight: '20px',
-                display: 'flex',
-                flexDirection: 'column',
+                width: 50,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRight: 2,
+                borderColor: "#d3d3d3",
               }}
             >
-              {/* <AirplanemodeActiveIcon /> */}
+              <Typography variant="myStyle" fontSize={23}>
+                편도
+              </Typography>
+            </CardContent>
+            <CardContent
+              sx={{
+                marginTop: "10px",
+                marginRight: "10px",
+                paddingRight: "10px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                //width: 100,
+              }}
+            >
               <Box
-                component='img'
+                component="img"
                 src={imgSrc}
-                sx={{ height: 60, width: 80 }}
+                sx={{ height: 90, width: 100 }}
               />
-              <Typography variant='h6' component='div' fontStyle={'initial'}>
-                {/* 아시아나 */}
-                {goStart.carrierCode}
-              </Typography>
-            </Box>
+              {/* <Typography variant='h6' component='div' fontStyle={'initial'}>
+              {goStart.carrierCode}
+            </Typography> */}
+            </CardContent>
 
-            <Box
+            <CardContent
               sx={{
-                marginTop: '15px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
+                marginTop: "15px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 200,
               }}
             >
-              <Typography variant='h5' component='div'>
-                {/* {info.start} */}
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 15, fontWeight: 500 }}
+              >
+                {goStartDate}
+              </Typography>
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 33, fontWeight: 700 }}
+              >
+                {goStartTime}
+              </Typography>
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 22, fontWeight: 700 }}
+              >
                 {goStart.departure.iataCode}
-                {/* {inputSearch.start.country} */}
               </Typography>
-              <Typography variant='h8' component='div'>
-                {/* {inputSearch.start.airport} 공항 */}
-                {'출발날짜: ' + goStartDate}
-                <br />
-                {'출발시간: ' + goStartTime}
-              </Typography>
-            </Box>
+            </CardContent>
 
-            <Box
+            <CardContent
               sx={{
-                margin: '0px 10px',
-                display: 'flex',
-                flexDirection: 'column',
+                margin: "0px 10px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                width: 170,
               }}
             >
               <Box
                 sx={{
-                  marginLeft: '30px',
+                  marginLeft: "30px",
                 }}
               >
-                <Typography variant='h10' component='div'>
+                <Typography variant="myStyle">
                   {/* {inputSearch.start.airport} 공항 */}
-                  {'경유: ' + goStopNum + '회'}
+                  {"경유: " + goStopNum + "회"}
                 </Typography>
                 <Typography>
-                  <TrendingFlatIcon sx={{ fontSize: 50 }} />
+                  <TrendingFlatIcon
+                    sx={{
+                      fontSize: 70,
+                    }}
+                  />
                 </Typography>
               </Box>
-              <Box sx={{ marginLeft: '10px' }}>
-                <Typography variant='h10' component='div'>
-                  {leadTrans(loTime) + '소요'}
+              <Box
+                sx={{
+                  marginLeft: "20%",
+                }}
+              >
+                <Typography variant="myStyle" fontSize={15}>
+                  {leadTrans(loTime)}
                 </Typography>
               </Box>
-            </Box>
+            </CardContent>
 
-            <Box
+            <CardContent
               sx={{
-                marginTop: '15px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                marginLeft: '20px',
+                marginTop: "15px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                marginLeft: "20px",
+                justifyContent: "center",
+                width: 200,
               }}
             >
-              <Typography variant='h5' component='div'>
-                {/* {info.end} */}
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 15, fontWeight: 500 }}
+              >
+                {goEndDate}
+              </Typography>
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 33, fontWeight: 700 }}
+              >
+                {goEndTime}
+              </Typography>
+              <Typography
+                variant="myStyle"
+                sx={{ fontSize: 22, fontWeight: 700 }}
+              >
                 {goEnd.arrival.iataCode}
               </Typography>
-              <Typography variant='h10' component='div'>
-                {'도착날짜: ' + goEndDate}
-                <br />
-                {'도착시간: ' + goEndTime}
-              </Typography>
-            </Box>
+            </CardContent>
 
-            {/* {backDataEmpty ? ( // 가고 오는거 다 보여줘야함
-            // <div>돌아오는 데이터가 있다 왕복입니다.</div>
-          ) : (
-            // 가는거 만 보여주면됨
-            <>
-              
-            </>
-          )} */}
-
-            <Box
+            <CardContent
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginTop: '15px',
-                marginLeft: '30px',
+                display: "flex",
+                flexDirection: "column",
+                // marginTop: '15px',
+                marginLeft: "30px",
+                justifyContent: "center",
+                alignItems: "center",
+                width: 150,
+                borderLeft: 2,
+                borderColor: "#d3d3d3",
               }}
             >
-              <Typography variant='h8' component='div'>
-                가격
+              <Typography variant="myStyle" fontSize={23}>
+                금액
               </Typography>
-              <Typography variant='h10' component='div'>
+              <Typography variant="myStyle" fontSize={18}>
                 $ {rfosData.price.total}
               </Typography>
-              <Box>
+              <Box sx={{ marginTop: "30px" }}>
                 {/* 여기서 버튼눌렀을떄 post로 보내서 응답 받아오기 */}
-                <Button onClick={reduxConfirm}>확인</Button>
+                <Button onClick={reduxConfirm} variant="contained">
+                  <Typography variant="myStyle" fontSize={18}>
+                    확인
+                  </Typography>
+                </Button>
               </Box>
-            </Box>
-          </CardContent>
+            </CardContent>
+          </ThemeProvider>
         </Card>
       )}
     </div>
