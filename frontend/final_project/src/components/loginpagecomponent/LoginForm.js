@@ -60,9 +60,10 @@ const LoginForm = (props) => {
         alert('로그인되었습니다, 감사합니다.');
         setCookie('this_is_login', response.data); //이메일 을 저장
         console.log('this_is_login', response); //이메일 가져옴
-        localStorage.setItem(ACCESS_TOKEN, Response.accessToken);
+        localStorage.setItem('token', response.accessToken);
+        console.log('니 알아서 해라', localStorage.getItem('token'))
         // props.setIsLogin(true);
-        this.props.history.push("/");
+        // this.props.history.push("/");
         navigate('/');
       })
       .catch((err) => {

@@ -30,7 +30,7 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
 
   /**
   *  상단은 회원가입 전용 분기를 만들어놓은 리퀘스트
-  *  하단은 일반적인 JWT 리퀘스트 (axios)
+  *  하단은 일반적인 JWT 리퀘스트
    */
 
   const JWTrequest = (options) => {
@@ -40,8 +40,7 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
     
     if(localStorage.getItem(ACCESS_TOKEN)) {
         headers.append('Authorization', 'Bearer ' + localStorage.getItem(ACCESS_TOKEN))
-    } else {headers.append('Authorization', 'Bearer ' + ACCESS_TOKEN)}
-
+    } 
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
 

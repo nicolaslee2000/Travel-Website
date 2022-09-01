@@ -1,11 +1,13 @@
 package com.teamapp.travelsite.Config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @ConfigurationProperties(prefix = "app")
+@Configuration
 public class AppProperties {
     private final Auth auth = new Auth();
     private final OAuth2 oauth2 = new OAuth2();

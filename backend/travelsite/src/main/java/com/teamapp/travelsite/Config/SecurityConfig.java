@@ -42,18 +42,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
     @Autowired
     private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    public SecurityConfig() {
+    }
+
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter() {
         return new TokenAuthenticationFilter();
     }
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AppProperties appProperties;
-
-
+    /*
+      By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
+      the authorization request. But, since our service is stateless, we can't save it in
+      the session. We'll save the request in a Base64 encoded cookie instead.
+    */
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
@@ -97,7 +101,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**","/","/**/*",
+                .antMatchers("/",
                         "/error",
                         "/favicon.ico",
                         "/**/*.png",
@@ -109,6 +113,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                         "/**/*.js")
                 .permitAll()
                 .antMatchers("/auth/**", "/oauth2/**")
+                .permitAll()
+                .antMatchers("/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -126,9 +132,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                 .and()
                 .successHandler(oAuth2AuthenticationSuccessHandler)
                 .failureHandler(oAuth2AuthenticationFailureHandler);
+
         // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
+        http.cors().and().csrf().disable();
     }
     }
 
