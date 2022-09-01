@@ -23,7 +23,7 @@ function TabPanel(props) {
 }
 
 const LoginForm = (props) => {
-  const baseURL = 'http://localhost:8090'
+  const baseURL = 'http://localhost:8090';
   const [cookies, setCookie, removeCookie] = useCookies(['this_is_login']);
 
   const navigate = useNavigate();
@@ -55,27 +55,41 @@ const LoginForm = (props) => {
       password: inputs.password,
     };
 
-  login(data)
+    login(data)
       .then((response) => {
         alert('로그인되었습니다, 감사합니다.');
         setCookie('this_is_login', response.data); //이메일 을 저장
         console.log('this_is_login', response); //이메일 가져옴
         localStorage.setItem('token', response.accessToken);
-        console.log('니 알아서 해라', localStorage.getItem('token'))
+        console.log('니 알아서 해라', localStorage.getItem('token'));
         // props.setIsLogin(true);
         // this.props.history.push("/");
         navigate('/');
       })
       .catch((err) => {
         alert('아이디와 비밀번호를 다시 확인해 주세요.');
-        
       });
   };
 
-  const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
+  const OAUTH2_REDIRECT_URI = 'http://localhost:8090/auth/oauth2/redirect';
 
-  const googleLogin = () => {
+  const googleLogin = async () => {
     console.log('google Login start');
+    const data = {
+      token: inputs.token,
+    };
+    await axios
+      .get(
+        baseURL +
+          '/auth/oauth2/redirect=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3IiwiaWF0IjoxNjYyMDQ3MDM0LCJleHAiOjE2NjI5MTEwMzR9.PAssM-ybPGeEGAeybHgCxr-lyL6TCh4J4jE6iLcSo6LjiIaV_2KUlmNVIvvRZNd_sAvwo0P3f5X3p6HhSEqTpA#_=_'
+      )
+      .then((response) => {
+        alert('로그인되었습니다, 감사합니다.');
+        setCookie('this_is_login', response); //이메일 을 저장
+        console.log('this_is_login', response); //이메일 가져옴
+        localStorage.setItem('token', response.accessToken);
+        console.log('니 알아서 해라', localStorage.getItem('token'));
+      });
   };
   const facebookLogin = () => {
     console.log('facebook Login start');

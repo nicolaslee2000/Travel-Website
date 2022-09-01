@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,6 +61,16 @@ public class AuthController {
         String token = tokenProvider.createToken(authentication);
         return ResponseEntity.ok(new AuthResponse(token));
     }
+    
+    @GetMapping("/oauth2/redirect")
+    public String oauthLogin(@RequestParam("token") String token) {
+    	
+        Long userId = tokenProvider.getUserIdFromToken(token);
+        String email = CUDService.loadUserById(userId).getUsername();
+        System.out.println(email);
+        
+    	return email;
+    }
 
 
     @PostMapping("/emailAuth")
@@ -77,7 +88,7 @@ public class AuthController {
         tempMail.setEmailAuth(false);
         tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
 
-        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
+//        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
         tempMailRepository.save(tempMail);
 
