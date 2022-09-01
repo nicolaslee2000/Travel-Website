@@ -5,6 +5,7 @@ import com.teamapp.travelsite.Model.DTOs.CountryDTO;
 import com.teamapp.travelsite.Model.DTOs.TravelerDTO;
 import com.teamapp.travelsite.Model.DTOs.UserDTO;
 import com.teamapp.travelsite.Model.Entity.Country;
+import com.teamapp.travelsite.Model.Repository.AirportRepository;
 import com.teamapp.travelsite.Model.Repository.CountryRepository;
 import com.teamapp.travelsite.Service.UserService;
 import com.teamapp.travelsite.Service.impl.TravelerServiceImpl;
@@ -31,6 +32,8 @@ public class TravelerController {
 	
 	@Autowired
 	CountryRepository countryRepository;
+	@Autowired
+	AirportRepository airportRepository;
 	
     @SneakyThrows
     @PostMapping("/create")
@@ -65,6 +68,8 @@ public class TravelerController {
 
     @GetMapping("/delete")
     public String deleteTraveler(@RequestParam Long id) throws Exception{
+    	System.out.println(id);
+    	System.out.println("hi");
         travelerService.deleteTraveler(id);
         if (!travelerService.isTravelerSaved(id)) {
             return " delete complete";
@@ -74,6 +79,11 @@ public class TravelerController {
     @GetMapping("/countries")
     public List<Country> getCountries() {
     	return countryRepository.findAll(Sort.by(Sort.Direction.ASC, "countryName"));
+    }
+    
+    @GetMapping("/airportName")
+    public String getAirportName(@RequestParam String iata) {
+    	return airportRepository.findByIata(iata);
     }
 
 }

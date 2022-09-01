@@ -38,8 +38,8 @@ public class Airport {
 	@JoinColumn(name = "country_name",referencedColumnName = "country_name")
 	private Country country;
 
-	@OneToMany(mappedBy = "airport",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	private List<TicketOrder> orders = new ArrayList<>();
+//	@OneToMany(mappedBy = "airport",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//	private List<TicketOrder> orders = new ArrayList<>();
 
 //	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "airport")
 //	private List<Order> order;

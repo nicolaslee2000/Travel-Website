@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Service
 public class OrdermanagementServiceImpl implements OrderManagementService {
-
+	
     TicketOrderRepository ticketOrderRepository;
     AirportRepository airportRepository;
     TravelerRepository travelerRepository;
@@ -36,7 +36,7 @@ public class OrdermanagementServiceImpl implements OrderManagementService {
 
     @Override
     public Long createTicketOrder(TicketOrderDTO ticketOrderDTO) {
-        TicketOrder ticketOrder = this.ticketOrderRepository.save(ticketOrderDTO.toEntity(ticketOrderDTO));
+        TicketOrder ticketOrder = ticketOrderRepository.save(ticketOrderDTO.toEntity(ticketOrderDTO));
         return ticketOrder.getId();
     }
 

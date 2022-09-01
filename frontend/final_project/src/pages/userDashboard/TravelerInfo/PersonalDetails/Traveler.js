@@ -43,7 +43,7 @@ const Traveler = () => {
                     >
                         <Typography variant="h3">Personal details</Typography>
                         <Link
-                            to="edit"
+                            to="/dashboard/travelerInfo/traveler/edit"
                             state={{ data: trav }}
                             style={{ textDecoration: "none" }}
                         >

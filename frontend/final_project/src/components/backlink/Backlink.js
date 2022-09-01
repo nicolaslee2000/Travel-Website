@@ -1,16 +1,17 @@
 import { IconButton } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Backlink = (props) => {
+    const navigate = useNavigate();
     return (
         <div align="center">
             <IconButton
                 sx={{ fontSize: "medium", fontFamily: "DM sans" }}
-                component={Link}
-                to={props.link}
-                state={{ data: props.data }}
+                onClick={() => {
+                    navigate(-1, { state: { data: props.data } });
+                }}
             >
                 <ArrowBackIosIcon sx={{ fontSize: "small" }} />
                 {props.text}

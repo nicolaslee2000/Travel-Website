@@ -2,7 +2,15 @@ plugins {
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'war'
 }
+
+
+//War 생성관련 설정을 할 수 있습니다.
+//Name 과 Version, File Name 등을 설정할 수 있으며 따로
+//설정이 없다면 프로젝트명 + Version 이 붙어서 생성됩니다.
+
+
 
 group = 'com.teamapp'
 version = '0.0.1-SNAPSHOT'
@@ -60,7 +68,7 @@ dependencies {
 
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
-
+providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 
 }
