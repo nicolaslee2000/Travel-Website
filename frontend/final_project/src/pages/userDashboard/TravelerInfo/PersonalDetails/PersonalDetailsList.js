@@ -8,32 +8,33 @@ const PersonalDetailsList = (props) => {
             <PersonalDetailsListItem
                 trav={props.trav}
                 primary={"Title"}
-                secondary={props.trav.name}
+                secondary={props.trav.title}
             />
             <PersonalDetailsListItem
                 trav={props.trav}
                 primary={"First name(s)"}
-                secondary={props.trav.name}
+                secondary={props.trav.firstName}
             />
             <PersonalDetailsListItem
                 trav={props.trav}
                 primary={"Last name"}
-                secondary={props.trav.name}
+                secondary={props.trav.lastName}
             />
             <PersonalDetailsListItem
                 trav={props.trav}
                 primary={"Gender"}
-                secondary={props.trav.name}
+                secondary={props.trav.gender}
             />
             <PersonalDetailsListItem
                 trav={props.trav}
                 primary={"Nationality"}
-                secondary={props.trav.name}
+                secondary={props.trav.nationality}
             />
+            {/* TODO */}
             <PersonalDetailsListItem
                 trav={props.trav}
                 primary={"Date of birth"}
-                secondary={props.trav.name}
+                secondary={props.trav.dateOfBirth}
             />
         </List>
     );

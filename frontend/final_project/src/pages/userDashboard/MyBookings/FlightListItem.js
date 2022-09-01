@@ -17,14 +17,14 @@ const FlightListItem = ({ flight }) => {
                 disablePadding
                 component={Link}
                 to="flight"
-                state={{ DataTransferItemList: flight }}
+                state={{ data: flight }}
                 sx={{ textDecoration: "none", color: "black", fontSize: "50" }}
             >
                 <ListItemButton>
                     <ListItemIcon>
                         <CircleIcon fontSize="20" />
                     </ListItemIcon>
-                    <ListItemText primary={flight.origin} />
+                    <ListItemText primary={flight.departCityIata} />
                     <ListItemIcon>
                         <ArrowForwardIos />
                     </ListItemIcon>

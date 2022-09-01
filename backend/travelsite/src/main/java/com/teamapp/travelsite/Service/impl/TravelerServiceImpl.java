@@ -25,6 +25,7 @@ public class TravelerServiceImpl implements TravelerService {
     }
     @Override
     public List<TravelerDTO> findTravelerByUserId(Long id) {
+
         List<Traveler> travelers = this.travelerRepository.findByUserId(id);
         if (!travelers.isEmpty()){
             List<TravelerDTO> travelerDTOS = new ArrayList<>();
@@ -36,7 +37,8 @@ public class TravelerServiceImpl implements TravelerService {
     @Override
     public Long saveUpdatedTraveler(TravelerDTO travelerDTO) throws Exception {
         Traveler traveler = travelerDTO.toEntity();
-        Optional<Traveler> byId = this.travelerRepository.findById(traveler.getId());
+        
+        Optional<Traveler> byId = this.travelerRepository.findById(travelerDTO.getId());
         if (byId.isPresent()){
             travelerRepository.delete(byId.get());
             return this.travelerRepository.save(traveler).getId();
@@ -46,8 +48,11 @@ public class TravelerServiceImpl implements TravelerService {
     @Override
     public boolean deleteTraveler(Long id) throws Exception {
         Optional<Traveler> byId = this.travelerRepository.findById(id);
+        System.out.println(1);
+        System.out.println(byId.get().getId()+byId.get().getDocumentType());
         if (byId.isPresent()) {
             this.travelerRepository.delete(byId.get());
+            System.out.println(2);
             return true;
         } else {
             return false;

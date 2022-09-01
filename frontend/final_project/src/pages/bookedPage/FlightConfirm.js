@@ -15,62 +15,108 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
-import { useLocation } from "react-router-dom";
-import Backlink from "../../../../components/backlink/Backlink";
-import FlightCancelDialog from "./FlightCancelDialog";
-import FlightTravelerTable from "./FlightTravelerTable";
+import { useCookies } from "react-cookie";
+import { useLocation, useNavigate } from "react-router-dom";
+import FlightCancelDialog from "../userDashboard/MyBookings/FlightDetails/FlightCancelDialog";
+import FlightTravelerTable from "../userDashboard/MyBookings/FlightDetails/FlightTravelerTable";
 
-const Flight = () => {
-    const { state } = useLocation();
-    const flight = state.data;
+const Traveler = ({ flight, travelers }) => {
     const [openDialog, setOpenDialog] = React.useState(false);
     const flightOrder = {
-        airlineCode: flight.airlineCode,
+        airlineCode:
+            flight.flightOffers[0].itineraries[0].segments[0].carrierCode +
+            flight.flightOffers[0].itineraries[0].segments[0].aircraft.code,
         departCityName: "",
-        departCityIata: flight.departCityIata,
-        departTime: flight.departTime,
-        departDate: flight.departDate,
+        departCityIata:
+            flight.flightOffers[0].itineraries[0].segments[0].departure
+                .iataCode,
+        departTime:
+            flight.flightOffers[0].itineraries[0].segments[0].departure.at.slice(
+                11,
+                16
+            ),
+        departDate:
+            flight.flightOffers[0].itineraries[0].segments[0].departure.at.slice(
+                0,
+                10
+            ),
         arrivalCityName: "",
-        arrivalCityIata: flight.arrivalCityIata,
-        arrivalTime: flight.arrivalTime,
-        arrivalDate: flight.arrivalDate,
+        arrivalCityIata:
+            flight.flightOffers[0].itineraries[0].segments[0].arrival.iataCode,
+        arrivalTime:
+            flight.flightOffers[0].itineraries[0].segments[0].arrival.at.slice(
+                11,
+                16
+            ),
+        arrivalDate:
+            flight.flightOffers[0].itineraries[0].segments[0].arrival.at.slice(
+                0,
+                10
+            ),
 
-        checkedBaggage: flight.checkedBaggage,
-        travelClass: flight.travelClass,
-        terminal: flight.terminal,
-        price: flight.price,
+        checkedBaggage:
+            flight.flightOffers[0].pricingOptions.includedCheckedBagsOnly,
+        travelClass: flight.flightOffers[0].travelerPricings[0].fareOption,
+        terminal:
+            flight.flightOffers[0].itineraries[0].segments[0].departure
+                .terminal,
+        price:
+            flight.flightOffers[0].price.total +
+            flight.flightOffers[0].price.currency,
+    };
+
+    const [userId, setUserId] = React.useState();
+    const [cookies, setCookie, removeCookie] = useCookies(["this_is_login"]);
+    const getUserId = async (data, setState) => {
+        await axios
+            .post(`http://localhost:8090/user/getId`, {
+                email: cookies.this_is_login,
+            })
+            .then((response) => response.data)
+            .then((id) => {
+                setUserId(id);
+            })
+            .catch((error) => console.log(error));
+    };
+    React.useEffect(() => {
+        getUserId();
+    }, []);
+    const navigate = useNavigate();
+    const createOrder = async (order) => {
+        await axios
+            .post(`http://localhost:8090/order/create`, {
+                ...order,
+                userId: userId,
+            })
+            .then((response) => navigate("/"))
+            .catch((error) => console.log(error));
     };
     const [departName, setDepartName] = React.useState();
     const [arrivalName, setArrivalName] = React.useState();
     React.useEffect(() => {
         getAirportName();
     }, []);
+
     const getAirportName = async (data) => {
         await axios
             .get("http://localhost:8090/traveler/airportName", {
                 params: { iata: flightOrder.departCityIata },
             })
-            .then((res) => setDepartName(res.data));
+            .then((res) => {
+                setDepartName(res.data);
+                flightOrder.departCityName = departName;
+            });
         await axios
             .get("http://localhost:8090/traveler/airportName", {
                 params: { iata: flightOrder.arrivalCityIata },
             })
-            .then((res) => setArrivalName(res.data));
+            .then((res) => {
+                setArrivalName(res.data);
+                flightOrder.arrivalCityName = arrivalName;
+            });
     };
     return (
-        <Box sx={{ width: 800 }}>
-            <Backlink text="my bookings" link="/dashboards/mybookings" />
-            <Container>
-                <Typography align="center" variant="h1">
-                    Flight details
-                </Typography>
-                <Typography align="right" sx={{ mt: 5 }} variant="subtitle1">
-                    Booked date: {"2022-10-22"}
-                </Typography>
-                <Typography align="right" variant="subtitle1">
-                    Booking confirmation id: {"KDJSFH399"}
-                </Typography>
-            </Container>
+        <>
             <Card variant="outlined" sx={{ mt: 8, borderRadius: 2 }}>
                 <CardHeader
                     avatar={<FlightTakeoff />}
@@ -272,26 +318,25 @@ const Flight = () => {
                     </Box>
                 </CardContent>
             </Card>
-            {/* <Typography variant="h4" sx={{ mt: 4 }}>
+
+            <Typography variant="h4" sx={{ mt: 4 }}>
                 Passenger information:
             </Typography>
-            <FlightTravelerTable travelers={travelers} /> */}
-
+            <FlightTravelerTable travelers={travelers} />
+            <Typography variant="h4" sx={{ mt: 4 }}>
+                {"Total Price: " + flightOrder.price}
+            </Typography>
             <Box textAlign="center" sx={{ mt: 5, mb: 5 }}>
                 <Button
-                    color="error"
+                    color="primary"
                     variant="contained"
-                    onClick={() => setOpenDialog(true)}
+                    onClick={() => createOrder(flightOrder)}
                 >
-                    Cancel flight
+                    Confirm flight
                 </Button>
             </Box>
-            <FlightCancelDialog
-                openDialog={openDialog}
-                setOpenDialog={setOpenDialog}
-            />
-        </Box>
+        </>
     );
 };
 
-export default Flight;
+export default Traveler;

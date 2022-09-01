@@ -1,5 +1,6 @@
 import { ArrowForwardIos } from "@mui/icons-material";
 import {
+    Checkbox,
     Divider,
     ListItem,
     ListItemButton,
@@ -10,21 +11,33 @@ import CircleIcon from "@mui/icons-material/Circle";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const TravelerListItem = ({ trav }) => {
+const TravelerListItem = ({ trav, isBooking }) => {
     return (
         <>
             <ListItem
                 disablePadding
                 component={Link}
-                to="traveler"
+                to="/dashboard/travelerInfo/traveler"
                 state={{ data: trav }}
                 sx={{ textDecoration: "none", color: "black", fontSize: "50" }}
             >
+                {/* <Checkbox
+                    edge="start"
+                    checked={true}
+                    tabIndex={-1}
+                    disableRipple
+                    onClick={(e) => {
+                        e.preventDefault();
+                        console.log(e.target.checked);
+                    }}
+                /> */}
                 <ListItemButton>
                     <ListItemIcon>
-                        <CircleIcon fontSize="20" />
+                        {isBooking ? null : <CircleIcon fontSize="20" />}
                     </ListItemIcon>
-                    <ListItemText primary={trav.name} />
+                    <ListItemText
+                        primary={trav.firstName + " " + trav.lastName}
+                    />
                     <ListItemIcon>
                         <ArrowForwardIos />
                     </ListItemIcon>

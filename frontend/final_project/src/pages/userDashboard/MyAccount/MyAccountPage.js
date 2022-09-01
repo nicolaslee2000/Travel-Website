@@ -8,8 +8,30 @@ import {
     Button,
 } from "@mui/material";
 import GeneralInfo from "./GeneralInfo";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const MyAccountPage = () => {
+    const [user, setUser] = React.useState();
+    const [cookies, setCookie, removeCookie] = useCookies(["this_is_login"]);
+    let navigate = useNavigate();
+    const getUser = async (data, setState) => {
+        await axios
+            .post(`http://localhost:8090/user/current`, {
+                email: cookies.this_is_login,
+            })
+            .then((response) => response.data)
+            .then((json) => {
+                setUser(json);
+            })
+            .catch((error) => console.log(error));
+    };
+
+    React.useEffect(() => {
+        getUser();
+    }, []);
+
     return (
         <Box sx={{ width: 800 }}>
             <Container>
@@ -28,7 +50,7 @@ const MyAccountPage = () => {
                             },
                         }}
                     >
-                        <GeneralInfo />
+                        <GeneralInfo user={user} />
                     </Box>
                 </CardContent>
             </Card>
@@ -36,7 +58,10 @@ const MyAccountPage = () => {
                 <Button
                     color="secondary"
                     variant="contained"
-                    // onClick={() => setOpenDialog(true)}
+                    onClick={() => {
+                        removeCookie("this_is_login");
+                        navigate("/");
+                    }}
                 >
                     Log out
                 </Button>

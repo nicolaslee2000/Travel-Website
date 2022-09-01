@@ -23,11 +23,6 @@ const FlightTravelerTable = ({ travelers }) => {
                 <TableRow>
                     <TableCell>
                         <Typography color="textSecondary" variant="h6">
-                            Ticket No.
-                        </Typography>
-                    </TableCell>
-                    <TableCell>
-                        <Typography color="textSecondary" variant="h6">
                             Passenger type
                         </Typography>
                     </TableCell>
@@ -36,11 +31,16 @@ const FlightTravelerTable = ({ travelers }) => {
                             Passenger name
                         </Typography>
                     </TableCell>
+                    <TableCell>
+                        <Typography color="textSecondary" variant="h6">
+                            Document number
+                        </Typography>
+                    </TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
-                {travelers.map((trav) => (
-                    <TableRow key={trav.id}>
+                {travelers.map((trav, index) => (
+                    <TableRow key={index}>
                         <TableCell>
                             <Typography
                                 sx={{
@@ -48,7 +48,7 @@ const FlightTravelerTable = ({ travelers }) => {
                                     fontWeight: "500",
                                 }}
                             >
-                                {trav.name}
+                                Adult
                             </Typography>
                         </TableCell>
                         <TableCell>
@@ -58,7 +58,7 @@ const FlightTravelerTable = ({ travelers }) => {
                                     fontWeight: "500",
                                 }}
                             >
-                                {trav.name}
+                                {trav.firstName + " " + trav.lastName}
                             </Typography>
                         </TableCell>
                         <TableCell>
@@ -68,7 +68,7 @@ const FlightTravelerTable = ({ travelers }) => {
                                     fontWeight: "500",
                                 }}
                             >
-                                {trav.name}
+                                {trav.number}
                             </Typography>
                         </TableCell>
                     </TableRow>

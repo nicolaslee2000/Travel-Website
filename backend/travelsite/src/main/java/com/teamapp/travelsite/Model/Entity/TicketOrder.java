@@ -28,15 +28,29 @@ public class TicketOrder {
     @Column(nullable = true)
     private Long orderNumber;
 
-    @Column(name = "depart_airport",insertable = false,updatable = false)
-    private String depart;
 
-    @Column(name = "arrive_airport",insertable = false,updatable = false)
-    private String arrive;
+//    @Column(name = "depart_airport",insertable = false,updatable = false)
+//    private String depart;
+//    @Column(name = "arrive_airport",insertable = false,updatable = false)
+//    private String arrive;
+//
+//    private Date arrivalDate;
+//
+//    private Date departureDate;
+    private String airlineCode;
+	private String departCityName;
+	private String departCityIata;
+	private String departTime;
+	private String departDate;
+	private String arrivalCityName;
+	private String arrivalCityIata;
+	private String arrivalTime;
+	private String arrivalDate;
+	private Boolean checkedBaggage;
+	private String travelClass;
+	private String terminal;
+	private String price;
 
-    private Date arrivalDate;
-
-    private Date departureDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
@@ -46,24 +60,26 @@ public class TicketOrder {
     private Long userId;
 
 
-    @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "arrive_airport", referencedColumnName = "airport_iata")
-    private Airport airport;
+//    @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "arrive_airport", referencedColumnName = "airport_iata")
+//    private Airport airport;
+//
+//    @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "depart_airport", referencedColumnName = "airport_iata")
+//    private Airport airports;
 
-    @ManyToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "depart_airport", referencedColumnName = "airport_iata")
-    private Airport airports;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ticketOrder")
-    private List<TravelerWithOrder> travelerWithOrderList;
+//    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.MERGE,mappedBy = "ticketOrderList")
+//    private List<Traveler> travelers = new ArrayList<>();
+
+
 
     public TicketOrderDTO of(TicketOrder ticketOrder) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(ticketOrder, TicketOrderDTO.class); //map(Entity,DTO.class)
     }
-
 }

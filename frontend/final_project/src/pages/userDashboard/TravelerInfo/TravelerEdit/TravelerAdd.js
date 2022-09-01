@@ -13,23 +13,62 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import Backlink from "../../../../components/backlink/Backlink";
-
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 const TravelerAdd = () => {
     const DATEFORMAT = "YYYY-MM-DD";
 
-    const [gender, setGender] = React.useState("");
-    const [nationality, setNationality] = React.useState("");
-    const [issuer, setIssuer] = React.useState("");
-    //date of birth, date of issue, date of expiry
-    const [dob, setDob] = React.useState(null);
-    const [doi, setDoi] = React.useState(null);
-    const [doe, setDoe] = React.useState(null);
+    const [countries, setCountries] = React.useState([]);
 
-    let countries = ["korea", "us", "austrailia", "egypt"];
+    React.useEffect(() => {
+        (async () => {
+            await axios
+                .get("http://localhost:8090/traveler/countries")
+                .then((response) => {
+                    return response.data.map((e) => e.countryName);
+                })
+                .then((data) => {
+                    setCountries((e) => data);
+                });
+        })();
+    }, []);
+
+    const navigate = useNavigate();
+    const { state } = useLocation();
+    const addTraveler = async (traveler) => {
+        await axios
+            .post(`http://localhost:8090/traveler/create`, {
+                ...traveler,
+                userId: state.userId,
+            })
+            .then((response) => navigate("/dashboard/travelerInfo"))
+            .catch((error) => console.log(error));
+    };
+
+    const [travelerData, setTravelerData] = React.useState({
+        title: "",
+        firstName: "",
+        lastName: "",
+        gender: "",
+        nationality: "",
+        dateOfBirth: null,
+        documentType: "",
+        number: "",
+        issuanceCountry: "",
+        dateOfIssue: null,
+        expiryDate: null,
+    });
+
+    const handleChange = (e) => {
+        setTravelerData({
+            ...travelerData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
     return (
         <Box sx={{ width: 600 }}>
-            <Backlink text={"traveler info"} link="/dashboards/travelerInfo" />
+            <Backlink text={"traveler info"} link="/dashboard/travelerInfo" />
             <Container>
                 <Typography align="center" variant="h1">
                     {"Add traveler"}
@@ -44,24 +83,27 @@ const TravelerAdd = () => {
                             label="Title"
                             variant="outlined"
                             fullWidth
+                            onChange={(e) => handleChange(e)}
                             sx={{ mb: 2 }}
                         />
                         <TextField
                             id="fname"
-                            name="fname"
+                            name="firstName"
                             label="First name(s)"
                             variant="outlined"
                             fullWidth
+                            onChange={(e) => handleChange(e)}
                             sx={{ mb: 2 }}
                             required
                         />
                         <TextField
                             id="lname"
-                            name="lname"
+                            name="lastName"
                             label="Last name"
                             variant="outlined"
                             fullWidth
                             helperText="exactly as on travel document"
+                            onChange={(e) => handleChange(e)}
                             sx={{ mb: 2 }}
                             required
                         />
@@ -72,8 +114,8 @@ const TravelerAdd = () => {
                             variant="outlined"
                             select
                             label="Gender"
-                            value={gender}
-                            onChange={(e) => setGender(e.target.value)}
+                            value={travelerData.gender}
+                            onChange={(e) => handleChange(e)}
                             sx={{
                                 mb: 2,
                             }}
@@ -81,38 +123,39 @@ const TravelerAdd = () => {
                             <MenuItem value={"ratherNotSay"}>
                                 Rather not say
                             </MenuItem>
-                            <MenuItem value={"female"}>Female</MenuItem>
-                            <MenuItem value={"male"}>Male</MenuItem>
+                            <MenuItem value={"Female"}>Female</MenuItem>
+                            <MenuItem value={"Male"}>Male</MenuItem>
                         </TextField>
-                        <TextField
-                            fullWidth
-                            name="nationality"
-                            id="nationality"
-                            variant="outlined"
-                            select
-                            label="Nationality"
-                            value={nationality}
-                            onChange={(e) => setNationality(e.target.value)}
-                            sx={{
-                                mb: 2,
-                            }}
-                        >
-                            {countries.map((country) => (
-                                <MenuItem key={country} value={country}>
-                                    {country}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                        {countries && (
+                            <TextField
+                                fullWidth
+                                name="nationality"
+                                id="nationality"
+                                variant="outlined"
+                                select
+                                label="Nationality"
+                                value={travelerData.nationality}
+                                onChange={(e) => handleChange(e)}
+                                sx={{
+                                    mb: 2,
+                                }}
+                            >
+                                {countries.map((country) => (
+                                    <MenuItem key={country} value={country}>
+                                        {country}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        )}
                         <LocalizationProvider dateAdapter={AdapterMoment}>
                             <DatePicker
                                 label="Date of birth"
-                                value={dob}
+                                value={travelerData.dateOfBirth}
                                 onChange={(newDate) => {
-                                    setDob(
-                                        newDate
-                                            ? newDate.format(DATEFORMAT)
-                                            : null
-                                    );
+                                    setTravelerData({
+                                        ...travelerData,
+                                        dateOfBirth: newDate.format(DATEFORMAT),
+                                    });
                                 }}
                                 renderInput={(params) => (
                                     <TextField
@@ -136,49 +179,52 @@ const TravelerAdd = () => {
                             label="Document type"
                             variant="outlined"
                             fullWidth
+                            onChange={(e) => handleChange(e)}
                             sx={{ mb: 2 }}
                             required
                         />
                         <TextField
                             id="documentNumber"
-                            name="documentNumber"
+                            name="number"
                             label="Document number"
                             variant="outlined"
                             fullWidth
+                            onChange={(e) => handleChange(e)}
                             sx={{ mb: 2 }}
                             required
                         />
 
-                        <TextField
-                            fullWidth
-                            id="issuer"
-                            name="issuer"
-                            variant="outlined"
-                            select
-                            label="Issuer"
-                            value={issuer}
-                            onChange={(e) => setIssuer(e.target.value)}
-                            sx={{
-                                mb: 2,
-                            }}
-                            required
-                        >
-                            {countries.map((country) => (
-                                <MenuItem key={country} value={country}>
-                                    {country}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                        {countries && (
+                            <TextField
+                                fullWidth
+                                id="issuanceCountry"
+                                name="issuanceCountry"
+                                variant="outlined"
+                                select
+                                label="Issuer"
+                                value={travelerData.issuanceCountry}
+                                onChange={(e) => handleChange(e)}
+                                sx={{
+                                    mb: 2,
+                                }}
+                                required
+                            >
+                                {countries.map((country) => (
+                                    <MenuItem key={country} value={country}>
+                                        {country}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        )}
                         <LocalizationProvider dateAdapter={AdapterMoment}>
                             <DatePicker
                                 label="Date of issue"
-                                value={doi}
+                                value={travelerData.dateOfIssue}
                                 onChange={(newDate) => {
-                                    setDoi(
-                                        newDate
-                                            ? newDate.format(DATEFORMAT)
-                                            : null
-                                    );
+                                    setTravelerData({
+                                        ...travelerData,
+                                        dateOfIssue: newDate.format(DATEFORMAT),
+                                    });
                                 }}
                                 renderInput={(params) => (
                                     <TextField
@@ -197,13 +243,12 @@ const TravelerAdd = () => {
                         <LocalizationProvider dateAdapter={AdapterMoment}>
                             <DatePicker
                                 label="Expiry date"
-                                value={doe}
+                                value={travelerData.expiryDate}
                                 onChange={(newDate) => {
-                                    setDoe(
-                                        newDate
-                                            ? newDate.format(DATEFORMAT)
-                                            : null
-                                    );
+                                    setTravelerData({
+                                        ...travelerData,
+                                        expiryDate: newDate.format(DATEFORMAT),
+                                    });
                                 }}
                                 renderInput={(params) => (
                                     <TextField
@@ -224,6 +269,10 @@ const TravelerAdd = () => {
                             variant="contained"
                             sx={{ mt: 5 }}
                             type="submit"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                addTraveler(travelerData);
+                            }}
                         >
                             Save traveler
                         </Button>

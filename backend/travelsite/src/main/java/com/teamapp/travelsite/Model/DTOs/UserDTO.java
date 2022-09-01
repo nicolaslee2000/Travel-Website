@@ -5,6 +5,9 @@ import com.teamapp.travelsite.User.AuthProvider;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
 import org.modelmapper.ModelMapper;
 
 @Data
@@ -18,7 +21,8 @@ public class UserDTO {
 
     private String name;
 
-
+    private Date createDate;
+    
     private String email;
 
     private String imageUrl;

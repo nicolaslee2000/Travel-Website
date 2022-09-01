@@ -6,6 +6,7 @@ import {
     CardActions,
     CardContent,
     CardMedia,
+    CircularProgress,
     List,
     ListItem,
     ListItemAvatar,
@@ -13,54 +14,82 @@ import {
     Typography,
 } from "@mui/material";
 import newyork from "../../../global/assets/images/temp/newyork.jpg";
-import React from "react";
+import React, { useState } from "react";
 import { Flight } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import axios from "axios";
+import { offerInit } from "../../../reduxes/modules/searchInfoReducer3";
+import { useNavigate } from "react-router-dom";
+import { searchInit } from "../../../reduxes/modules/searchInfoReducer";
 
-const FlightRecommendationCard = () => {
+const FlightRecommendationCard = (props) => {
+    const [pageLoaded, setPageLoaded] = useState(false);
+    const [flightInfo, setFlightInfo] = useState({
+        origin: "ICN",
+        destination: props.destination,
+        departDate: moment().add(7, "days").format("YYYY-MM-DD"),
+        adults: 1,
+        currency: "KRW",
+        max: 10,
+    });
+
+    const dispatch = useDispatch();
+
+    const searchData = async (sendData) => {
+        await axios
+            .get("http://localhost:8090/flight/flights", {
+                params: {
+                    origin: sendData.origin,
+                    destination: sendData.destination,
+                    departDate: sendData.departDate,
+                    adults: sendData.adults,
+                    currency: "KRW",
+                    max: 10,
+                },
+            })
+            .then((response) => {
+                dispatch(offerInit(response.data));
+                setPageLoaded(true);
+            })
+            .catch((err) => console.log(err));
+    };
+
+    const navigate = useNavigate();
+
+    const handleToResult = () => {
+        dispatch(searchInit(flightInfo));
+        searchData(flightInfo);
+        navigate("/searchResult", { state: { pageLoaded: pageLoaded } });
+    };
     return (
         <Card
             variant="outlined"
             sx={{ mt: 8, borderRadius: 2, mb: 8, width: 280 }}
         >
-            <CardActionArea>
+            <CardActionArea onClick={handleToResult}>
+                <CardContent sx={{ justifyContent: "center" }}>
+                    <Typography gutterBottom variant="h3" component="div">
+                        {props.name}
+                    </Typography>
+                </CardContent>
                 <CardMedia
                     component="img"
                     alt="img"
-                    height="170"
-                    image={newyork}
+                    height="200"
+                    image={props.image}
+                    sx={{ mb: 4 }}
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h3" component="div">
-                        New York
-                    </Typography>
-                    <List>
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <Flight />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary="THU, Oct 3"
-                                secondary="BKK - NYC"
-                            />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <Flight />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary="THU, Oct 3"
-                                secondary="NYC - BKK"
-                            />
-                        </ListItem>
-                    </List>
-                </CardContent>
             </CardActionArea>
-            <CardActions sx={{ justifyContent: "right" }}>
-                <Button size="small">{"From 29999usd  >>"}</Button>
+            <CardActions
+                sx={{ justifyContent: "right" }}
+                onClick={handleToResult}
+            >
+                {props.price ? (
+                    <Button size="small">{`From ${props.price} >>`}</Button>
+                ) : (
+                    <CircularProgress />
+                )}
             </CardActions>
         </Card>
     );

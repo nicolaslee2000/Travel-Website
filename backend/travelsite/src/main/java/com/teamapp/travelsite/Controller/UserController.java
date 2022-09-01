@@ -1,6 +1,12 @@
 package com.teamapp.travelsite.Controller;
 
 
+
+import com.google.gson.JsonObject;
+import com.teamapp.travelsite.Exception.NotFoundExceptionMessage;
+import com.teamapp.travelsite.Exception.UserNotFoundException;
+import com.teamapp.travelsite.Model.DTOs.UserDTO;
+
 import com.teamapp.travelsite.Model.Entity.User;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.User.CurrentUser;
@@ -24,7 +30,23 @@ public class UserController {
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER')")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        return userRepository.findByEmail(userPrincipal.getEmail())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getEmail()));
+
+        return userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+}
+    @PostMapping("/user/current")
+    public UserDTO showCurrentUser(@RequestBody JsonObject credential) {
+        User user = userRepository.findByEmail(credential.get("email").getAsString()).get();
+        if (!user.getEmail().isEmpty()) {
+            return user.of(user);
+        } else throw new NotFoundExceptionMessage("not founded");
+
+
+    }
+
+    @PostMapping("user/getId")
+    public String getId(@RequestBody JsonObject credential) {
+    	User user = userRepository.findByEmail(credential.get("email").getAsString()).get();
+    	return user.getId().toString();
     }
 }

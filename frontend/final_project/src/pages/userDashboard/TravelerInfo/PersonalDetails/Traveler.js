@@ -6,8 +6,9 @@ import {
     Container,
     Typography,
 } from "@mui/material";
+import axios from "axios";
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Backlink from "../../../../components/backlink/Backlink";
 import DocumentDetailsList from "./DocumentDetailsList";
 import PersonalDetailsList from "./PersonalDetailsList";
@@ -15,12 +16,21 @@ import PersonalDetailsList from "./PersonalDetailsList";
 const Traveler = () => {
     const { state } = useLocation();
     const trav = state.data;
+    const navigate = useNavigate();
+
+    const deleteTraveler = async (id) => {
+        await axios
+            .get("http://localhost:8090/traveler/delete", {
+                params: { id: id },
+            })
+            .then((res) => navigate("/dashboard/travelerInfo"));
+    };
     return (
         <Box sx={{ width: 600 }}>
             <Backlink text="travel info" link="/dashboard/travelerInfo" />
             <Container>
                 <Typography align="center" variant="h1">
-                    {trav.name}
+                    {trav.firstName + " " + trav.lastName}
                 </Typography>
             </Container>
             <Card variant="outlined" sx={{ mt: 10 }}>
@@ -33,7 +43,7 @@ const Traveler = () => {
                     >
                         <Typography variant="h3">Personal details</Typography>
                         <Link
-                            to="edit"
+                            to="/dashboard/travelerInfo/traveler/edit"
                             state={{ data: trav }}
                             style={{ textDecoration: "none" }}
                         >
@@ -66,7 +76,11 @@ const Traveler = () => {
                 </CardContent>
             </Card>
             <Box textAlign="center">
-                <Button color="error" variant="contained">
+                <Button
+                    color="error"
+                    variant="contained"
+                    onClick={() => deleteTraveler(trav.id)}
+                >
                     Delete traveler
                 </Button>
             </Box>
