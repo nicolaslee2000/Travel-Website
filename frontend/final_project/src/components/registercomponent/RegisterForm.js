@@ -67,7 +67,7 @@ const RegisterForm = (props) => {
       response.json().then((json) => {
         if (!response.ok) {
           //   console.log(!response.ok);
-          alert('해당 아이디는 이미 사용중입니다. 다른 ID를 입력해주세요');
+          alert('이름과 비밀번호 형식이 올바르지 않습니다.');
           return Promise.reject(json);
         } else if (response.ok) {
           navigate('/registed');
@@ -152,7 +152,7 @@ const RegisterForm = (props) => {
                     <Input
                       type='text'
                       name='name'
-                      placeholder='이름 입력하세요.'
+                      placeholder='한글 2~5자'
                       className='name'
                       required
                       value={name}
@@ -238,7 +238,7 @@ const RegisterForm = (props) => {
                     <Input
                       type='password'
                       name='password'
-                      placeholder='비밀번호를 입력하세요.'
+                      placeholder='숫자+문자 6자리 이상.'
                       className='password'
                       required
                       value={password}

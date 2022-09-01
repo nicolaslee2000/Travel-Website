@@ -64,19 +64,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 		mailSender.send(messagePreparator);
 	}
 	
-	@Transactional
-	public void mailAuth(String userEmail, String authKey) throws Exception {
+    @Transactional
+	public boolean mailAuth(String userEmail, String authKey) throws Exception {
 		TempMail tempMail = tempMailRepository.findByEmail(userEmail) 
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + userEmail));
 		
-		System.out.println("ser");
-		System.out.println(authKey);
-		System.out.println(tempMail.getEmailAuthKey());
-		System.out.println(tempMail.getEmailAuth());
-		
 		if(authKey.equals(tempMail.getEmailAuthKey())) {
 			tempMail.setEmailAuth(true);
-		System.out.println(tempMail.getEmailAuth());
+		return true;
+		}else {
+			return false;
 		}
 	
 	}
