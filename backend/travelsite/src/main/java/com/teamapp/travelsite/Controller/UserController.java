@@ -44,8 +44,10 @@ public class UserController {
 
     }
 
-    @PostMapping("user/getId")
+    @PostMapping("/getId")
     public String getId(@RequestBody JsonObject credential) {
+    	System.out.println(credential);
+    	System.out.println("comon");
     	User user = userRepository.findByEmail(credential.get("email").getAsString()).get();
     	return user.getId().toString();
     }

@@ -20,7 +20,6 @@ const TravelerInfo = ({ isBooking, setSelectedTravelers }) => {
     const [cookies, setCookie, removeCookie] = useCookies(["this_is_login"]);
     const [travelers, setTravelers] = React.useState([]);
     const getUserId = async (data, setState) => {
-        console.log(cookies.this_is_login);
         await axios
             .post(BASE_URL + `/user/getId`, {
                 email: cookies.this_is_login,
