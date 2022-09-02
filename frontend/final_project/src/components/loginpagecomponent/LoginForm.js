@@ -61,7 +61,7 @@ const LoginForm = (props) => {
         login(data)
             .then((response) => {
                 alert("로그인되었습니다, 감사합니다.");
-                setCookie("this_is_login", response.data); //이메일 을 저장
+                setCookie("this_is_login", response.email); //이메일 을 저장
                 localStorage.setItem("token", response.accessToken);
                 // props.setIsLogin(true);
                 // this.props.history.push("/");
