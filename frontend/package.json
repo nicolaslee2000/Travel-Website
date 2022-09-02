@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "package": "^1.0.1",
+    "react-s-alert": "^1.4.1"
+  }
+}

@@ -5,15 +5,17 @@ import React, { useEffect, useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 //import { TabPanel } from 'react-tabs';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import { Route, useNavigate } from 'react-router-dom';
+import { Route, useNavigate, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { login } from '../../ApiConnect/ApiEndPoints';
+import { login, SetUserInfoToCookie, setUserInfoToCookie } from '../../ApiConnect/ApiEndPoints';
 import {
   ACCESS_TOKEN,
   BASE_URL,
+  GOOGLE_AUTH_URL,
   OAUTH2_REDIRECT_URI,
 } from '../../ApiConnect/constants';
+import Alert from 'react-s-alert';
 
 function TabPanel(props) {
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ function TabPanel(props) {
 }
 
 const LoginForm = (props) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['this_is_login']);
+  const [cookies, setCookie, removeCookie] = useCookies(['email', 'name', 'profile']);
 
   const navigate = useNavigate();
 
@@ -36,7 +38,7 @@ const LoginForm = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
@@ -50,6 +52,8 @@ const LoginForm = (props) => {
       return { ...prev, ...nextState };
     });
   };
+  const token = useParams();
+
 
   const loginStart = async (e) => {
     e.preventDefault();
@@ -60,42 +64,22 @@ const LoginForm = (props) => {
 
     login(data)
       .then((response) => {
-        alert('로그인되었습니다, 감사합니다.');
-
-        setCookie('this_is_login', response); //이메일 을 저장
-        console.log('쿠키', response);
+        SetUserInfoToCookie();
+        Alert.success('로그인되었습니다, 감사합니다.',{
+          position: 'top-right',
+          effect: 'scale'
+        });
         localStorage.setItem('token', response.accessToken);
-        // props.setIsLogin(true);
-        // this.props.history.push("/");
+        setCookie('this_is_login',1,{path:'/'}) //로그인 여부 확인용 쿠키
         navigate('/');
+        
       })
       .catch((err) => {
-        alert('아이디와 비밀번호를 다시 확인해 주세요.');
-      });
-  };
-
-  const googleLogin = async (e) => {
-    const data = {
-      ACCESS_TOKEN: ACCESS_TOKEN,
-    };
-    console.log(data);
-    await axios
-      //   .get(
-      //     BASE_URL +
-      //       `/auth/oauth2/redirect?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2OTAxIiwiaWF0IjoxNjYyMDg3MDA5LCJleHAiOjE2NjI5NTEwMDl9.OpVdrmi1DMoHJQlskSjo379O2R0QIYIF3WXz11KOQbegkIRdBYqCXHj6mjA-fKz0TLnTwhXlxbdLyMRw_l2AYQ`
-      //   )
-      .get(BASE_URL + `/auth/oauth2/redirect?token=${ACCESS_TOKEN}`)
-      .then((response) => {
-        console.log('hi');
-        setCookie('this_is_login', response);
-        localStorage.setItem(
-          ACCESS_TOKEN,
-          'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2OTAxIiwiaWF0IjoxNjYyMDg3MDA5LCJleHAiOjE2NjI5NTEwMDl9.OpVdrmi1DMoHJQlskSjo379O2R0QIYIF3WXz11KOQbegkIRdBYqCXHj6mjA-fKz0TLnTwhXlxbdLyMRw_l2AYQ'
-        );
-        console.log('localStrage', localStorage.getItem(ACCESS_TOKEN));
-      })
-      .catch((err) => {
-        console.log('구글로그인 에러입니다!', err);
+        Alert.error((err && err.message) || '아이디와 비밀번호를 다시 확인해 주세요.',
+        {
+          position: 'top-right',
+          effect: 'scale'
+        });
       });
   };
   const facebookLogin = async (e) => {};
@@ -163,13 +147,11 @@ const LoginForm = (props) => {
                       type='submit'
                       className='googleLogin'
                       value='googleLogin'
-                      // target='_blank'
-                      //   href={
-                      //     BASE_URL +
-                      //     '/oauth2/authorize/google?redirect_uri=' +
-                      //     OAUTH2_REDIRECT_URI
-                      //   }
-                      onClick={googleLogin}
+                        href={
+                          BASE_URL +
+                          '/oauth2/authorize/google?redirect_uri=' +
+                          OAUTH2_REDIRECT_URI
+                        }
                     >
                       <GoogleIcon />
                       <label> &nbsp; 구글 아이디로 로그인하기</label>
@@ -182,11 +164,7 @@ const LoginForm = (props) => {
                       className='facebookLogin'
                       value='facebookLogin'
                       target='_blank'
-                      href={
-                        BASE_URL +
-                        '/oauth2/authorize/facebook?redirect_uri=' +
-                        OAUTH2_REDIRECT_URI
-                      }
+                      href={GOOGLE_AUTH_URL}
                       onClick={facebookLogin}
                     >
                       <FacebookIcon />

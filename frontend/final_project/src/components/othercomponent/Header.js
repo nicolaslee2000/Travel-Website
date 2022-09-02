@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
@@ -20,16 +20,14 @@ import { useCookies } from 'react-cookie';
 import { remove } from 'lodash';
 import { margin } from '@mui/system';
 
+
+
 const Header = (props) => {
   const [open, setOpen] = React.useState(false);
   const [openProButton, setOpenProButton] = useState(true);
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['this_is_login']);
-  const [checkLogin, setCheckLogin] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(['email','name','profile','this_is_login']);
 
-  const handleLogin = () => {
-    setOpenProButton(!openProButton);
-  };
   const titleStyle = {
     fontSize: '30px',
     color: 'white',
@@ -43,21 +41,32 @@ const Header = (props) => {
     setOpen(true);
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
     setOpenProButton(!openProButton);
     setOpen(false);
   };
 
-  const LoginChecked = () => {
-    const cookie = cookies.this_is_login; //쿠키에서 이메일꺼내기
+  /**
+  * cookie 는 권장하지는 않음.
+   */
+   function isLogout() { 
+    deleteAllCookies()
+    
   };
-
-  const isLogout = () => {
-    const cookie = cookies.this_is_login;
-    removeCookie('this_is_login');
-    localStorage.removeItem('accessToken');
-  };
+  
+  function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+    
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+    navigate("/")
+  }
 
   return (
     <Box
@@ -74,31 +83,13 @@ const Header = (props) => {
         href='/'
       >
         <img src={LogoIcon} alt='Logo icon' width={120} height={120} />
-        {/* <img
-                        src={LogoName}
-                        alt="Logo name"
-                        width={240}
-                        height={240}
-                        style={{ alignSelf: "center" }}
-                    /> */}
-        {/* <Typography
-          variant='h1'
-          sx={{
-            alignSelf: "center",
-            fontFamily: "comic sans MS",
-            fontWeight: "630",
-          }}
-          noWrap
-        >
-          Travel Service
-        </Typography> */}
         <Box sx={{ margin: 'auto' }}>
           <img src={Triplus_logo} alt='Logo name' width={224} height={63} />
         </Box>
       </Box>
 
       <Box sx={{ mt: '3.5%' }}>
-        {!cookies.this_is_login && (
+        {!cookies.email && (
           <div>
             <Button
               sx={{ minWidth: 100, mr: 0.5 }}
@@ -116,25 +107,26 @@ const Header = (props) => {
             </Button>
           </div>
         )}
-        {cookies.this_is_login && (
+        {cookies.email && (
           <div>
             <Tooltip title='Account settings'>
               <IconButton
                 onClick={handleClick}
-                size='small'
+                size='medium'
                 sx={{ ml: 2, mr: 3 }}
                 aria-controls={open ? 'account-menu' : undefined}
                 aria-haspopup='true'
                 aria-expanded={open ? 'true' : undefined}
               >
                 {/* <Avatar sx={{ width: 32, height: 32 }} >M</Avatar> */}
-                <AccountCircleIcon
-                  color='disabled'
-                  sx={{ width: 32, height: 32 }}
+                < img src={cookies.profile} alt={cookies.profile}
+                  color = 'disabled'
+                  sx={{ width: 40, height: 40 }}
                 />
               </IconButton>
             </Tooltip>
-
+            <Typography variant='h3'> {cookies.name} </Typography>
+            <Typography variant='h3'> {cookies.email} </Typography>
             <Menu
               anchorEl={anchorEl}
               id='account-menu'
@@ -182,7 +174,7 @@ const Header = (props) => {
                   navigate('/dashboard/travelerInfo');
                 }}
               >
-                <Avatar />
+                <Avatar  />
                 Profile
               </MenuItem>
               <MenuItem
@@ -193,15 +185,18 @@ const Header = (props) => {
               >
                 <Avatar /> My account
               </MenuItem>
+
               <Divider />
-              <MenuItem onClick={isLogout}>
+              <MenuItem onClick={isLogout} >
                 <ListItemIcon>
                   <Logout fontSize='small' />
                 </ListItemIcon>
                 Logout
               </MenuItem>
             </Menu>
+
           </div>
+          
         )}
       </Box>
     </Box>

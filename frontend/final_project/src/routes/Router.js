@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Spinner from '../global/Spinner/Spinner';
 import { CookiesProvider } from 'react-cookie';
 import SocialLogin from '../pages/registerpage/SocialLogin';
+import { SocialLoginConfirmed } from '../pages/loginpage/SocialLoginConfirmed';
 
 //lazy importing page components
 const MainPage = lazy(() => import('../pages/mainpage/MainPage'));
@@ -109,8 +110,8 @@ const Router = () => {
                   element={<ErrorPage text={'인증 만료된 이메일 입니다. '} />}
                 />
                 <Route
-                  path='/oauth2/*'
-                  element={<ErrorPage text={' welcome '} />}
+                  path='/oauth2/redirect'
+                  element={<SocialLoginConfirmed/>}
                 />
               </Route>
             </Routes>

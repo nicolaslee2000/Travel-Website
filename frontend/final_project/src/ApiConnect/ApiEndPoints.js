@@ -1,4 +1,6 @@
 
+import { after } from "lodash";
+import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
 import { ACCESS_TOKEN, BASE_URL } from "./constants";
 
@@ -54,7 +56,7 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
         })
     );
 };
-
+  
 
   export function signup(inputs) {
     return signUpRequest({
@@ -81,4 +83,14 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
         method: 'POST',
         body: JSON.stringify(loginRequest)
     });
+}
+
+export function SetUserInfoToCookie() {
+  const [cookies, setCookie, removeCookie] = useCookies(['email', 'name', 'profile'])
+  
+  getCurrentUser().then(response =>{
+    setCookie('email',response.email,{path:'/'})
+    setCookie('name',response.name,{path:'/'})
+    setCookie('profile',response.imageUrl,{path:'/'})
+  } )
 }
