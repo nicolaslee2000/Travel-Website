@@ -62,8 +62,8 @@ const LoginForm = (props) => {
       .then((response) => {
         alert('로그인되었습니다, 감사합니다.');
 
-        setCookie('this_is_login', response); //이메일 을 저장
-        console.log('쿠키', response);
+        setCookie('this_is_login', response.email);
+        console.log('쿠키', response.email);
         localStorage.setItem('token', response.accessToken);
         // props.setIsLogin(true);
         // this.props.history.push("/");
@@ -80,11 +80,11 @@ const LoginForm = (props) => {
     };
     console.log(data);
     await axios
-      //   .get(
-      //     BASE_URL +
-      //       `/auth/oauth2/redirect?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2OTAxIiwiaWF0IjoxNjYyMDg3MDA5LCJleHAiOjE2NjI5NTEwMDl9.OpVdrmi1DMoHJQlskSjo379O2R0QIYIF3WXz11KOQbegkIRdBYqCXHj6mjA-fKz0TLnTwhXlxbdLyMRw_l2AYQ`
-      //   )
-      .get(BASE_URL + `/auth/oauth2/redirect?token=${ACCESS_TOKEN}`)
+      .get(
+        BASE_URL +
+          `/auth/oauth2/redirect?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2OTAxIiwiaWF0IjoxNjYyMDg3MDA5LCJleHAiOjE2NjI5NTEwMDl9.OpVdrmi1DMoHJQlskSjo379O2R0QIYIF3WXz11KOQbegkIRdBYqCXHj6mjA-fKz0TLnTwhXlxbdLyMRw_l2AYQ`
+      )
+      // .get(BASE_URL + `/auth/oauth2/redirect?token=${ACCESS_TOKEN}`)
       .then((response) => {
         console.log('hi');
         setCookie('this_is_login', response);
@@ -164,12 +164,12 @@ const LoginForm = (props) => {
                       className='googleLogin'
                       value='googleLogin'
                       // target='_blank'
-                      //   href={
-                      //     BASE_URL +
-                      //     '/oauth2/authorize/google?redirect_uri=' +
-                      //     OAUTH2_REDIRECT_URI
-                      //   }
-                      onClick={googleLogin}
+                      href={
+                        BASE_URL +
+                        '/oauth2/authorize/google?redirect_uri=' +
+                        OAUTH2_REDIRECT_URI
+                      }
+                      // onClick={googleLogin}
                     >
                       <GoogleIcon />
                       <label> &nbsp; 구글 아이디로 로그인하기</label>

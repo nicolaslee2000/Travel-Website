@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Spinner from '../global/Spinner/Spinner';
 import { CookiesProvider } from 'react-cookie';
 import SocialLogin from '../pages/registerpage/SocialLogin';
+import OAuth2RedirectHandler from '../pages/registerpage/OAuth2RedirectHandler';
 
 //lazy importing page components
 const MainPage = lazy(() => import('../pages/mainpage/MainPage'));
@@ -68,10 +69,13 @@ const Router = () => {
                 <Route index element={<MainPage />} exact />
                 <Route path='confirm/flight' element={<BookedPage />} />
                 <Route path='register' element={<RegisterPage />} />
-                <Route path='social' element={<SocialLogin />} />
                 <Route
                   path='register/emailconfirmed'
                   element={<Emailconfirmed />}
+                />
+                <Route
+                  path='/oauth2/redirect'
+                  element={<OAuth2RedirectHandler />}
                 />
                 <Route path='registed' element={<RegisteredPage />} />
                 <Route
@@ -107,10 +111,6 @@ const Router = () => {
                 <Route
                   path='register/expired'
                   element={<ErrorPage text={'인증 만료된 이메일 입니다. '} />}
-                />
-                <Route
-                  path='/oauth2/*'
-                  element={<ErrorPage text={' welcome '} />}
                 />
               </Route>
             </Routes>

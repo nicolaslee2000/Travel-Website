@@ -19,6 +19,7 @@ import Triplus_logo from '../../global/assets/images/logo/Triplus_logo.PNG';
 import { useCookies } from 'react-cookie';
 import { remove } from 'lodash';
 import { margin } from '@mui/system';
+import { ACCESS_TOKEN } from '../../ApiConnect/constants';
 
 const Header = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -56,7 +57,8 @@ const Header = (props) => {
   const isLogout = () => {
     const cookie = cookies.this_is_login;
     removeCookie('this_is_login');
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.clear();
   };
 
   return (
