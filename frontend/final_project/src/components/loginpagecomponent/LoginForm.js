@@ -75,22 +75,8 @@ const LoginForm = (props) => {
 
   const googleLogin = async () => {
     console.log('google Login start');
-    const data = {
-      token: inputs.token,
-    };
-    await axios
-      .get(
-        baseURL +
-          '/auth/oauth2/redirect=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3IiwiaWF0IjoxNjYyMDQ3MDM0LCJleHAiOjE2NjI5MTEwMzR9.PAssM-ybPGeEGAeybHgCxr-lyL6TCh4J4jE6iLcSo6LjiIaV_2KUlmNVIvvRZNd_sAvwo0P3f5X3p6HhSEqTpA#_=_'
-      )
-      .then((response) => {
-        alert('로그인되었습니다, 감사합니다.');
-        setCookie('this_is_login', response); //이메일 을 저장
-        console.log('this_is_login', response); //이메일 가져옴
-        localStorage.setItem('token', response.accessToken);
-        console.log('니 알아서 해라', localStorage.getItem('token'));
-      });
   };
+
   const facebookLogin = () => {
     console.log('facebook Login start');
   };

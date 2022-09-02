@@ -62,15 +62,15 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(token));
     }
     
-    @GetMapping("/oauth2/redirect")
-    public String oauthLogin(@RequestParam("token") String token) {
-    	
-        Long userId = tokenProvider.getUserIdFromToken(token);
-        String email = CUDService.loadUserById(userId).getUsername();
-        System.out.println(email);
-        
-    	return email;
-    }
+//    @GetMapping("/oauth2/redirect")
+//    public String oauthLogin(@RequestParam("token") String token) {
+//    	
+//        Long userId = tokenProvider.getUserIdFromToken(token);
+//        String email = CUDService.loadUserById(userId).getUsername();
+//        System.out.println(email);
+//        
+//    	return email;
+//    }
 
 
     @PostMapping("/emailAuth")
