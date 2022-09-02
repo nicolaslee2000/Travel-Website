@@ -9,7 +9,11 @@ import { Route, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { login } from '../../ApiConnect/ApiEndPoints';
-import { ACCESS_TOKEN } from '../../ApiConnect/constants';
+import {
+  ACCESS_TOKEN,
+  BASE_URL,
+  OAUTH2_REDIRECT_URI,
+} from '../../ApiConnect/constants';
 
 function TabPanel(props) {
   const navigate = useNavigate();
@@ -23,7 +27,6 @@ function TabPanel(props) {
 }
 
 const LoginForm = (props) => {
-  const baseURL = 'http://localhost:8090';
   const [cookies, setCookie, removeCookie] = useCookies(['this_is_login']);
 
   const navigate = useNavigate();
@@ -59,9 +62,7 @@ const LoginForm = (props) => {
       .then((response) => {
         alert('로그인되었습니다, 감사합니다.');
         setCookie('this_is_login', response.data); //이메일 을 저장
-        console.log('this_is_login', response); //이메일 가져옴
         localStorage.setItem('token', response.accessToken);
-        console.log('니 알아서 해라', localStorage.getItem('token'));
         // props.setIsLogin(true);
         // this.props.history.push("/");
         navigate('/');
@@ -71,15 +72,8 @@ const LoginForm = (props) => {
       });
   };
 
-  const OAUTH2_REDIRECT_URI = 'http://localhost:8090/auth/oauth2/redirect';
-
-  const googleLogin = async () => {
-    console.log('google Login start');
-  };
-
-  const facebookLogin = () => {
-    console.log('facebook Login start');
-  };
+  const googleLogin = () => {};
+  const facebookLogin = () => {};
 
   return (
     <Container maxWidth='sm'>
@@ -146,7 +140,7 @@ const LoginForm = (props) => {
                       value='googleLogin'
                       target='_blank'
                       href={
-                        baseURL +
+                        BASE_URL +
                         '/oauth2/authorize/google?redirect_uri=' +
                         OAUTH2_REDIRECT_URI
                       }
@@ -164,7 +158,7 @@ const LoginForm = (props) => {
                       value='facebookLogin'
                       target='_blank'
                       href={
-                        baseURL +
+                        BASE_URL +
                         '/oauth2/authorize/facebook?redirect_uri=' +
                         OAUTH2_REDIRECT_URI
                       }

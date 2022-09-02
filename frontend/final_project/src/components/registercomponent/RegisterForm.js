@@ -16,6 +16,7 @@ import React, { useState } from 'react';
 import { Container } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { BASE_URL } from '../../ApiConnect/constants';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -27,8 +28,6 @@ function TabPanel(props) {
 }
 
 const RegisterForm = (props) => {
-  const baseURL = 'http://localhost:8090';
-
   const navigate = useNavigate();
 
   const [value, setValue] = React.useState(0);
@@ -51,7 +50,7 @@ const RegisterForm = (props) => {
 
   function signup(inputs) {
     return request({
-      url: baseURL + '/auth/signup',
+      url: BASE_URL + '/auth/signup',
       method: 'POST',
       body: JSON.stringify(inputs),
     });
@@ -98,7 +97,7 @@ const RegisterForm = (props) => {
     console.log(data); //정상적으로 값을 가져옴.
 
     await axios
-      .post(baseURL + '/auth/emailAuth', JSON.stringify(data), {
+      .post(BASE_URL + '/auth/emailAuth', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/json',
           // Authorization: Bearer ${ACCESS_TOKEN},
@@ -120,7 +119,7 @@ const RegisterForm = (props) => {
     console.log(data);
 
     await axios
-      .get(baseURL + `/auth/AuthSuccess?userEmail=${inputs.email}`)
+      .get(BASE_URL + `/auth/AuthSuccess?userEmail=${inputs.email}`)
       .then((res) => {
         console.log('res', res);
         alert('이메일 인증이 완료 되었습니다.');
