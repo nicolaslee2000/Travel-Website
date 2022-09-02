@@ -7,11 +7,14 @@ import com.teamapp.travelsite.Model.Repository.TempMailRepository;
 import com.teamapp.travelsite.Model.Repository.UserRepository;
 import com.teamapp.travelsite.User.OAuthPayload.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Random;
 
 
 @RestController
@@ -52,12 +56,21 @@ public class AuthController {
                         loginRequest.getPassword()
                 )
         );
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = tokenProvider.createToken(authentication);
         return ResponseEntity.ok(new AuthResponse(token));
     }
+    
+//    @GetMapping("/oauth2/redirect")
+//    public String oauthLogin(@RequestParam("token") String token) {
+//    	
+//        Long userId = tokenProvider.getUserIdFromToken(token);
+//        String email = CUDService.loadUserById(userId).getUsername();
+//        System.out.println(email);
+//        
+//    	return email;
+//    }
 
 
     @PostMapping("/emailAuth")
@@ -65,19 +78,21 @@ public class AuthController {
         if (userRepository.existsByEmail(signUpMailRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
         }
-
+        
+        Random ran = new Random();
+        long ranId = ran.nextInt(999)+1;
+        
         TempMail tempMail = new TempMail();
+        tempMail.setId(ranId);
         tempMail.setEmail(signUpMailRequest.getEmail());
         tempMail.setEmailAuth(false);
         tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
 
-        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
+//        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
-        TempMail result = tempMailRepository.save(tempMail);
-        System.out.println(tempMailRepository.searchEmailAuth(signUpMailRequest.getEmail()));
+        tempMailRepository.save(tempMail);
 
-
-        return "redirect:/auth/AuthSuccess?userEmail=" + signUpMailRequest.getEmail(); 
+        return signUpMailRequest.getEmail(); 
         //대기페이지에서 메일 승인완료 누르면 가입창으로 
 
     }
@@ -89,8 +104,6 @@ public class AuthController {
             throw new BadRequestException("이메일 인증을 완료해주세요.");
 
         }
-        System.out.println(tempMailRepository.searchEmailAuth(userEmail));
-        System.out.println("userEmail");
 
         return true;
     }
@@ -99,23 +112,7 @@ public class AuthController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-//			throws Exception {
-//		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//			throw new BadRequestException("Email address already in use.");
-//		}
-	
-//		System.out.println(" dd");
-//		String userEmail = null;
-//		
-//		Map<String, ?> flashMap =RequestContextUtils.getInputFlashMap(request);
-//		  if(flashMap!=null) {
-//	            
-//	          userEmail =(String)flashMap.get("userEmail");
-//	        }
-      
-		// Creating user's account
 		User user = new User();
-		
 		user.setName(signUpRequest.getName());
 		user.setEmail(signUpRequest.getEmail());
 		user.setPassword(signUpRequest.getPassword());
@@ -128,14 +125,13 @@ public class AuthController {
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
 				.buildAndExpand(result.getId()).toUri();
 
+		tempMailRepository.delete(tempMailRepository.findByEmail(signUpRequest.getEmail()).get());
 		
 		return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully@"));
 	
 	}
 
 	// 메일 보내기
-	// @Async
-	// @RequestMapping("/sendMail")
 	public ModelAndView sendEmail(String email, String emailAuthKey) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
@@ -143,20 +139,30 @@ public class AuthController {
 
 		CUDService.sendEmail(email, key);
 
-//		mv.setViewName("/");
 		return mv;
 	}
 
 	
 	
 	@GetMapping("/emailconfirmed")
-	public @ResponseBody String reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
-		CUDService.mailAuth(userEmail, authKey);
-	
-	
+	public ResponseEntity<?> reciveEmail(@RequestParam("userEmail") String userEmail, @RequestParam("authKey") String authKey) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		if (!tempMailRepository.existsByEmail(userEmail)) {
+				headers.setLocation(URI.create("http://localhost:3000/register/expired"));
+				return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+	        }
 		
-		return "인증 완료 후에 페이지로 연결";
-		// 페이지 고민중
+		CUDService.mailAuth(userEmail, authKey); 
+		
+		Boolean result = CUDService.mailAuth(userEmail, authKey);
+		
+		if(result.equals(true)) {
+			headers.setLocation(URI.create("http://localhost:3000/register/emailconfirmed"));
+			return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+		}else {
+			headers.setLocation(URI.create("http://localhost:3000/register/expired"));
+			return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+		}
 	}
 
 }
