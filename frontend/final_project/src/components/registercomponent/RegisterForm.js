@@ -124,13 +124,13 @@ const RegisterForm = (props) => {
             .get(BASE_URL + `/auth/AuthSuccess?userEmail=${inputs.email}`)
             .then((res) => {
                 console.log("res", res);
-                alert("이메일 인증이 완료 되었습니다.");
+                toast.success("이메일 인증이 완료 되었습니다.");
                 setEmailCheckForm(true);
                 setOpen(false);
             })
             .catch((err) => {
                 console.log(err);
-                alert("이메일 인증 확인 부탁드립니다.");
+                toast.error("이메일 인증 확인 부탁드립니다.");
             });
     };
 
