@@ -40,8 +40,6 @@ public class UserController {
         if (!user.getEmail().isEmpty()) {
             return user.of(user);
         } else throw new NotFoundExceptionMessage("not founded");
-
-
     }
 
     @PostMapping("/getId")
