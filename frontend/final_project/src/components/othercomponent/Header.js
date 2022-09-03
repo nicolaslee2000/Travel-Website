@@ -50,10 +50,9 @@ const Header = (props) => {
     localStorage.removeItem('profileImg')
     localStorage.removeItem('name')
     localStorage.removeItem('createDate')
+    localStorage.removeItem('accessToken')
   };
-  function goToHome() {
-    navigate("/");
-  }
+
   
 
 

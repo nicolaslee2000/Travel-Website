@@ -87,14 +87,15 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
 }
 
 export function setUserInfoToLocalstorage() {
-  
   getCurrentUser().then(response =>{
     localStorage.setItem('email', response.email)
     localStorage.setItem('name', response.name)
     localStorage.setItem('profileImg', response.imageUrl)
     localStorage.setItem('createDate', response.createDate)
-    console.log(response)
-  } )
+    
+  }).catch()
+
+  return localStorage.getItem('email')
 }
 
 export function goToHome () {

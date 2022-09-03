@@ -45,19 +45,21 @@ const TravelerAdd = () => {
     * select user is need ACCESS_TOKEN
      */
     function addTraveler(traveler) {
-
-        getCurrentUser().then((response) => {
-            traveler.userId = response.id
-        });
-        if(!localStorage.getItem(ACCESS_TOKEN)) {
-            return Promise.reject("No access token set.");
-        }
-
-        return jwtRequest({
-            url: BASE_URL + "/traveler/create",
-            method: 'POST',
-            body: JSON.stringify(traveler)
-        });
+        getCurrentUser()
+        .then((response) => {
+            traveler.userId = response.id})
+        .then(()=> {
+            if(!localStorage.getItem(ACCESS_TOKEN)) {
+                return Promise.reject("No access token set.")}})
+        .then(()=>{
+            jwtRequest({
+                url: BASE_URL + "/traveler/create",
+                method: 'POST',
+                body: JSON.stringify(traveler)
+            })})
+        .then( () => {
+            navigate("/dashboard/travelerInfo")
+            });
     }
 
     const [travelerData, setTravelerData] = React.useState({
