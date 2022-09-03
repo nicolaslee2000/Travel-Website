@@ -11,7 +11,7 @@ import GeneralInfo from "./GeneralInfo";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../../ApiConnect/constants";
+import { BASE_URL } from "../../../apiEndPoints/constants";
 
 const MyAccountPage = () => {
     const [user, setUser] = React.useState();

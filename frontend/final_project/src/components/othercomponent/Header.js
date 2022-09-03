@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -9,16 +8,12 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
+
 import Logout from '@mui/icons-material/Logout';
 import { Box, Button, Link } from '@mui/material';
 import LogoIcon from '../../global/assets/images/logo/LogoIcon.png';
-import LogoName from '../../global/assets/images/logo/LogoName.png';
+
 import Triplus_logo from '../../global/assets/images/logo/Triplus_logo.PNG';
-import { useCookies } from 'react-cookie';
-import { remove } from 'lodash';
-import { margin } from '@mui/system';
 
 
 
@@ -26,7 +21,6 @@ const Header = (props) => {
   const [open, setOpen] = React.useState(false);
   const [openProButton, setOpenProButton] = useState(true);
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['email','name','profile','this_is_login']);
 
   const titleStyle = {
     fontSize: '30px',
@@ -51,22 +45,17 @@ const Header = (props) => {
   /**
   * cookie 는 권장하지는 않음.
    */
-   function isLogout() { 
-    deleteAllCookies()
-    
+   function isLogout(goToHome) { 
+    localStorage.removeItem('email')
+    localStorage.removeItem('profileImg')
+    localStorage.removeItem('name')
+    localStorage.removeItem('createDate')
   };
-  
-  function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
-    
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-    navigate("/")
+  function goToHome() {
+    navigate("/");
   }
+  
+
 
   return (
     <Box
@@ -89,7 +78,7 @@ const Header = (props) => {
       </Box>
 
       <Box sx={{ mt: '3.5%' }}>
-        {!cookies.email && (
+        {!localStorage.getItem('email') && (
           <div>
             <Button
               sx={{ minWidth: 100, mr: 0.5 }}
@@ -107,7 +96,7 @@ const Header = (props) => {
             </Button>
           </div>
         )}
-        {cookies.email && (
+        {localStorage.getItem('email') && (
           <div>
             <Tooltip title='Account settings'>
               <IconButton
@@ -119,14 +108,14 @@ const Header = (props) => {
                 aria-expanded={open ? 'true' : undefined}
               >
                 {/* <Avatar sx={{ width: 32, height: 32 }} >M</Avatar> */}
-                < img src={cookies.profile} alt={cookies.profile}
+                < img src={localStorage.getItem('profileImg')} alt={localStorage.getItem('profileImg')}
                   color = 'disabled'
-                  sx={{ width: 40, height: 40 }}
+                  sx={{ width: 35, height: 35 }}
                 />
               </IconButton>
             </Tooltip>
-            <Typography variant='h3'> {cookies.name} </Typography>
-            <Typography variant='h3'> {cookies.email} </Typography>
+            <Typography variant='h3'> {localStorage.getItem('name') + "님 안녕하세요"} </Typography>
+            <Typography variant='h3'> {localStorage.getItem('email')} </Typography>
             <Menu
               anchorEl={anchorEl}
               id='account-menu'

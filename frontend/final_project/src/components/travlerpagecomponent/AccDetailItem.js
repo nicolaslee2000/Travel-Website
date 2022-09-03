@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { display } from "@mui/system";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 
 const AccDetailItem = (props) => {
     const times = props.times;

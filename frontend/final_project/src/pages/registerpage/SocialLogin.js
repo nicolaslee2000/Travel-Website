@@ -1,6 +1,6 @@
 import React from 'react';
-import { getCurrentUser } from '../../ApiConnect/ApiEndPoints';
-import { ACCESS_TOKEN } from '../../ApiConnect/constants';
+import { getCurrentUser } from '../../apiEndPoints/ApiEndPoints';
+import { ACCESS_TOKEN } from '../../apiEndPoints/constants';
 
 const SocialLogin = () => {
   console.log(getCurrentUser());

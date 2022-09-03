@@ -17,7 +17,7 @@ import axios from "axios";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 import FlightCancelDialog from "../userDashboard/MyBookings/FlightDetails/FlightCancelDialog";
 import FlightTravelerTable from "../userDashboard/MyBookings/FlightDetails/FlightTravelerTable";
 

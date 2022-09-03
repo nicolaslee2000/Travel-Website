@@ -8,14 +8,16 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { Route, useNavigate, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { login, SetUserInfoToCookie, setUserInfoToCookie } from '../../ApiConnect/ApiEndPoints';
+import { goToHome, login, setUserInfoToLocalstorage } from '../../apiEndPoints/ApiEndPoints';
 import {
   ACCESS_TOKEN,
   BASE_URL,
   GOOGLE_AUTH_URL,
   OAUTH2_REDIRECT_URI,
-} from '../../ApiConnect/constants';
-import Alert from 'react-s-alert';
+} from '../../apiEndPoints/constants';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 function TabPanel(props) {
   const navigate = useNavigate();
@@ -29,7 +31,6 @@ function TabPanel(props) {
 }
 
 const LoginForm = (props) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['email', 'name', 'profile']);
 
   const navigate = useNavigate();
 
@@ -52,7 +53,6 @@ const LoginForm = (props) => {
       return { ...prev, ...nextState };
     });
   };
-  const token = useParams();
 
 
   const loginStart = async (e) => {
@@ -61,24 +61,28 @@ const LoginForm = (props) => {
       email: inputs.email,
       password: inputs.password,
     };
-
+    /**
+    *  나중에 alert 지우고 toast으로 바꾸려고함 제발 왜 작동을 안하는거임 ㅡㅡ
+     */
     login(data)
       .then((response) => {
-        SetUserInfoToCookie();
-        Alert.success('로그인되었습니다, 감사합니다.',{
-          position: 'top-right',
-          effect: 'scale'
-        });
-        localStorage.setItem('token', response.accessToken);
-        setCookie('this_is_login',1,{path:'/'}) //로그인 여부 확인용 쿠키
-        navigate('/');
-        
+        alert('감사')
+        toast.success('로그인되었습니다, 감사합니다.', );
+        localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+        setUserInfoToLocalstorage();
+        return goToHome();
       })
       .catch((err) => {
-        Alert.error((err && err.message) || '아이디와 비밀번호를 다시 확인해 주세요.',
-        {
-          position: 'top-right',
-          effect: 'scale'
+        console.log('로그인')
+        alert("에러")
+        toast.error("아이디와 비밀번호를 다시 확인해 주세요.", {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_RIGHT
+        });
+        console.log(err)
+        toast.info(err && err.message, {
+          autoClose: 5000,
+          position: toast.POSITION.TOP_RIGHT
         });
       });
   };
@@ -133,6 +137,7 @@ const LoginForm = (props) => {
                     onClick={loginStart}
                   >
                     로그인
+                    
                   </Button>
                 </div>
               </div>

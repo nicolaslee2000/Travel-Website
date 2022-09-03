@@ -22,7 +22,7 @@ import axios from "axios";
 import { offerInit } from "../../../reduxes/modules/searchInfoReducer3";
 import { useNavigate } from "react-router-dom";
 import { searchInit } from "../../../reduxes/modules/searchInfoReducer";
-import { BASE_URL } from "../../../ApiConnect/constants";
+import { BASE_URL } from "../../../apiEndPoints/constants";
 
 const FlightRecommendationCard = (props) => {
     const [pageLoaded, setPageLoaded] = useState(false);

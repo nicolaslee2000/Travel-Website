@@ -23,7 +23,7 @@ import {
 import { useSelector } from "react-redux";
 import { display } from "@mui/system";
 import AccDetailItem from "./AccDetailItem";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 
 const GoResultItem02 = () => {
     // 목적지로 갈 때

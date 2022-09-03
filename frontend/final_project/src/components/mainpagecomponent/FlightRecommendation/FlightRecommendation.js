@@ -15,7 +15,7 @@ import bali from "../../../global/assets/images/temp/bali.jpeg";
 import vienna from "../../../global/assets/images/temp/vienna.jpg";
 import axios from "axios";
 import moment from "moment";
-import { BASE_URL } from "../../../ApiConnect/constants";
+import { BASE_URL } from "../../../apiEndPoints/constants";
 
 const FlightRecommendation = ({ dashboardTrans }) => {
     const [nyPrice, setNyPrice] = React.useState();

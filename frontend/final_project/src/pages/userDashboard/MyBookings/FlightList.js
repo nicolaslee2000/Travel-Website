@@ -3,7 +3,7 @@ import axios from "axios";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../../ApiConnect/constants";
+import { BASE_URL } from "../../../apiEndPoints/constants";
 
 import FlightListItem from "./FlightListItem";
 const FlightList = () => {

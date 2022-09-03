@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../../../ApiConnect/constants";
+import { BASE_URL } from "../../../../apiEndPoints/constants";
 import Backlink from "../../../../components/backlink/Backlink";
 import DocumentDetailsList from "./DocumentDetailsList";
 import PersonalDetailsList from "./PersonalDetailsList";

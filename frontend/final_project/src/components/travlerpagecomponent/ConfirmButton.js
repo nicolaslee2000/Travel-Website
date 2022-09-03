@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { border } from "@mui/system";
 import TravelerInfo from "../../pages/userDashboard/TravelerInfo/TravelerInfo";
 import { Container } from "@mui/material";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 
 const ConfirmButton = () => {
     const flightRedux = useSelector((state) => {

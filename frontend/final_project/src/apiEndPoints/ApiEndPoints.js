@@ -35,7 +35,7 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
   *  하단은 일반적인 JWT 리퀘스트
    */
 
-  const JWTrequest = (options) => {
+  export function jwtRequest (options) {
     const headers = new Headers({
         'Content-Type': 'application/json',
     })
@@ -71,26 +71,34 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
         return Promise.reject("No access token set.");
     }
 
-    return JWTrequest({
+    return jwtRequest({
         url: BASE_URL + "/user/me",
         method: 'GET'
     });
 }
 
     export function login(loginRequest) {
-    return JWTrequest({
+
+    return jwtRequest({
         url: BASE_URL + "/auth/login",
         method: 'POST',
         body: JSON.stringify(loginRequest)
     });
 }
 
-export function SetUserInfoToCookie() {
-  const [cookies, setCookie, removeCookie] = useCookies(['email', 'name', 'profile'])
+export function setUserInfoToLocalstorage() {
   
   getCurrentUser().then(response =>{
-    setCookie('email',response.email,{path:'/'})
-    setCookie('name',response.name,{path:'/'})
-    setCookie('profile',response.imageUrl,{path:'/'})
+    localStorage.setItem('email', response.email)
+    localStorage.setItem('name', response.name)
+    localStorage.setItem('profileImg', response.imageUrl)
+    localStorage.setItem('createDate', response.createDate)
+    console.log(response)
   } )
 }
+
+export function goToHome () {
+  return document.location.href="/";
+}
+
+//Hooks only useing in React Components, remember 

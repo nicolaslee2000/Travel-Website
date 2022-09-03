@@ -15,7 +15,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import Backlink from "../../../../components/backlink/Backlink";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { BASE_URL } from "../../../../ApiConnect/constants";
+import { ACCESS_TOKEN, BASE_URL } from "../../../../apiEndPoints/constants";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { getCurrentUser, jwtRequest } from "../../../../apiEndPoints/ApiEndPoints";
 const TravelerAdd = () => {
     const DATEFORMAT = "YYYY-MM-DD";
 
@@ -36,15 +40,25 @@ const TravelerAdd = () => {
 
     const navigate = useNavigate();
     const { state } = useLocation();
-    const addTraveler = async (traveler) => {
-        await axios
-            .post(BASE_URL + `/traveler/create`, {
-                ...traveler,
-                userId: state.userId,
-            })
-            .then((response) => navigate("/dashboard/travelerInfo"))
-            .catch((error) => console.log(error));
-    };
+
+    /**
+    * select user is need ACCESS_TOKEN
+     */
+    function addTraveler(traveler) {
+
+        getCurrentUser().then((response) => {
+            traveler.userId = response.id
+        });
+        if(!localStorage.getItem(ACCESS_TOKEN)) {
+            return Promise.reject("No access token set.");
+        }
+
+        return jwtRequest({
+            url: BASE_URL + "/traveler/create",
+            method: 'POST',
+            body: JSON.stringify(traveler)
+        });
+    }
 
     const [travelerData, setTravelerData] = React.useState({
         title: "",
@@ -58,6 +72,7 @@ const TravelerAdd = () => {
         issuanceCountry: "",
         dateOfIssue: null,
         expiryDate: null,
+        userId: null
     });
 
     const handleChange = (e) => {
