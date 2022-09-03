@@ -66,12 +66,11 @@ const LoginForm = (props) => {
      */
     login(data)
       .then((response) => {
+        localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+        setUserInfoToLocalstorage()
         alert('감사')
         toast.success('로그인되었습니다, 감사합니다.', );
-        localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-        return Promise.resolve()
       })
-      .then( () => {setUserInfoToLocalstorage()})
       .then( () => {goToHome();})
       .catch((err) => {
         console.log('로그인')
