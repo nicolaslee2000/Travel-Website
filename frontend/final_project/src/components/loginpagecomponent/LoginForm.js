@@ -58,7 +58,7 @@ const LoginForm = (props) => {
     e.preventDefault();
     const data = {
       email: inputs.email,
-      password: inputs.password,
+      password: inputs.password
     };
     /**
     *  나중에 alert 지우고 toast으로 바꾸려고함 제발 왜 작동을 안하는거임 ㅡㅡ
