@@ -138,7 +138,7 @@ const SearchResultItem = (props) => {
                                 가격
                             </Typography>
                             <Typography variant="h10" component="div">
-                                $ {flightOfferSearchData.price.total}
+                                {flightOfferSearchData.price.total + "₩"}
                             </Typography>
                         </Box>
                         <Box sx={{ marginTop: "30px" }}>

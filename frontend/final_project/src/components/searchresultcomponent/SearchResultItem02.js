@@ -299,7 +299,7 @@ const SearchResultItem02 = (props) => {
                                 금액
                             </Typography>
                             <Typography variant="myStyle" fontSize={18}>
-                                $ {rfosData.price.total}
+                                {rfosData.price.total + "₩"}
                             </Typography>
                             <Box sx={{ marginTop: "30px" }}>
                                 {/* 여기서 버튼눌렀을떄 post로 보내서 응답 받아오기 */}
