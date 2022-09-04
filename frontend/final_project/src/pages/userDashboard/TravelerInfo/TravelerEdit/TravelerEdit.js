@@ -15,19 +15,17 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import Backlink from "../../../../components/backlink/Backlink";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { BASE_URL } from "../../../../ApiConnect/constants";
+import { BASE_URL } from "../../../../apiEndPoints/constants";
 
 const TravelerAdd = () => {
     const DATEFORMAT = "YYYY-MM-DD";
     const [countries, setCountries] = React.useState([]);
     const [userId, setUserId] = React.useState();
-    const [cookies, setCookie, removeCookie] = useCookies(["this_is_login"]);
 
     const getUserId = async (data, setState) => {
         await axios
             .post(BASE_URL + `/user/getId`, {
-                email: cookies.this_is_login,
+                email: localStorage.getItem('email'),
             })
             .then((response) => response.data)
             .then((id) => {

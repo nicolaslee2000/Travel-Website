@@ -4,7 +4,7 @@ import axios from "axios";
 import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
 import { debounce } from "lodash";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 
 const SelectCity = (props) => {
     const { update, id, label } = props;

@@ -1,7 +1,22 @@
 import { List, ListItem, ListItemText, Typography } from "@mui/material";
 import React from "react";
 
-const GeneralInfo = ({ user }) => {
+
+
+
+
+const GeneralInfo = () => {
+    const user = {
+        name : '',
+        email : '',
+        profileImg : '',
+        createDate : ''
+    }
+    
+    user.name = localStorage.getItem('name');
+    user.email = localStorage.getItem('email');
+    user.profileImg = localStorage.getItem('profileImg');
+    user.createDate = localStorage.getItem('createDate');
     return (
         user && (
             <List>

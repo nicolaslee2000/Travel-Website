@@ -16,7 +16,9 @@ import React, { useState } from "react";
 import { Container } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
+import { toast } from "react-toastify";
+
 
 function TabPanel(props) {
     const { children, value, index } = props;
@@ -66,7 +68,7 @@ const RegisterForm = (props) => {
             response.json().then((json) => {
                 if (!response.ok) {
                     //   console.log(!response.ok);
-                    alert("이름과 비밀번호 형식이 올바르지 않습니다.");
+                    toast.error("이름과 비밀번호 형식이 올바르지 않습니다.");
                     return Promise.reject(json);
                 } else if (response.ok) {
                     navigate("/registed");
@@ -108,7 +110,7 @@ const RegisterForm = (props) => {
             })
             .catch((err) => {
                 console.log("err", err);
-                alert(
+                toast.error(
                     "해당 아이디는 이미 사용중입니다. 다른 ID를 입력해주세요"
                 );
             });
@@ -124,14 +126,16 @@ const RegisterForm = (props) => {
             .get(BASE_URL + `/auth/AuthSuccess?userEmail=${inputs.email}`)
             .then((res) => {
                 console.log("res", res);
-                alert("이메일 인증이 완료 되었습니다.");
+                toast.success("이메일 인증이 완료 되었습니다.");
                 setEmailCheckForm(true);
                 setOpen(false);
             })
             .catch((err) => {
                 console.log(err);
-                alert("이메일 인증 확인 부탁드립니다.");
+                toast.error("이메일 인증 확인 부탁드립니다.");
+                
             });
+
     };
 
     return (
