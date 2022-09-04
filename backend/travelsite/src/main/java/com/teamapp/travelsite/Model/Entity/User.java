@@ -52,11 +52,11 @@ public class User implements UserDetails {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private java.util.Date createDate; //Timestamp
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    List<Traveler> traveler;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<TicketOrder> ticketOrders; //lombok @Builder 관련 경고 발생위치
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+//    List<Traveler> traveler;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    List<TicketOrder> ticketOrders; //lombok @Builder 관련 경고 발생위치
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<TempMail> tempMails;
