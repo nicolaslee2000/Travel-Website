@@ -1,4 +1,6 @@
 
+import { after } from "lodash";
+import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
 import { ACCESS_TOKEN, BASE_URL } from "./constants";
 
@@ -33,7 +35,7 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
   *  하단은 일반적인 JWT 리퀘스트
    */
 
-  const JWTrequest = (options) => {
+  export function jwtRequest (options) {
     const headers = new Headers({
         'Content-Type': 'application/json',
     })
@@ -54,7 +56,7 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
         })
     );
 };
-
+  
 
   export function signup(inputs) {
     return signUpRequest({
@@ -69,16 +71,35 @@ import { ACCESS_TOKEN, BASE_URL } from "./constants";
         return Promise.reject("No access token set.");
     }
 
-    return JWTrequest({
+    return jwtRequest({
         url: BASE_URL + "/user/me",
         method: 'GET'
     });
 }
 
     export function login(loginRequest) {
-    return JWTrequest({
+
+    return jwtRequest({
         url: BASE_URL + "/auth/login",
         method: 'POST',
         body: JSON.stringify(loginRequest)
     });
 }
+
+export function setUserInfoToLocalstorage() {
+  getCurrentUser().then(response =>{
+    localStorage.setItem('email', response.email)
+    localStorage.setItem('name', response.name)
+    localStorage.setItem('profileImg', response.imageUrl)
+    localStorage.setItem('createDate', response.createDate)
+    localStorage.setItem('UUID',response.id)
+  })
+  if(localStorage.getItem('email'))
+  return localStorage.getItem('email') 
+}
+
+export function goToHome () {
+  return document.location.href="/";
+}
+
+//Hooks only useing in React Components, remember 

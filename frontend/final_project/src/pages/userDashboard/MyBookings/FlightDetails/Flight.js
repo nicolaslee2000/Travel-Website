@@ -16,7 +16,7 @@ import {
 import axios from "axios";
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { BASE_URL } from "../../../../ApiConnect/constants";
+import { BASE_URL } from "../../../../apiEndPoints/constants";
 import Backlink from "../../../../components/backlink/Backlink";
 import FlightCancelDialog from "./FlightCancelDialog";
 import FlightTravelerTable from "./FlightTravelerTable";

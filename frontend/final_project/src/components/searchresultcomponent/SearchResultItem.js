@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { confirmInit } from "../../reduxes/modules/searchInfoReducer3";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 
 const SearchResultItem = (props) => {
     const flightOfferSearchData = props.flightOfferSearchData; // 이게 reducer데이터임 각각 줘야하기 떄문에 props로 줬음

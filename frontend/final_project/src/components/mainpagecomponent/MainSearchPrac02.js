@@ -30,7 +30,7 @@ import BackgroundImage from "../../global/assets/images/backgrounds/BackgroundIm
 
 import { Brightness1 } from "@mui/icons-material";
 import FlightRecommendation from "./FlightRecommendation/FlightRecommendation";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 
 const MainSearchPrac02 = () => {
     const [raidoValue, setRadioValue] = useState(false);

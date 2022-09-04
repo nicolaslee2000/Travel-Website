@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { confirmInit } from "../../reduxes/modules/searchInfoReducer3";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 
 const SearchResultItem02Back = (props) => {
     const dispatch = useDispatch();

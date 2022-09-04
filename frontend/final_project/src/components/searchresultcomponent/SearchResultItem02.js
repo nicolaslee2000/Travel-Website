@@ -20,7 +20,7 @@ import axios from "axios";
 import { confirmInit } from "../../reduxes/modules/searchInfoReducer3";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { BASE_URL } from "../../ApiConnect/constants";
+import { BASE_URL } from "../../apiEndPoints/constants";
 
 const SearchResultItem02 = (props) => {
     const dispatch = useDispatch();

@@ -10,19 +10,17 @@ import {
 } from "@mui/material";
 
 import TravelerList from "./TravelerList";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../../ApiConnect/constants";
+import { BASE_URL } from "../../../apiEndPoints/constants";
 
 const TravelerInfo = ({ isBooking, setSelectedTravelers }) => {
     const [userId, setUserId] = React.useState();
-    const [cookies, setCookie, removeCookie] = useCookies(["this_is_login"]);
     const [travelers, setTravelers] = React.useState([]);
     const getUserId = async (data, setState) => {
         await axios
             .post(BASE_URL + `/user/getId`, {
-                email: cookies.this_is_login,
+                email: localStorage.getItem('email'),
             })
             .then((response) => response.data)
             .then((id) => {
@@ -30,6 +28,7 @@ const TravelerInfo = ({ isBooking, setSelectedTravelers }) => {
             })
             .catch((error) => console.log(error));
     };
+    
     const getTravelers = async (data, setState) => {
         if (userId === undefined) {
             return;
