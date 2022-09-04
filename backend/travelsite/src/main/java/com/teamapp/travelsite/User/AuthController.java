@@ -59,7 +59,10 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = tokenProvider.createToken(authentication);
-        return ResponseEntity.ok(new AuthResponse(token));
+
+
+
+        return ResponseEntity.ok(new AuthResponse(token,loginRequest.getEmail()));
     }
     
 //    @GetMapping("/oauth2/redirect")
