@@ -45,6 +45,7 @@ const TravelerAdd = () => {
     * select user is need ACCESS_TOKEN
      */
     function addTraveler(traveler) {
+        
         getCurrentUser()
         .then((response) => {
             traveler.userId = response.id})

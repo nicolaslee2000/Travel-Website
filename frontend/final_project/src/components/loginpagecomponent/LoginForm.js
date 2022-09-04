@@ -15,9 +15,8 @@ import {
   GOOGLE_AUTH_URL,
   OAUTH2_REDIRECT_URI,
 } from '../../apiEndPoints/constants';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast} from 'react-toastify';
+
 
 function TabPanel(props) {
   const navigate = useNavigate();
@@ -68,13 +67,13 @@ const LoginForm = (props) => {
       .then((response) => {
         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         setUserInfoToLocalstorage()
-        alert('감사')
+        alert('로그인되었습니다, 감사합니다.')
         toast.success('로그인되었습니다, 감사합니다.', );
       })
       .then( () => {goToHome();})
       .catch((err) => {
         console.log('로그인')
-        alert("에러")
+        alert("아이디와 비밀번호를 다시 확인해 주세요")
         toast.error("아이디와 비밀번호를 다시 확인해 주세요.", {
           autoClose: 3000,
           position: toast.POSITION.TOP_RIGHT
@@ -89,6 +88,7 @@ const LoginForm = (props) => {
   const facebookLogin = async (e) => {};
 
   return (
+    
     <Container maxWidth='sm'>
       <form>
         <div className='tab-form'>
@@ -192,6 +192,7 @@ const LoginForm = (props) => {
         </div>
       </form>
     </Container>
+    
   );
 };
 

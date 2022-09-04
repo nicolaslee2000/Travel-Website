@@ -109,12 +109,12 @@ const Header = (props) => {
                 {/* <Avatar sx={{ width: 32, height: 32 }} >M</Avatar> */}
                 < img src={localStorage.getItem('profileImg')} alt={localStorage.getItem('profileImg')}
                   color = 'disabled'
-                  sx={{ width: 35, height: 35 }}
+                  sx={{ width: 30, height: 30 }}
                 />
               </IconButton>
             </Tooltip>
-            <Typography variant='h3'> {localStorage.getItem('name') + "님 안녕하세요"} </Typography>
-            <Typography variant='h3'> {localStorage.getItem('email')} </Typography>
+            <Typography variant='h4'> {localStorage.getItem('name') + "님 안녕하세요"} </Typography>
+            <Typography variant='h4'> {localStorage.getItem('email')} </Typography>
             <Menu
               anchorEl={anchorEl}
               id='account-menu'

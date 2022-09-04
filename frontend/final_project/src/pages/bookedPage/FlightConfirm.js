@@ -17,6 +17,7 @@ import axios from "axios";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useLocation, useNavigate } from "react-router-dom";
+import { jwtRequest } from "../../apiEndPoints/ApiEndPoints";
 import { BASE_URL } from "../../apiEndPoints/constants";
 import FlightCancelDialog from "../userDashboard/MyBookings/FlightDetails/FlightCancelDialog";
 import FlightTravelerTable from "../userDashboard/MyBookings/FlightDetails/FlightTravelerTable";
@@ -68,30 +69,18 @@ const Traveler = ({ flight, travelers }) => {
 
     const [userId, setUserId] = React.useState();
     const [cookies, setCookie, removeCookie] = useCookies(["this_is_login"]);
-    const getUserId = async (data, setState) => {
-        await axios
-            .post(BASE_URL + `/user/getId`, {
-                email: cookies.this_is_login,
-            })
-            .then((response) => response.data)
-            .then((id) => {
-                setUserId(id);
-            })
-            .catch((error) => console.log(error));
-    };
-    React.useEffect(() => {
-        getUserId();
-    }, []);
+
     const navigate = useNavigate();
+    
     const createOrder = async (order) => {
-        await axios
-            .post(BASE_URL + `/order/create`, {
-                ...order,
-                userId: userId,
-            })
-            .then((response) => navigate("/"))
-            .catch((error) => console.log(error));
+        order.userId = localStorage.getItem('UUID')
+        return jwtRequest({
+            url: BASE_URL + "/order/create",
+            method: 'POST',
+            body: JSON.stringify(order)
+        }) && navigate("/")
     };
+
     const [departName, setDepartName] = React.useState();
     const [arrivalName, setArrivalName] = React.useState();
     React.useEffect(() => {

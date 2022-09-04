@@ -92,10 +92,10 @@ export function setUserInfoToLocalstorage() {
     localStorage.setItem('name', response.name)
     localStorage.setItem('profileImg', response.imageUrl)
     localStorage.setItem('createDate', response.createDate)
-    
-  }).catch()
-
-  return localStorage.getItem('email')
+    localStorage.setItem('UUID',response.id)
+  })
+  if(localStorage.getItem('email'))
+  return localStorage.getItem('email') 
 }
 
 export function goToHome () {
