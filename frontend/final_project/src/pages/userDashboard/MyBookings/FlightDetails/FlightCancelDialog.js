@@ -11,9 +11,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
-export default function FlightCancelDialog({ openDialog, setOpenDialog }) {
+export default function FlightCancelDialog({
+    openDialog,
+    setOpenDialog,
+    cancelFlight,
+}) {
     return (
         <Dialog
             open={openDialog}
@@ -31,7 +33,10 @@ export default function FlightCancelDialog({ openDialog, setOpenDialog }) {
             </DialogContent>
             <DialogActions>
                 <Button
-                    onClick={() => setOpenDialog(false)}
+                    onClick={() => {
+                        setOpenDialog(false);
+                        cancelFlight();
+                    }}
                     variant="contained"
                     color="error"
                 >

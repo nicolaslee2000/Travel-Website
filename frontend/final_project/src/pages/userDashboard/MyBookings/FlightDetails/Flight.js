@@ -15,8 +15,12 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
-import { useLocation } from "react-router-dom";
-import { BASE_URL } from "../../../../apiEndPoints/constants";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+    getCurrentUser,
+    jwtRequest,
+} from "../../../../apiEndPoints/ApiEndPoints";
+import { ACCESS_TOKEN, BASE_URL } from "../../../../apiEndPoints/constants";
 import Backlink from "../../../../components/backlink/Backlink";
 import FlightCancelDialog from "./FlightCancelDialog";
 import FlightTravelerTable from "./FlightTravelerTable";
@@ -57,6 +61,28 @@ const Flight = () => {
                 params: { iata: flightOrder.arrivalCityIata },
             })
             .then((res) => setArrivalName(res.data));
+    };
+    const [userId, setUserId] = React.useState();
+    const navigate = useNavigate();
+    const cancelFlight = async () => {
+        getCurrentUser()
+            .then((response) => {
+                setUserId(response.id);
+            })
+            .then(() => {
+                if (!localStorage.getItem(ACCESS_TOKEN)) {
+                    return Promise.reject("No access token set.");
+                }
+            })
+            .then(() => {
+                jwtRequest({
+                    url: BASE_URL + "/order/delete?id=" + userId,
+                    method: "get",
+                });
+            })
+            .then(() => {
+                navigate("/dashboard/travelerInfo");
+            });
     };
     return (
         <Box sx={{ width: 800 }}>
@@ -290,6 +316,7 @@ const Flight = () => {
             <FlightCancelDialog
                 openDialog={openDialog}
                 setOpenDialog={setOpenDialog}
+                cancelFlight={cancelFlight}
             />
         </Box>
     );
