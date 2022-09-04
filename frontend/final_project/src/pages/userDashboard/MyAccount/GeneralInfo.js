@@ -5,8 +5,13 @@ import React from "react";
 
 
 
-const GeneralInfo = (user) => {
-
+const GeneralInfo = () => {
+    const user = {
+        name : '',
+        email : '',
+        profileImg : '',
+        createDate : ''
+    }
     
     user.name = localStorage.getItem('name');
     user.email = localStorage.getItem('email');
