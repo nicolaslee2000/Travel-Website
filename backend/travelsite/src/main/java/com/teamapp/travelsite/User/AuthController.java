@@ -91,7 +91,7 @@ public class AuthController {
         tempMail.setEmailAuth(false);
         tempMail.setEmailAuthKey(tokenProvider.creatEmailAuth());
 
-//        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
+        sendEmail((String) signUpMailRequest.getEmail(), tempMail.getEmailAuthKey());
 
         tempMailRepository.save(tempMail);
 
