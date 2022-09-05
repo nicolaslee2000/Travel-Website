@@ -1,5 +1,6 @@
 package com.teamapp.travelsite.initDatabase;
 
+import java.io.File;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,6 +15,7 @@ import com.teamapp.travelsite.Model.Entity.City;
 import com.teamapp.travelsite.Model.Entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -57,10 +59,11 @@ public class InitDatabase implements ApplicationListener<InitDatabaseCheck.InitD
     @Override
     public void onApplicationEvent(InitDatabaseCheck.InitDatabaseEvent event) {
         Gson gson = new Gson();
-        Reader reader = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"));
+        Reader reader = Files.newBufferedReader(Paths.get(new ClassPathResource("airports.json").getFile().getAbsolutePath()));
+        
         airportsDTOs = gson.fromJson(reader, new TypeToken<List<AirportDTO>>() {
         }.getType());
-        Reader readers = Files.newBufferedReader(Paths.get("src/main/java/com/teamapp/travelsite/initDatabase/airports.json"));
+        Reader readers = Files.newBufferedReader(Paths.get(new ClassPathResource("airports.json").getFile().getAbsolutePath()));
         citiesDTOs = gson.fromJson(readers, new TypeToken<List<CityDTO>>() {
         }.getType());
         //Practice lambda & Functional
